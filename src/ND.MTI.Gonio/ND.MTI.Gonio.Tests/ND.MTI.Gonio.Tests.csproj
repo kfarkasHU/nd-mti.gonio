@@ -4,16 +4,16 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{612EEEC8-DD6F-4812-8965-96390D059BD5}</ProjectGuid>
-    <OutputType>Library</OutputType>
-    <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>ND.MTI.Service</RootNamespace>
-    <AssemblyName>ND.MTI.Service</AssemblyName>
+    <ProjectGuid>{46DAA5DE-D943-493E-9622-DCB1A0D96723}</ProjectGuid>
+    <OutputType>Exe</OutputType>
+    <RootNamespace>ND.MTI.Gonio.Tests</RootNamespace>
+    <AssemblyName>ND.MTI.Gonio.Tests</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -23,6 +23,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
@@ -31,16 +32,8 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="EPPlus, Version=4.5.3.3, Culture=neutral, PublicKeyToken=ea159fdaa78159a1, processorArchitecture=MSIL">
-      <HintPath>..\packages\EPPlus.4.5.3.3\lib\net40\EPPlus.dll</HintPath>
-    </Reference>
-    <Reference Include="PresentationCore" />
     <Reference Include="System" />
-    <Reference Include="System.configuration" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Drawing" />
-    <Reference Include="System.Security" />
-    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -48,23 +41,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ExcelExportService.cs" />
-    <Compile Include="MeasurementService.cs" />
+    <Compile Include="GonioTests.cs" />
+    <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Worker\ExcelFactory\ExcelFactory.cs" />
-    <Compile Include="Worker\ExcelFactory\IExcelFactory.cs" />
-    <Compile Include="Worker\GonioWorker\GonioWorker.cs" />
-    <Compile Include="Worker\GonioWorker\IGonioWorker.cs" />
-    <Compile Include="Worker\IOWorker\IIOWorker.cs" />
-    <Compile Include="Worker\IOWorker\IOWorker.cs" />
-    <Compile Include="Worker\LPTCore\ILPTCore.cs" />
-    <Compile Include="Worker\LPTCore\LPTCore.cs" />
-    <Compile Include="Worker\PositionWorker\MotorWorker\IMotorWorker.cs" />
-    <Compile Include="Worker\PositionWorker\IPositionWorker.cs" />
-    <Compile Include="Worker\PositionWorker\MotorWorker\MotorWorker.cs" />
-    <Compile Include="Worker\PositionWorker\PositionWorker.cs" />
-    <Compile Include="Worker\SerialCore\ISerialCore.cs" />
-    <Compile Include="Worker\SerialCore\SerialCore.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ND.MTI.Gonio.Common\ND.MTI.Gonio.Common.csproj">
@@ -75,13 +54,10 @@
       <Project>{680927AC-E6E3-47F1-8DA7-B8457DDAB8D9}</Project>
       <Name>ND.MTI.Gonio.Model</Name>
     </ProjectReference>
-    <ProjectReference Include="..\ND.MTI.Gonio.ServiceInterface\ND.MTI.Gonio.ServiceInterface.csproj">
-      <Project>{B65BF380-0265-479B-8BDB-B23A06534ECE}</Project>
-      <Name>ND.MTI.Gonio.ServiceInterface</Name>
+    <ProjectReference Include="..\ND.MTI.Service\ND.MTI.Gonio.Service.csproj">
+      <Project>{612EEEC8-DD6F-4812-8965-96390D059BD5}</Project>
+      <Name>ND.MTI.Gonio.Service</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

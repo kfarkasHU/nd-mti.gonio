@@ -1,4 +1,5 @@
 ﻿using ND.MTI.Gonio.Model;
+using System;
 using System.Windows.Forms;
 
 namespace ND.MTI.Gonio.Common.RuntimeContext
@@ -22,6 +23,10 @@ namespace ND.MTI.Gonio.Common.RuntimeContext
         public static Form LoadFormInstance { get; set; }
         public static Primitive_Position ZeroPosition { get; set; }
         public static Primitive_Position VirtualZeroPosition { get; set; }
+        public static Primitive_Position CalculatedPosition()
+        {
+            throw new NotImplementedException();
+        }
         public static Status Status { get; set; }
         public static Complex_ResultCollection Results { get; set; }
         public static bool FsmGonioConnected { get; set; }

@@ -125,6 +125,7 @@
             this.buttonSetVirtualZero.TabIndex = 6;
             this.buttonSetVirtualZero.Text = "Set V0";
             this.buttonSetVirtualZero.UseVisualStyleBackColor = true;
+            this.buttonSetVirtualZero.Click += new System.EventHandler(this.ButtonSetVirtualZero_Click);
             // 
             // buttonStop
             // 

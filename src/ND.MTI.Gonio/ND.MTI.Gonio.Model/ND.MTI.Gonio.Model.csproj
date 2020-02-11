@@ -42,6 +42,7 @@
   <ItemGroup>
     <Compile Include="Complex_FSMGonioConfig.cs" />
     <Compile Include="Complex_MainModel.cs" />
+    <Compile Include="Complex_MotorConfig.cs" />
     <Compile Include="Complex_ResultCollection.cs" />
     <Compile Include="Complex_ResultItem.cs" />
     <Compile Include="Primitive_Position.cs" />

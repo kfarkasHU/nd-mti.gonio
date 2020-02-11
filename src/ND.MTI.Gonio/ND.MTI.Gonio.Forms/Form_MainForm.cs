@@ -21,9 +21,9 @@ namespace ND.MTI.Gonio.Forms
     {
         private readonly Complex_MainModel _model;
         private readonly ResourceManager _resourceManager;
-        private readonly IGonioConfiguration _gonioConfiguration;
         private readonly IMeasurementService _measurementService;
         private readonly IExcelExportService _excelExportService;
+        private readonly IGonioConfiguration _gonioConfiguration;
 
         public Form_MainForm()
         {
@@ -31,9 +31,11 @@ namespace ND.MTI.Gonio.Forms
 
             _model = new Complex_MainModel();
             _resourceManager = Resources.ResourceManager;
-            _gonioConfiguration = new GonioConfiguration();
             _measurementService = new MeasurementService();
             _excelExportService = new ExcelExportService();
+
+            _gonioConfiguration = GonioConfiguration.GetInstance();
+
             SetModel();
 
             RuntimeContext.Init();
@@ -206,11 +208,11 @@ namespace ND.MTI.Gonio.Forms
             if (RuntimeContext.XConnected)
             {
                 RuntimeContext.XConnected = false;
-                // TODO (FK): Implement disconnect.
+                _measurementService.DisconnectXMotor();
             }
             else
             {
-                RuntimeContext.XConnected = true; // TODO (FK): Implement this.
+                RuntimeContext.XConnected = _measurementService.ConnectXMotor(_gonioConfiguration.XMotorConfig);
             }
 
             pictureBoxXMotor.Image = (Image)_resourceManager.GetObject(GetImageFor(RuntimeContext.XConnected));
@@ -221,11 +223,11 @@ namespace ND.MTI.Gonio.Forms
             if (RuntimeContext.YConnected)
             {
                 RuntimeContext.YConnected = false;
-                // TODO (FK): Implement disconnect.
+                _measurementService.DisconnectYMotor();
             }
             else
             {
-                RuntimeContext.YConnected = true; // TODO (FK): Implement this.
+                RuntimeContext.YConnected = _measurementService.ConnectXMotor(_gonioConfiguration.YMotorConfig);
             }
 
             pictureBoxYMotor.Image = (Image)_resourceManager.GetObject(GetImageFor(RuntimeContext.YConnected));
@@ -428,6 +430,13 @@ namespace ND.MTI.Gonio.Forms
 
         private void ButtonGoToZero_Click(object sender, EventArgs e) => _measurementService.SetPositionZero();
 
-        private void ButtonGoToVirtualZero_Click(object sender, EventArgs e) => _measurementService.SetPositionZero();
+        private void ButtonGoToVirtualZero_Click(object sender, EventArgs e) => _measurementService.SetPositionVirtualZero();
+
+        private void ButtonSetVirtualZero_Click(object sender, EventArgs e)
+        {
+            var virtualZeroForm = new Form_VirtualZeroForm();
+
+            virtualZeroForm.Show();
+        }
     }
 }

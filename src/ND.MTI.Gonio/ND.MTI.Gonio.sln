@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ND.MTI.Gonio.ServiceInterfa
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ND.MTI.Gonio.Service", "ND.MTI.Service\ND.MTI.Gonio.Service.csproj", "{612EEEC8-DD6F-4812-8965-96390D059BD5}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ND.MTI.Gonio.Tests", "ND.MTI.Gonio.Tests\ND.MTI.Gonio.Tests.csproj", "{46DAA5DE-D943-493E-9622-DCB1A0D96723}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{612EEEC8-DD6F-4812-8965-96390D059BD5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{612EEEC8-DD6F-4812-8965-96390D059BD5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{612EEEC8-DD6F-4812-8965-96390D059BD5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{46DAA5DE-D943-493E-9622-DCB1A0D96723}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{46DAA5DE-D943-493E-9622-DCB1A0D96723}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{46DAA5DE-D943-493E-9622-DCB1A0D96723}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{46DAA5DE-D943-493E-9622-DCB1A0D96723}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

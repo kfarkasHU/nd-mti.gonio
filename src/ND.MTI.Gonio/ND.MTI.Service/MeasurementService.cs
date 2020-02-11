@@ -15,12 +15,17 @@ namespace ND.MTI.Service
         public MeasurementService()
         {
             _gonioWorker = new GonioWorker();
-            _positionWorker = new PositionWorker();
+            _positionWorker = PositionWorker.GetInstance();
         }
 
 
         public bool ConnectFsmGonio(Complex_FSMGonioConfig fsmGonioConfig) => _gonioWorker.Connect(fsmGonioConfig);
         public void DisconnectFsmGonio() => _gonioWorker.Disconnect();
+
+        public bool ConnectXMotor(Complex_MotorConfig xMotorConfig) => _positionWorker.ConnectXMotor(xMotorConfig);
+        public void DisconnectXMotor() => _positionWorker.DisconnectXMotor();
+        public bool ConnectYMotor(Complex_MotorConfig yMotorConfig) => _positionWorker.ConnectYMotor(yMotorConfig);
+        public void DisconnectYMotor() => _positionWorker.DisconnectYMotor();
 
         public void Configure(Complex_MainModel mainModel) => _config = mainModel;
 
@@ -62,7 +67,9 @@ namespace ND.MTI.Service
 
         public void SetPositionVirtualZero() => SetPositionInternal(RuntimeContext.VirtualZeroPosition);
 
-        public void SetPositionZero() => SetPositionInternal(RuntimeContext.ZeroPosition);
+        public void SetPositionZero() => SetPositionInternal(RuntimeContext.ZeroPosition + RuntimeContext.VirtualZeroPosition);
+
+        public void SetPosition(Primitive_Position position) => SetPositionInternal(position + RuntimeContext.VirtualZeroPosition);
 
         private void SetPositionInternal(Primitive_Position position) => _positionWorker.SetPosition(position);
     }
