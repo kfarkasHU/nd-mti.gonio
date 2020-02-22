@@ -19,8 +19,8 @@ namespace ND.MTI.Gonio.Model
 
         private void ResetInternal()
         {
-            Start = new Primitive_Position();
-            End = new Primitive_Position();
+            Start = new Primitive_Position(0, 0);
+            End = new Primitive_Position(0, 0);
             StepX = null;
             StepY = null;
             IsXAuto = false;

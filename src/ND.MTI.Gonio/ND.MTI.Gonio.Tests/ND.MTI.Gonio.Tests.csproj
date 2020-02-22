@@ -4,16 +4,16 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{680927AC-E6E3-47F1-8DA7-B8457DDAB8D9}</ProjectGuid>
-    <OutputType>Library</OutputType>
-    <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>ND.MTI.Gonio.Model</RootNamespace>
-    <AssemblyName>ND.MTI.Gonio.Model</AssemblyName>
+    <ProjectGuid>{46DAA5DE-D943-493E-9622-DCB1A0D96723}</ProjectGuid>
+    <OutputType>Exe</OutputType>
+    <RootNamespace>ND.MTI.Gonio.Tests</RootNamespace>
+    <AssemblyName>ND.MTI.Gonio.Tests</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -23,6 +23,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
@@ -40,15 +41,23 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Complex_FSMGonioConfig.cs" />
-    <Compile Include="Complex_MainModel.cs" />
-    <Compile Include="Complex_Pokeys57UConfig.cs" />
-    <Compile Include="Complex_ResultCollection.cs" />
-    <Compile Include="Complex_ResultItem.cs" />
-    <Compile Include="Primitive_Position.cs" />
-    <Compile Include="Primitive_PositionCollection.cs" />
+    <Compile Include="GonioTests.cs" />
+    <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Status.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ND.MTI.Gonio.Common\ND.MTI.Gonio.Common.csproj">
+      <Project>{6F4372BF-D624-49E1-B06F-DD198345804B}</Project>
+      <Name>ND.MTI.Gonio.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ND.MTI.Gonio.Model\ND.MTI.Gonio.Model.csproj">
+      <Project>{680927AC-E6E3-47F1-8DA7-B8457DDAB8D9}</Project>
+      <Name>ND.MTI.Gonio.Model</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ND.MTI.Service\ND.MTI.Gonio.Service.csproj">
+      <Project>{612EEEC8-DD6F-4812-8965-96390D059BD5}</Project>
+      <Name>ND.MTI.Gonio.Service</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

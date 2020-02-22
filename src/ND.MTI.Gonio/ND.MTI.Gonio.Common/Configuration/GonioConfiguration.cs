@@ -9,15 +9,25 @@ namespace ND.MTI.Gonio.Common.Configuration
 {
     public class GonioConfiguration : IGonioConfiguration
     {
+        private static IGonioConfiguration _instance { get; set; }
+
         private readonly string _configFileAbsolutePath;
         private readonly IDictionary<string, string> _configCache;
 
-        public GonioConfiguration()
+        private GonioConfiguration()
         {
             _configFileAbsolutePath = $"{Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location)}\\gonio.config";
             _configCache = new Dictionary<string, string>();
 
             CreateConfigCacheInternal();
+        }
+
+        public static IGonioConfiguration GetInstance()
+        {
+            if (_instance is null)
+                _instance = new GonioConfiguration();
+
+            return _instance;
         }
 
         public Complex_FSMGonioConfig FsmGonioConfig
@@ -31,12 +41,23 @@ namespace ND.MTI.Gonio.Common.Configuration
                 cfg.Parity = Parser.StringIntToEnum<Parity>(GetConfigByKeyName("FSM_Parity"));
                 cfg.ReadTimeout = Parser.StringToInteger(GetConfigByKeyName("FSM_ReadTimeout"));
                 cfg.SpeedInBaud = Parser.StringToInteger(GetConfigByKeyName("FSM_SpeedInBaud"));
-                cfg.StopBits = Parser.StringIntToEnum<StopBits>(GetConfigByKeyName("FSM_StopBits"));
                 cfg.WriteTimeout = Parser.StringToInteger(GetConfigByKeyName("FSM_WriteTimeout"));
+                cfg.StopBits = Parser.StringIntToEnum<StopBits>(GetConfigByKeyName("FSM_StopBits"));
 
                 return cfg;
             }
         }
+
+        public double PrecisionPercentage => Parser.StringToDouble(GetConfigByKeyName("Motor_PrecisionPercentage"));
+
+        public double SensorDistance => Parser.StringToDouble(GetConfigByKeyName("Sensor_Distance"));
+
+        public int EncoderXMin => Parser.StringToInteger(GetConfigByKeyName("Encoder_XMin"));
+        public int EncoderXMax => Parser.StringToInteger(GetConfigByKeyName("Encoder_XMax"));
+        public int EncoderXFullSpectrum => Parser.StringToInteger(GetConfigByKeyName("Encoder_XFullSpectrum"));
+        public int EncoderYMin => Parser.StringToInteger(GetConfigByKeyName("Encoder_YMin"));
+        public int EncoderYMax => Parser.StringToInteger(GetConfigByKeyName("Encoder_XMax"));
+        public int EncoderYFullSpectrum => Parser.StringToInteger(GetConfigByKeyName("Encoder_YFullSpectrum"));
 
         private void CreateConfigCacheInternal()
         {

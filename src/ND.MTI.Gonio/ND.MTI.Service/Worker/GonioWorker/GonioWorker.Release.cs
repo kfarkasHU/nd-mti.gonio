@@ -1,4 +1,6 @@
-﻿using ND.MTI.Gonio.Model;
+﻿#if !DEBUG
+
+using ND.MTI.Gonio.Model;
 using ND.MTI.Service.Worker.Serial;
 
 namespace ND.MTI.Service.Worker
@@ -20,3 +22,5 @@ namespace ND.MTI.Service.Worker
         public override void Reset() => base.Reset();
     }
 }
+
+#endif
