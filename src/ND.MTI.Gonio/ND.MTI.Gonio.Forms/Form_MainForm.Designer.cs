@@ -57,14 +57,11 @@
             this.labelEnd = new System.Windows.Forms.Label();
             this.labelStep = new System.Windows.Forms.Label();
             this.labelFsmGonio = new System.Windows.Forms.Label();
-            this.labelYMotor = new System.Windows.Forms.Label();
-            this.labelXMotor = new System.Windows.Forms.Label();
+            this.labelPokeys75U = new System.Windows.Forms.Label();
             this.pictureBoxFsmGonioStatus = new System.Windows.Forms.PictureBox();
-            this.pictureBoxYMotor = new System.Windows.Forms.PictureBox();
-            this.pictureBoxXMotor = new System.Windows.Forms.PictureBox();
+            this.pictureBoxPokeys75U = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxFsmGonioStatus)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxYMotor)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxXMotor)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxPokeys75U)).BeginInit();
             this.SuspendLayout();
             // 
             // checkBoxXAuto
@@ -339,23 +336,14 @@
             this.labelFsmGonio.TabIndex = 37;
             this.labelFsmGonio.Text = "FSM Gonio 01";
             // 
-            // labelYMotor
+            // labelPokeys75U
             // 
-            this.labelYMotor.AutoSize = true;
-            this.labelYMotor.Location = new System.Drawing.Point(34, 106);
-            this.labelYMotor.Name = "labelYMotor";
-            this.labelYMotor.Size = new System.Drawing.Size(44, 13);
-            this.labelYMotor.TabIndex = 38;
-            this.labelYMotor.Text = "Y Motor";
-            // 
-            // labelXMotor
-            // 
-            this.labelXMotor.AutoSize = true;
-            this.labelXMotor.Location = new System.Drawing.Point(34, 84);
-            this.labelXMotor.Name = "labelXMotor";
-            this.labelXMotor.Size = new System.Drawing.Size(44, 13);
-            this.labelXMotor.TabIndex = 39;
-            this.labelXMotor.Text = "X Motor";
+            this.labelPokeys75U.AutoSize = true;
+            this.labelPokeys75U.Location = new System.Drawing.Point(194, 128);
+            this.labelPokeys75U.Name = "labelPokeys75U";
+            this.labelPokeys75U.Size = new System.Drawing.Size(34, 13);
+            this.labelPokeys75U.TabIndex = 39;
+            this.labelPokeys75U.Text = "Motor";
             // 
             // pictureBoxFsmGonioStatus
             // 
@@ -367,25 +355,15 @@
             this.pictureBoxFsmGonioStatus.TabStop = false;
             this.pictureBoxFsmGonioStatus.Click += new System.EventHandler(this.PictureBoxFsmGonioStatus_Click);
             // 
-            // pictureBoxYMotor
+            // pictureBoxPokeys75U
             // 
-            this.pictureBoxYMotor.Image = global::ND.MTI.Gonio.Forms.Properties.Resources.disconnect;
-            this.pictureBoxYMotor.Location = new System.Drawing.Point(12, 103);
-            this.pictureBoxYMotor.Name = "pictureBoxYMotor";
-            this.pictureBoxYMotor.Size = new System.Drawing.Size(16, 16);
-            this.pictureBoxYMotor.TabIndex = 35;
-            this.pictureBoxYMotor.TabStop = false;
-            this.pictureBoxYMotor.Click += new System.EventHandler(this.PictureBoxYMotor_Click);
-            // 
-            // pictureBoxXMotor
-            // 
-            this.pictureBoxXMotor.Image = global::ND.MTI.Gonio.Forms.Properties.Resources.disconnect;
-            this.pictureBoxXMotor.Location = new System.Drawing.Point(12, 81);
-            this.pictureBoxXMotor.Name = "pictureBoxXMotor";
-            this.pictureBoxXMotor.Size = new System.Drawing.Size(16, 16);
-            this.pictureBoxXMotor.TabIndex = 34;
-            this.pictureBoxXMotor.TabStop = false;
-            this.pictureBoxXMotor.Click += new System.EventHandler(this.PictureBoxXMotor_Click);
+            this.pictureBoxPokeys75U.Image = global::ND.MTI.Gonio.Forms.Properties.Resources.disconnect;
+            this.pictureBoxPokeys75U.Location = new System.Drawing.Point(172, 125);
+            this.pictureBoxPokeys75U.Name = "pictureBoxPokeys75U";
+            this.pictureBoxPokeys75U.Size = new System.Drawing.Size(16, 16);
+            this.pictureBoxPokeys75U.TabIndex = 34;
+            this.pictureBoxPokeys75U.TabStop = false;
+            this.pictureBoxPokeys75U.Click += new System.EventHandler(this.PictureBoxPokeys75U_Click);
             // 
             // Form_MainForm
             // 
@@ -393,12 +371,10 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 240);
             this.ControlBox = false;
-            this.Controls.Add(this.labelXMotor);
-            this.Controls.Add(this.labelYMotor);
+            this.Controls.Add(this.labelPokeys75U);
             this.Controls.Add(this.labelFsmGonio);
             this.Controls.Add(this.pictureBoxFsmGonioStatus);
-            this.Controls.Add(this.pictureBoxYMotor);
-            this.Controls.Add(this.pictureBoxXMotor);
+            this.Controls.Add(this.pictureBoxPokeys75U);
             this.Controls.Add(this.labelStep);
             this.Controls.Add(this.labelEnd);
             this.Controls.Add(this.labelStart);
@@ -433,8 +409,7 @@
             this.Text = "GONIO";
             this.Load += new System.EventHandler(this.Form_MainForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxFsmGonioStatus)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxYMotor)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxXMotor)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxPokeys75U)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -470,11 +445,9 @@
         private System.Windows.Forms.Label labelStart;
         private System.Windows.Forms.Label labelEnd;
         private System.Windows.Forms.Label labelStep;
-        private System.Windows.Forms.PictureBox pictureBoxXMotor;
-        private System.Windows.Forms.PictureBox pictureBoxYMotor;
+        private System.Windows.Forms.PictureBox pictureBoxPokeys75U;
         private System.Windows.Forms.PictureBox pictureBoxFsmGonioStatus;
         private System.Windows.Forms.Label labelFsmGonio;
-        private System.Windows.Forms.Label labelYMotor;
-        private System.Windows.Forms.Label labelXMotor;
+        private System.Windows.Forms.Label labelPokeys75U;
     }
 }

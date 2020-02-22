@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading;
 
 namespace ND.MTI.Gonio.Tests
 {
@@ -19,7 +20,7 @@ namespace ND.MTI.Gonio.Tests
                 {
                     case "?":
                         {
-                            Console.WriteLine("?, gonio");
+                            Console.WriteLine("?, gonio, motor, encoder");
                             break;
                         }
                     case "gonio":
@@ -28,6 +29,18 @@ namespace ND.MTI.Gonio.Tests
 
                             break;
                         }
+                    case "motor":
+                        {
+                            TestMotor();
+
+                            break;
+                        }
+                    case "encoder":
+                        {
+
+                            break;
+                        }
+
                 }
             }
             while (cmd != "exit");
@@ -42,6 +55,11 @@ namespace ND.MTI.Gonio.Tests
 
             var measured = _gonioTests.TestMeasure();
             Console.WriteLine("Measurement test: {0}", measured);
+        }
+
+        private static void TestMotor()
+        {
+
         }
     }
 }

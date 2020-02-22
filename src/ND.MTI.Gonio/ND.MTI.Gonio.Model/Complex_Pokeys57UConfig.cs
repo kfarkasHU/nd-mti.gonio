@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace ND.MTI.Service.Worker.LPT
+namespace ND.MTI.Gonio.Model
 {
-    public interface ILPTCore
+    public class Complex_Pokeys57UConfig
     {
     }
 }

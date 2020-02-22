@@ -15,7 +15,6 @@ namespace ND.MTI.Gonio.Forms
     // TODO (FK): Connect on startup to cfg.
     // TODO (FK): Button validations (connections).
     // TODO (FK): UI Review and refactor.
-    // TODO (FK): Generate *.Debug files to serials.
 
     public partial class Form_MainForm : Form
     {
@@ -86,10 +85,8 @@ namespace ND.MTI.Gonio.Forms
             textBoxStartY.Enabled = true;
             textBoxStartY.Cursor = Cursors.Hand;
 
-            pictureBoxXMotor.Enabled = true;
-            pictureBoxXMotor.Cursor = Cursors.Hand;
-            pictureBoxYMotor.Enabled = true;
-            pictureBoxYMotor.Cursor = Cursors.Hand;
+            pictureBoxPokeys75U.Enabled = true;
+            pictureBoxPokeys75U.Cursor = Cursors.Hand;
             pictureBoxFsmGonioStatus.Enabled = true;
             pictureBoxFsmGonioStatus.Cursor = Cursors.Hand;
 
@@ -152,10 +149,8 @@ namespace ND.MTI.Gonio.Forms
             textBoxStartY.Enabled = true;
             textBoxStartY.Cursor = Cursors.Hand;
 
-            pictureBoxXMotor.Enabled = true;
-            pictureBoxXMotor.Cursor = Cursors.Hand;
-            pictureBoxYMotor.Enabled = true;
-            pictureBoxYMotor.Cursor = Cursors.Hand;
+            pictureBoxPokeys75U.Enabled = true;
+            pictureBoxPokeys75U.Cursor = Cursors.Hand;
             pictureBoxFsmGonioStatus.Enabled = true;
             pictureBoxFsmGonioStatus.Cursor = Cursors.Hand;
 
@@ -203,34 +198,19 @@ namespace ND.MTI.Gonio.Forms
             pictureBoxFsmGonioStatus.Image = (Image)_resourceManager.GetObject(GetImageFor(RuntimeContext.FsmGonioConnected));
         }
 
-        private void PictureBoxXMotor_Click(object sender, EventArgs e)
+        private void PictureBoxPokeys75U_Click(object sender, EventArgs e)
         {
-            if (RuntimeContext.XConnected)
+            if (RuntimeContext.Pokeys57U)
             {
-                RuntimeContext.XConnected = false;
-                _measurementService.DisconnectXMotor();
+                RuntimeContext.Pokeys57U = false;
+                _measurementService.DisconnectPokeys75U();
             }
             else
             {
-                RuntimeContext.XConnected = _measurementService.ConnectXMotor(_gonioConfiguration.XMotorConfig);
+                RuntimeContext.Pokeys57U = _measurementService.ConnectPokeys57U();
             }
 
-            pictureBoxXMotor.Image = (Image)_resourceManager.GetObject(GetImageFor(RuntimeContext.XConnected));
-        }
-
-        private void PictureBoxYMotor_Click(object sender, EventArgs e)
-        {
-            if (RuntimeContext.YConnected)
-            {
-                RuntimeContext.YConnected = false;
-                _measurementService.DisconnectYMotor();
-            }
-            else
-            {
-                RuntimeContext.YConnected = _measurementService.ConnectXMotor(_gonioConfiguration.YMotorConfig);
-            }
-
-            pictureBoxYMotor.Image = (Image)_resourceManager.GetObject(GetImageFor(RuntimeContext.YConnected));
+            pictureBoxPokeys75U.Image = (Image)_resourceManager.GetObject(GetImageFor(RuntimeContext.Pokeys57U));
         }
 
         private string GetImageFor(bool status) => status ? "connect" : "disconnect";
@@ -240,13 +220,14 @@ namespace ND.MTI.Gonio.Forms
             GetModel();
 
             _model.Validate();
+            _measurementService.Configure(_model);
 
-            StartOrContinue();
+            StartOrContinue(_measurementService.Start);
         }
 
-        private void ButtonContinue_Click(object sender, EventArgs e) => StartOrContinue();
+        private void ButtonContinue_Click(object sender, EventArgs e) => StartOrContinue(_measurementService.Continue);
 
-        private void StartOrContinue()
+        private void StartOrContinue(Action callback)
         {
             #region [ UI ]
 
@@ -291,17 +272,15 @@ namespace ND.MTI.Gonio.Forms
             textBoxStartY.Enabled = false;
             textBoxStartY.Cursor = Cursors.No;
 
-            pictureBoxXMotor.Enabled = false;
-            pictureBoxXMotor.Cursor = Cursors.No;
-            pictureBoxYMotor.Enabled = false;
-            pictureBoxYMotor.Cursor = Cursors.No;
+            pictureBoxPokeys75U.Enabled = false;
+            pictureBoxPokeys75U.Cursor = Cursors.No;
             pictureBoxFsmGonioStatus.Enabled = false;
             pictureBoxFsmGonioStatus.Cursor = Cursors.No;
 
             #endregion [ UI ]
 
             RuntimeContext.Status = Status.Started;
-            _measurementService.Start();
+            callback();
         }
 
         private void ButtonStop_Click(object sender, EventArgs e)
@@ -349,10 +328,8 @@ namespace ND.MTI.Gonio.Forms
             textBoxStartY.Enabled = true;
             textBoxStartY.Cursor = Cursors.Hand;
 
-            pictureBoxXMotor.Enabled = true;
-            pictureBoxXMotor.Cursor = Cursors.Hand;
-            pictureBoxYMotor.Enabled = true;
-            pictureBoxYMotor.Cursor = Cursors.Hand;
+            pictureBoxPokeys75U.Enabled = true;
+            pictureBoxPokeys75U.Cursor = Cursors.Hand;
             pictureBoxFsmGonioStatus.Enabled = true;
             pictureBoxFsmGonioStatus.Cursor = Cursors.Hand;
 
@@ -407,10 +384,8 @@ namespace ND.MTI.Gonio.Forms
             textBoxStartY.Enabled = false;
             textBoxStartY.Cursor = Cursors.No;
 
-            pictureBoxXMotor.Enabled = false;
-            pictureBoxXMotor.Cursor = Cursors.No;
-            pictureBoxYMotor.Enabled = false;
-            pictureBoxYMotor.Cursor = Cursors.No;
+            pictureBoxPokeys75U.Enabled = false;
+            pictureBoxPokeys75U.Cursor = Cursors.No;
             pictureBoxFsmGonioStatus.Enabled = false;
             pictureBoxFsmGonioStatus.Cursor = Cursors.No;
 

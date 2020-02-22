@@ -30,25 +30,25 @@ namespace ND.MTI.Gonio.Forms
 
         private void ButtonIncrementX_Click(object sender, EventArgs e)
         {
-            _positionWorker.IncrementX(GetStepInternal());
+            _positionWorker.IncrementX();
             SetModelInternal();
         }
 
         private void ButtonIncrementY_Click(object sender, EventArgs e)
         {
-            _positionWorker.IncrementY(GetStepInternal());
+            _positionWorker.IncrementY();
             SetModelInternal();
         }
 
         private void ButtonDecrementX_Click(object sender, EventArgs e)
         {
-            _positionWorker.DecrementX(GetStepInternal());
+            _positionWorker.DecrementX();
             SetModelInternal();
         }
 
         private void ButtonDecrementY_Click(object sender, EventArgs e)
         {
-            _positionWorker.DecrementY(GetStepInternal());
+            _positionWorker.DecrementY();
             SetModelInternal();
         }
 

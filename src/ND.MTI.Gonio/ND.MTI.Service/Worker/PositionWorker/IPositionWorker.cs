@@ -4,18 +4,17 @@ namespace ND.MTI.Service.Worker
 {
     public interface IPositionWorker
     {
-        bool ConnectXMotor(Complex_MotorConfig xMotorConfig);
-        void DisconnectXMotor();
-        bool ConnectYMotor(Complex_MotorConfig yMotorConfig);
-        void DisconnectYMotor();
+        bool Connect();
+        void Disconnect();
 
         void SetPosition(Primitive_Position position);
-
-        void IncrementX(int step = 1);
-        void DecrementX(int step = 1);
-        void IncrementY(int step = 1);
-        void DecrementY(int step = 1);
-
         Primitive_Position GetPosition();
+
+        void DecrementY();
+        void DecrementX();
+        void StopX();
+        void IncrementY();
+        void IncrementX();
+        void StopY();
     }
 }

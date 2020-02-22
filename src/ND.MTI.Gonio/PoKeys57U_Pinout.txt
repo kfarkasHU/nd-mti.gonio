@@ -1,0 +1,60 @@
+A következõ lábkiosztás szerint van felépítvée a szoftver
+PIN1: X tengely 1. Helyen álló bitje (MSB)
+PIN2: X tengely 2. Helyen álló bitje
+PIN3: X tengely 3. Helyen álló bitje
+PIN4: X tengely 4. Helyen álló bitje
+PIN5: X tengely 5. Helyen álló bitje
+PIN6: X tengely 6. Helyen álló bitje
+PIN7: X tengely 7. Helyen álló bitje
+PIN8: X tengely 8. Helyen álló bitje
+PIN9: X tengely 9. Helyen álló bitje
+PIN10: X tengely 10. Helyen álló bitje
+PIN11: X tengely 11. Helyen álló bitje
+PIN12: X tengely 12. Helyen álló bitje
+PIN13: X tengely 13. Helyen álló bitje (LSB)
+PIN14: X tengely jobb oldali végálláskapcsoló bitje
+PIN15: X tengely bal oldali végálláskapcsoló bitje
+PIN16: X tengely tartalékbitje
+
+PIN17: Y tengely 1. Helyen álló bitje
+PIN18: Y tengely 2. Helyen álló bitje
+PIN19: Y tengely 3. Helyen álló bitje
+PIN20: Y tengely 4. Helyen álló bitje
+PIN21: Y tengely 5. Helyen álló bitje
+PIN22: Y tengely 6. Helyen álló bitje
+PIN23: Y tengely 7. Helyen álló bitje
+PIN24: Y tengely 8. Helyen álló bitje
+PIN25: Y tengely 9. Helyen álló bitje
+PIN26: Y tengely 10. Helyen álló bitje
+PIN27: Y tengely 11. Helyen álló bitje
+PIN28: Y tengely 12. Helyen álló bitje
+PIN29: Y tengely 13. Helyen álló bitje
+PIN30: Y tengley jobb oldali végálláskapcsoló bitje
+PIN31: Y tengely bal oldali végálláskapcsoló bitje
+PIN32: Y tengely tartalékbitje
+
+PIN33: X motor PUL+ lába
+PIN34: X motor DIR+ lába
+PIN35: X motor ENA+ lába
+PIN36: X motor tartalékbitje
+
+PIN37: Y motor PUL+ lába
+PIN38: Y motor DIR+ lába
+PIN39: Y motor ENA+ lába
+PIN40: Y motor tartalékbitje
+
+PIN41:
+PIN42:
+PIN43:
+PIN44:
+PIN45:
+PIN46:
+PIN47:
+PIN48:
+PIN49:
+PIN50:
+PIN51:
+PIN52:
+PIN53:
+PIN54:
+PIN55:

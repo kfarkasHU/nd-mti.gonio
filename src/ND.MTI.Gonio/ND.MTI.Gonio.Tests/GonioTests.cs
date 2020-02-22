@@ -1,9 +1,5 @@
 ﻿using ND.MTI.Gonio.Common.Configuration;
 using ND.MTI.Service.Worker;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace ND.MTI.Gonio.Tests
 {

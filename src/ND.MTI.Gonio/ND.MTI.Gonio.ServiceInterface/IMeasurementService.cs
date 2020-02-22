@@ -7,10 +7,8 @@ namespace ND.MTI.Gonio.ServiceInterface
         bool ConnectFsmGonio(Complex_FSMGonioConfig fsmGonioConfig);
         void DisconnectFsmGonio();
 
-        bool ConnectXMotor(Complex_MotorConfig xMotorConfig);
-        void DisconnectXMotor();
-        bool ConnectYMotor(Complex_MotorConfig yMotorConfig);
-        void DisconnectYMotor();
+        bool ConnectPokeys57U();
+        void DisconnectPokeys75U();
 
         void Configure(Complex_MainModel mainModel);
         void Start();

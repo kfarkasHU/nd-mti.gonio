@@ -52,17 +52,12 @@ namespace ND.MTI.Gonio.Common.Configuration
 
         public double SensorDistance => Parser.StringToDouble(GetConfigByKeyName("Sensor_Distance"));
 
-        public Complex_MotorConfig XMotorConfig => MotorConfigInternal("MotorX");
-
-        public Complex_MotorConfig YMotorConfig => MotorConfigInternal("MotorX");
-
-        private Complex_MotorConfig MotorConfigInternal(string prefix)
-        {
-            var cfg = new Complex_MotorConfig();
-
-
-            return cfg;
-        }
+        public int EncoderXMin => Parser.StringToInteger(GetConfigByKeyName("Encoder_XMin"));
+        public int EncoderXMax => Parser.StringToInteger(GetConfigByKeyName("Encoder_XMax"));
+        public int EncoderXFullSpectrum => Parser.StringToInteger(GetConfigByKeyName("Encoder_XFullSpectrum"));
+        public int EncoderYMin => Parser.StringToInteger(GetConfigByKeyName("Encoder_YMin"));
+        public int EncoderYMax => Parser.StringToInteger(GetConfigByKeyName("Encoder_XMax"));
+        public int EncoderYFullSpectrum => Parser.StringToInteger(GetConfigByKeyName("Encoder_YFullSpectrum"));
 
         private void CreateConfigCacheInternal()
         {
