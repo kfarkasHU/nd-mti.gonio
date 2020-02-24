@@ -54,19 +54,19 @@ namespace ND.MTI.Service.Worker
 
             #region [ SET Y ]
 
-            if (currentPosition.X > position.X)
+            if (currentPosition.Y > position.Y)
             {
-                while (GetPositionInternal().X > position.X)
+                while (GetPositionInternal().Y > position.Y)
                     DecrementXInternal();
 
                 StopX();
             }
-            else if (currentPosition.X < position.X)
+            else if (currentPosition.Y < position.Y)
             {
-                while (GetPositionInternal().X < position.X)
+                while (GetPositionInternal().Y < position.Y)
                     IncrementXInternal();
 
-                StopX();
+                StopY();
             }
 
             #endregion [ SET Y ]

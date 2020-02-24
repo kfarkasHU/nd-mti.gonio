@@ -47,7 +47,7 @@ namespace ND.MTI.Service.Worker
                     worksheet.Cells[1, 4].Value = result.RealPosition.X.ToString();
                     worksheet.Cells[1, 5].Value = result.RealPosition.Y.ToString();
                     worksheet.Cells[1, 6].Value = result.MeasuredIllumination.ToString();
-                    worksheet.Cells[1, 7].Value = (result.MeasuredIllumination / Math.Pow(_gonioConfiguration.SensorDistance,2)).ToString();
+                    worksheet.Cells[1, 7].Value = (result.MeasuredIllumination / Math.Pow(_gonioConfiguration.SensorDistance, 2)).ToString();
                 }
 
                 #endregion [ Insert data ]

@@ -1,3 +1,8 @@
+Demo:
+PIN17: PWM X
+PIN16: ENA+ X
+PIN15: DIR+ X
+
 A következõ lábkiosztás szerint van felépítvée a szoftver
 PIN1: X tengely 1. Helyen álló bitje (MSB)
 PIN2: X tengely 2. Helyen álló bitje

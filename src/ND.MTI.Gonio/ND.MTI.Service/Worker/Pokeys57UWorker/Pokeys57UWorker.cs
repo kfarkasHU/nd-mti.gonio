@@ -65,8 +65,8 @@ namespace ND.MTI.Service.Worker.Pokeys
 
             #region [ X bits > write ]
 
-            // X PUL+
-            _device.SetPinData((byte)Pokeys57U_PinNumbers.PIN_33, (byte)Pokeys57U_PinFunctions.PIN_DIGITAL_OUTPUT);
+            // X PUL+ (PWM)
+            //_device.SetPinData((byte)Pokeys57U_PinNumbers.PIN_33, (byte)Pokeys57U_PinFunctions.PIN_DIGITAL_OUTPUT);
 
             // X DIR+
             _device.SetPinData((byte)Pokeys57U_PinNumbers.PIN_34, (byte)Pokeys57U_PinFunctions.PIN_DIGITAL_OUTPUT);
@@ -113,8 +113,8 @@ namespace ND.MTI.Service.Worker.Pokeys
 
             #region [ Y bits > write ]
 
-            // Y PUL+
-            _device.SetPinData((byte)Pokeys57U_PinNumbers.PIN_37, (byte)Pokeys57U_PinFunctions.PIN_DIGITAL_OUTPUT);
+            // Y PUL+ (PWM)
+            //_device.SetPinData((byte)Pokeys57U_PinNumbers.PIN_37, (byte)Pokeys57U_PinFunctions.PIN_DIGITAL_OUTPUT);
 
             // Y DIR+
             _device.SetPinData((byte)Pokeys57U_PinNumbers.PIN_38, (byte)Pokeys57U_PinFunctions.PIN_DIGITAL_OUTPUT);
@@ -222,11 +222,18 @@ namespace ND.MTI.Service.Worker.Pokeys
                 Pokeys57U_PinNumbers.PIN_12,
                 Pokeys57U_PinNumbers.PIN_13,
                 Pokeys57U_PinNumbers.PIN_14,
-                Pokeys57U_PinNumbers.PIN_15,
-                Pokeys57U_PinNumbers.PIN_16,
+                //Pokeys57U_PinNumbers.PIN_15,
+                //Pokeys57U_PinNumbers.PIN_16,
             };
 
-            for(var i = 0; i < xPins.Length; i++)
+            var state = false;
+            if (_device.GetInput((byte)Pokeys57U_PinNumbers.PIN_15, ref state))
+                throw new Exception("Endpoint reached: P15");
+
+            if (_device.GetInput((byte)Pokeys57U_PinNumbers.PIN_16, ref state))
+                throw new Exception("Endpoint reached: P16");
+
+            for (var i = 0; i < xPins.Length; i++)
                 AppendResponse(ref response, _device.GetInput((byte)xPins[i], ref pinState));
 
             return response;
@@ -253,10 +260,17 @@ namespace ND.MTI.Service.Worker.Pokeys
                 Pokeys57U_PinNumbers.PIN_28,
                 Pokeys57U_PinNumbers.PIN_29,
                 Pokeys57U_PinNumbers.PIN_30,
-                Pokeys57U_PinNumbers.PIN_31,
-                Pokeys57U_PinNumbers.PIN_32,
+                //Pokeys57U_PinNumbers.PIN_31,
+                //Pokeys57U_PinNumbers.PIN_32,
 
             };
+
+            var state = false;
+            if (_device.GetInput((byte)Pokeys57U_PinNumbers.PIN_31, ref state))
+                throw new Exception("Endpoint reached: P31");
+
+            if (_device.GetInput((byte)Pokeys57U_PinNumbers.PIN_32, ref state))
+                throw new Exception("Endpoint reached: P32");
 
             for (var i = 0; i < xPins.Length; i++)
                 AppendResponse(ref response, _device.GetInput((byte)xPins[i], ref pinState));
