@@ -1,4 +1,6 @@
-﻿using System;
+﻿using ND.MTI.Gonio.Common.Configuration;
+using ND.MTI.Gonio.Common.Exceptions;
+using System;
 using System.Windows.Forms;
 
 namespace ND.MTI.Service.Worker.Pokeys
@@ -7,6 +9,7 @@ namespace ND.MTI.Service.Worker.Pokeys
     {
         private readonly Timer _timer;
         private readonly PoKeysDevice_DLL.PoKeysDevice _device;
+        protected readonly IGonioConfiguration _configuration;
 
         public string LastXResponse { get; private set; }
         public string LastYResponse { get; private set; }
@@ -18,6 +21,13 @@ namespace ND.MTI.Service.Worker.Pokeys
             _timer = new Timer();
             _timer.Tick += new EventHandler(OnTimerTick);
             _timer.Interval = 100;
+
+            _configuration = GonioConfiguration.GetInstance();
+
+            var deviceCount = _device.EnumerateDevices();
+
+            if (deviceCount != 1)
+                throw new ArgumentException("Device number!");
 
         }
 
@@ -140,8 +150,7 @@ namespace ND.MTI.Service.Worker.Pokeys
             pwmOutputs[1] = false; // 21
             pwmOutputs[0] = false; // 22
 
-            // 12MHz / 300 = 40kHz
-            var period = (uint)_device.GetPWMFrequency() / 300; // 40 kHz
+            var period = (uint)(_device.GetPWMFrequency() / _configuration.PWMFrequencyDivier);
 
             // Create 50% PWM.
             var dutyScale = new uint[6];
@@ -204,7 +213,6 @@ namespace ND.MTI.Service.Worker.Pokeys
         private string ReadXInternal()
         {
             var response = string.Empty;
-            var pinState = false;
 
             var xPins = new Pokeys57U_PinNumbers[]
             {
@@ -222,19 +230,16 @@ namespace ND.MTI.Service.Worker.Pokeys
                 Pokeys57U_PinNumbers.PIN_12,
                 Pokeys57U_PinNumbers.PIN_13,
                 Pokeys57U_PinNumbers.PIN_14,
-                //Pokeys57U_PinNumbers.PIN_15,
-                //Pokeys57U_PinNumbers.PIN_16,
             };
 
-            var state = false;
-            if (_device.GetInput((byte)Pokeys57U_PinNumbers.PIN_15, ref state))
-                throw new Exception("Endpoint reached: P15");
+            if (ReadInput(Pokeys57U_PinNumbers.PIN_15))
+                throw new Gonio_EndpointException((int)Pokeys57U_PinNumbers.PIN_15);
 
-            if (_device.GetInput((byte)Pokeys57U_PinNumbers.PIN_16, ref state))
-                throw new Exception("Endpoint reached: P16");
+            if (ReadInput(Pokeys57U_PinNumbers.PIN_16))
+                throw new Gonio_EndpointException((int)Pokeys57U_PinNumbers.PIN_16);
 
             for (var i = 0; i < xPins.Length; i++)
-                AppendResponse(ref response, _device.GetInput((byte)xPins[i], ref pinState));
+                AppendResponse(ref response, ReadInput(xPins[i]));
 
             return response;
         }
@@ -242,9 +247,8 @@ namespace ND.MTI.Service.Worker.Pokeys
         private string ReadYInternal()
         {
             var response = string.Empty;
-            var pinState = false;
 
-            var xPins = new Pokeys57U_PinNumbers[]
+            var yPins = new Pokeys57U_PinNumbers[]
             {
                 Pokeys57U_PinNumbers.PIN_17,
                 Pokeys57U_PinNumbers.PIN_18,
@@ -260,22 +264,32 @@ namespace ND.MTI.Service.Worker.Pokeys
                 Pokeys57U_PinNumbers.PIN_28,
                 Pokeys57U_PinNumbers.PIN_29,
                 Pokeys57U_PinNumbers.PIN_30,
-                //Pokeys57U_PinNumbers.PIN_31,
-                //Pokeys57U_PinNumbers.PIN_32,
 
             };
 
-            var state = false;
-            if (_device.GetInput((byte)Pokeys57U_PinNumbers.PIN_31, ref state))
-                throw new Exception("Endpoint reached: P31");
+            if (ReadInput(Pokeys57U_PinNumbers.PIN_31))
+                throw new Gonio_EndpointException((int)Pokeys57U_PinNumbers.PIN_31);
 
-            if (_device.GetInput((byte)Pokeys57U_PinNumbers.PIN_32, ref state))
-                throw new Exception("Endpoint reached: P32");
+            if (ReadInput(Pokeys57U_PinNumbers.PIN_32))
+                throw new Gonio_EndpointException((int)Pokeys57U_PinNumbers.PIN_32);
 
-            for (var i = 0; i < xPins.Length; i++)
-                AppendResponse(ref response, _device.GetInput((byte)xPins[i], ref pinState));
+            for (var i = 0; i < yPins.Length; i++)
+                AppendResponse(ref response, ReadInput(yPins[i]));
 
             return response;
+        }
+
+
+        private bool ReadInput(Pokeys57U_PinNumbers pinNumber)
+        {
+            var state = false;
+
+            var readSuccess = _device.GetInput((byte)pinNumber, ref state);
+
+            if (!readSuccess)
+                throw new InvalidOperationException($"Read error on {pinNumber.ToString()}");
+
+            return state;
         }
 
         private void AppendResponse(ref string response, bool state) => response += state ? "1" : "0";

@@ -10,14 +10,8 @@ namespace ND.MTI.Service.Worker
     public class PositionWorker : Pokeys57UWorker, IPositionWorker
     {
         private static IPositionWorker _instance { get; set; }
-        private readonly IGonioConfiguration _configuration;
 
-        private PositionWorker()
-        {
-            _configuration = GonioConfiguration.GetInstance();
-
-            Init();
-        }
+        private PositionWorker() => Init();
 
         public static IPositionWorker GetInstance()
         {

@@ -14,6 +14,7 @@ namespace ND.MTI.Gonio.Pokeys57U_POC
             try
             {
                 var device = new PoKeysDevice_DLL.PoKeysDevice();
+                _ = device.EnumerateDevices();
 
                 device.ConnectToDevice(0);
 

@@ -59,6 +59,8 @@ namespace ND.MTI.Gonio.Common.Configuration
         public int EncoderYMax => Parser.StringToInteger(GetConfigByKeyName("Encoder_XMax"));
         public int EncoderYFullSpectrum => Parser.StringToInteger(GetConfigByKeyName("Encoder_YFullSpectrum"));
 
+        public int PWMFrequencyDivier => Parser.StringToInteger(GetConfigByKeyName("PWM_FrequencyDivier"));
+
         private void CreateConfigCacheInternal()
         {
             var lines = File.ReadAllLines(_configFileAbsolutePath);
