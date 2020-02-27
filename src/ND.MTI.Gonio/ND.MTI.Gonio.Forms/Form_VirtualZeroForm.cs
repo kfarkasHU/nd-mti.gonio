@@ -61,5 +61,9 @@ namespace ND.MTI.Gonio.Forms
             textBoxXCoord.Text = position.X.ToString();
             textBoxYCoord.Text = position.Y.ToString();
         }
+
+        private void ButtonStopX_Click(object sender, EventArgs e) => _positionWorker.StopX();
+
+        private void ButtonStopY_Click(object sender, EventArgs e) => _positionWorker.StopY();
     }
 }

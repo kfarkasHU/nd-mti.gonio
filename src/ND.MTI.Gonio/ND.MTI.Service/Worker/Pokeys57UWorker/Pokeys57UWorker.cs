@@ -33,34 +33,47 @@ namespace ND.MTI.Service.Worker.Pokeys
 
         private void OnTimerTick(object sender, EventArgs e)
         {
-            LastXResponse = ReadXInternal();
-            LastYResponse = ReadYInternal();
+            if (_device.Connected())
+            {
+                LastXResponse = ReadXInternal();
+                LastYResponse = ReadYInternal();
+            }
         }
 
-        public bool Connect() => _device.ConnectToDevice(0);
+        public bool Connect()
+        {
+            var cResult = _device.ConnectToDevice(0);
+            Init();
+
+            return cResult;
+        }
 
         public void Disconnect() => _device.DisconnectDevice();
 
         public virtual void Init()
         {
+            if (!_device.Connected())
+                throw new InvalidOperationException();
+
             #region [ X bits > read ]
-            
-            _device.SetPinData((byte)Pokeys57U_PinNumbers.PIN_1, (byte)Pokeys57U_PinFunctions.PIN_DIGITAL_INPUT);
-            _device.SetPinData((byte)Pokeys57U_PinNumbers.PIN_2, (byte)Pokeys57U_PinFunctions.PIN_DIGITAL_INPUT);
-            _device.SetPinData((byte)Pokeys57U_PinNumbers.PIN_3, (byte)Pokeys57U_PinFunctions.PIN_DIGITAL_INPUT);
-            _device.SetPinData((byte)Pokeys57U_PinNumbers.PIN_4, (byte)Pokeys57U_PinFunctions.PIN_DIGITAL_INPUT);
-            _device.SetPinData((byte)Pokeys57U_PinNumbers.PIN_5, (byte)Pokeys57U_PinFunctions.PIN_DIGITAL_INPUT);
-            _device.SetPinData((byte)Pokeys57U_PinNumbers.PIN_6, (byte)Pokeys57U_PinFunctions.PIN_DIGITAL_INPUT);
-            _device.SetPinData((byte)Pokeys57U_PinNumbers.PIN_7, (byte)Pokeys57U_PinFunctions.PIN_DIGITAL_INPUT);
-            _device.SetPinData((byte)Pokeys57U_PinNumbers.PIN_8, (byte)Pokeys57U_PinFunctions.PIN_DIGITAL_INPUT);
-            _device.SetPinData((byte)Pokeys57U_PinNumbers.PIN_9, (byte)Pokeys57U_PinFunctions.PIN_DIGITAL_INPUT);
-            _device.SetPinData((byte)Pokeys57U_PinNumbers.PIN_10, (byte)Pokeys57U_PinFunctions.PIN_DIGITAL_INPUT);
-            _device.SetPinData((byte)Pokeys57U_PinNumbers.PIN_11, (byte)Pokeys57U_PinFunctions.PIN_DIGITAL_INPUT);
-            _device.SetPinData((byte)Pokeys57U_PinNumbers.PIN_12, (byte)Pokeys57U_PinFunctions.PIN_DIGITAL_INPUT);
-            _device.SetPinData((byte)Pokeys57U_PinNumbers.PIN_13, (byte)Pokeys57U_PinFunctions.PIN_DIGITAL_INPUT);
-            _device.SetPinData((byte)Pokeys57U_PinNumbers.PIN_14, (byte)Pokeys57U_PinFunctions.PIN_DIGITAL_INPUT);
-            _device.SetPinData((byte)Pokeys57U_PinNumbers.PIN_15, (byte)Pokeys57U_PinFunctions.PIN_DIGITAL_INPUT);
-            _device.SetPinData((byte)Pokeys57U_PinNumbers.PIN_16, (byte)Pokeys57U_PinFunctions.PIN_DIGITAL_INPUT);
+
+            var success = false;
+            success = _device.SetPinData((byte)Pokeys57U_PinNumbers.PIN_1, (byte)Pokeys57U_PinFunctions.PIN_DIGITAL_INPUT);
+            success = _device.SetPinData((byte)Pokeys57U_PinNumbers.PIN_2, (byte)Pokeys57U_PinFunctions.PIN_DIGITAL_INPUT);
+            success = _device.SetPinData((byte)Pokeys57U_PinNumbers.PIN_3, (byte)Pokeys57U_PinFunctions.PIN_DIGITAL_INPUT);
+            success = _device.SetPinData((byte)Pokeys57U_PinNumbers.PIN_4, (byte)Pokeys57U_PinFunctions.PIN_DIGITAL_INPUT);
+            success = _device.SetPinData((byte)Pokeys57U_PinNumbers.PIN_5, (byte)Pokeys57U_PinFunctions.PIN_DIGITAL_INPUT);
+            success = _device.SetPinData((byte)Pokeys57U_PinNumbers.PIN_6, (byte)Pokeys57U_PinFunctions.PIN_DIGITAL_INPUT);
+            success = _device.SetPinData((byte)Pokeys57U_PinNumbers.PIN_7, (byte)Pokeys57U_PinFunctions.PIN_DIGITAL_INPUT);
+            success = _device.SetPinData((byte)Pokeys57U_PinNumbers.PIN_8, (byte)Pokeys57U_PinFunctions.PIN_DIGITAL_INPUT);
+            success = _device.SetPinData((byte)Pokeys57U_PinNumbers.PIN_9, (byte)Pokeys57U_PinFunctions.PIN_DIGITAL_INPUT);
+            success = _device.SetPinData((byte)Pokeys57U_PinNumbers.PIN_10, (byte)Pokeys57U_PinFunctions.PIN_DIGITAL_INPUT);
+            success = _device.SetPinData((byte)Pokeys57U_PinNumbers.PIN_11, (byte)Pokeys57U_PinFunctions.PIN_DIGITAL_INPUT);
+            success = _device.SetPinData((byte)Pokeys57U_PinNumbers.PIN_12, (byte)Pokeys57U_PinFunctions.PIN_DIGITAL_INPUT);
+            success = _device.SetPinData((byte)Pokeys57U_PinNumbers.PIN_13, (byte)Pokeys57U_PinFunctions.PIN_DIGITAL_INPUT);
+            success = _device.SetPinData((byte)Pokeys57U_PinNumbers.PIN_14, (byte)Pokeys57U_PinFunctions.PIN_DIGITAL_INPUT);
+            success = _device.SetPinData((byte)Pokeys57U_PinNumbers.PIN_15, (byte)Pokeys57U_PinFunctions.PIN_DIGITAL_INPUT);
+            success = _device.SetPinData((byte)Pokeys57U_PinNumbers.PIN_16, (byte)Pokeys57U_PinFunctions.PIN_DIGITAL_INPUT);
 
             #endregion [ X bits > read ]
 
@@ -114,13 +127,13 @@ namespace ND.MTI.Service.Worker.Pokeys
 
             var bytes = CreateMessageBytesInternal(message);
 
-            _device.SetOutput((byte)Pokeys57U_PinNumbers.PIN_34, bytes[0]);
+            _ = _device.SetOutput((byte)Pokeys57U_PinNumbers.PIN_35, bytes[0]);
             Thread.Sleep(5);
 
-            _device.SetOutput((byte)Pokeys57U_PinNumbers.PIN_35, bytes[1]);
+            _ = _device.SetOutput((byte)Pokeys57U_PinNumbers.PIN_36, bytes[1]);
             Thread.Sleep(5);
 
-            _device.SetOutput((byte)Pokeys57U_PinNumbers.PIN_36, bytes[2]);
+            _ = _device.SetOutput((byte)Pokeys57U_PinNumbers.PIN_37, bytes[2]);
             Thread.Sleep(5);
 
             StartPWMX();
@@ -152,7 +165,7 @@ namespace ND.MTI.Service.Worker.Pokeys
         {
             var pwmOutputs = new bool[6];
 
-            pwmOutputs[5] = true;  // 17 (X)
+            pwmOutputs[5] = true; // 17 (X)
             pwmOutputs[4] = false; // 18 (Y)
             pwmOutputs[3] = false; // 19
             pwmOutputs[2] = false; // 20
@@ -166,7 +179,7 @@ namespace ND.MTI.Service.Worker.Pokeys
 
             dutyScale[5] = (uint)(0.5 * period);
 
-            _device.SetPWMOutputs(ref pwmOutputs, ref period, ref dutyScale);
+            _ = _device.SetPWMOutputs(ref pwmOutputs, ref period, ref dutyScale);
         }
 
         private void StartPWMY()
@@ -225,11 +238,11 @@ namespace ND.MTI.Service.Worker.Pokeys
                 Pokeys57U_PinNumbers.PIN_14,
             };
 
-            if (ReadInput(Pokeys57U_PinNumbers.PIN_15))
-                throw new Gonio_EndpointException((int)Pokeys57U_PinNumbers.PIN_15);
+            //if (ReadInput(Pokeys57U_PinNumbers.PIN_15))
+            //    throw new Gonio_EndpointException((int)Pokeys57U_PinNumbers.PIN_15);
 
-            if (ReadInput(Pokeys57U_PinNumbers.PIN_16))
-                throw new Gonio_EndpointException((int)Pokeys57U_PinNumbers.PIN_16);
+            //if (ReadInput(Pokeys57U_PinNumbers.PIN_16))
+            //    throw new Gonio_EndpointException((int)Pokeys57U_PinNumbers.PIN_16);
 
             for (var i = 0; i < xPins.Length; i++)
                 AppendResponse(ref response, ReadInput(xPins[i]));
@@ -259,11 +272,11 @@ namespace ND.MTI.Service.Worker.Pokeys
                 Pokeys57U_PinNumbers.PIN_32
             };
 
-            if (ReadInput(Pokeys57U_PinNumbers.PIN_33))
-                throw new Gonio_EndpointException((int)Pokeys57U_PinNumbers.PIN_33);
+            //if (ReadInput(Pokeys57U_PinNumbers.PIN_33))
+            //    throw new Gonio_EndpointException((int)Pokeys57U_PinNumbers.PIN_33);
 
-            if (ReadInput(Pokeys57U_PinNumbers.PIN_34))
-                throw new Gonio_EndpointException((int)Pokeys57U_PinNumbers.PIN_34);
+            //if (ReadInput(Pokeys57U_PinNumbers.PIN_34))
+            //    throw new Gonio_EndpointException((int)Pokeys57U_PinNumbers.PIN_34);
 
             for (var i = 0; i < yPins.Length; i++)
                 AppendResponse(ref response, ReadInput(yPins[i]));
@@ -275,7 +288,8 @@ namespace ND.MTI.Service.Worker.Pokeys
         {
             var state = false;
 
-            var readSuccess = _device.GetInput((byte)pinNumber, ref state);
+            var pinNum = (byte)(int)pinNumber;
+            var readSuccess = _device.GetInput(pinNum, ref state);
 
             if (!readSuccess)
                 throw new InvalidOperationException($"Read error on {pinNumber.ToString()}");

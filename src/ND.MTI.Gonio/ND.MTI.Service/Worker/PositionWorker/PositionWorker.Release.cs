@@ -11,8 +11,6 @@ namespace ND.MTI.Service.Worker
     {
         private static IPositionWorker _instance { get; set; }
 
-        private PositionWorker() => Init();
-
         public static IPositionWorker GetInstance()
         {
             if (_instance is null)
@@ -103,17 +101,17 @@ namespace ND.MTI.Service.Worker
 
         public void StopY() => StopYInternal();
         
-        private void IncrementXInternal() => WriteDataX(Pokeys57U_Commands.DIR1_ENA1_RES0);
+        private void IncrementXInternal() => WriteDataX(Pokeys57U_Commands.ENA0_DIR0_RES0);
 
-        private void IncrementYInternal() => WriteDataY(Pokeys57U_Commands.DIR1_ENA1_RES0);
+        private void IncrementYInternal() => WriteDataY(Pokeys57U_Commands.ENA0_DIR0_RES0);
 
-        private void DecrementXInternal() => WriteDataX(Pokeys57U_Commands.DIR0_ENA1_RES0);
+        private void DecrementXInternal() => WriteDataX(Pokeys57U_Commands.ENA0_DIR1_RES0);
 
-        private void DecrementYInternal() => WriteDataY(Pokeys57U_Commands.DIR0_ENA1_RES0);
+        private void DecrementYInternal() => WriteDataY(Pokeys57U_Commands.ENA0_DIR1_RES0);
 
-        private void StopXInternal() => WriteDataX(Pokeys57U_Commands.DIR0_ENA0_RES0);
+        private void StopXInternal() => WriteDataX(Pokeys57U_Commands.ENA1_DIR0_RES0);
 
-        private void StopYInternal() => WriteDataY(Pokeys57U_Commands.DIR0_ENA0_RES0);
+        private void StopYInternal() => WriteDataY(Pokeys57U_Commands.ENA1_DIR0_RES0);
 
         private double NormalizeInternal(
             int encoderPos,

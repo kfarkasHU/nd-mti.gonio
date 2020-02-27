@@ -1,4 +1,5 @@
 ﻿using ND.MTI.Service.Worker.Pokeys;
+using System.Threading;
 
 namespace ND.MTI.Gonio.Tests
 {
@@ -76,6 +77,42 @@ namespace ND.MTI.Gonio.Tests
             dutyScale[0] = (uint)(0.5 * period);
 
             _device.SetPWMOutputs(ref pwmOutputs, ref period, ref dutyScale);
+        }
+
+        public void Motor()
+        {
+            var p0 = _device.SetPinData(0, 4);
+            var p1 = _device.SetPinData(1, 4);
+
+            var o0 = _device.SetOutput(0, true);
+            Thread.Sleep(5);
+            var o1 = _device.SetOutput(1, false);
+            Thread.Sleep(5);
+
+            var pwmOutputs = new bool[6];
+
+            pwmOutputs[5] = true;
+            pwmOutputs[4] = true;
+            pwmOutputs[3] = true;
+            pwmOutputs[2] = true;
+            pwmOutputs[1] = true;
+            pwmOutputs[0] = true;
+
+            var period = (uint)(_device.GetPWMFrequency() / 1200);
+
+            var dutyScale = new uint[6];
+
+            dutyScale[5] = (uint)(0.5 * period);
+            dutyScale[4] = (uint)(0.5 * period);
+            dutyScale[3] = (uint)(0.5 * period);
+            dutyScale[2] = (uint)(0.5 * period);
+            dutyScale[1] = (uint)(0.5 * period);
+            dutyScale[0] = (uint)(0.5 * period);
+
+            _device.SetPWMOutputs(ref pwmOutputs, ref period, ref dutyScale);
+
+            var o11 = _device.SetOutput(0, false);
+            Thread.Sleep(5);
         }
     }
 }
