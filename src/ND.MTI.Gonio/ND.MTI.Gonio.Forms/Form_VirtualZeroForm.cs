@@ -52,8 +52,6 @@ namespace ND.MTI.Gonio.Forms
             SetModelInternal();
         }
 
-        private int GetStepInternal() => Parser.StringToInteger(comboBoxStep.SelectedItem.ToString());
-
         private void SetModelInternal() => SetModelInternal(_positionWorker.GetPosition());
 
         private void SetModelInternal(Primitive_Position position)
