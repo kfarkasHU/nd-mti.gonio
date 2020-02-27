@@ -1,5 +1,6 @@
 ﻿using ND.MTI.Gonio.Common.Configuration;
 using ND.MTI.Service.Worker;
+using System;
 
 namespace ND.MTI.Gonio.Tests
 {
@@ -14,12 +15,21 @@ namespace ND.MTI.Gonio.Tests
             _gonioConfiguration = GonioConfiguration.GetInstance();
         }
 
-        public bool TestConnection() => _gonioWorker.Connect(_gonioConfiguration.FsmGonioConfig);
+        public bool TestConnection()
+        {
+            Console.WriteLine("Connection to FSM Gonio 01");
+
+            var result = _gonioWorker.Connect(_gonioConfiguration.FsmGonioConfig);
+
+            Console.WriteLine($"Connection status: {result}");
+
+            return result;
+        }
 
         public double TestMeasure() => _gonioWorker.Measure();
 
         public void TestReset() => _gonioWorker.Reset();
 
-        public void TestDisconnect() => _gonioWorker.Reset();
+        public void TestDisconnect() => _gonioWorker.Disconnect();
     }
 }

@@ -10,14 +10,6 @@ namespace ND.MTI.Service.Worker
     public class PositionWorker : Pokeys57UWorker, IPositionWorker
     {
         private static IPositionWorker _instance { get; set; }
-        private readonly IGonioConfiguration _configuration;
-
-        private PositionWorker()
-        {
-            _configuration = GonioConfiguration.GetInstance();
-
-            Init();
-        }
 
         public static IPositionWorker GetInstance()
         {
@@ -54,19 +46,19 @@ namespace ND.MTI.Service.Worker
 
             #region [ SET Y ]
 
-            if (currentPosition.X > position.X)
+            if (currentPosition.Y > position.Y)
             {
-                while (GetPositionInternal().X > position.X)
+                while (GetPositionInternal().Y > position.Y)
                     DecrementXInternal();
 
                 StopX();
             }
-            else if (currentPosition.X < position.X)
+            else if (currentPosition.Y < position.Y)
             {
-                while (GetPositionInternal().X < position.X)
+                while (GetPositionInternal().Y < position.Y)
                     IncrementXInternal();
 
-                StopX();
+                StopY();
             }
 
             #endregion [ SET Y ]
@@ -109,17 +101,17 @@ namespace ND.MTI.Service.Worker
 
         public void StopY() => StopYInternal();
         
-        private void IncrementXInternal() => WriteDataX(Pokeys57U_Commands.DIR1_ENA1_RES0);
+        private void IncrementXInternal() => WriteDataX(Pokeys57U_Commands.ENA0_DIR0_RES0);
 
-        private void IncrementYInternal() => WriteDataY(Pokeys57U_Commands.DIR1_ENA1_RES0);
+        private void IncrementYInternal() => WriteDataY(Pokeys57U_Commands.ENA0_DIR0_RES0);
 
-        private void DecrementXInternal() => WriteDataX(Pokeys57U_Commands.DIR0_ENA1_RES0);
+        private void DecrementXInternal() => WriteDataX(Pokeys57U_Commands.ENA0_DIR1_RES0);
 
-        private void DecrementYInternal() => WriteDataY(Pokeys57U_Commands.DIR0_ENA1_RES0);
+        private void DecrementYInternal() => WriteDataY(Pokeys57U_Commands.ENA0_DIR1_RES0);
 
-        private void StopXInternal() => WriteDataX(Pokeys57U_Commands.DIR0_ENA0_RES0);
+        private void StopXInternal() => WriteDataX(Pokeys57U_Commands.ENA1_DIR0_RES0);
 
-        private void StopYInternal() => WriteDataY(Pokeys57U_Commands.DIR0_ENA0_RES0);
+        private void StopYInternal() => WriteDataY(Pokeys57U_Commands.ENA1_DIR0_RES0);
 
         private double NormalizeInternal(
             int encoderPos,

@@ -13,5 +13,6 @@ namespace ND.MTI.Gonio.Common.Configuration
         int EncoderYMin { get; }
         int EncoderYMax { get; }
         int EncoderYFullSpectrum { get; }
+        int PWMFrequencyDivider { get; }
     }
 }

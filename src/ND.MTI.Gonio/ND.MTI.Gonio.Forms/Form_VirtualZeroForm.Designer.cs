@@ -36,14 +36,14 @@ namespace ND.MTI.Gonio.Forms
             this.labelYCoord = new System.Windows.Forms.Label();
             this.labelXCoord = new System.Windows.Forms.Label();
             this.groupBoxControl = new System.Windows.Forms.GroupBox();
-            this.comboBoxStep = new System.Windows.Forms.ComboBox();
-            this.labelStep = new System.Windows.Forms.Label();
             this.buttonIncrementY = new System.Windows.Forms.Button();
             this.buttonDecrementY = new System.Windows.Forms.Button();
             this.buttonIncrementX = new System.Windows.Forms.Button();
             this.buttonDecrementX = new System.Windows.Forms.Button();
             this.buttonSave = new System.Windows.Forms.Button();
             this.buttonClose = new System.Windows.Forms.Button();
+            this.buttonStopX = new System.Windows.Forms.Button();
+            this.buttonStopY = new System.Windows.Forms.Button();
             this.groupBoxCurrentPosition.SuspendLayout();
             this.groupBoxControl.SuspendLayout();
             this.SuspendLayout();
@@ -101,48 +101,22 @@ namespace ND.MTI.Gonio.Forms
             // 
             // groupBoxControl
             // 
-            this.groupBoxControl.Controls.Add(this.comboBoxStep);
-            this.groupBoxControl.Controls.Add(this.labelStep);
+            this.groupBoxControl.Controls.Add(this.buttonStopX);
+            this.groupBoxControl.Controls.Add(this.buttonStopY);
             this.groupBoxControl.Controls.Add(this.buttonIncrementY);
             this.groupBoxControl.Controls.Add(this.buttonDecrementY);
             this.groupBoxControl.Controls.Add(this.buttonIncrementX);
             this.groupBoxControl.Controls.Add(this.buttonDecrementX);
             this.groupBoxControl.Location = new System.Drawing.Point(12, 118);
             this.groupBoxControl.Name = "groupBoxControl";
-            this.groupBoxControl.Size = new System.Drawing.Size(172, 118);
+            this.groupBoxControl.Size = new System.Drawing.Size(172, 115);
             this.groupBoxControl.TabIndex = 1;
             this.groupBoxControl.TabStop = false;
             this.groupBoxControl.Text = "Control";
             // 
-            // comboBoxStep
-            // 
-            this.comboBoxStep.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBoxStep.FormattingEnabled = true;
-            this.comboBoxStep.Items.AddRange(new object[] {
-            "1",
-            "10",
-            "20",
-            "25",
-            "5",
-            "50"});
-            this.comboBoxStep.Location = new System.Drawing.Point(6, 33);
-            this.comboBoxStep.Name = "comboBoxStep";
-            this.comboBoxStep.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.comboBoxStep.Size = new System.Drawing.Size(160, 21);
-            this.comboBoxStep.TabIndex = 5;
-            // 
-            // labelStep
-            // 
-            this.labelStep.AutoSize = true;
-            this.labelStep.Location = new System.Drawing.Point(6, 18);
-            this.labelStep.Name = "labelStep";
-            this.labelStep.Size = new System.Drawing.Size(29, 13);
-            this.labelStep.TabIndex = 4;
-            this.labelStep.Text = "Step";
-            // 
             // buttonIncrementY
             // 
-            this.buttonIncrementY.Location = new System.Drawing.Point(91, 89);
+            this.buttonIncrementY.Location = new System.Drawing.Point(91, 48);
             this.buttonIncrementY.Name = "buttonIncrementY";
             this.buttonIncrementY.Size = new System.Drawing.Size(75, 23);
             this.buttonIncrementY.TabIndex = 3;
@@ -152,7 +126,7 @@ namespace ND.MTI.Gonio.Forms
             // 
             // buttonDecrementY
             // 
-            this.buttonDecrementY.Location = new System.Drawing.Point(6, 89);
+            this.buttonDecrementY.Location = new System.Drawing.Point(6, 48);
             this.buttonDecrementY.Name = "buttonDecrementY";
             this.buttonDecrementY.Size = new System.Drawing.Size(75, 23);
             this.buttonDecrementY.TabIndex = 2;
@@ -162,7 +136,7 @@ namespace ND.MTI.Gonio.Forms
             // 
             // buttonIncrementX
             // 
-            this.buttonIncrementX.Location = new System.Drawing.Point(91, 60);
+            this.buttonIncrementX.Location = new System.Drawing.Point(91, 19);
             this.buttonIncrementX.Name = "buttonIncrementX";
             this.buttonIncrementX.Size = new System.Drawing.Size(75, 23);
             this.buttonIncrementX.TabIndex = 1;
@@ -172,7 +146,7 @@ namespace ND.MTI.Gonio.Forms
             // 
             // buttonDecrementX
             // 
-            this.buttonDecrementX.Location = new System.Drawing.Point(6, 60);
+            this.buttonDecrementX.Location = new System.Drawing.Point(6, 19);
             this.buttonDecrementX.Name = "buttonDecrementX";
             this.buttonDecrementX.Size = new System.Drawing.Size(75, 23);
             this.buttonDecrementX.TabIndex = 0;
@@ -182,7 +156,7 @@ namespace ND.MTI.Gonio.Forms
             // 
             // buttonSave
             // 
-            this.buttonSave.Location = new System.Drawing.Point(109, 242);
+            this.buttonSave.Location = new System.Drawing.Point(109, 239);
             this.buttonSave.Name = "buttonSave";
             this.buttonSave.Size = new System.Drawing.Size(75, 23);
             this.buttonSave.TabIndex = 5;
@@ -192,7 +166,7 @@ namespace ND.MTI.Gonio.Forms
             // 
             // buttonClose
             // 
-            this.buttonClose.Location = new System.Drawing.Point(12, 242);
+            this.buttonClose.Location = new System.Drawing.Point(12, 239);
             this.buttonClose.Name = "buttonClose";
             this.buttonClose.Size = new System.Drawing.Size(75, 23);
             this.buttonClose.TabIndex = 6;
@@ -200,11 +174,31 @@ namespace ND.MTI.Gonio.Forms
             this.buttonClose.UseVisualStyleBackColor = true;
             this.buttonClose.Click += new System.EventHandler(this.ButtonClose_Click);
             // 
+            // buttonStopX
+            // 
+            this.buttonStopX.Location = new System.Drawing.Point(91, 77);
+            this.buttonStopX.Name = "buttonStopX";
+            this.buttonStopX.Size = new System.Drawing.Size(75, 23);
+            this.buttonStopX.TabIndex = 5;
+            this.buttonStopX.Text = "Stop X";
+            this.buttonStopX.UseVisualStyleBackColor = true;
+            this.buttonStopX.Click += new System.EventHandler(this.ButtonStopX_Click);
+            // 
+            // buttonStopY
+            // 
+            this.buttonStopY.Location = new System.Drawing.Point(6, 77);
+            this.buttonStopY.Name = "buttonStopY";
+            this.buttonStopY.Size = new System.Drawing.Size(75, 23);
+            this.buttonStopY.TabIndex = 4;
+            this.buttonStopY.Text = "Stop Y";
+            this.buttonStopY.UseVisualStyleBackColor = true;
+            this.buttonStopY.Click += new System.EventHandler(this.ButtonStopY_Click);
+            // 
             // Form_VirtualZeroForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(194, 272);
+            this.ClientSize = new System.Drawing.Size(194, 274);
             this.ControlBox = false;
             this.Controls.Add(this.buttonClose);
             this.Controls.Add(this.buttonSave);
@@ -219,7 +213,6 @@ namespace ND.MTI.Gonio.Forms
             this.groupBoxCurrentPosition.ResumeLayout(false);
             this.groupBoxCurrentPosition.PerformLayout();
             this.groupBoxControl.ResumeLayout(false);
-            this.groupBoxControl.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -232,13 +225,13 @@ namespace ND.MTI.Gonio.Forms
         private System.Windows.Forms.Label labelXCoord;
         private System.Windows.Forms.TextBox textBoxYCoord;
         private System.Windows.Forms.TextBox textBoxXCoord;
-        private System.Windows.Forms.Label labelStep;
         private System.Windows.Forms.Button buttonIncrementY;
         private System.Windows.Forms.Button buttonDecrementY;
         private System.Windows.Forms.Button buttonIncrementX;
         private System.Windows.Forms.Button buttonDecrementX;
         private System.Windows.Forms.Button buttonSave;
         private System.Windows.Forms.Button buttonClose;
-        private System.Windows.Forms.ComboBox comboBoxStep;
+        private System.Windows.Forms.Button buttonStopX;
+        private System.Windows.Forms.Button buttonStopY;
     }
 }

@@ -1,18 +1,35 @@
 ﻿namespace ND.MTI.Service.Worker.Pokeys
 {
+    /// <summary>
+    ///  Direction:
+    ///  <para>
+    ///     0 - LEFT
+    ///     1 - RIGHT
+    ///  </para>
+    ///  Enable:
+    ///  <para>
+    ///     0 - ENABLED
+    ///     1 - DISABLED
+    ///  </para>
+    ///  Reserved:
+    ///  <para>
+    ///     0 - Send logical 0
+    ///     1 - Send logical 1
+    ///  </para>
+    /// </summary>
     internal class Pokeys57U_Commands
     {
-        internal readonly static string DIR0_ENA0_RES0 = "000";
-        internal readonly static string DIR0_ENA0_RES1 = "001";
+        internal readonly static string ENA0_DIR0_RES0 = "000";
+        internal readonly static string ENA0_DIR0_RES1 = "001";
 
-        internal readonly static string DIR0_ENA1_RES0 = "010";
-        internal readonly static string DIR0_ENA1_RES1 = "011";
+        internal readonly static string ENA0_DIR1_RES0 = "010";
+        internal readonly static string ENA0_DIR1_RES1 = "011";
 
-        internal readonly static string DIR1_ENA0_RES0 = "100";
-        internal readonly static string DIR1_ENA0_RES1 = "101";
+        internal readonly static string ENA1_DIR0_RES0 = "100";
+        internal readonly static string ENA1_DIR0_RES1 = "101";
 
-        internal readonly static string DIR1_ENA1_RES0 = "110";
-        internal readonly static string DIR1_ENA1_RES1 = "111";
+        internal readonly static string ENA1_DIR1_RES0 = "110";
+        internal readonly static string ENA1_DIR1_RES1 = "111";
     }
 
     internal enum Pokeys57U_PinNumbers
