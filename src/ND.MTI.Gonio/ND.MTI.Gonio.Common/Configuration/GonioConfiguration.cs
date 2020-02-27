@@ -59,7 +59,7 @@ namespace ND.MTI.Gonio.Common.Configuration
         public int EncoderYMax => Parser.StringToInteger(GetConfigByKeyName("Encoder_XMax"));
         public int EncoderYFullSpectrum => Parser.StringToInteger(GetConfigByKeyName("Encoder_YFullSpectrum"));
 
-        public int PWMFrequencyDivier => Parser.StringToInteger(GetConfigByKeyName("PWM_FrequencyDivier"));
+        public int PWMFrequencyDivider => Parser.StringToInteger(GetConfigByKeyName("PWM_FrequencyDivider"));
 
         private void CreateConfigCacheInternal()
         {

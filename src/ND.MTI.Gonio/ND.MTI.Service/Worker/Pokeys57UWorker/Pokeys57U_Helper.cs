@@ -1,5 +1,22 @@
 ﻿namespace ND.MTI.Service.Worker.Pokeys
 {
+    /// <summary>
+    ///  Direction:
+    ///  <para>
+    ///     0 - LEFT
+    ///     1 - RIGHT
+    ///  </para>
+    ///  Enable:
+    ///  <para>
+    ///     0 - ENABLED
+    ///     1 - DISABLED
+    ///  </para>
+    ///  Reserved:
+    ///  <para>
+    ///     0 - Send logical 0
+    ///     1 - Send logical 1
+    ///  </para>
+    /// </summary>
     internal class Pokeys57U_Commands
     {
         internal readonly static string DIR0_ENA0_RES0 = "000";
