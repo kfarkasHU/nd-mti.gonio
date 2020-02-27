@@ -42,8 +42,8 @@ namespace ND.MTI.Gonio.Forms
             this.buttonDecrementX = new System.Windows.Forms.Button();
             this.buttonSave = new System.Windows.Forms.Button();
             this.buttonClose = new System.Windows.Forms.Button();
-            this.buttonStopY = new System.Windows.Forms.Button();
             this.buttonStopX = new System.Windows.Forms.Button();
+            this.buttonStopY = new System.Windows.Forms.Button();
             this.groupBoxCurrentPosition.SuspendLayout();
             this.groupBoxControl.SuspendLayout();
             this.SuspendLayout();
@@ -109,14 +109,14 @@ namespace ND.MTI.Gonio.Forms
             this.groupBoxControl.Controls.Add(this.buttonDecrementX);
             this.groupBoxControl.Location = new System.Drawing.Point(12, 118);
             this.groupBoxControl.Name = "groupBoxControl";
-            this.groupBoxControl.Size = new System.Drawing.Size(172, 164);
+            this.groupBoxControl.Size = new System.Drawing.Size(172, 115);
             this.groupBoxControl.TabIndex = 1;
             this.groupBoxControl.TabStop = false;
             this.groupBoxControl.Text = "Control";
             // 
             // buttonIncrementY
             // 
-            this.buttonIncrementY.Location = new System.Drawing.Point(91, 89);
+            this.buttonIncrementY.Location = new System.Drawing.Point(91, 48);
             this.buttonIncrementY.Name = "buttonIncrementY";
             this.buttonIncrementY.Size = new System.Drawing.Size(75, 23);
             this.buttonIncrementY.TabIndex = 3;
@@ -126,7 +126,7 @@ namespace ND.MTI.Gonio.Forms
             // 
             // buttonDecrementY
             // 
-            this.buttonDecrementY.Location = new System.Drawing.Point(6, 89);
+            this.buttonDecrementY.Location = new System.Drawing.Point(6, 48);
             this.buttonDecrementY.Name = "buttonDecrementY";
             this.buttonDecrementY.Size = new System.Drawing.Size(75, 23);
             this.buttonDecrementY.TabIndex = 2;
@@ -136,7 +136,7 @@ namespace ND.MTI.Gonio.Forms
             // 
             // buttonIncrementX
             // 
-            this.buttonIncrementX.Location = new System.Drawing.Point(91, 60);
+            this.buttonIncrementX.Location = new System.Drawing.Point(91, 19);
             this.buttonIncrementX.Name = "buttonIncrementX";
             this.buttonIncrementX.Size = new System.Drawing.Size(75, 23);
             this.buttonIncrementX.TabIndex = 1;
@@ -146,7 +146,7 @@ namespace ND.MTI.Gonio.Forms
             // 
             // buttonDecrementX
             // 
-            this.buttonDecrementX.Location = new System.Drawing.Point(6, 60);
+            this.buttonDecrementX.Location = new System.Drawing.Point(6, 19);
             this.buttonDecrementX.Name = "buttonDecrementX";
             this.buttonDecrementX.Size = new System.Drawing.Size(75, 23);
             this.buttonDecrementX.TabIndex = 0;
@@ -156,7 +156,7 @@ namespace ND.MTI.Gonio.Forms
             // 
             // buttonSave
             // 
-            this.buttonSave.Location = new System.Drawing.Point(109, 288);
+            this.buttonSave.Location = new System.Drawing.Point(109, 239);
             this.buttonSave.Name = "buttonSave";
             this.buttonSave.Size = new System.Drawing.Size(75, 23);
             this.buttonSave.TabIndex = 5;
@@ -166,7 +166,7 @@ namespace ND.MTI.Gonio.Forms
             // 
             // buttonClose
             // 
-            this.buttonClose.Location = new System.Drawing.Point(12, 288);
+            this.buttonClose.Location = new System.Drawing.Point(12, 239);
             this.buttonClose.Name = "buttonClose";
             this.buttonClose.Size = new System.Drawing.Size(75, 23);
             this.buttonClose.TabIndex = 6;
@@ -174,31 +174,31 @@ namespace ND.MTI.Gonio.Forms
             this.buttonClose.UseVisualStyleBackColor = true;
             this.buttonClose.Click += new System.EventHandler(this.ButtonClose_Click);
             // 
-            // buttonStopY
-            // 
-            this.buttonStopY.Location = new System.Drawing.Point(6, 118);
-            this.buttonStopY.Name = "buttonStopY";
-            this.buttonStopY.Size = new System.Drawing.Size(75, 23);
-            this.buttonStopY.TabIndex = 6;
-            this.buttonStopY.Text = "STOP Y";
-            this.buttonStopY.UseVisualStyleBackColor = true;
-            this.buttonStopY.Click += new System.EventHandler(this.ButtonStopY_Click);
-            // 
             // buttonStopX
             // 
-            this.buttonStopX.Location = new System.Drawing.Point(91, 118);
+            this.buttonStopX.Location = new System.Drawing.Point(91, 77);
             this.buttonStopX.Name = "buttonStopX";
             this.buttonStopX.Size = new System.Drawing.Size(75, 23);
-            this.buttonStopX.TabIndex = 7;
-            this.buttonStopX.Text = "STOP X";
+            this.buttonStopX.TabIndex = 5;
+            this.buttonStopX.Text = "Stop X";
             this.buttonStopX.UseVisualStyleBackColor = true;
             this.buttonStopX.Click += new System.EventHandler(this.ButtonStopX_Click);
+            // 
+            // buttonStopY
+            // 
+            this.buttonStopY.Location = new System.Drawing.Point(6, 77);
+            this.buttonStopY.Name = "buttonStopY";
+            this.buttonStopY.Size = new System.Drawing.Size(75, 23);
+            this.buttonStopY.TabIndex = 4;
+            this.buttonStopY.Text = "Stop Y";
+            this.buttonStopY.UseVisualStyleBackColor = true;
+            this.buttonStopY.Click += new System.EventHandler(this.ButtonStopY_Click);
             // 
             // Form_VirtualZeroForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(194, 323);
+            this.ClientSize = new System.Drawing.Size(194, 274);
             this.ControlBox = false;
             this.Controls.Add(this.buttonClose);
             this.Controls.Add(this.buttonSave);
