@@ -4,7 +4,6 @@
     {
         bool Connect();
         void Disconnect();
-        void Init();
         void WriteDataX(string message);
         void WriteDataY(string message);
         string LastXResponse { get; }

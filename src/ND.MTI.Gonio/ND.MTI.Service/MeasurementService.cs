@@ -110,7 +110,7 @@ namespace ND.MTI.Service
 
             for(var i = 0; i < _positionMatrix.Count; i++)
             {
-                _waitHandle.WaitOne();
+                _ = _waitHandle.WaitOne();
 
                 _positionWorker.SetPosition(_positionMatrix[i]);
                 var position = _positionWorker.GetPosition();

@@ -11,6 +11,8 @@
         public double X { get; set; }
         public double Y { get; set; }
 
+        public override string ToString() => $"X: {X} Y: {Y}";
+
         public static Primitive_Position operator +(Primitive_Position left, Primitive_Position right)
         {
             var sum = new Primitive_Position(0, 0);
