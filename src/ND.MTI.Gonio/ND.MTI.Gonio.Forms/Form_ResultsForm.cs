@@ -37,8 +37,6 @@ namespace ND.MTI.Gonio.Forms
 
             dataGridViewResults.DataSource = source;
             dataGridViewResults.AutoResizeColumns();
-
-
         }
     }
 }

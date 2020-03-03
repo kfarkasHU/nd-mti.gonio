@@ -43,74 +43,75 @@ namespace ND.MTI.Service.Worker.Pokeys
         public bool Connect()
         {
             var cResult = _device.ConnectToDevice(0);
-            Init();
+            InitInternal();
 
             return cResult;
         }
 
         public void Disconnect() => _device.DisconnectDevice();
 
-        public virtual void Init()
+        protected void Initl() => InitInternal();
+
+        private void InitInternal()
         {
             if (!_device.Connected())
                 throw new InvalidOperationException();
 
             #region [ X bits > read ]
 
-            var success = false;
-            success = _device.SetPinData((byte)Pokeys57U_PinNumbers.PIN_1, (byte)Pokeys57U_PinFunctions.PIN_DIGITAL_INPUT);
-            success = _device.SetPinData((byte)Pokeys57U_PinNumbers.PIN_2, (byte)Pokeys57U_PinFunctions.PIN_DIGITAL_INPUT);
-            success = _device.SetPinData((byte)Pokeys57U_PinNumbers.PIN_3, (byte)Pokeys57U_PinFunctions.PIN_DIGITAL_INPUT);
-            success = _device.SetPinData((byte)Pokeys57U_PinNumbers.PIN_4, (byte)Pokeys57U_PinFunctions.PIN_DIGITAL_INPUT);
-            success = _device.SetPinData((byte)Pokeys57U_PinNumbers.PIN_5, (byte)Pokeys57U_PinFunctions.PIN_DIGITAL_INPUT);
-            success = _device.SetPinData((byte)Pokeys57U_PinNumbers.PIN_6, (byte)Pokeys57U_PinFunctions.PIN_DIGITAL_INPUT);
-            success = _device.SetPinData((byte)Pokeys57U_PinNumbers.PIN_7, (byte)Pokeys57U_PinFunctions.PIN_DIGITAL_INPUT);
-            success = _device.SetPinData((byte)Pokeys57U_PinNumbers.PIN_8, (byte)Pokeys57U_PinFunctions.PIN_DIGITAL_INPUT);
-            success = _device.SetPinData((byte)Pokeys57U_PinNumbers.PIN_9, (byte)Pokeys57U_PinFunctions.PIN_DIGITAL_INPUT);
-            success = _device.SetPinData((byte)Pokeys57U_PinNumbers.PIN_10, (byte)Pokeys57U_PinFunctions.PIN_DIGITAL_INPUT);
-            success = _device.SetPinData((byte)Pokeys57U_PinNumbers.PIN_11, (byte)Pokeys57U_PinFunctions.PIN_DIGITAL_INPUT);
-            success = _device.SetPinData((byte)Pokeys57U_PinNumbers.PIN_12, (byte)Pokeys57U_PinFunctions.PIN_DIGITAL_INPUT);
-            success = _device.SetPinData((byte)Pokeys57U_PinNumbers.PIN_13, (byte)Pokeys57U_PinFunctions.PIN_DIGITAL_INPUT);
-            success = _device.SetPinData((byte)Pokeys57U_PinNumbers.PIN_14, (byte)Pokeys57U_PinFunctions.PIN_DIGITAL_INPUT);
-            success = _device.SetPinData((byte)Pokeys57U_PinNumbers.PIN_15, (byte)Pokeys57U_PinFunctions.PIN_DIGITAL_INPUT);
-            success = _device.SetPinData((byte)Pokeys57U_PinNumbers.PIN_16, (byte)Pokeys57U_PinFunctions.PIN_DIGITAL_INPUT);
+            _ = _device.SetPinData((byte)Pokeys57U_PinNumbers.PIN_1,  (byte)Pokeys57U_PinFunctions.PIN_DIGITAL_INPUT);
+            _ = _device.SetPinData((byte)Pokeys57U_PinNumbers.PIN_2,  (byte)Pokeys57U_PinFunctions.PIN_DIGITAL_INPUT);
+            _ = _device.SetPinData((byte)Pokeys57U_PinNumbers.PIN_3,  (byte)Pokeys57U_PinFunctions.PIN_DIGITAL_INPUT);
+            _ = _device.SetPinData((byte)Pokeys57U_PinNumbers.PIN_4,  (byte)Pokeys57U_PinFunctions.PIN_DIGITAL_INPUT);
+            _ = _device.SetPinData((byte)Pokeys57U_PinNumbers.PIN_5,  (byte)Pokeys57U_PinFunctions.PIN_DIGITAL_INPUT);
+            _ = _device.SetPinData((byte)Pokeys57U_PinNumbers.PIN_6,  (byte)Pokeys57U_PinFunctions.PIN_DIGITAL_INPUT);
+            _ = _device.SetPinData((byte)Pokeys57U_PinNumbers.PIN_7,  (byte)Pokeys57U_PinFunctions.PIN_DIGITAL_INPUT);
+            _ = _device.SetPinData((byte)Pokeys57U_PinNumbers.PIN_8,  (byte)Pokeys57U_PinFunctions.PIN_DIGITAL_INPUT);
+            _ = _device.SetPinData((byte)Pokeys57U_PinNumbers.PIN_9,  (byte)Pokeys57U_PinFunctions.PIN_DIGITAL_INPUT);
+            _ = _device.SetPinData((byte)Pokeys57U_PinNumbers.PIN_10, (byte)Pokeys57U_PinFunctions.PIN_DIGITAL_INPUT);
+            _ = _device.SetPinData((byte)Pokeys57U_PinNumbers.PIN_11, (byte)Pokeys57U_PinFunctions.PIN_DIGITAL_INPUT);
+            _ = _device.SetPinData((byte)Pokeys57U_PinNumbers.PIN_12, (byte)Pokeys57U_PinFunctions.PIN_DIGITAL_INPUT);
+            _ = _device.SetPinData((byte)Pokeys57U_PinNumbers.PIN_13, (byte)Pokeys57U_PinFunctions.PIN_DIGITAL_INPUT);
+            _ = _device.SetPinData((byte)Pokeys57U_PinNumbers.PIN_14, (byte)Pokeys57U_PinFunctions.PIN_DIGITAL_INPUT);
+            _ = _device.SetPinData((byte)Pokeys57U_PinNumbers.PIN_15, (byte)Pokeys57U_PinFunctions.PIN_DIGITAL_INPUT);
+            _ = _device.SetPinData((byte)Pokeys57U_PinNumbers.PIN_16, (byte)Pokeys57U_PinFunctions.PIN_DIGITAL_INPUT);
 
             #endregion [ X bits > read ]
 
             #region [ X bits > write ]
 
-            _device.SetPinData((byte)Pokeys57U_PinNumbers.PIN_35, (byte)Pokeys57U_PinFunctions.PIN_DIGITAL_OUTPUT);
-            _device.SetPinData((byte)Pokeys57U_PinNumbers.PIN_36, (byte)Pokeys57U_PinFunctions.PIN_DIGITAL_OUTPUT);
-            _device.SetPinData((byte)Pokeys57U_PinNumbers.PIN_37, (byte)Pokeys57U_PinFunctions.PIN_DIGITAL_OUTPUT);
+            _ = _device.SetPinData((byte)Pokeys57U_PinNumbers.PIN_35, (byte)Pokeys57U_PinFunctions.PIN_DIGITAL_OUTPUT);
+            _ = _device.SetPinData((byte)Pokeys57U_PinNumbers.PIN_36, (byte)Pokeys57U_PinFunctions.PIN_DIGITAL_OUTPUT);
+            _ = _device.SetPinData((byte)Pokeys57U_PinNumbers.PIN_37, (byte)Pokeys57U_PinFunctions.PIN_DIGITAL_OUTPUT);
 
             #endregion [ X bits > write ]
             
             #region [ Y bits > read ]
 
-            _device.SetPinData((byte)Pokeys57U_PinNumbers.PIN_19, (byte)Pokeys57U_PinFunctions.PIN_DIGITAL_INPUT);
-            _device.SetPinData((byte)Pokeys57U_PinNumbers.PIN_20, (byte)Pokeys57U_PinFunctions.PIN_DIGITAL_INPUT);
-            _device.SetPinData((byte)Pokeys57U_PinNumbers.PIN_21, (byte)Pokeys57U_PinFunctions.PIN_DIGITAL_INPUT);
-            _device.SetPinData((byte)Pokeys57U_PinNumbers.PIN_22, (byte)Pokeys57U_PinFunctions.PIN_DIGITAL_INPUT);
-            _device.SetPinData((byte)Pokeys57U_PinNumbers.PIN_23, (byte)Pokeys57U_PinFunctions.PIN_DIGITAL_INPUT);
-            _device.SetPinData((byte)Pokeys57U_PinNumbers.PIN_24, (byte)Pokeys57U_PinFunctions.PIN_DIGITAL_INPUT);
-            _device.SetPinData((byte)Pokeys57U_PinNumbers.PIN_25, (byte)Pokeys57U_PinFunctions.PIN_DIGITAL_INPUT);
-            _device.SetPinData((byte)Pokeys57U_PinNumbers.PIN_26, (byte)Pokeys57U_PinFunctions.PIN_DIGITAL_INPUT);
-            _device.SetPinData((byte)Pokeys57U_PinNumbers.PIN_27, (byte)Pokeys57U_PinFunctions.PIN_DIGITAL_INPUT);
-            _device.SetPinData((byte)Pokeys57U_PinNumbers.PIN_28, (byte)Pokeys57U_PinFunctions.PIN_DIGITAL_INPUT);
-            _device.SetPinData((byte)Pokeys57U_PinNumbers.PIN_29, (byte)Pokeys57U_PinFunctions.PIN_DIGITAL_INPUT);
-            _device.SetPinData((byte)Pokeys57U_PinNumbers.PIN_30, (byte)Pokeys57U_PinFunctions.PIN_DIGITAL_INPUT);
-            _device.SetPinData((byte)Pokeys57U_PinNumbers.PIN_31, (byte)Pokeys57U_PinFunctions.PIN_DIGITAL_INPUT);
-            _device.SetPinData((byte)Pokeys57U_PinNumbers.PIN_32, (byte)Pokeys57U_PinFunctions.PIN_DIGITAL_INPUT);
-            _device.SetPinData((byte)Pokeys57U_PinNumbers.PIN_33, (byte)Pokeys57U_PinFunctions.PIN_DIGITAL_INPUT);
-            _device.SetPinData((byte)Pokeys57U_PinNumbers.PIN_34, (byte)Pokeys57U_PinFunctions.PIN_DIGITAL_INPUT);
+            _ = _device.SetPinData((byte)Pokeys57U_PinNumbers.PIN_19, (byte)Pokeys57U_PinFunctions.PIN_DIGITAL_INPUT);
+            _ = _device.SetPinData((byte)Pokeys57U_PinNumbers.PIN_20, (byte)Pokeys57U_PinFunctions.PIN_DIGITAL_INPUT);
+            _ = _device.SetPinData((byte)Pokeys57U_PinNumbers.PIN_21, (byte)Pokeys57U_PinFunctions.PIN_DIGITAL_INPUT);
+            _ = _device.SetPinData((byte)Pokeys57U_PinNumbers.PIN_22, (byte)Pokeys57U_PinFunctions.PIN_DIGITAL_INPUT);
+            _ = _device.SetPinData((byte)Pokeys57U_PinNumbers.PIN_23, (byte)Pokeys57U_PinFunctions.PIN_DIGITAL_INPUT);
+            _ = _device.SetPinData((byte)Pokeys57U_PinNumbers.PIN_24, (byte)Pokeys57U_PinFunctions.PIN_DIGITAL_INPUT);
+            _ = _device.SetPinData((byte)Pokeys57U_PinNumbers.PIN_25, (byte)Pokeys57U_PinFunctions.PIN_DIGITAL_INPUT);
+            _ = _device.SetPinData((byte)Pokeys57U_PinNumbers.PIN_26, (byte)Pokeys57U_PinFunctions.PIN_DIGITAL_INPUT);
+            _ = _device.SetPinData((byte)Pokeys57U_PinNumbers.PIN_27, (byte)Pokeys57U_PinFunctions.PIN_DIGITAL_INPUT);
+            _ = _device.SetPinData((byte)Pokeys57U_PinNumbers.PIN_28, (byte)Pokeys57U_PinFunctions.PIN_DIGITAL_INPUT);
+            _ = _device.SetPinData((byte)Pokeys57U_PinNumbers.PIN_29, (byte)Pokeys57U_PinFunctions.PIN_DIGITAL_INPUT);
+            _ = _device.SetPinData((byte)Pokeys57U_PinNumbers.PIN_30, (byte)Pokeys57U_PinFunctions.PIN_DIGITAL_INPUT);
+            _ = _device.SetPinData((byte)Pokeys57U_PinNumbers.PIN_31, (byte)Pokeys57U_PinFunctions.PIN_DIGITAL_INPUT);
+            _ = _device.SetPinData((byte)Pokeys57U_PinNumbers.PIN_32, (byte)Pokeys57U_PinFunctions.PIN_DIGITAL_INPUT);
+            _ = _device.SetPinData((byte)Pokeys57U_PinNumbers.PIN_33, (byte)Pokeys57U_PinFunctions.PIN_DIGITAL_INPUT);
+            _ = _device.SetPinData((byte)Pokeys57U_PinNumbers.PIN_34, (byte)Pokeys57U_PinFunctions.PIN_DIGITAL_INPUT);
 
             #endregion [ Y bits > read ]
 
             #region [ Y bits > write ]
 
-            _device.SetPinData((byte)Pokeys57U_PinNumbers.PIN_38, (byte)Pokeys57U_PinFunctions.PIN_DIGITAL_OUTPUT);
-            _device.SetPinData((byte)Pokeys57U_PinNumbers.PIN_39, (byte)Pokeys57U_PinFunctions.PIN_DIGITAL_OUTPUT);
-            _device.SetPinData((byte)Pokeys57U_PinNumbers.PIN_40, (byte)Pokeys57U_PinFunctions.PIN_DIGITAL_OUTPUT);
+            _ = _device.SetPinData((byte)Pokeys57U_PinNumbers.PIN_38, (byte)Pokeys57U_PinFunctions.PIN_DIGITAL_OUTPUT);
+            _ = _device.SetPinData((byte)Pokeys57U_PinNumbers.PIN_39, (byte)Pokeys57U_PinFunctions.PIN_DIGITAL_OUTPUT);
+            _ = _device.SetPinData((byte)Pokeys57U_PinNumbers.PIN_40, (byte)Pokeys57U_PinFunctions.PIN_DIGITAL_OUTPUT);
 
             #endregion [ Y bits > write ]
 
@@ -165,7 +166,7 @@ namespace ND.MTI.Service.Worker.Pokeys
         {
             var pwmOutputs = new bool[6];
 
-            pwmOutputs[5] = true; // 17 (X)
+            pwmOutputs[5] = true;  // 17 (X)
             pwmOutputs[4] = false; // 18 (Y)
             pwmOutputs[3] = false; // 19
             pwmOutputs[2] = false; // 20

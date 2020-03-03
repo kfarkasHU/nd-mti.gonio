@@ -19,8 +19,7 @@ namespace ND.MTI.Gonio.Tests
             _pokeysTester.Connect();
             _pokeysTester.Motor();
 
-            var currentCase = TestCase.TestCase_Main;
-
+            TestCase currentCase;
             do
             {
                 Console.Write("> ");

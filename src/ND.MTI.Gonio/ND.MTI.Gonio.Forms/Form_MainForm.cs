@@ -13,8 +13,6 @@ using ND.MTI.Gonio.Common.RuntimeContext;
 namespace ND.MTI.Gonio.Forms
 {
     // TODO (FK): Connect on startup to cfg.
-    // TODO (FK): Button validations (connections).
-    // TODO (FK): UI Review and refactor.
 
     public partial class Form_MainForm : Form
     {
@@ -95,14 +93,20 @@ namespace ND.MTI.Gonio.Forms
 
         private void ButtonExit_Click(object sender, EventArgs e) => RuntimeContext.LoadFormInstance.Close();
 
-        private void CheckBoxYAuto_CheckedChanged(object sender, EventArgs e) => textBoxStepY.Enabled = checkBoxYAuto.Checked;
+        private void CheckBoxYAuto_CheckedChanged(object sender, EventArgs e)
+        {
+            textBoxStepY.Enabled = checkBoxYAuto.Checked;
+            textBoxStepY.Cursor = checkBoxYAuto.Checked ? Cursors.Hand : Cursors.No;
+        }
 
-        private void CheckBoxXAuto_CheckedChanged(object sender, EventArgs e) => textBoxStepX.Enabled = checkBoxXAuto.Checked;
+        private void CheckBoxXAuto_CheckedChanged(object sender, EventArgs e)
+        {
+            textBoxStepX.Enabled = checkBoxXAuto.Checked;
+            textBoxStepX.Cursor = checkBoxXAuto.Checked ? Cursors.Hand : Cursors.No;
+        }
         
         private void ButtonNew_Click(object sender, EventArgs e)
         {
-            // TODO (FK): Is model is changed, ask for change.
-
             _model.Reset();
             SetModel();
 
@@ -137,9 +141,9 @@ namespace ND.MTI.Gonio.Forms
             textBoxEndY.Enabled = true;
             textBoxEndY.Cursor = Cursors.Hand;
             textBoxStepX.Enabled = _model.IsXAuto;
-            textBoxStepX.Cursor = Cursors.Hand;
+            textBoxStepX.Cursor = _model.IsXAuto ? Cursors.Hand : Cursors.No;
             textBoxStepY.Enabled = _model.IsYAuto;
-            textBoxStepY.Cursor = Cursors.Hand;
+            textBoxStepY.Cursor = _model.IsYAuto ? Cursors.Hand : Cursors.No;
             checkBoxXAuto.Enabled = true;
             checkBoxXAuto.Cursor = Cursors.Hand;
             checkBoxYAuto.Enabled = true;

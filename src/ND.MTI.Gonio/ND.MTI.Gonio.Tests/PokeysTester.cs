@@ -5,7 +5,7 @@ namespace ND.MTI.Gonio.Tests
 {
     public class PokeysTester : Pokeys57UWorker
     {
-        public override void Init()
+        public void Init()
         {
             _device.SetPinData(0, 4);
             _device.SetPinData(1, 4);
@@ -81,12 +81,12 @@ namespace ND.MTI.Gonio.Tests
 
         public void Motor()
         {
-            var p0 = _device.SetPinData(0, 4);
-            var p1 = _device.SetPinData(1, 4);
+            _ = _device.SetPinData(0, 4);
+            _ = _device.SetPinData(1, 4);
 
-            var o0 = _device.SetOutput(0, true);
+            _ = _device.SetOutput(0, true);
             Thread.Sleep(5);
-            var o1 = _device.SetOutput(1, false);
+            _ = _device.SetOutput(1, false);
             Thread.Sleep(5);
 
             var pwmOutputs = new bool[6];
@@ -109,9 +109,9 @@ namespace ND.MTI.Gonio.Tests
             dutyScale[1] = (uint)(0.5 * period);
             dutyScale[0] = (uint)(0.5 * period);
 
-            _device.SetPWMOutputs(ref pwmOutputs, ref period, ref dutyScale);
+            _ = _device.SetPWMOutputs(ref pwmOutputs, ref period, ref dutyScale);
 
-            var o11 = _device.SetOutput(0, false);
+            _ = _device.SetOutput(0, false);
             Thread.Sleep(5);
         }
     }
