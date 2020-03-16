@@ -71,7 +71,6 @@
     <Compile Include="GonioErrorHandler.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="UIConfig\UIConfig.cs" />
     <EmbeddedResource Include="Form_LoadForm.resx">
       <DependentUpon>Form_LoadForm.cs</DependentUpon>
     </EmbeddedResource>

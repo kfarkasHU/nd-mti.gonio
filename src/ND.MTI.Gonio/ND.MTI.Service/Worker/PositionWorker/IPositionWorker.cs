@@ -2,11 +2,8 @@
 
 namespace ND.MTI.Service.Worker
 {
-    public interface IPositionWorker
+    public interface IPositionWorker : IPokeys57UWorker
     {
-        bool Connect();
-        void Disconnect();
-
         void SetPosition(Primitive_Position position);
         Primitive_Position GetPosition();
 
@@ -18,10 +15,5 @@ namespace ND.MTI.Service.Worker
 
         void IncrementY();
         void IncrementX();
-
-        void ReverseX();
-        void ReverseY();
-
-        bool IsConnected { get; }
     }
 }

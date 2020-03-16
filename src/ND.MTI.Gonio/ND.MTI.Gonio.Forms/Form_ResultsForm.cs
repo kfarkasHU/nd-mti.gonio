@@ -6,12 +6,12 @@ using ND.MTI.Gonio.Common.RuntimeContext;
 
 namespace ND.MTI.Gonio.Forms
 {
-    public partial class Form_ResultsForm : Form
+    internal partial class Form_ResultsForm : Form
     {
         private readonly Timer _timer;
         private readonly IExcelExportService _excelExportService;
 
-        public Form_ResultsForm()
+        internal Form_ResultsForm()
         {
             _excelExportService = new ExcelExportService();
 

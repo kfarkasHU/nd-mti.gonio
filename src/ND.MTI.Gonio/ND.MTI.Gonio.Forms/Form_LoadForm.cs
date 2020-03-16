@@ -4,11 +4,11 @@ using ND.MTI.Gonio.Common.RuntimeContext;
 
 namespace ND.MTI.Gonio.Forms
 {
-    public partial class Form_LoadForm : Form
+    internal partial class Form_LoadForm : Form
     {
         private readonly Timer _timer;
 
-        public Form_LoadForm()
+        internal Form_LoadForm()
         {
             InitializeComponent();
 

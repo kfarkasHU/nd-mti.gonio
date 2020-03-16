@@ -2,9 +2,25 @@
 
 namespace ND.MTI.Service.Worker.Pokeys.Helper
 {
-    public static class GonioPokeys_Pinout
+    internal static class GonioPokeys_Pinout
     {
-        public static Pokeys57U_Pin[] X_Input
+        internal static Pokeys57U_Pin X_SR
+        {
+            get
+            {
+                return Pokeys57U_Pin.PIN_17;
+            }
+        }
+
+        internal static Pokeys57U_Pin Y_SR
+        {
+            get
+            {
+                return Pokeys57U_Pin.PIN_18;
+            }
+        }
+
+        internal static Pokeys57U_Pin[] X_Input
         {
             get
             {
@@ -29,7 +45,7 @@ namespace ND.MTI.Service.Worker.Pokeys.Helper
             }
         }
 
-        public static Pokeys57U_Pin[] Y_Input
+        internal static Pokeys57U_Pin[] Y_Input
         {
             get
             {
@@ -46,7 +62,7 @@ namespace ND.MTI.Service.Worker.Pokeys.Helper
                     Pokeys57U_Pin.PIN_28,
                     Pokeys57U_Pin.PIN_29,
                     Pokeys57U_Pin.PIN_30,
-                    Pokeys57U_Pin.PIN_31, // BUG
+                    Pokeys57U_Pin.PIN_31,
                     Pokeys57U_Pin.PIN_32,
                     Pokeys57U_Pin.PIN_33,
                     Pokeys57U_Pin.PIN_34
@@ -54,35 +70,35 @@ namespace ND.MTI.Service.Worker.Pokeys.Helper
             }
         }
 
-        public static Pokeys57U_Pin[] X_Output
+        internal static Pokeys57U_Pin[] X_Output
         {
             get
             {
                 return new Pokeys57U_Pin[]
                 {
-                    Pokeys57U_Pin.PIN_35, // ENA
-                    Pokeys57U_Pin.PIN_17, // SR
-                    Pokeys57U_Pin.PIN_36, // DIR
-                    Pokeys57U_Pin.PIN_37, // RES
+                    Pokeys57U_Pin.PIN_35,
+                    Pokeys57U_Pin.PIN_17,
+                    Pokeys57U_Pin.PIN_36,
+                    Pokeys57U_Pin.PIN_37
                 };
             }
         }
 
-        public static Pokeys57U_Pin[] Y_Output
+        internal static Pokeys57U_Pin[] Y_Output
         {
             get
             {
                 return new Pokeys57U_Pin[]
                 {
-                    Pokeys57U_Pin.PIN_38, // ENA
-                    Pokeys57U_Pin.PIN_18, // SR
-                    Pokeys57U_Pin.PIN_39, // DIR
-                    Pokeys57U_Pin.PIN_40, // RES
+                    Pokeys57U_Pin.PIN_38,
+                    Pokeys57U_Pin.PIN_18,
+                    Pokeys57U_Pin.PIN_39,
+                    Pokeys57U_Pin.PIN_40
                 };
             }
         }
 
-        public static Pokeys57U_Pin[] X_Endpoints
+        internal static Pokeys57U_Pin[] X_Endpoints
         {
             get
             {
@@ -94,7 +110,7 @@ namespace ND.MTI.Service.Worker.Pokeys.Helper
             }
         }
 
-        public static Pokeys57U_Pin[] Y_Endpoints
+        internal static Pokeys57U_Pin[] Y_Endpoints
         {
             get
             {

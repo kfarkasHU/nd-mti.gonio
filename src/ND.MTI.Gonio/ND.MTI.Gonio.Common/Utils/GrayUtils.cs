@@ -24,19 +24,43 @@ namespace ND.MTI.Gonio.Common.Utils
 
                 var last = output.Last();
 
-                var nextToAdd = xor(current.ToString(), last.ToString());
+                var nextToAdd = XOR(current.ToString(), last.ToString());
                 output += $"{nextToAdd}";
             }
 
             return Convert.ToInt32(output, 2);
+        }
 
-            int xor(string left, string right)
+        public static string IntgerToGray(int integer)
+        {
+            var input = Convert.ToString(integer, 2);
+            var output = string.Empty;
+
+            for (var i = 0; i < input.Length - 1; i++)
             {
-                var iLeft = int.Parse(left);
-                var iRight = int.Parse(right);
+                var current = input[i];
 
-                return iLeft == iRight ? 0 : 1;
+                if (output == string.Empty)
+                {
+                    output += $"{current}";
+                    continue;
+                }
+
+                var last = output.Last();
+
+                var nextToAdd = XOR(current.ToString(), last.ToString());
+                output += $"{nextToAdd}";
             }
+
+            return output.PadLeft(13, '0');
+        }
+
+        private static int XOR(string left, string right)
+        {
+            var iLeft = int.Parse(left);
+            var iRight = int.Parse(right);
+
+            return iLeft == iRight ? 0 : 1;
         }
     }
 }

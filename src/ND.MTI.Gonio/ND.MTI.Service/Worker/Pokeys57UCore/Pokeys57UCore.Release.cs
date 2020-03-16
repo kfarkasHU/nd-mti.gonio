@@ -1,4 +1,6 @@
-﻿using System;
+﻿#if !DEBUG
+
+using System;
 using PoKeysDevice_DLL;
 using System.Collections.Generic;
 using ND.MTI.Gonio.Common.Exceptions;
@@ -9,7 +11,6 @@ namespace ND.MTI.Service.Worker.PokeysCore
     public abstract class Pokeys57UCore : IPokeys57UCore
     {
         private bool _connected { get; set; }
-        private int _deviceNumber { get; set; }
 
         private readonly PoKeysDevice _device;
 
@@ -18,15 +19,16 @@ namespace ND.MTI.Service.Worker.PokeysCore
             _device = new PoKeysDevice();
         }
 
-        public bool IsConnected => _connected;
+        public virtual bool IsConnected => _connected;
 
-        public int NumberOfDevices => _deviceNumber;
-
-        public bool Connect()
+        public virtual bool Connect()
         {
-            _deviceNumber = _device.EnumerateDevices();
+            if (_connected)
+                return _connected;
 
-            if (_deviceNumber == 0)
+            var deviceNumber = _device.EnumerateDevices();
+
+            if (deviceNumber != 1)
                 throw new Gonio_Exception("Device number");
 
             _connected = _device.ConnectToDevice(0);
@@ -34,7 +36,7 @@ namespace ND.MTI.Service.Worker.PokeysCore
             return _connected;
         }
 
-        public void Disconnect()
+        public virtual void Disconnect()
         {
             if(_connected)
             {
@@ -43,52 +45,60 @@ namespace ND.MTI.Service.Worker.PokeysCore
             }
         }
 
-        protected string ReadBytes(Pokeys57U_Pin[] pins)
+        private protected string ReadBytes(Pokeys57U_Pin[] pins)
         {
             var data = string.Empty;
             for (var index = 0; index < pins.Length; index++)
-            {
-                var pinNum = (byte)pins[index];
-
-                data += ReadPin(pinNum) ? "1" : "0";
-            }
+                data += ReadPin((byte)pins[index])
+                    ? "1"
+                    : "0"
+                ;
 
             return data;
 
             bool ReadPin(byte pinNumber)
             {
-                var state = false;
+                var state = true;
+
+                if (!_connected)
+                    return state;
 
                 var success = _device.GetInput(pinNumber, ref state);
 
-                if (!success)
-                    throw new Gonio_PinReadException(pinNumber);
-
-                return state;
+                return !success ? ReadPin(pinNumber) : state;
             }
         }
 
-        protected bool WriteBytes(IList<Tuple<Pokeys57U_Pin, bool>> dataList)
+        private protected bool GetPinData(Pokeys57U_Pin pin, Pokeys57U_PinFunction function)
+        {
+            var func = (byte)function;
+            var state = _device.GetPinData((byte)pin, ref func);
+
+            return state;
+        }
+
+        private protected bool WriteBytes(IList<Tuple<Pokeys57U_Pin, bool>> dataList)
         {
             for(var index = 0; index < dataList.Count; index++)
-            {
-                var data = dataList[index];
-
-                WritePin((byte)data.Item1, data.Item2);
-            }
+                WritePin(
+                    (byte)dataList[index].Item1,
+                    dataList[index].Item2
+                );
 
             return true;
 
             void WritePin(byte pinNumber, bool data)
             {
+                if (!_connected) return;
+
                 var success = _device.SetOutput(pinNumber, data);
 
                 if (!success)
-                    throw new Gonio_PinWriteException(pinNumber);
+                    WritePin(pinNumber, data);
             }
         }
 
-        protected bool InitDigitalInputPins(Pokeys57U_Pin[] inputPins)
+        private protected bool InitDigitalInputPins(Pokeys57U_Pin[] inputPins)
         {
             foreach (var pin in inputPins)
                 InitPin((byte)pin, (byte)Pokeys57U_PinFunction.DIGITAL_INPUT);
@@ -96,7 +106,7 @@ namespace ND.MTI.Service.Worker.PokeysCore
             return true;
         }
 
-        protected bool InitDigitalOutputPins(Pokeys57U_Pin[] outputPins)
+        private protected bool InitDigitalOutputPins(Pokeys57U_Pin[] outputPins)
         {
             foreach (var pin in outputPins)
                 InitPin((byte)pin, (byte)Pokeys57U_PinFunction.DIGITAL_OUTPUT);
@@ -106,10 +116,14 @@ namespace ND.MTI.Service.Worker.PokeysCore
 
         private void InitPin(byte pinNumber, byte pinFunction)
         {
+            if (!_connected) return;
+
             var success = _device.SetPinData(pinNumber, pinFunction);
 
             if (!success)
-                throw new Gonio_PinInitException(pinNumber, pinFunction);
+                InitPin(pinNumber, pinFunction);
         }
     }
 }
+
+#endif

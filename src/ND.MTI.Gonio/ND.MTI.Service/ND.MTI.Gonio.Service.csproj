@@ -62,11 +62,12 @@
     <Compile Include="Worker\GonioWorker\IGonioWorker.cs" />
     <Compile Include="Worker\IOWorker\IIOWorker.cs" />
     <Compile Include="Worker\IOWorker\IOWorker.cs" />
+    <Compile Include="Worker\Pokeys57UCore\Debug_Helper\DebugHelper.cs" />
     <Compile Include="Worker\Pokeys57UCore\Helper\Pokeys57U_Pin.cs" />
     <Compile Include="Worker\Pokeys57UCore\Helper\Pokeys57U_PinFunction.cs" />
     <Compile Include="Worker\Pokeys57UCore\IPokeys57UCore.cs" />
-    <None Include="Worker\Pokeys57UCore\Pokeys57UCore.cs._bak" />
-    <Compile Include="Worker\Pokeys57UCore\Pokeys57UCore.cs" />
+    <Compile Include="Worker\Pokeys57UCore\Pokeys57UCore.Debug.cs" />
+    <Compile Include="Worker\Pokeys57UCore\Pokeys57UCore.Release.cs" />
     <Compile Include="Worker\Pokeys57UWorker\Helper\GonioPokeys_Axis.cs" />
     <Compile Include="Worker\Pokeys57UWorker\Helper\GonioPokeys_Commands.cs" />
     <Compile Include="Worker\Pokeys57UWorker\Helper\GonioPokeys_Pinout.cs" />

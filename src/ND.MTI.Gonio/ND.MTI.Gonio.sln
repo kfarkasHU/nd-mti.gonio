@@ -28,6 +28,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ND.MTI.Gonio.EPT", "ND.MTI.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ND.MTI.Gonio.COMScan", "ND.MTI.Gonio.COMScan\ND.MTI.Gonio.COMScan.csproj", "{769E6B40-5197-4E7B-B31D-DEB995D5CB9B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ND.MTI.Gonio.LIT", "ND.MTI.Gonio.LIT\ND.MTI.Gonio.LIT.csproj", "{25D1CCEC-70D5-4D2A-B118-C13B06B34FD0}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -62,6 +64,10 @@ Global
 		{769E6B40-5197-4E7B-B31D-DEB995D5CB9B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{769E6B40-5197-4E7B-B31D-DEB995D5CB9B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{769E6B40-5197-4E7B-B31D-DEB995D5CB9B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{25D1CCEC-70D5-4D2A-B118-C13B06B34FD0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{25D1CCEC-70D5-4D2A-B118-C13B06B34FD0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{25D1CCEC-70D5-4D2A-B118-C13B06B34FD0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{25D1CCEC-70D5-4D2A-B118-C13B06B34FD0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -69,6 +75,7 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{5AE1F18A-BEDC-4682-AB21-B00D3EADBB20} = {F5B6EE97-2290-42E8-A704-E518E6F4C3AE}
 		{769E6B40-5197-4E7B-B31D-DEB995D5CB9B} = {F5B6EE97-2290-42E8-A704-E518E6F4C3AE}
+		{25D1CCEC-70D5-4D2A-B118-C13B06B34FD0} = {F5B6EE97-2290-42E8-A704-E518E6F4C3AE}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {D7521CD1-B974-4102-BF23-A1A7539ADF02}

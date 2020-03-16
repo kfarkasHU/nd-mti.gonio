@@ -24,10 +24,7 @@ namespace ND.MTI.Service.Worker
             return random.NextDouble() * 1000;
         }
 
-        public override void Reset()
-        {
-            Thread.Sleep(500);
-        }
+        public override void Reset() => Thread.Sleep(500);
     }
 }
 

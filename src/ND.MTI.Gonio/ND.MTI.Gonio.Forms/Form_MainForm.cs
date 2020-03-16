@@ -12,7 +12,7 @@ using ND.MTI.Gonio.Common.RuntimeContext;
 
 namespace ND.MTI.Gonio.Forms
 {
-    public partial class Form_MainForm : Form
+    internal partial class Form_MainForm : Form
     {
         private readonly Complex_MainModel _model;
         private readonly ResourceManager _resourceManager;
@@ -20,7 +20,7 @@ namespace ND.MTI.Gonio.Forms
         private readonly IExcelExportService _excelExportService;
         private readonly IGonioConfiguration _gonioConfiguration;
 
-        public Form_MainForm()
+        internal Form_MainForm()
         {
             InitializeComponent();
 
@@ -208,9 +208,9 @@ namespace ND.MTI.Gonio.Forms
 
         private void PictureBoxPokeys75U_Click(object sender, EventArgs e)
         {
-            if (RuntimeContext.Pokeys57U)
+            if (RuntimeContext.Pokeys57UConnected)
             {
-                RuntimeContext.Pokeys57U = false;
+                RuntimeContext.Pokeys57UConnected = false;
                 _measurementService.DisconnectPokeys75U();
             }
             else
@@ -218,7 +218,7 @@ namespace ND.MTI.Gonio.Forms
                 ConnectPokeysInternal();
             }
 
-            pictureBoxPokeys75U.Image = (Image)_resourceManager.GetObject(GetImageFor(RuntimeContext.Pokeys57U));
+            pictureBoxPokeys75U.Image = (Image)_resourceManager.GetObject(GetImageFor(RuntimeContext.Pokeys57UConnected));
         }
 
         private string GetImageFor(bool status) => status ? "connect" : "disconnect";
@@ -430,8 +430,8 @@ namespace ND.MTI.Gonio.Forms
 
         private void ConnectPokeysInternal()
         {
-            RuntimeContext.Pokeys57U = _measurementService.ConnectPokeys57U();
-            pictureBoxPokeys75U.Image = (Image)_resourceManager.GetObject(GetImageFor(RuntimeContext.Pokeys57U));
+            RuntimeContext.Pokeys57UConnected = _measurementService.ConnectPokeys57U();
+            pictureBoxPokeys75U.Image = (Image)_resourceManager.GetObject(GetImageFor(RuntimeContext.Pokeys57UConnected));
         }
     }
 }

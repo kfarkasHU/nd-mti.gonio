@@ -1,6 +1,6 @@
 ﻿namespace ND.MTI.Service.Worker.Pokeys.Helper
 {
-    public static class GonioPokeys_Commands
+    internal static class GonioPokeys_Commands
     {
         public static string ENA0_SR0_DIR0_RES0 = "0000";
         public static string ENA0_SR0_DIR0_RES1 = "0001";

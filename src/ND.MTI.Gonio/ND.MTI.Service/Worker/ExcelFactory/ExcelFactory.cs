@@ -1,7 +1,7 @@
 ﻿using System;
-using ND.MTI.Gonio.Common.Configuration;
-using ND.MTI.Gonio.Model;
 using OfficeOpenXml;
+using ND.MTI.Gonio.Model;
+using ND.MTI.Gonio.Common.Configuration;
 
 namespace ND.MTI.Service.Worker
 {

@@ -6,14 +6,14 @@ using ND.MTI.Gonio.Common.RuntimeContext;
 
 namespace ND.MTI.Gonio.Forms
 {
-    public partial class Form_VirtualZeroForm : Form
+    internal partial class Form_VirtualZeroForm : Form
     {
         private readonly Timer _timer;
         private readonly IPositionWorker _positionWorker;
 
         private bool _keyPressed;
 
-        public Form_VirtualZeroForm()
+        internal Form_VirtualZeroForm()
         {
             _positionWorker = PositionWorker.GetInstance();
 
@@ -123,7 +123,7 @@ namespace ND.MTI.Gonio.Forms
 
         private void StopYInternal() => _positionWorker.StopY();
 
-        private void OnTimerTick(object sender, EventArgs e)  => SetModelInternal(/*_positionWorker.GetPosition()*/);
+        private void OnTimerTick(object sender, EventArgs e)  => SetModelInternal(_positionWorker.GetPosition());
 
         private void DisableForm() => SetFormState(false, Cursors.No);
         private void EnableForm() => SetFormState(true, Cursors.Hand);
@@ -149,11 +149,8 @@ namespace ND.MTI.Gonio.Forms
             buttonIncrementY.Cursor = cursor;
         }
 
-        private void SetModelInternal(Primitive_Position position = null)
+        private void SetModelInternal(Primitive_Position position)
         {
-            if (position is null)
-                return;
-
             textBoxXCoord.Text = position.X.ToString();
             textBoxYCoord.Text = position.Y.ToString();
         }

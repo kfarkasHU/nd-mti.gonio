@@ -1,6 +1,6 @@
 ﻿namespace ND.MTI.Service.Worker.PokeysCore.Helper
 {
-    public enum Pokeys57U_Pin
+    internal enum Pokeys57U_Pin
     {
         PIN_1 = 0,
         PIN_2 = 1,

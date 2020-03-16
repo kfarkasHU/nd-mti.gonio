@@ -6,9 +6,9 @@ using ND.MTI.Gonio.Common.Exceptions;
 
 namespace ND.MTI.Gonio.Forms
 {
-    public static class GonioErrorHandler
+    internal static class GonioErrorHandler
     {
-        public static void HandleException(
+        internal static void HandleException(
             object sender,
             UnhandledExceptionEventArgs unhandledExceptionEventArgs
         )
@@ -17,7 +17,7 @@ namespace ND.MTI.Gonio.Forms
             HandleExceptionCore(exception);
         }
 
-        public static void HandleThreadException(
+        internal static void HandleThreadException(
             object sender,
             ThreadExceptionEventArgs threadExceptionEventArgs
         ) =>
@@ -26,26 +26,26 @@ namespace ND.MTI.Gonio.Forms
         private static void HandleExceptionCore(Exception exception)
         {
             var title = "FATAL ERROR";
-            if (exception is Gonio_EndpointException endpointException)
-            {
-                var positionWorker = PositionWorker.GetInstance();
+            //if (exception is Gonio_EndpointException endpointException)
+            //{
+            //    var positionWorker = PositionWorker.GetInstance();
 
-                switch (endpointException.Axis)
-                {
-                    case "X":
-                        {
-                            positionWorker.StopX();
-                            positionWorker.ReverseX();
-                            break;
-                        }
-                    case "Y":
-                        {
-                            positionWorker.StopY();
-                            positionWorker.ReverseY();
-                            break;
-                        }
-                }
-            }
+            //    switch (endpointException.Axis)
+            //    {
+            //        case "X":
+            //            {
+            //                positionWorker.StopX();
+            //                positionWorker.ReverseX();
+            //                break;
+            //            }
+            //        case "Y":
+            //            {
+            //                positionWorker.StopY();
+            //                positionWorker.ReverseY();
+            //                break;
+            //            }
+            //    }
+            //}
 
             if (exception is Gonio_Exception _)
                 title = "GONIO ERROR";

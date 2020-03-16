@@ -25,6 +25,6 @@ namespace ND.MTI.Gonio.Common.RuntimeContext
         public static Complex_ResultCollection Results { get; private set; }
         public static BindingList<Complex_ResultItem> ResultsBindingList { get; private set; }
         public static bool FsmGonioConnected { get; set; }
-        public static bool Pokeys57U { get; set; }
+        public static bool Pokeys57UConnected { get; set; }
     }
 }

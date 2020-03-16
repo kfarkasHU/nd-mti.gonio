@@ -49,28 +49,17 @@ namespace ND.MTI.Gonio.Common.Configuration
         }
 
         public double Sensor_Distance => Parser.StringToDouble(GetConfigByKeyName("Sensor_Distance", "15"));
-
-        public int Encoder_XMin => GrayUtils.GrayToInteger(GetConfigByKeyName("Encoder_XMin", "100"));
-        public int Encoder_XMax => GrayUtils.GrayToInteger(GetConfigByKeyName("Encoder_XMax", "1000"));
-        public int Encoder_XFullSpectrum => Parser.StringToInteger(GetConfigByKeyName("Encoder_XFullSpectrum", "340"));
-        public int Encoder_YMin => GrayUtils.GrayToInteger(GetConfigByKeyName("Encoder_YMin", "0"));
-        public int Encoder_YMax => GrayUtils.GrayToInteger(GetConfigByKeyName("Encoder_YMax", "1000"));
-        public int Encoder_YFullSpectrum => Parser.StringToInteger(GetConfigByKeyName("Encoder_YFullSpectrum", "340"));
-
-        public uint PWM_StartFrequency => Parser.StringToUInteger(GetConfigByKeyName("PWM_StartFrequency", "2500"));
-        public uint PWM_EndFrequency => Parser.StringToUInteger(GetConfigByKeyName("PWM_EndFrequency", "40000"));
-        public uint PWM_FrequencyStep => Parser.StringToUInteger(GetConfigByKeyName("PWM_FrequencyStep", "125"));
-        public int PWM_TimeStep => Parser.StringToInteger(GetConfigByKeyName("PWM_TimeStep", "3"));
-        public double PWM_DutyScale => Parser.StringToDouble(GetConfigByKeyName("PWM_DutyScale", "0,5"));
-
-        public int Pokeys_ReservedTimeoutMs => Parser.StringToInteger(GetConfigByKeyName("Pokeys_ReservedTimeoutMs", "5"));
-        public int Pokeys_DirectionTimeoutMs => Parser.StringToInteger(GetConfigByKeyName("Pokeys_DirectionTimeoutMs", "5"));
-        public int Pokeys_EnableTimeoutMs => Parser.StringToInteger(GetConfigByKeyName("Pokeys_EnableTimeoutMs", "5"));
         public int Pokeys_ReadInterval => Parser.StringToInteger(GetConfigByKeyName("Pokeys_ReadInterval", "100"));
 
         public bool Application_ConnectGonioAuto => Parser.StringToBoolean(GetConfigByKeyName("Application_ConnectGonioAuto", "0"));
-
         public bool Application_ConnectPokeysAuto => Parser.StringToBoolean(GetConfigByKeyName("Application_ConnectPokeysAuto", "0"));
+
+        public int Encoder_DecXEnd => Parser.StringToInteger(GetConfigByKeyName("Encoder_DecXEnd", "1800"));
+        public int Encoder_IncXEnd => Parser.StringToInteger(GetConfigByKeyName("Encoder_IncXEnd", "1800"));
+        public int Encoder_MaxXEnc => Parser.StringToInteger(GetConfigByKeyName("Encoder_MaxXEnc", "4000"));
+        public int Encoder_DecYEnd => Parser.StringToInteger(GetConfigByKeyName("Encoder_DecYEnd", "1800"));
+        public int Encoder_IncYEnd => Parser.StringToInteger(GetConfigByKeyName("Encoder_IncYEnd", "1800"));
+        public int Encoder_MaxYEnc => Parser.StringToInteger(GetConfigByKeyName("Encoder_MaxYEnc", "4000"));
 
         private void CreateConfigCacheInternal()
         {

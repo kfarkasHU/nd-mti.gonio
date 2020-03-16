@@ -1,8 +1,8 @@
-﻿namespace ND.MTI.Service.Worker
+﻿using ND.MTI.Service.Worker.PokeysCore;
+
+namespace ND.MTI.Service.Worker
 {
-    public interface IPokeys57UWorker
+    public interface IPokeys57UWorker : IPokeys57UCore
     {
-        bool Connect();
-        void Disconnect();
-}
+    }
 }
