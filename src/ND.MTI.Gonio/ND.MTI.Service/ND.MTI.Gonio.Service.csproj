@@ -8,7 +8,7 @@
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>ND.MTI.Service</RootNamespace>
-    <AssemblyName>ND.MTI.Service</AssemblyName>
+    <AssemblyName>Service</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
@@ -52,6 +52,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ExcelExportService.cs" />
+    <Compile Include="ExcelExportServiceHelper.cs" />
     <Compile Include="MeasurementService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Worker\ExcelFactory\ExcelFactory.cs" />
@@ -61,12 +62,18 @@
     <Compile Include="Worker\GonioWorker\IGonioWorker.cs" />
     <Compile Include="Worker\IOWorker\IIOWorker.cs" />
     <Compile Include="Worker\IOWorker\IOWorker.cs" />
+    <Compile Include="Worker\Pokeys57UCore\Helper\Pokeys57U_Pin.cs" />
+    <Compile Include="Worker\Pokeys57UCore\Helper\Pokeys57U_PinFunction.cs" />
+    <Compile Include="Worker\Pokeys57UCore\IPokeys57UCore.cs" />
+    <None Include="Worker\Pokeys57UCore\Pokeys57UCore.cs._bak" />
+    <Compile Include="Worker\Pokeys57UCore\Pokeys57UCore.cs" />
+    <Compile Include="Worker\Pokeys57UWorker\Helper\GonioPokeys_Axis.cs" />
+    <Compile Include="Worker\Pokeys57UWorker\Helper\GonioPokeys_Commands.cs" />
+    <Compile Include="Worker\Pokeys57UWorker\Helper\GonioPokeys_Pinout.cs" />
     <Compile Include="Worker\Pokeys57UWorker\IPokeys57UWorker.cs" />
     <Compile Include="Worker\Pokeys57UWorker\Pokeys57UWorker.cs" />
-    <Compile Include="Worker\Pokeys57UWorker\Pokeys57U_Helper.cs" />
     <Compile Include="Worker\PositionWorker\IPositionWorker.cs" />
-    <Compile Include="Worker\PositionWorker\PositionWorker.Debug.cs" />
-    <Compile Include="Worker\PositionWorker\PositionWorker.Release.cs" />
+    <Compile Include="Worker\PositionWorker\PositionWorker.cs" />
     <Compile Include="Worker\SerialCore\ISerialCore.cs" />
     <Compile Include="Worker\SerialCore\SerialCore.cs" />
   </ItemGroup>

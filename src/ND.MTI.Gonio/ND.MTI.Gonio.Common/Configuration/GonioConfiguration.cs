@@ -16,7 +16,7 @@ namespace ND.MTI.Gonio.Common.Configuration
 
         private GonioConfiguration()
         {
-            _configFileAbsolutePath = $"{Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location)}\\gonio.config";
+            _configFileAbsolutePath = $"{Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location)}\\gonio.cfg";
             _configCache = new Dictionary<string, string>();
 
             CreateConfigCacheInternal();
@@ -30,43 +30,61 @@ namespace ND.MTI.Gonio.Common.Configuration
             return _instance;
         }
 
-        public Complex_FSMGonioConfig FsmGonioConfig
+        public Complex_FSMGonioConfig FSM_GonioConfig
         {
             get
             {
                 var cfg = new Complex_FSMGonioConfig();
 
-                cfg.ComPortName = GetConfigByKeyName("FSM_ComPortName");
-                cfg.DataBits = Parser.StringToInteger(GetConfigByKeyName("FSM_DataBits"));
-                cfg.Parity = Parser.StringIntToEnum<Parity>(GetConfigByKeyName("FSM_Parity"));
-                cfg.ReadTimeout = Parser.StringToInteger(GetConfigByKeyName("FSM_ReadTimeout"));
-                cfg.SpeedInBaud = Parser.StringToInteger(GetConfigByKeyName("FSM_SpeedInBaud"));
-                cfg.WriteTimeout = Parser.StringToInteger(GetConfigByKeyName("FSM_WriteTimeout"));
-                cfg.StopBits = Parser.StringIntToEnum<StopBits>(GetConfigByKeyName("FSM_StopBits"));
+                cfg.ComPortName = GetConfigByKeyName("FSM_ComPortName", "COM3");
+                cfg.DataBits = Parser.StringToInteger(GetConfigByKeyName("FSM_DataBits", "8"));
+                cfg.Parity = Parser.StringIntToEnum<Parity>(GetConfigByKeyName("FSM_Parity", "0"));
+                cfg.ReadTimeout = Parser.StringToInteger(GetConfigByKeyName("FSM_ReadTimeout", "500"));
+                cfg.SpeedInBaud = Parser.StringToInteger(GetConfigByKeyName("FSM_SpeedInBaud", "38400"));
+                cfg.WriteTimeout = Parser.StringToInteger(GetConfigByKeyName("FSM_WriteTimeout", "500"));
+                cfg.StopBits = Parser.StringIntToEnum<StopBits>(GetConfigByKeyName("FSM_StopBits", "1"));
 
                 return cfg;
             }
         }
 
-        public double PrecisionPercentage => Parser.StringToDouble(GetConfigByKeyName("Motor_PrecisionPercentage"));
+        public double Sensor_Distance => Parser.StringToDouble(GetConfigByKeyName("Sensor_Distance", "15"));
 
-        public double SensorDistance => Parser.StringToDouble(GetConfigByKeyName("Sensor_Distance"));
+        public int Encoder_XMin => GrayUtils.GrayToInteger(GetConfigByKeyName("Encoder_XMin", "100"));
+        public int Encoder_XMax => GrayUtils.GrayToInteger(GetConfigByKeyName("Encoder_XMax", "1000"));
+        public int Encoder_XFullSpectrum => Parser.StringToInteger(GetConfigByKeyName("Encoder_XFullSpectrum", "340"));
+        public int Encoder_YMin => GrayUtils.GrayToInteger(GetConfigByKeyName("Encoder_YMin", "0"));
+        public int Encoder_YMax => GrayUtils.GrayToInteger(GetConfigByKeyName("Encoder_YMax", "1000"));
+        public int Encoder_YFullSpectrum => Parser.StringToInteger(GetConfigByKeyName("Encoder_YFullSpectrum", "340"));
 
-        public int EncoderXMin => Parser.StringToInteger(GetConfigByKeyName("Encoder_XMin"));
-        public int EncoderXMax => Parser.StringToInteger(GetConfigByKeyName("Encoder_XMax"));
-        public int EncoderXFullSpectrum => Parser.StringToInteger(GetConfigByKeyName("Encoder_XFullSpectrum"));
-        public int EncoderYMin => Parser.StringToInteger(GetConfigByKeyName("Encoder_YMin"));
-        public int EncoderYMax => Parser.StringToInteger(GetConfigByKeyName("Encoder_XMax"));
-        public int EncoderYFullSpectrum => Parser.StringToInteger(GetConfigByKeyName("Encoder_YFullSpectrum"));
+        public uint PWM_StartFrequency => Parser.StringToUInteger(GetConfigByKeyName("PWM_StartFrequency", "2500"));
+        public uint PWM_EndFrequency => Parser.StringToUInteger(GetConfigByKeyName("PWM_EndFrequency", "40000"));
+        public uint PWM_FrequencyStep => Parser.StringToUInteger(GetConfigByKeyName("PWM_FrequencyStep", "125"));
+        public int PWM_TimeStep => Parser.StringToInteger(GetConfigByKeyName("PWM_TimeStep", "3"));
+        public double PWM_DutyScale => Parser.StringToDouble(GetConfigByKeyName("PWM_DutyScale", "0,5"));
 
-        public int PWMFrequencyDivider => Parser.StringToInteger(GetConfigByKeyName("PWM_FrequencyDivider"));
+        public int Pokeys_ReservedTimeoutMs => Parser.StringToInteger(GetConfigByKeyName("Pokeys_ReservedTimeoutMs", "5"));
+        public int Pokeys_DirectionTimeoutMs => Parser.StringToInteger(GetConfigByKeyName("Pokeys_DirectionTimeoutMs", "5"));
+        public int Pokeys_EnableTimeoutMs => Parser.StringToInteger(GetConfigByKeyName("Pokeys_EnableTimeoutMs", "5"));
+        public int Pokeys_ReadInterval => Parser.StringToInteger(GetConfigByKeyName("Pokeys_ReadInterval", "100"));
+
+        public bool Application_ConnectGonioAuto => Parser.StringToBoolean(GetConfigByKeyName("Application_ConnectGonioAuto", "0"));
+
+        public bool Application_ConnectPokeysAuto => Parser.StringToBoolean(GetConfigByKeyName("Application_ConnectPokeysAuto", "0"));
 
         private void CreateConfigCacheInternal()
         {
-            var lines = File.ReadAllLines(_configFileAbsolutePath);
+            try
+            {
+                var lines = File.ReadAllLines(_configFileAbsolutePath);
 
-            foreach (var line in lines)
-                CreateConfigItem(line);
+                foreach (var line in lines)
+                    CreateConfigItem(line);
+            }
+            catch (FileNotFoundException)
+            {
+
+            }
 
             void CreateConfigItem(string line)
             {
@@ -75,11 +93,11 @@ namespace ND.MTI.Gonio.Common.Configuration
             }
         }
         
-        private string GetConfigByKeyName(string keyName)
+        private string GetConfigByKeyName(string keyName, string defaultValue)
         {
-            _configCache.TryGetValue(keyName, out var val);
+            var success = _configCache.TryGetValue(keyName, out var val);
 
-            return val;
+            return success ? val : defaultValue;
         }
     }
 }

@@ -12,9 +12,16 @@ namespace ND.MTI.Service.Worker
 
         void DecrementY();
         void DecrementX();
+
         void StopX();
+        void StopY();
+
         void IncrementY();
         void IncrementX();
-        void StopY();
+
+        void ReverseX();
+        void ReverseY();
+
+        bool IsConnected { get; }
     }
 }

@@ -2,12 +2,6 @@
 {
     public class Complex_ResultItem
     {
-        public Complex_ResultItem()
-        {
-            WantedPosition = new Primitive_Position(0, 0);
-            RealPosition = new Primitive_Position(0, 0);
-        }
-
         public Complex_ResultItem(
                 double wX,
                 double wY,

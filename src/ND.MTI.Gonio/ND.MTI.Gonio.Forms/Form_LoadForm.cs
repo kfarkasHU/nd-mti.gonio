@@ -14,7 +14,7 @@ namespace ND.MTI.Gonio.Forms
 
             _timer = new Timer();
             _timer.Tick += OnTimerTick;
-            _timer.Interval = 5000;
+            _timer.Interval = 1500;
 
             _timer.Start();
 

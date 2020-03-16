@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Threading;
 using System.Windows.Forms;
+using ND.MTI.Service.Worker;
+using ND.MTI.Gonio.Common.Exceptions;
 
 namespace ND.MTI.Gonio.Forms
 {
@@ -23,11 +25,36 @@ namespace ND.MTI.Gonio.Forms
 
         private static void HandleExceptionCore(Exception exception)
         {
+            var title = "FATAL ERROR";
+            if (exception is Gonio_EndpointException endpointException)
+            {
+                var positionWorker = PositionWorker.GetInstance();
+
+                switch (endpointException.Axis)
+                {
+                    case "X":
+                        {
+                            positionWorker.StopX();
+                            positionWorker.ReverseX();
+                            break;
+                        }
+                    case "Y":
+                        {
+                            positionWorker.StopY();
+                            positionWorker.ReverseY();
+                            break;
+                        }
+                }
+            }
+
+            if (exception is Gonio_Exception _)
+                title = "GONIO ERROR";
+
             var message = exception.Message;
 
             MessageBox.Show(
                 message,
-                "Error",
+                title,
                 MessageBoxButtons.OK,
                 MessageBoxIcon.Error
             );

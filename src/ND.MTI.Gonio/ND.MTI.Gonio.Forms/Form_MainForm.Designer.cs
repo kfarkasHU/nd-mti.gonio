@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             this.checkBoxXAuto = new System.Windows.Forms.CheckBox();
-            this.textBoxCommand = new System.Windows.Forms.TextBox();
             this.buttonNew = new System.Windows.Forms.Button();
             this.buttonGoToZero = new System.Windows.Forms.Button();
             this.buttonGoToVirtualZero = new System.Windows.Forms.Button();
@@ -42,8 +41,6 @@
             this.buttonExcelExport = new System.Windows.Forms.Button();
             this.buttonEdtExport = new System.Windows.Forms.Button();
             this.buttonExit = new System.Windows.Forms.Button();
-            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
-            this.buttonSendCommand = new System.Windows.Forms.Button();
             this.labelX = new System.Windows.Forms.Label();
             this.labelY = new System.Windows.Forms.Label();
             this.textBoxStartX = new System.Windows.Forms.TextBox();
@@ -74,14 +71,6 @@
             this.checkBoxXAuto.Text = "auto";
             this.checkBoxXAuto.UseVisualStyleBackColor = true;
             this.checkBoxXAuto.CheckedChanged += new System.EventHandler(this.CheckBoxXAuto_CheckedChanged);
-            // 
-            // textBoxCommand
-            // 
-            this.textBoxCommand.Enabled = false;
-            this.textBoxCommand.Location = new System.Drawing.Point(415, 211);
-            this.textBoxCommand.Name = "textBoxCommand";
-            this.textBoxCommand.Size = new System.Drawing.Size(292, 20);
-            this.textBoxCommand.TabIndex = 1;
             // 
             // buttonNew
             // 
@@ -207,25 +196,6 @@
             this.buttonExit.Text = "Exit";
             this.buttonExit.UseVisualStyleBackColor = true;
             this.buttonExit.Click += new System.EventHandler(this.ButtonExit_Click);
-            // 
-            // richTextBox1
-            // 
-            this.richTextBox1.Enabled = false;
-            this.richTextBox1.Location = new System.Drawing.Point(415, 12);
-            this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(373, 190);
-            this.richTextBox1.TabIndex = 17;
-            this.richTextBox1.Text = "";
-            // 
-            // buttonSendCommand
-            // 
-            this.buttonSendCommand.Enabled = false;
-            this.buttonSendCommand.Location = new System.Drawing.Point(713, 211);
-            this.buttonSendCommand.Name = "buttonSendCommand";
-            this.buttonSendCommand.Size = new System.Drawing.Size(75, 23);
-            this.buttonSendCommand.TabIndex = 18;
-            this.buttonSendCommand.Text = "Send";
-            this.buttonSendCommand.UseVisualStyleBackColor = true;
             // 
             // labelX
             // 
@@ -369,7 +339,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 240);
+            this.ClientSize = new System.Drawing.Size(416, 240);
             this.ControlBox = false;
             this.Controls.Add(this.labelPokeys75U);
             this.Controls.Add(this.labelFsmGonio);
@@ -387,8 +357,6 @@
             this.Controls.Add(this.textBoxStartX);
             this.Controls.Add(this.labelY);
             this.Controls.Add(this.labelX);
-            this.Controls.Add(this.buttonSendCommand);
-            this.Controls.Add(this.richTextBox1);
             this.Controls.Add(this.buttonExcelExport);
             this.Controls.Add(this.buttonEdtExport);
             this.Controls.Add(this.buttonExit);
@@ -401,7 +369,6 @@
             this.Controls.Add(this.buttonSetVirtualZero);
             this.Controls.Add(this.buttonGoToZero);
             this.Controls.Add(this.buttonNew);
-            this.Controls.Add(this.textBoxCommand);
             this.Controls.Add(this.checkBoxXAuto);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "Form_MainForm";
@@ -418,7 +385,6 @@
         #endregion
 
         private System.Windows.Forms.CheckBox checkBoxXAuto;
-        private System.Windows.Forms.TextBox textBoxCommand;
         private System.Windows.Forms.Button buttonNew;
         private System.Windows.Forms.Button buttonGoToZero;
         private System.Windows.Forms.Button buttonGoToVirtualZero;
@@ -431,8 +397,6 @@
         private System.Windows.Forms.Button buttonExcelExport;
         private System.Windows.Forms.Button buttonEdtExport;
         private System.Windows.Forms.Button buttonExit;
-        private System.Windows.Forms.RichTextBox richTextBox1;
-        private System.Windows.Forms.Button buttonSendCommand;
         private System.Windows.Forms.Label labelX;
         private System.Windows.Forms.Label labelY;
         private System.Windows.Forms.TextBox textBoxStartX;

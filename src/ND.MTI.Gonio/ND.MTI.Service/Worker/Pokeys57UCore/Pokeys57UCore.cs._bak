@@ -1,0 +1,62 @@
+﻿using System;
+using PoKeysDevice_DLL;
+using System.Collections.Generic;
+using ND.MTI.Gonio.Common.Exceptions;
+using ND.MTI.Service.Worker.PokeysCore.Helper;
+using System.Linq;
+
+namespace ND.MTI.Service.Worker.PokeysCore
+{
+    public abstract class Pokeys57UCore : IPokeys57UCore
+    {
+        private readonly PoKeysDevice _device;
+
+        public bool IsConnected { get; private set; }
+
+        public Pokeys57UCore()
+        {
+            _device = new PoKeysDevice();
+        }
+
+        public bool Connect()
+        {
+            var deviceNumber = _device.EnumerateDevices();
+
+            if (deviceNumber != 1)
+                throw new Gonio_Exception("Device number!");
+
+            IsConnected = _device.ConnectToDevice(0);
+
+            return IsConnected;
+        }
+
+        public void Disconnect()
+        {
+            throw new NotImplementedException();
+        }
+
+        protected void InitDigitalInputPins(Pokeys57U_Pin[] x_Input)
+        {
+
+        }
+
+        protected void InitDigitalOutputPins(Pokeys57U_Pin[] x_Output)
+        {
+
+        }
+
+        protected void WriteBytes(IList<Tuple<Pokeys57U_Pin, bool>> list)
+        {
+        
+        }
+
+        protected string ReadBytes(Pokeys57U_Pin[] x_Input)
+        {
+            var s = string.Empty;
+            foreach (var _ in Enumerable.Range(0, x_Input.Length))
+                s += 1;
+
+            return s;
+        }
+    }
+}                      

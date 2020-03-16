@@ -12,8 +12,6 @@ using ND.MTI.Gonio.Common.RuntimeContext;
 
 namespace ND.MTI.Gonio.Forms
 {
-    // TODO (FK): Connect on startup to cfg.
-
     public partial class Form_MainForm : Form
     {
         private readonly Complex_MainModel _model;
@@ -32,6 +30,12 @@ namespace ND.MTI.Gonio.Forms
             _excelExportService = new ExcelExportService();
 
             _gonioConfiguration = GonioConfiguration.GetInstance();
+
+            if (_gonioConfiguration.Application_ConnectGonioAuto)
+                ConnectGonioInternal();
+
+            if (_gonioConfiguration.Application_ConnectPokeysAuto)
+                ConnectPokeysInternal();
 
             SetModel();
 
@@ -196,7 +200,7 @@ namespace ND.MTI.Gonio.Forms
             }
             else
             {
-                RuntimeContext.FsmGonioConnected = _measurementService.ConnectFsmGonio(_gonioConfiguration.FsmGonioConfig);
+                ConnectGonioInternal();
             }
 
             pictureBoxFsmGonioStatus.Image = (Image)_resourceManager.GetObject(GetImageFor(RuntimeContext.FsmGonioConnected));
@@ -211,7 +215,7 @@ namespace ND.MTI.Gonio.Forms
             }
             else
             {
-                RuntimeContext.Pokeys57U = _measurementService.ConnectPokeys57U();
+                ConnectPokeysInternal();
             }
 
             pictureBoxPokeys75U.Image = (Image)_resourceManager.GetObject(GetImageFor(RuntimeContext.Pokeys57U));
@@ -416,6 +420,18 @@ namespace ND.MTI.Gonio.Forms
             var virtualZeroForm = new Form_VirtualZeroForm();
 
             virtualZeroForm.Show();
+        }
+
+        private void ConnectGonioInternal()
+        {
+            RuntimeContext.FsmGonioConnected = _measurementService.ConnectFsmGonio(_gonioConfiguration.FSM_GonioConfig);
+            pictureBoxFsmGonioStatus.Image = (Image)_resourceManager.GetObject(GetImageFor(RuntimeContext.FsmGonioConnected));
+        }
+
+        private void ConnectPokeysInternal()
+        {
+            RuntimeContext.Pokeys57U = _measurementService.ConnectPokeys57U();
+            pictureBoxPokeys75U.Image = (Image)_resourceManager.GetObject(GetImageFor(RuntimeContext.Pokeys57U));
         }
     }
 }

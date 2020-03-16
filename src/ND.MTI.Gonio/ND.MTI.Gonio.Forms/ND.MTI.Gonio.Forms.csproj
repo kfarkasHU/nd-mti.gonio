@@ -7,7 +7,7 @@
     <ProjectGuid>{969DF68B-4448-4AD9-B4C7-5722863D6C5B}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <RootNamespace>ND.MTI.Gonio.Forms</RootNamespace>
-    <AssemblyName>ND.MTI.Gonio.Forms</AssemblyName>
+    <AssemblyName>GonioApplication</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
@@ -94,7 +94,10 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
-    <None Include="gonio.config">
+    <None Include="calculations.cfg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="gonio.cfg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="Properties\Settings.settings">
@@ -118,7 +121,7 @@
       <Name>ND.MTI.Gonio.Common</Name>
     </ProjectReference>
     <ProjectReference Include="..\ND.MTI.Gonio.Model\ND.MTI.Gonio.Model.csproj">
-      <Project>{680927AC-E6E3-47F1-8DA7-B8457DDAB8D9}</Project>
+      <Project>{680927ac-e6e3-47f1-8da7-b8457ddab8d9}</Project>
       <Name>ND.MTI.Gonio.Model</Name>
     </ProjectReference>
     <ProjectReference Include="..\ND.MTI.Gonio.ServiceInterface\ND.MTI.Gonio.ServiceInterface.csproj">

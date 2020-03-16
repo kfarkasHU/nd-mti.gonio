@@ -1,303 +1,227 @@
-﻿using ND.MTI.Gonio.Common.Configuration;
+﻿using System;
+using System.Timers;
+using System.Collections.Generic;
 using ND.MTI.Gonio.Common.Exceptions;
-using System.Threading;
-using System;
+using ND.MTI.Service.Worker.PokeysCore;
+using ND.MTI.Gonio.Common.Configuration;
+using ND.MTI.Service.Worker.Pokeys.Helper;
+using ND.MTI.Service.Worker.PokeysCore.Helper;
+using ND.MTI.Gonio.Common.Utils;
+using ND.MTI.Gonio.Common.Extensions;
 
 namespace ND.MTI.Service.Worker.Pokeys
 {
-    public abstract class Pokeys57UWorker : IPokeys57UWorker
+    public abstract class Pokeys57UWorker : Pokeys57UCore, IPokeys57UWorker
     {
-        private readonly System.Windows.Forms.Timer _timer;
-        protected readonly PoKeysDevice_DLL.PoKeysDevice _device;
+        private readonly Timer _timer;
+
+        private bool _endpoint_X;
+        private bool _endpoint_Y;
+
+        private int _xOperator = 1;
+        private int _yOperator = 1;
+
         protected readonly IGonioConfiguration _configuration;
 
-        public string LastXResponse { get; private set; }
-        public string LastYResponse { get; private set; }
+        protected string LastXDirection { get; private set; }
+        protected string LastYDirection { get; private set; }
 
+        public static Tuple<string, short> LastXResponse { get; private set; } = new Tuple<string, short>(string.Empty, 0);
+        public static Tuple<string, short> LastYResponse { get; private set; } = new Tuple<string, short>(string.Empty, 0);
+
+        private List<string> _xCache;
+        private IList<string> _yCache;
 
         public Pokeys57UWorker()
         {
-            _device = new PoKeysDevice_DLL.PoKeysDevice();
-            _timer = new System.Windows.Forms.Timer();
-            _timer.Tick += new EventHandler(OnTimerTick);
-            _timer.Interval = 100;
-
             _configuration = GonioConfiguration.GetInstance();
 
-            var deviceCount = _device.EnumerateDevices();
+            _xCache = new List<string>();
+            _yCache = new List<string>();
 
-            if (deviceCount != 1)
-                throw new ArgumentException("Device number!");
-
+            _timer = new Timer(_configuration.Pokeys_ReadInterval);
+            _timer.Elapsed += OnTimerTick;
         }
 
-        private void OnTimerTick(object sender, EventArgs e)
+        public new bool Connect()
         {
-            if (_device.Connected())
-            {
-                LastXResponse = ReadXInternal();
-                LastYResponse = ReadYInternal();
-            }
-        }
+            var res = base.Connect();
 
-        public bool Connect()
-        {
-            var cResult = _device.ConnectToDevice(0);
             InitInternal();
+            _timer.Start();
 
-            return cResult;
+            return res;
         }
-
-        public void Disconnect() => _device.DisconnectDevice();
-
-        protected void Initl() => InitInternal();
 
         private void InitInternal()
         {
-            if (!_device.Connected())
-                throw new InvalidOperationException();
+            InitDigitalInputPins(GonioPokeys_Pinout.X_Input);
+            InitDigitalInputPins(GonioPokeys_Pinout.Y_Input);
 
-            #region [ X bits > read ]
+            InitDigitalInputPins(GonioPokeys_Pinout.X_Endpoints);
+            InitDigitalInputPins(GonioPokeys_Pinout.Y_Endpoints);
 
-            _ = _device.SetPinData((byte)Pokeys57U_PinNumbers.PIN_1,  (byte)Pokeys57U_PinFunctions.PIN_DIGITAL_INPUT);
-            _ = _device.SetPinData((byte)Pokeys57U_PinNumbers.PIN_2,  (byte)Pokeys57U_PinFunctions.PIN_DIGITAL_INPUT);
-            _ = _device.SetPinData((byte)Pokeys57U_PinNumbers.PIN_3,  (byte)Pokeys57U_PinFunctions.PIN_DIGITAL_INPUT);
-            _ = _device.SetPinData((byte)Pokeys57U_PinNumbers.PIN_4,  (byte)Pokeys57U_PinFunctions.PIN_DIGITAL_INPUT);
-            _ = _device.SetPinData((byte)Pokeys57U_PinNumbers.PIN_5,  (byte)Pokeys57U_PinFunctions.PIN_DIGITAL_INPUT);
-            _ = _device.SetPinData((byte)Pokeys57U_PinNumbers.PIN_6,  (byte)Pokeys57U_PinFunctions.PIN_DIGITAL_INPUT);
-            _ = _device.SetPinData((byte)Pokeys57U_PinNumbers.PIN_7,  (byte)Pokeys57U_PinFunctions.PIN_DIGITAL_INPUT);
-            _ = _device.SetPinData((byte)Pokeys57U_PinNumbers.PIN_8,  (byte)Pokeys57U_PinFunctions.PIN_DIGITAL_INPUT);
-            _ = _device.SetPinData((byte)Pokeys57U_PinNumbers.PIN_9,  (byte)Pokeys57U_PinFunctions.PIN_DIGITAL_INPUT);
-            _ = _device.SetPinData((byte)Pokeys57U_PinNumbers.PIN_10, (byte)Pokeys57U_PinFunctions.PIN_DIGITAL_INPUT);
-            _ = _device.SetPinData((byte)Pokeys57U_PinNumbers.PIN_11, (byte)Pokeys57U_PinFunctions.PIN_DIGITAL_INPUT);
-            _ = _device.SetPinData((byte)Pokeys57U_PinNumbers.PIN_12, (byte)Pokeys57U_PinFunctions.PIN_DIGITAL_INPUT);
-            _ = _device.SetPinData((byte)Pokeys57U_PinNumbers.PIN_13, (byte)Pokeys57U_PinFunctions.PIN_DIGITAL_INPUT);
-            _ = _device.SetPinData((byte)Pokeys57U_PinNumbers.PIN_14, (byte)Pokeys57U_PinFunctions.PIN_DIGITAL_INPUT);
-            _ = _device.SetPinData((byte)Pokeys57U_PinNumbers.PIN_15, (byte)Pokeys57U_PinFunctions.PIN_DIGITAL_INPUT);
-            _ = _device.SetPinData((byte)Pokeys57U_PinNumbers.PIN_16, (byte)Pokeys57U_PinFunctions.PIN_DIGITAL_INPUT);
-
-            #endregion [ X bits > read ]
-
-            #region [ X bits > write ]
-
-            _ = _device.SetPinData((byte)Pokeys57U_PinNumbers.PIN_35, (byte)Pokeys57U_PinFunctions.PIN_DIGITAL_OUTPUT);
-            _ = _device.SetPinData((byte)Pokeys57U_PinNumbers.PIN_36, (byte)Pokeys57U_PinFunctions.PIN_DIGITAL_OUTPUT);
-            _ = _device.SetPinData((byte)Pokeys57U_PinNumbers.PIN_37, (byte)Pokeys57U_PinFunctions.PIN_DIGITAL_OUTPUT);
-
-            #endregion [ X bits > write ]
-            
-            #region [ Y bits > read ]
-
-            _ = _device.SetPinData((byte)Pokeys57U_PinNumbers.PIN_19, (byte)Pokeys57U_PinFunctions.PIN_DIGITAL_INPUT);
-            _ = _device.SetPinData((byte)Pokeys57U_PinNumbers.PIN_20, (byte)Pokeys57U_PinFunctions.PIN_DIGITAL_INPUT);
-            _ = _device.SetPinData((byte)Pokeys57U_PinNumbers.PIN_21, (byte)Pokeys57U_PinFunctions.PIN_DIGITAL_INPUT);
-            _ = _device.SetPinData((byte)Pokeys57U_PinNumbers.PIN_22, (byte)Pokeys57U_PinFunctions.PIN_DIGITAL_INPUT);
-            _ = _device.SetPinData((byte)Pokeys57U_PinNumbers.PIN_23, (byte)Pokeys57U_PinFunctions.PIN_DIGITAL_INPUT);
-            _ = _device.SetPinData((byte)Pokeys57U_PinNumbers.PIN_24, (byte)Pokeys57U_PinFunctions.PIN_DIGITAL_INPUT);
-            _ = _device.SetPinData((byte)Pokeys57U_PinNumbers.PIN_25, (byte)Pokeys57U_PinFunctions.PIN_DIGITAL_INPUT);
-            _ = _device.SetPinData((byte)Pokeys57U_PinNumbers.PIN_26, (byte)Pokeys57U_PinFunctions.PIN_DIGITAL_INPUT);
-            _ = _device.SetPinData((byte)Pokeys57U_PinNumbers.PIN_27, (byte)Pokeys57U_PinFunctions.PIN_DIGITAL_INPUT);
-            _ = _device.SetPinData((byte)Pokeys57U_PinNumbers.PIN_28, (byte)Pokeys57U_PinFunctions.PIN_DIGITAL_INPUT);
-            _ = _device.SetPinData((byte)Pokeys57U_PinNumbers.PIN_29, (byte)Pokeys57U_PinFunctions.PIN_DIGITAL_INPUT);
-            _ = _device.SetPinData((byte)Pokeys57U_PinNumbers.PIN_30, (byte)Pokeys57U_PinFunctions.PIN_DIGITAL_INPUT);
-            _ = _device.SetPinData((byte)Pokeys57U_PinNumbers.PIN_31, (byte)Pokeys57U_PinFunctions.PIN_DIGITAL_INPUT);
-            _ = _device.SetPinData((byte)Pokeys57U_PinNumbers.PIN_32, (byte)Pokeys57U_PinFunctions.PIN_DIGITAL_INPUT);
-            _ = _device.SetPinData((byte)Pokeys57U_PinNumbers.PIN_33, (byte)Pokeys57U_PinFunctions.PIN_DIGITAL_INPUT);
-            _ = _device.SetPinData((byte)Pokeys57U_PinNumbers.PIN_34, (byte)Pokeys57U_PinFunctions.PIN_DIGITAL_INPUT);
-
-            #endregion [ Y bits > read ]
-
-            #region [ Y bits > write ]
-
-            _ = _device.SetPinData((byte)Pokeys57U_PinNumbers.PIN_38, (byte)Pokeys57U_PinFunctions.PIN_DIGITAL_OUTPUT);
-            _ = _device.SetPinData((byte)Pokeys57U_PinNumbers.PIN_39, (byte)Pokeys57U_PinFunctions.PIN_DIGITAL_OUTPUT);
-            _ = _device.SetPinData((byte)Pokeys57U_PinNumbers.PIN_40, (byte)Pokeys57U_PinFunctions.PIN_DIGITAL_OUTPUT);
-
-            #endregion [ Y bits > write ]
-
-            _timer.Enabled = true;
+            InitDigitalOutputPins(GonioPokeys_Pinout.X_Output);
+            InitDigitalOutputPins(GonioPokeys_Pinout.Y_Output);
         }
 
-        public void WriteDataX(string message)
+        private void OnTimerTick(object sender, ElapsedEventArgs e)
         {
-            if (message.Length > 3)
-                throw new ArgumentOutOfRangeException();
+            ReadDataX();
+            ReadDataY();
 
-            if (message.Length < 3)
-                throw new ArgumentNullException();
-
-            var bytes = CreateMessageBytesInternal(message);
-
-            _ = _device.SetOutput((byte)Pokeys57U_PinNumbers.PIN_35, bytes[0]);
-            Thread.Sleep(5);
-
-            _ = _device.SetOutput((byte)Pokeys57U_PinNumbers.PIN_36, bytes[1]);
-            Thread.Sleep(5);
-
-            _ = _device.SetOutput((byte)Pokeys57U_PinNumbers.PIN_37, bytes[2]);
-            Thread.Sleep(5);
-
-            StartPWMX();
+            ReadEndpointX();
+            ReadEndpointY();
         }
 
-        public void WriteDataY(string message)
+        protected void WriteDataX(string command) => WriteBytes(ParseCommandToAxis(GonioPokeys_Axis.X, command));
+
+        protected void WriteDataY(string command) => WriteBytes(ParseCommandToAxis(GonioPokeys_Axis.Y, command));
+
+        private void ReadEndpointX()
         {
-            if (message.Length > 3)
-                throw new ArgumentOutOfRangeException();
+            /*
+            var data = ReadEndpoint(GonioPokeys_Axis.X);
 
-            if (message.Length < 3)
-                throw new ArgumentNullException();
+            if (!string.Equals("11", data) && !_endpoint_X)
+            {
+                _endpoint_X = true;
+                throw new Gonio_EndpointException(GonioPokeys_Axis.X.ToString());
+            }
+            else if(string.Equals("11", data) && _endpoint_X)
+            {
+                WriteDataX(GonioPokeys_Commands.ENA0_SR0_DIR0_RES0);
+                _endpoint_X = false;
+            }
+            */
+        }
+        private void ReadEndpointY()
+        {
+            /*
+            var data = ReadEndpoint(GonioPokeys_Axis.Y);
 
-            var bytes = CreateMessageBytesInternal(message);
+            if (!string.Equals("11", data) && !_endpoint_Y)
+            {
+                _endpoint_Y = true;
+                throw new Gonio_EndpointException(GonioPokeys_Axis.Y.ToString());
 
-            _device.SetOutput((byte)Pokeys57U_PinNumbers.PIN_38, bytes[0]);
-            Thread.Sleep(5);
+                return;
+            }
+            else if (string.Equals("11", data) && _endpoint_Y)
+            {
+                WriteDataY(GonioPokeys_Commands.ENA0_SR0_DIR0_RES0);
+                _endpoint_Y = false;
 
-            _device.SetOutput((byte)Pokeys57U_PinNumbers.PIN_39, bytes[1]);
-            Thread.Sleep(5);
-
-            _device.SetOutput((byte)Pokeys57U_PinNumbers.PIN_40, bytes[2]);
-            Thread.Sleep(5);
-
-            StartPWMY();
+                return;
+            }
+            */
         }
 
-        private void StartPWMX()
+        private string ReadEndpoint(GonioPokeys_Axis axis)
         {
-            var pwmOutputs = new bool[6];
+            var result = "11";
+            if (!IsConnected)
+                return result;
 
-            pwmOutputs[5] = true;  // 17 (X)
-            pwmOutputs[4] = false; // 18 (Y)
-            pwmOutputs[3] = false; // 19
-            pwmOutputs[2] = false; // 20
-            pwmOutputs[1] = false; // 21
-            pwmOutputs[0] = false; // 22
+            switch (axis)
+            {
+                case GonioPokeys_Axis.X:
+                    {
+                        result = ReadBytes(GonioPokeys_Pinout.X_Endpoints);
 
-            var period = (uint)(_device.GetPWMFrequency() / _configuration.PWMFrequencyDivider);
+                        break;
+                    }
+                case GonioPokeys_Axis.Y:
+                    {
+                        result = ReadBytes(GonioPokeys_Pinout.Y_Endpoints);
 
-            // Create 50% PWM.
-            var dutyScale = new uint[6];
-
-            dutyScale[5] = (uint)(0.5 * period);
-
-            _ = _device.SetPWMOutputs(ref pwmOutputs, ref period, ref dutyScale);
-        }
-
-        private void StartPWMY()
-        {
-            var pwmOutputs = new bool[6];
-
-            pwmOutputs[5] = false; // 17 (X)
-            pwmOutputs[4] = true;  // 18 (Y)
-            pwmOutputs[3] = false; // 19
-            pwmOutputs[2] = false; // 20
-            pwmOutputs[1] = false; // 21
-            pwmOutputs[0] = false; // 22
-
-            var period = (uint)(_device.GetPWMFrequency() / _configuration.PWMFrequencyDivider);
-
-            // Create 50% PWM.
-            var dutyScale = new uint[6];
-
-            dutyScale[4] = (uint)(0.5 * period);
-
-            _device.SetPWMOutputs(ref pwmOutputs, ref period, ref dutyScale);
-        }
-
-        private bool[] CreateMessageBytesInternal(string message)
-        {
-            var result = new bool[3];
-
-            result[0] = ParseBool(message[0]);
-            result[1] = ParseBool(message[1]);
-            result[2] = ParseBool(message[2]);
+                        break;
+                    }
+            }
 
             return result;
-
-            bool ParseBool(char c) => c == '1';
         }
 
-        private string ReadXInternal()
+        private void ReadDataX()
         {
-            var response = string.Empty;
+            var data = ReadBytes(GonioPokeys_Pinout.X_Input);
 
-            var xPins = new Pokeys57U_PinNumbers[]
+            _xCache.Add(data);
+
+            if(_xCache.Count == 3)
             {
-                Pokeys57U_PinNumbers.PIN_1,
-                Pokeys57U_PinNumbers.PIN_2,
-                Pokeys57U_PinNumbers.PIN_3,
-                Pokeys57U_PinNumbers.PIN_4,
-                Pokeys57U_PinNumbers.PIN_5,
-                Pokeys57U_PinNumbers.PIN_6,
-                Pokeys57U_PinNumbers.PIN_7,
-                Pokeys57U_PinNumbers.PIN_8,
-                Pokeys57U_PinNumbers.PIN_9,
-                Pokeys57U_PinNumbers.PIN_10,
-                Pokeys57U_PinNumbers.PIN_11,
-                Pokeys57U_PinNumbers.PIN_12,
-                Pokeys57U_PinNumbers.PIN_13,
-                Pokeys57U_PinNumbers.PIN_14,
-            };
+                var xReadData = _xCache.GetModus();
 
-            //if (ReadInput(Pokeys57U_PinNumbers.PIN_15))
-            //    throw new Gonio_EndpointException((int)Pokeys57U_PinNumbers.PIN_15);
+                _xCache.Clear();
 
-            //if (ReadInput(Pokeys57U_PinNumbers.PIN_16))
-            //    throw new Gonio_EndpointException((int)Pokeys57U_PinNumbers.PIN_16);
+                var xMaxData = 4000;
+                var xLastData = GrayUtils.GrayToInteger(LastXResponse.Item1);
 
-            for (var i = 0; i < xPins.Length; i++)
-                AppendResponse(ref response, ReadInput(xPins[i]));
+                if (GrayUtils.GrayToInteger(xReadData) < xMaxData && xLastData > xMaxData)
+                    _xOperator = _xOperator == 1 ? -1 : 1;
 
-            return response;
+                LastXResponse = new Tuple<string, short>(xReadData, (short)_xOperator);
+            }
         }
 
-        private string ReadYInternal()
+        private void ReadDataY()
         {
-            var response = string.Empty;
+            var data = ReadBytes(GonioPokeys_Pinout.X_Input);
 
-            var yPins = new Pokeys57U_PinNumbers[]
+            _yCache.Add(data);
+
+            if (_yCache.Count == 3)
             {
-                Pokeys57U_PinNumbers.PIN_19,
-                Pokeys57U_PinNumbers.PIN_20,
-                Pokeys57U_PinNumbers.PIN_21,
-                Pokeys57U_PinNumbers.PIN_22,
-                Pokeys57U_PinNumbers.PIN_23,
-                Pokeys57U_PinNumbers.PIN_24,
-                Pokeys57U_PinNumbers.PIN_25,
-                Pokeys57U_PinNumbers.PIN_26,
-                Pokeys57U_PinNumbers.PIN_27,
-                Pokeys57U_PinNumbers.PIN_28,
-                Pokeys57U_PinNumbers.PIN_29,
-                Pokeys57U_PinNumbers.PIN_30,
-                Pokeys57U_PinNumbers.PIN_31,
-                Pokeys57U_PinNumbers.PIN_32
-            };
+                var yReadData = _yCache.GetModus();
 
-            //if (ReadInput(Pokeys57U_PinNumbers.PIN_33))
-            //    throw new Gonio_EndpointException((int)Pokeys57U_PinNumbers.PIN_33);
+                _yCache.Clear();
 
-            //if (ReadInput(Pokeys57U_PinNumbers.PIN_34))
-            //    throw new Gonio_EndpointException((int)Pokeys57U_PinNumbers.PIN_34);
+                var yMaxData = 4000;
+                var yLastData = GrayUtils.GrayToInteger(LastYResponse.Item1);
 
-            for (var i = 0; i < yPins.Length; i++)
-                AppendResponse(ref response, ReadInput(yPins[i]));
+                if (GrayUtils.GrayToInteger(yReadData) < yMaxData && yLastData > yMaxData)
+                    _yOperator = _yOperator == 1 ? -1 : 1;
 
-            return response;
+                LastXResponse = new Tuple<string, short>(yReadData, (short)_yOperator);
+            }
         }
 
-        private bool ReadInput(Pokeys57U_PinNumbers pinNumber)
+        private IList<Tuple<Pokeys57U_Pin, bool>> ParseCommandToAxis(GonioPokeys_Axis axis, string command)
         {
-            var state = false;
+            switch (axis)
+            {
+                case GonioPokeys_Axis.X: return ParseToAxis(GonioPokeys_Pinout.X_Output, ParseCommandCore());
+                case GonioPokeys_Axis.Y: return ParseToAxis(GonioPokeys_Pinout.Y_Output, ParseCommandCore());
+            }
 
-            var pinNum = (byte)(int)pinNumber;
-            var readSuccess = _device.GetInput(pinNum, ref state);
+            throw new Gonio_Exception("Cannot parse command to axis");
 
-            if (!readSuccess)
-                throw new InvalidOperationException($"Read error on {pinNumber.ToString()}");
+            IList<Tuple<Pokeys57U_Pin, bool>> ParseToAxis(Pokeys57U_Pin[] pins, IList<bool> stateArray)
+            {
+                var list = new List<Tuple<Pokeys57U_Pin, bool>>();
 
-            return state;
+                try
+                {
+                    for (var i = 0; i < pins.Length; i++)
+                        list.Add(new Tuple<Pokeys57U_Pin, bool>(pins[i], stateArray[i]));
+                }
+                catch (ArgumentOutOfRangeException e)
+                {
+                    throw new Gonio_Exception("Argument out of range", e);
+                }
+
+                return list;
+            }
+
+            IList<bool> ParseCommandCore()
+            {
+                var list = new List<bool>();
+
+                for (var i = 0; i < command.Length; i++)
+                    list.Add(command[i] == '1');
+
+                return list;
+            }
         }
-
-        private void AppendResponse(ref string response, bool state) => response += state ? "1" : "0";
     }
 }

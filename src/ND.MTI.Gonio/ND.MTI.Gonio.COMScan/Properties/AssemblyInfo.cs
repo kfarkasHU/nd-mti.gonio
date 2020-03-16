@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("ND.MTI.Gonio.Tests")]
+[assembly: AssemblyTitle("ND.MTI.Gonio.COMScan")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("ND.MTI.Gonio.Tests")]
+[assembly: AssemblyProduct("ND.MTI.Gonio.COMScan")]
 [assembly: AssemblyCopyright("Copyright ©  2020")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("46daa5de-d943-493e-9622-dcb1a0d96723")]
+[assembly: Guid("769e6b40-5197-4e7b-b31d-deb995d5cb9b")]
 
 // Version information for an assembly consists of the following four values:
 //

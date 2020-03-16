@@ -20,13 +20,7 @@ namespace ND.MTI.Gonio.Common.RuntimeContext
         public static Primitive_Position ZeroPosition { get; set; }
         public static Primitive_Position VirtualZeroPosition { get; set; }
         public static Status Status { get; set; }
-        public static void AddResult(Complex_ResultItem resultItem)
-        {
-            Results.Add(resultItem);
-
-            // TODO (FK): Call this somehow to update the DGView.
-            //ResultsBindingList.ResetBindings;
-        }
+        public static void AddResult(Complex_ResultItem resultItem) => Results.Add(resultItem);
 
         public static Complex_ResultCollection Results { get; private set; }
         public static BindingList<Complex_ResultItem> ResultsBindingList { get; private set; }

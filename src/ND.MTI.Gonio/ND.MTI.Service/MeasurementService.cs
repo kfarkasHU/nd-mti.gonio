@@ -1,10 +1,11 @@
-﻿using System.Threading;
+﻿using System.Linq;
+using System.Threading;
 using ND.MTI.Gonio.Model;
 using ND.MTI.Service.Worker;
 using System.Collections.Generic;
 using ND.MTI.Gonio.ServiceInterface;
+using ND.MTI.Gonio.Common.Extensions;
 using ND.MTI.Gonio.Common.RuntimeContext;
-using System.Linq;
 
 namespace ND.MTI.Service
 {
@@ -115,6 +116,12 @@ namespace ND.MTI.Service
                 _positionWorker.SetPosition(_positionMatrix[i]);
                 var position = _positionWorker.GetPosition();
 
+                var measuredResults = new List<double>();
+                foreach (var _ in Enumerable.Range(0, 3))
+                {
+                    measuredResults.Add(_gonioWorker.Measure());
+                }
+
                 RuntimeContext
                     .AddResult(
                         new Complex_ResultItem(
@@ -122,9 +129,9 @@ namespace ND.MTI.Service
                             position.Y,
                             _positionMatrix[i].X,
                             _positionMatrix[i].Y,
-                            _gonioWorker.Measure()
+                            measuredResults.GetModus()
                     )
-                );
+                ); ;
             }
         }
     }

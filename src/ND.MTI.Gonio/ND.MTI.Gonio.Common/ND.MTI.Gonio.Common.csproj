@@ -8,7 +8,7 @@
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>ND.MTI.Gonio.Common</RootNamespace>
-    <AssemblyName>ND.MTI.Gonio.Common</AssemblyName>
+    <AssemblyName>Common</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
@@ -46,9 +46,14 @@
     <Compile Include="Configuration\GonioConfiguration.cs" />
     <Compile Include="Configuration\IGonioConfiguration.cs" />
     <Compile Include="Exceptions\Gonio_EndpointException.cs" />
+    <Compile Include="Exceptions\Gonio_Exception.cs" />
+    <Compile Include="Exceptions\Gonio_PinException.cs" />
+    <Compile Include="Exceptions\Gonio_PinInitException.cs" />
+    <Compile Include="Exceptions\Gonio_PinReadException.cs" />
+    <Compile Include="Exceptions\Gonio_PinWriteException.cs" />
+    <Compile Include="Extensions\ListExtenions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RuntimeContext\RuntimeContext.cs" />
-    <Compile Include="Utils\COMUtils.cs" />
     <Compile Include="Utils\GrayUtils.cs" />
     <Compile Include="Utils\Parser.cs" />
   </ItemGroup>
