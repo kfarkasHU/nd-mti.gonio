@@ -1,21 +1,22 @@
 ﻿using System;
 using ND.MTI.Service;
-using System.Drawing;
-using System.Resources;
 using ND.MTI.Gonio.Model;
 using System.Windows.Forms;
+using ND.MTI.Gonio.Service;
 using ND.MTI.Gonio.Common.Utils;
-using ND.MTI.Gonio.Forms.Properties;
-using ND.MTI.Gonio.ServiceInterface;
 using ND.MTI.Gonio.Common.Configuration;
 using ND.MTI.Gonio.Common.RuntimeContext;
 
 namespace ND.MTI.Gonio.Forms
 {
+    // TODO: State enum.
+    // TODO: Handle state enum (model driven form ui).
+    // TODO: Remove config callback.
+
     internal partial class Form_MainForm : Form
     {
+        private readonly Timer _timer;
         private readonly Complex_MainModel _model;
-        private readonly ResourceManager _resourceManager;
         private readonly IMeasurementService _measurementService;
         private readonly IExcelExportService _excelExportService;
         private readonly IGonioConfiguration _gonioConfiguration;
@@ -24,22 +25,34 @@ namespace ND.MTI.Gonio.Forms
         {
             InitializeComponent();
 
+            _timer = new Timer();
             _model = new Complex_MainModel();
-            _resourceManager = Resources.ResourceManager;
             _measurementService = new MeasurementService();
             _excelExportService = new ExcelExportService();
-
             _gonioConfiguration = GonioConfiguration.GetInstance();
 
-            if (_gonioConfiguration.Application_ConnectGonioAuto)
-                ConnectGonioInternal();
-
-            if (_gonioConfiguration.Application_ConnectPokeysAuto)
-                ConnectPokeysInternal();
+            _model.OnFinishedCallback = OnStopOrFinishedUI;
 
             SetModel();
 
             RuntimeContext.Init();
+
+            _timer.Interval = _gonioConfiguration.Pokeys_ReadInterval;
+            _timer.Tick += OnTimerTick;
+            _timer.Start();
+        }
+
+        private void OnTimerTick(object sender, EventArgs e)
+        {
+            var position = _measurementService.GetPosition();
+            var illumination = _measurementService.Measure();
+
+            textBoxXCurrentPosition.Text = position.X.ToString();
+            textBoxYCurrentPosition.Text = position.Y.ToString();
+
+            textBoxMeasuredIllumination.Text = illumination.ToString();
+
+            labelStatusValue.Text = _measurementService.State;
         }
 
         private void Form_MainForm_Load(object sender, EventArgs e)
@@ -86,11 +99,6 @@ namespace ND.MTI.Gonio.Forms
             textBoxStartX.Cursor = Cursors.Hand;
             textBoxStartY.Enabled = true;
             textBoxStartY.Cursor = Cursors.Hand;
-
-            pictureBoxPokeys75U.Enabled = true;
-            pictureBoxPokeys75U.Cursor = Cursors.Hand;
-            pictureBoxFsmGonioStatus.Enabled = true;
-            pictureBoxFsmGonioStatus.Cursor = Cursors.Hand;
 
             #endregion [ UI ]
         }
@@ -157,11 +165,6 @@ namespace ND.MTI.Gonio.Forms
             textBoxStartY.Enabled = true;
             textBoxStartY.Cursor = Cursors.Hand;
 
-            pictureBoxPokeys75U.Enabled = true;
-            pictureBoxPokeys75U.Cursor = Cursors.Hand;
-            pictureBoxFsmGonioStatus.Enabled = true;
-            pictureBoxFsmGonioStatus.Cursor = Cursors.Hand;
-
             #endregion [ UI ]
 
             RuntimeContext.Results.Clear();
@@ -191,38 +194,6 @@ namespace ND.MTI.Gonio.Forms
             _model.StepY = _model.IsYAuto ? Parser.StringToDouble(textBoxStepY.Text) : (double?)null;
         }
 
-        private void PictureBoxFsmGonioStatus_Click(object sender, EventArgs e)
-        {
-            if(RuntimeContext.FsmGonioConnected)
-            {
-                RuntimeContext.FsmGonioConnected = false;
-                _measurementService.DisconnectFsmGonio();
-            }
-            else
-            {
-                ConnectGonioInternal();
-            }
-
-            pictureBoxFsmGonioStatus.Image = (Image)_resourceManager.GetObject(GetImageFor(RuntimeContext.FsmGonioConnected));
-        }
-
-        private void PictureBoxPokeys75U_Click(object sender, EventArgs e)
-        {
-            if (RuntimeContext.Pokeys57UConnected)
-            {
-                RuntimeContext.Pokeys57UConnected = false;
-                _measurementService.DisconnectPokeys75U();
-            }
-            else
-            {
-                ConnectPokeysInternal();
-            }
-
-            pictureBoxPokeys75U.Image = (Image)_resourceManager.GetObject(GetImageFor(RuntimeContext.Pokeys57UConnected));
-        }
-
-        private string GetImageFor(bool status) => status ? "connect" : "disconnect";
-
         private void ButtonStart_Click(object sender, EventArgs e)
         {
             GetModel();
@@ -234,6 +205,12 @@ namespace ND.MTI.Gonio.Forms
         }
 
         private void ButtonContinue_Click(object sender, EventArgs e) => StartOrContinue(_measurementService.Continue);
+
+        private void ButtonRegistration_Click(object sender, EventArgs e)
+        {
+            var form = new Form_Registration();
+            form.Show();
+        }
 
         private void StartOrContinue(Action callback)
         {
@@ -279,19 +256,20 @@ namespace ND.MTI.Gonio.Forms
             textBoxStartX.Cursor = Cursors.No;
             textBoxStartY.Enabled = false;
             textBoxStartY.Cursor = Cursors.No;
-
-            pictureBoxPokeys75U.Enabled = false;
-            pictureBoxPokeys75U.Cursor = Cursors.No;
-            pictureBoxFsmGonioStatus.Enabled = false;
-            pictureBoxFsmGonioStatus.Cursor = Cursors.No;
-
+            
             #endregion [ UI ]
 
-            RuntimeContext.Status = Status.Started;
             callback();
         }
 
         private void ButtonStop_Click(object sender, EventArgs e)
+        {
+            OnStopOrFinishedUI();
+
+            _measurementService.Stop();
+        }
+
+        private void OnStopOrFinishedUI()
         {
             #region [ UI ]
 
@@ -336,15 +314,7 @@ namespace ND.MTI.Gonio.Forms
             textBoxStartY.Enabled = true;
             textBoxStartY.Cursor = Cursors.Hand;
 
-            pictureBoxPokeys75U.Enabled = true;
-            pictureBoxPokeys75U.Cursor = Cursors.Hand;
-            pictureBoxFsmGonioStatus.Enabled = true;
-            pictureBoxFsmGonioStatus.Cursor = Cursors.Hand;
-
             #endregion [ UI ]
-
-            RuntimeContext.Status = Status.Stopped;
-            _measurementService.Stop();
         }
 
         private void ButtonPause_Click(object sender, EventArgs e)
@@ -392,14 +362,8 @@ namespace ND.MTI.Gonio.Forms
             textBoxStartY.Enabled = false;
             textBoxStartY.Cursor = Cursors.No;
 
-            pictureBoxPokeys75U.Enabled = false;
-            pictureBoxPokeys75U.Cursor = Cursors.No;
-            pictureBoxFsmGonioStatus.Enabled = false;
-            pictureBoxFsmGonioStatus.Cursor = Cursors.No;
-
             #endregion [ UI ]
 
-            RuntimeContext.Status = Status.Paused;
             _measurementService.Pause();
         }
 
@@ -422,16 +386,6 @@ namespace ND.MTI.Gonio.Forms
             virtualZeroForm.Show();
         }
 
-        private void ConnectGonioInternal()
-        {
-            RuntimeContext.FsmGonioConnected = _measurementService.ConnectFsmGonio(_gonioConfiguration.FSM_GonioConfig);
-            pictureBoxFsmGonioStatus.Image = (Image)_resourceManager.GetObject(GetImageFor(RuntimeContext.FsmGonioConnected));
-        }
-
-        private void ConnectPokeysInternal()
-        {
-            RuntimeContext.Pokeys57UConnected = _measurementService.ConnectPokeys57U();
-            pictureBoxPokeys75U.Image = (Image)_resourceManager.GetObject(GetImageFor(RuntimeContext.Pokeys57UConnected));
-        }
+        private void ButtonEncZero_Click(object sender, EventArgs e) => _measurementService.EncoderZero();
     }
 }

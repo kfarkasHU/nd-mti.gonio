@@ -5,7 +5,7 @@ namespace ND.MTI.Gonio.COMScan
 {
     class Program
     {
-        static void Main(string[] args)
+        static void Main()
         {
             var comPortNames = SerialPort.GetPortNames();
 

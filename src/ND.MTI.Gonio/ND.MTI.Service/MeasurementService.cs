@@ -1,10 +1,9 @@
 ﻿using System.Linq;
 using System.Threading;
 using ND.MTI.Gonio.Model;
+using ND.MTI.Gonio.Service;
 using ND.MTI.Service.Worker;
 using System.Collections.Generic;
-using ND.MTI.Gonio.ServiceInterface;
-using ND.MTI.Gonio.Common.Extensions;
 using ND.MTI.Gonio.Common.RuntimeContext;
 
 namespace ND.MTI.Service
@@ -19,25 +18,30 @@ namespace ND.MTI.Service
         private readonly EventWaitHandle _waitHandle;
         private readonly IPositionWorker _positionWorker;
 
+        public string State { get; private set; }
+
         public MeasurementService()
         {
-            _gonioWorker = new GonioWorker();
+            _gonioWorker = GonioWorker.GetInstance();
             _positionWorker = PositionWorker.GetInstance();
             _waitHandle = new ManualResetEvent(initialState: true);
         }
 
-
-        public bool ConnectFsmGonio(Complex_FSMGonioConfig fsmGonioConfig) => _gonioWorker.Connect(fsmGonioConfig);
-        public void DisconnectFsmGonio() => _gonioWorker.Disconnect();
-
-        public bool ConnectPokeys57U() => _positionWorker.Connect();
-        public void DisconnectPokeys75U() => _positionWorker.Disconnect();
-
         public void Configure(Complex_MainModel mainModel) => _config = mainModel;
 
-        public void Continue() => _waitHandle.Set();
+        public void Continue()
+        {
+            _waitHandle.Set();
 
-        public void Pause() => _waitHandle.Reset();
+            State = "RUNNING";
+        }
+
+        public void Pause()
+        {
+            _waitHandle.Reset();
+
+            State = "PAUSED";
+        }
 
         public void Start()
         {
@@ -47,92 +51,106 @@ namespace ND.MTI.Service
             _thread.IsBackground = true;
             _thread.Start();
             _waitHandle.Set();
+
+            State = "RUNNING";
         }
 
-        public void Stop() => _thread.Abort();
+        public void Stop()
+        {
+            _positionWorker.StopX();
+            _positionWorker.StopY();
+            _thread.Abort();
 
-        public void SetPositionVirtualZero() => SetPositionInternal(RuntimeContext.VirtualZeroPosition);
+            State = "STOPPED";
+        }
 
-        public void SetPositionZero() => SetPositionInternal(RuntimeContext.ZeroPosition + RuntimeContext.VirtualZeroPosition);
+        public void SetPositionVirtualZero() => SetPositionInternal(RuntimeContext.VirtualZeroPosition + RuntimeContext.ZeroPosition);
 
-        public void SetPosition(Primitive_Position position) => SetPositionInternal(position + RuntimeContext.VirtualZeroPosition);
+        public void SetPositionZero() => SetPositionInternal(RuntimeContext.ZeroPosition);
+
+        public void EncoderZero() => _positionWorker.EncoderZero();
+
+        public Primitive_Position GetPosition() => GetPositionInternal();
+
+        public double Measure() => MeasureInternal();
 
         private void SetPositionInternal(Primitive_Position position) => _positionWorker.SetPosition(position);
 
         private void CalculatePositionMatrix()
         {
             _positionMatrix = new Primitive_PositionCollection();
+            var xVect = CreateAxisVect(_config.Start.X, _config.End.X, _config.StepX);
+            var yVect = CreateAxisVect(_config.Start.Y, _config.End.Y, _config.StepY);
 
-            var xVector = CreateAxisVector(
-                _config.Start.X,
-                _config.End.X,
-                _config.IsXAuto ? _config.StepX != 0 ? _config.StepX.Value : 0 : 0
-            );
-
-            var yVector = CreateAxisVector(
-                _config.Start.Y,
-                _config.End.Y,
-                _config.IsYAuto ? _config.StepY != 0 ? _config.StepY.Value : 0 : 0
-            );
-
-            _positionMatrix = CreatePositions();
-
-            Primitive_PositionCollection CreatePositions()
+            for (var ix = 0; ix < xVect.Count; ix++)
             {
-                var list = new Primitive_PositionCollection();
+                var yRelatives = ix % 2 == 0
+                    ? yVect
+                    : yVect
+                        .Reverse()
+                        .ToList();
 
-                var xVect = xVector.OrderBy(m => m).ToList();
-                var yVect = yVector.OrderBy(m => m).ToList();
-
-                for (var iy = 0; iy < yVect.Count; iy++)
-                    for (var ix = 0; ix < xVect.Count; ix++)
-                        list.Add(new Primitive_Position(xVect[ix], yVect[iy]));
-
-                return list;
+                for (var iy = 0; iy < yRelatives.Count; iy++)
+                    _positionMatrix.Add(new Primitive_Position(xVect[ix], yRelatives[iy]));
             }
 
-            IList<double> CreateAxisVector(double start, double end, double step)
+            IList<double> CreateAxisVect(double start, double end, double? step)
             {
-                var list = new List<double>();
+                if (start == end)
+                    return new List<double>() { start };
 
-                if (start == end || step == 0)
-                    return new List<double> { start };
+                if(!step.HasValue)
+                    return new List<double>() { start };
 
-                for (var cPos = start; cPos <= end; cPos += step)
-                    list.Add(cPos);
+                var list = start > end
+                    ? CreateAxisVectCore(start, end)
+                    : CreateAxisVectCore(end, start)
+                        .Reverse()
+                        .ToList();
 
                 return list;
+
+                IList<double> CreateAxisVectCore(double bigger, double smaller)
+                {
+                    var coreList = new List<double>();
+
+                    for (var current = bigger; current > smaller - step.Value; current -= step.Value)
+                        coreList.Add(current);
+
+                    return coreList;
+                }
             }
         }
 
+        private Primitive_Position GetPositionInternal() => _positionWorker.GetPosition();
+
+        private double MeasureInternal() => _gonioWorker.Measure();
+
         private void WorkingThreadImplementation()
         {
-            RuntimeContext.Results.Reset();
+            RuntimeContext.Results.Clear();
 
             for(var i = 0; i < _positionMatrix.Count; i++)
             {
                 _ = _waitHandle.WaitOne();
 
-                _positionWorker.SetPosition(_positionMatrix[i]);
-                var position = _positionWorker.GetPosition();
-
-                var measuredResults = new List<double>();
-                foreach (var _ in Enumerable.Range(0, 3))
-                {
-                    measuredResults.Add(_gonioWorker.Measure());
-                }
+                SetPositionInternal(_positionMatrix[i]);
+                var position = GetPositionInternal();
 
                 RuntimeContext
                     .AddResult(
                         new Complex_ResultItem(
                             position.X,
                             position.Y,
-                            _positionMatrix[i].X,
-                            _positionMatrix[i].Y,
-                            measuredResults.GetModus()
+                            MeasureInternal()
                     )
                 ); ;
             }
+
+            _config.OnFinishedCallback();
+            State = "FINISHED";
+
+            _thread.Abort();
         }
     }
 }

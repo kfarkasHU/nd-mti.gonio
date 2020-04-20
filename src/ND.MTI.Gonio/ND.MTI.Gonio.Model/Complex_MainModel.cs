@@ -2,7 +2,7 @@
 
 namespace ND.MTI.Gonio.Model
 {
-    public class Complex_MainModel
+    public sealed class Complex_MainModel
     {
         public Complex_MainModel() => ResetInternal();
 
@@ -12,6 +12,7 @@ namespace ND.MTI.Gonio.Model
         public double? StepY { get; set; }
         public bool IsXAuto { get; set; }
         public bool IsYAuto { get; set; }
+        public Action OnFinishedCallback { get; set; }
 
         public void Reset() => ResetInternal();
 
@@ -35,29 +36,29 @@ namespace ND.MTI.Gonio.Model
             if (IsYAuto && !(StepY > 0))
                 throw new Exception("Step Y must be grater than zero.");
 
-            if (Start.X < -170)
-                throw new Exception("Start X must be greater than -170.");
+            if (Start.X < -174)
+                throw new Exception("Start X must be greater than -174");
 
-            if (Start.Y < -170)
-                throw new Exception("Start Y must be greater than -170.");
+            if (Start.Y < -174)
+                throw new Exception("Start Y must be greater than -174");
 
-            if (Start.X > 170)
-                throw new Exception("Start X must be smaller than 170.");
+            if (Start.X > 174)
+                throw new Exception("Start X must be smaller than 174");
 
-            if (Start.Y > 170)
-                throw new Exception("Start Y must be smaller than 170.");
+            if (Start.Y > 174)
+                throw new Exception("Start Y must be smaller than 174");
 
-            if (End.X < -170)
-                throw new Exception("End X must be greater than -170");
+            if (End.X < -174)
+                throw new Exception("End X must be greater than -174");
 
-            if (End.Y < -170)
-                throw new Exception("End Y must be greater than -170");
+            if (End.Y < -174)
+                throw new Exception("End Y must be greater than -174");
 
-            if (End.X > 170)
-                throw new Exception("End X must be smaller than 170");
+            if (End.X > 174)
+                throw new Exception("End X must be smaller than 174");
 
-            if (End.Y > 170)
-                throw new Exception("End Y must be smaller than 170");
+            if (End.Y > 174)
+                throw new Exception("End Y must be smaller than 174");
         }
     }
 }

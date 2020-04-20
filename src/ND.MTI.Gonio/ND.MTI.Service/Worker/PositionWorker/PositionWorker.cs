@@ -1,17 +1,30 @@
 ﻿using ND.MTI.Gonio.Model;
 using ND.MTI.Gonio.Common.Utils;
 using ND.MTI.Service.Worker.Pokeys;
+using ND.MTI.Service.Worker.SSIWorker;
+using ND.MTI.Gonio.Common.Configuration;
+using ND.MTI.Gonio.Common.RuntimeContext;
 using ND.MTI.Service.Worker.Pokeys.Helper;
-using ND.MTI.Gonio.Common.Exceptions;
 
 namespace ND.MTI.Service.Worker
 {
-    public sealed class PositionWorker : Pokeys57UWorker, IPositionWorker
+    public sealed class PositionWorker : IPositionWorker
     {
         private static IPositionWorker _instance { get; set; }
 
+        private readonly ISSIWorker _ssiWorker;
+        private readonly IPokeys57UWorker _pokeysWorker;
+        private readonly IGonioConfiguration _gonioConfiguration;
+
         private PositionWorker()
         {
+            _gonioConfiguration = GonioConfiguration.GetInstance();
+
+            _ssiWorker = new SSIWorker.SSIWorker();
+            _ssiWorker.Connect(_gonioConfiguration.SSI_Config);
+
+            _pokeysWorker = new Pokeys57UWorker(_gonioConfiguration.Pokeys_ReadInterval);
+            _pokeysWorker.Connect();
         }
 
         public static IPositionWorker GetInstance()
@@ -26,76 +39,27 @@ namespace ND.MTI.Service.Worker
 
         private Primitive_Position GetPositionInternal()
         {
-            var xResp = LastXResponse;
-            var yResp = LastYResponse;
+            var strX = _ssiWorker.ResponseX;
+            var strY = _ssiWorker.ResponseY;
 
-            var rotX = GrayUtils.GrayToInteger(xResp.Item1);
-            var rotY = GrayUtils.GrayToInteger(yResp.Item1);
-
-            var coordX = NormalizeInternal(
-                rotX,
-                _configuration.Encoder_DecXEnd,
-                _configuration.Encoder_IncXEnd,
-                _configuration.Encoder_MaxXEnc,
-                xResp.Item2
+            var pos = new Primitive_Position(
+                NormalizeInternal(Parser.StringToInteger(strX)),
+                NormalizeInternal(Parser.StringToInteger(strY))
             );
 
-            var coordY = NormalizeInternal(
-                rotY,
-                _configuration.Encoder_DecYEnd,
-                _configuration.Encoder_IncYEnd,
-                _configuration.Encoder_MaxYEnc,
-                yResp.Item2
-            );
+            pos += RuntimeContext.VirtualZeroPosition;
+            pos += RuntimeContext.ZeroPosition;
 
-            return new Primitive_Position(coordX, coordY);
+            return pos;
         }
 
         public void SetPosition(Primitive_Position position)
         {
-            var currentPosition = GetPositionInternal();
+            position += RuntimeContext.VirtualZeroPosition;
+            position += RuntimeContext.ZeroPosition;
 
-            #region [ SET X ]
-
-            if (currentPosition.X > position.X)
-            {
-                DecrementXInternal();
-
-                while (GetPositionInternal().X > position.X) ;
-                
-                StopX();
-            }
-            else if (currentPosition.X < position.X)
-            {
-                IncrementXInternal();
-
-                while (GetPositionInternal().X < position.X) ;
-
-                StopX();
-            }
-
-            #endregion [ SET X ]
-
-            #region [ SET Y ]
-
-            if (currentPosition.Y > position.Y)
-            {
-                DecrementYInternal();
-
-                while (GetPositionInternal().Y > position.Y) ;
-
-                StopY();
-            }
-            else if (currentPosition.Y < position.Y)
-            {
-                IncrementYInternal();
-
-                while (GetPositionInternal().Y < position.Y) ;
-
-                StopY();
-            }
-
-            #endregion [ SET Y ]
+            SetPositionXInternal(position.X);
+            SetPositionYInternal(position.Y);
         }
 
         public void DecrementY() => DecrementYInternal();
@@ -110,47 +74,85 @@ namespace ND.MTI.Service.Worker
 
         public void StopY() => StopYInternal();
 
-        private void IncrementXInternal() => WriteDataX(GonioPokeys_Commands.ENA1_SR1_DIR0_RES0);
-
-        private void IncrementYInternal() => WriteDataY(GonioPokeys_Commands.ENA1_SR1_DIR0_RES0);
-
-        private void DecrementXInternal() => WriteDataX(GonioPokeys_Commands.ENA1_SR1_DIR1_RES0);
-
-        private void DecrementYInternal() => WriteDataY(GonioPokeys_Commands.ENA1_SR1_DIR1_RES0);
-
-        private void StopXInternal() => WriteDataX(GonioPokeys_Commands.ENA0_SR0_DIR0_RES0);
-
-        private void StopYInternal() => WriteDataY(GonioPokeys_Commands.ENA0_SR0_DIR0_RES0);
-
-        private double NormalizeInternal(
-            int currentPosition,
-            int decEndpointPosition,
-            int incEndpointPostion,
-            int maxEncPosition,
-            int axisOperator
-        )
+        public void EncoderZero()
         {
-            // [] ------------------- || ------------------- []
-            switch (axisOperator)
+            _ssiWorker.ZeroX();
+            _ssiWorker.ZeroY();
+        }
+
+        private void SetPositionXInternal(double pos)
+        {
+            var currentX = GetPositionInternal().X;
+
+            if (CloseEnough(currentX, pos))
+                return;
+
+            if(currentX < pos)
             {
-                case 0: return 0;
-                case -1: return axisOperator * NormalizeCore(decEndpointPosition);
-                case +1: return axisOperator * NormalizeCore(incEndpointPostion);
+                IncrementXInternal();
+
+                while (GetPositionInternal().X < pos) { };
+                
+                StopXInternal();
+            }
+            else if(currentX > pos)
+            {
+                DecrementXInternal();
+
+                while (GetPositionInternal().X > pos) { };
+
+                StopXInternal();
             }
 
-            throw new Gonio_Exception($"Unable to normalize with this operator: {axisOperator}");
+            SetPositionXInternal(pos);
+        }
 
-            double NormalizeCore(int localEndposition)
+        private void SetPositionYInternal(double pos)
+        {
+            var currentY = GetPositionInternal().Y;
+
+            if (CloseEnough(currentY, pos))
+                return;
+
+            if (currentY < pos)
             {
-                var localScale = maxEncPosition - localEndposition;
-                var localSpectrum = 360 / 2;
-                var normalizedEncPosition = currentPosition - localEndposition;
+                IncrementYInternal();
 
-                var rate = ((double)normalizedEncPosition / localScale);
-                var standardScale = localSpectrum * rate;
-
-                return localSpectrum - standardScale;
+                while (GetPositionInternal().Y < pos) { };
+                
+                StopYInternal();
             }
+            else if (currentY > pos)
+            {
+                DecrementYInternal();
+
+                while (GetPositionInternal().Y > pos) { };
+               
+                StopYInternal();
+            }
+
+            SetPositionYInternal(pos);
+        }
+
+        private bool CloseEnough(double current, double target) => current - 0.1 < target && current + 0.1 > target;
+
+        private void IncrementXInternal() => _ = _pokeysWorker.WriteDataX(GonioPokeys_Commands.ENA1_SR1_DIR0_RES0);
+
+        private void IncrementYInternal() => _ = _pokeysWorker.WriteDataY(GonioPokeys_Commands.ENA1_SR1_DIR1_RES0);
+
+        private void DecrementXInternal() => _ = _pokeysWorker.WriteDataX(GonioPokeys_Commands.ENA1_SR1_DIR1_RES0);
+
+        private void DecrementYInternal() => _ = _pokeysWorker.WriteDataY(GonioPokeys_Commands.ENA1_SR1_DIR0_RES0);
+
+        private void StopXInternal() => _pokeysWorker.WriteDataX(GonioPokeys_Commands.ENA0_SR0_DIR0_RES0);
+
+        private void StopYInternal() => _pokeysWorker.WriteDataY(GonioPokeys_Commands.ENA0_SR0_DIR0_RES0);
+
+        private double NormalizeInternal(float current) {
+            var c = 360f / 8192f;
+            var fullAngle = current * c;
+
+           return 180 - fullAngle;
         }
     }
 }

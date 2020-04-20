@@ -3,6 +3,7 @@ using ND.MTI.Gonio.Model;
 using System.Windows.Forms;
 using ND.MTI.Service.Worker;
 using ND.MTI.Gonio.Common.RuntimeContext;
+using ND.MTI.Gonio.Common.Configuration;
 
 namespace ND.MTI.Gonio.Forms
 {
@@ -10,12 +11,14 @@ namespace ND.MTI.Gonio.Forms
     {
         private readonly Timer _timer;
         private readonly IPositionWorker _positionWorker;
+        private readonly IGonioConfiguration _gonioConfiguration;
 
         private bool _keyPressed;
 
         internal Form_VirtualZeroForm()
         {
             _positionWorker = PositionWorker.GetInstance();
+            _gonioConfiguration = GonioConfiguration.GetInstance();
 
             InitializeComponent();
 
@@ -24,8 +27,8 @@ namespace ND.MTI.Gonio.Forms
             KeyUp += new KeyEventHandler(OnKeyUp);
 
             _timer = new Timer();
-            _timer.Interval = 10;
-            _timer.Tick += new EventHandler(OnTimerTick);
+            _timer.Interval = _gonioConfiguration.Pokeys_ReadInterval * 3;
+            _timer.Tick += OnTimerTick;
             _timer.Start();
 
             EnableForm();

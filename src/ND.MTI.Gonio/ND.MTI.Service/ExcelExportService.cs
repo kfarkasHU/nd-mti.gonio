@@ -1,8 +1,7 @@
 ﻿using ND.MTI.Gonio.Model;
-using ND.MTI.Gonio.ServiceInterface;
-using ND.MTI.Service.Worker;
+using ND.MTI.Gonio.Service.Worker;
 
-namespace ND.MTI.Service
+namespace ND.MTI.Gonio.Service
 {
     public class ExcelExportService : IExcelExportService
     {
@@ -17,8 +16,14 @@ namespace ND.MTI.Service
 
         public void ExportToExcel(Complex_ResultCollection results)
         {
-            var content = _excelFactory.CreateExcelData(results);
-            _ioWorker.SaveFile(content);
+            var content = _excelFactory.CreateMeasurementResults(results);
+            _ioWorker.SaveFile(content, IOWorker_Filter.ExcelFile);
+        }
+
+        public void ExportToExcel(Complex_RegistrationCollection results)
+        {
+            var content = _excelFactory.CreateRegistrationResults(results);
+            _ioWorker.SaveFile(content, IOWorker_Filter.ExcelFile);
         }
     }
 }

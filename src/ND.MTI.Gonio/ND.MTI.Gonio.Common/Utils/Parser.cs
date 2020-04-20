@@ -6,6 +6,9 @@ namespace ND.MTI.Gonio.Common.Utils
     {
         public static double StringToDouble(string str)
         {
+            if (str.Contains("."))
+                str = str.Replace(".", ",");
+
             var success = double.TryParse(str, out var doub);
 
             if (!success)
@@ -16,6 +19,9 @@ namespace ND.MTI.Gonio.Common.Utils
 
         public static int StringToInteger(string str)
         {
+            if (string.IsNullOrEmpty(str))
+                return 0;
+
             var success = int.TryParse(str, out var integer);
 
             if (!success)
@@ -25,17 +31,5 @@ namespace ND.MTI.Gonio.Common.Utils
         }
 
         public static TEnum StringIntToEnum<TEnum>(string strInt) => (TEnum)Enum.Parse(typeof(TEnum), strInt);
-
-        internal static uint StringToUInteger(string str)
-        {
-            var success = uint.TryParse(str, out var integer);
-
-            if (!success)
-                throw new Exception($"Cannot parse {str} to unsigneed integer!");
-
-            return integer;
-        }
-
-        internal static bool StringToBoolean(string str) => str.ToLower() == "true" || str == "1";
     }
 }

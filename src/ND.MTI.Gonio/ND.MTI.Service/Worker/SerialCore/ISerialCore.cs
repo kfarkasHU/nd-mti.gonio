@@ -14,7 +14,5 @@ namespace ND.MTI.Service.Worker.Serial
             int readTimeout = 500
         );
         void Disconnect();
-        void Reset();
-        double Measure();
     }
 }

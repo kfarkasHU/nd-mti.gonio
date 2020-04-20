@@ -1,9 +1,9 @@
-﻿using System;
+﻿using System.Linq;
 using OfficeOpenXml;
 using ND.MTI.Gonio.Model;
 using ND.MTI.Gonio.Common.Configuration;
 
-namespace ND.MTI.Service.Worker
+namespace ND.MTI.Gonio.Service.Worker
 {
     public class ExcelFactory : IExcelFactory
     {
@@ -16,50 +16,65 @@ namespace ND.MTI.Service.Worker
             _excelExportServiceHelper = new ExcelExportServiceHelper();
         }
 
-        public byte[] CreateExcelData(Complex_ResultCollection results)
+        public byte[] CreateMeasurementResults(Complex_ResultCollection results)
         {
+
+            byte[] content;
             using (var package = new ExcelPackage())
             {
                 var workbook = package.Workbook;
                 var worksheet = workbook.Worksheets
-                    .Add("Gonio results")
-                ;
+                    .Add("Results");
 
-                #region [ Create headers ]
+                var uniqueXValues = results
+                    .Select(m => m.Position.X)
+                    .Distinct()
+                    .OrderBy(m => m)
+                    .ToList();
 
-                worksheet.Cells[1, 1].Value = "#";
-                worksheet.Cells[1, 2].Value = "Xk";
-                worksheet.Cells[1, 3].Value = "Yk";
-                worksheet.Cells[1, 4].Value = "Xv";
-                worksheet.Cells[1, 5].Value = "Yv";
-                worksheet.Cells[1, 6].Value = "E [lx]";
-                worksheet.Cells[1, 7].Value = "I [cd]";
-                worksheet.Cells[1, 8].Value = "K [lx]";
-
-                #endregion [ Create headers ]
-
-                #region [ Insert data ]
-
-                var i = 1;
-                var j = 0;
-                for(; j < results.Count; i++, j++)
+                var xColIndex = 2;
+                for (var i = 0; i < uniqueXValues.Count; i++, xColIndex += 2)
                 {
-                    var result = results[j];
+                    worksheet.Cells[1, xColIndex].Value = uniqueXValues[i];
 
-                    worksheet.Cells[1, 1].Value = j.ToString();
-                    worksheet.Cells[1, 2].Value = result.WantedPosition.X.ToString();
-                    worksheet.Cells[1, 3].Value = result.WantedPosition.Y.ToString();
-                    worksheet.Cells[1, 4].Value = result.RealPosition.X.ToString();
-                    worksheet.Cells[1, 5].Value = result.RealPosition.Y.ToString();
-                    worksheet.Cells[1, 6].Value = result.MeasuredIllumination.ToString();
-                    worksheet.Cells[1, 7].Value = (result.MeasuredIllumination / Math.Pow(_gonioConfiguration.Sensor_Distance, 2)).ToString();
-                    worksheet.Cells[1, 8].Value = _excelExportServiceHelper.GetCorrectionValue(result.MeasuredIllumination);
+                    var relatedResults = results
+                        .Where(m => m.Position.X == uniqueXValues[i])
+                        .OrderBy(m => m.Position.Y)
+                        .ToList();
+
+                    for(var j = 0; j < relatedResults.Count; j++)
+                    {
+                        worksheet.Cells[j + 2, xColIndex - 1].Value = relatedResults[j].Position.Y;
+                        worksheet.Cells[j + 2, xColIndex].Value = relatedResults[j].MeasuredIllumination;
+                    }
                 }
 
-                #endregion [ Insert data ]
-
+                content = package.GetAsByteArray();
             }
-            throw new NotImplementedException();
+
+            return content;
+        }
+
+        public byte[] CreateRegistrationResults(Complex_RegistrationCollection results)
+        {
+            byte[] content;
+
+            using (var package = new ExcelPackage())
+            {
+                var workbook = package.Workbook;
+                var worksheet = workbook.Worksheets
+                    .Add("Results");
+
+                for(var i = 0; i < results.Count; i++)
+                {
+                    worksheet.Cells[i + 1, 1].Value = results[i].Time;
+                    worksheet.Cells[i + 1, 2].Value = results[i].Data;
+                }
+
+                content = package.GetAsByteArray();
+            }
+            
+            return content;
         }
     }
 }

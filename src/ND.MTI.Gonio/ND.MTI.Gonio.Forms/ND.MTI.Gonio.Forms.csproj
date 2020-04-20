@@ -56,11 +56,23 @@
     <Compile Include="Form_MainForm.Designer.cs">
       <DependentUpon>Form_MainForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Form_Registration.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form_Registration.Designer.cs">
+      <DependentUpon>Form_Registration.cs</DependentUpon>
+    </Compile>
     <Compile Include="Form_ResultsForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Form_ResultsForm.Designer.cs">
       <DependentUpon>Form_ResultsForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Form_Status.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form_Status.Designer.cs">
+      <DependentUpon>Form_Status.cs</DependentUpon>
     </Compile>
     <Compile Include="Form_VirtualZeroForm.cs">
       <SubType>Form</SubType>
@@ -77,8 +89,14 @@
     <EmbeddedResource Include="Form_MainForm.resx">
       <DependentUpon>Form_MainForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Form_Registration.resx">
+      <DependentUpon>Form_Registration.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Form_ResultsForm.resx">
       <DependentUpon>Form_ResultsForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form_Status.resx">
+      <DependentUpon>Form_Status.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Form_VirtualZeroForm.resx">
       <DependentUpon>Form_VirtualZeroForm.cs</DependentUpon>
@@ -122,10 +140,6 @@
     <ProjectReference Include="..\ND.MTI.Gonio.Model\ND.MTI.Gonio.Model.csproj">
       <Project>{680927ac-e6e3-47f1-8da7-b8457ddab8d9}</Project>
       <Name>ND.MTI.Gonio.Model</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\ND.MTI.Gonio.ServiceInterface\ND.MTI.Gonio.ServiceInterface.csproj">
-      <Project>{B65BF380-0265-479B-8BDB-B23A06534ECE}</Project>
-      <Name>ND.MTI.Gonio.ServiceInterface</Name>
     </ProjectReference>
     <ProjectReference Include="..\ND.MTI.Service\ND.MTI.Gonio.Service.csproj">
       <Project>{612EEEC8-DD6F-4812-8965-96390D059BD5}</Project>

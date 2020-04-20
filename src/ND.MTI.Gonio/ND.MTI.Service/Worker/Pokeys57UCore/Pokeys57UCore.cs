@@ -1,6 +1,4 @@
-﻿#if !DEBUG
-
-using System;
+﻿using System;
 using PoKeysDevice_DLL;
 using System.Collections.Generic;
 using ND.MTI.Gonio.Common.Exceptions;
@@ -48,25 +46,14 @@ namespace ND.MTI.Service.Worker.PokeysCore
         private protected string ReadBytes(Pokeys57U_Pin[] pins)
         {
             var data = string.Empty;
-            for (var index = 0; index < pins.Length; index++)
-                data += ReadPin((byte)pins[index])
-                    ? "1"
-                    : "0"
-                ;
+            var block = new bool[55];
+
+            _ = _device.BlockGetInputAll55(ref block);
+
+            for(var i = 0; i < pins.Length; i++)
+                data += block[(int)pins[i]] ? "1" : "0";
 
             return data;
-
-            bool ReadPin(byte pinNumber)
-            {
-                var state = true;
-
-                if (!_connected)
-                    return state;
-
-                var success = _device.GetInput(pinNumber, ref state);
-
-                return !success ? ReadPin(pinNumber) : state;
-            }
         }
 
         private protected bool GetPinData(Pokeys57U_Pin pin, Pokeys57U_PinFunction function)
@@ -91,13 +78,10 @@ namespace ND.MTI.Service.Worker.PokeysCore
             {
                 if (!_connected) return;
 
-                var success = _device.SetOutput(pinNumber, data);
-
-                if (!success)
-                    WritePin(pinNumber, data);
+                _ = _device.SetOutput(pinNumber, data);
             }
         }
-
+        
         private protected bool InitDigitalInputPins(Pokeys57U_Pin[] inputPins)
         {
             foreach (var pin in inputPins)
@@ -125,5 +109,3 @@ namespace ND.MTI.Service.Worker.PokeysCore
         }
     }
 }
-
-#endif

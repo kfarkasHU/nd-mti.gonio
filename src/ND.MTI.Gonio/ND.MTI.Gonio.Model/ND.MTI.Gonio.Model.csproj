@@ -42,13 +42,15 @@
   <ItemGroup>
     <Compile Include="Complex_FSMGonioConfig.cs" />
     <Compile Include="Complex_MainModel.cs" />
-    <Compile Include="Complex_Pokeys57UConfig.cs" />
+    <Compile Include="Complex_RegistrationCollection.cs" />
+    <Compile Include="Complex_RegistrationItem.cs" />
     <Compile Include="Complex_ResultCollection.cs" />
     <Compile Include="Complex_ResultItem.cs" />
+    <Compile Include="Complex_SerialConfig.cs" />
+    <Compile Include="Complex_SSIConfig.cs" />
     <Compile Include="Primitive_Position.cs" />
     <Compile Include="Primitive_PositionCollection.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Status.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

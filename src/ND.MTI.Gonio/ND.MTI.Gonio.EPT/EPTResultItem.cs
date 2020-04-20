@@ -5,11 +5,11 @@ namespace ND.MTI.Gonio.EPT
 {
     public class EPTResultItem
     {
-        public EPTResultItem(Tuple<string, short> encoderPos)
+        public EPTResultItem(string encoderPos)
         {
             Time = DateTime.Now;
-            EncoderPos = encoderPos.Item1;
-            GrayPos = GrayUtils.GrayToInteger(encoderPos.Item1) * encoderPos.Item2;
+            EncoderPos = encoderPos;
+            GrayPos = GrayUtils.GrayToInteger(encoderPos);
         }
 
         public DateTime Time { get; private set; }

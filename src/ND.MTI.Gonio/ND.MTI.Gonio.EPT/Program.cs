@@ -25,9 +25,14 @@ namespace ND.MTI.Gonio.EPT
 
             _results = new List<EPTResultItem>();
 
-            _timer = new Timer(cfg.Pokeys_ReadInterval * 3);
+            _timer = new Timer(cfg.Pokeys_ReadInterval);
             _timer.Elapsed += OnTimerTick;
             _timer.Start();
+
+            _worker.StopX();
+            _worker.StopY();
+
+            _ = Console.ReadKey();
 
             //_worker.DecrementX();
             //_worker.IncrementX();
@@ -40,8 +45,9 @@ namespace ND.MTI.Gonio.EPT
 
             _ = Console.ReadKey();
 
-            //_worker.StopX();
+            _worker.StopX();
             _worker.StopY();
+            _worker.Disconnect();
 
             Export();
         }
@@ -58,8 +64,8 @@ namespace ND.MTI.Gonio.EPT
 
         private static void OnTimerTick(object sender, ElapsedEventArgs e)
         {
-            var res = PositionWorker.LastYResponse;
-            Console.WriteLine($"{res.Item1} - {res.Item2} - {GrayUtils.GrayToInteger(res.Item1)}");
+            var res = _worker.LastYResponse;
+            Console.WriteLine($"{res} - {GrayUtils.GrayToInteger(res)}");
 
             _results.Add(new EPTResultItem(res));
         }

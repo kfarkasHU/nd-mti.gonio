@@ -3,7 +3,7 @@ using System.IO;
 using System.Windows.Forms;
 using System.Collections.Generic;
 
-namespace ND.MTI.Service.Worker
+namespace ND.MTI.Gonio.Service.Worker
 {
     public class IOWorker : IIOWorker
     {
@@ -24,10 +24,12 @@ namespace ND.MTI.Service.Worker
             }
         }
 
-        public void SaveFile(byte[] content)
+        public void SaveFile(byte[] content, string extension)
         {
             var saveFileDialog = new SaveFileDialog();
-            
+
+            saveFileDialog.Filter = extension;
+
             if(saveFileDialog.ShowDialog() == DialogResult.OK)
             {
                 var stream = saveFileDialog.OpenFile();

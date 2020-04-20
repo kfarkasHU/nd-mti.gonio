@@ -53,12 +53,17 @@
             this.labelStart = new System.Windows.Forms.Label();
             this.labelEnd = new System.Windows.Forms.Label();
             this.labelStep = new System.Windows.Forms.Label();
-            this.labelFsmGonio = new System.Windows.Forms.Label();
-            this.labelPokeys75U = new System.Windows.Forms.Label();
-            this.pictureBoxFsmGonioStatus = new System.Windows.Forms.PictureBox();
-            this.pictureBoxPokeys75U = new System.Windows.Forms.PictureBox();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxFsmGonioStatus)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxPokeys75U)).BeginInit();
+            this.labelCurrentPosition = new System.Windows.Forms.Label();
+            this.textBoxXCurrentPosition = new System.Windows.Forms.TextBox();
+            this.textBoxYCurrentPosition = new System.Windows.Forms.TextBox();
+            this.buttonRegistration = new System.Windows.Forms.Button();
+            this.buttonEncZero = new System.Windows.Forms.Button();
+            this.buttonStatus = new System.Windows.Forms.Button();
+            this.labelMeasuredIlluminationText = new System.Windows.Forms.Label();
+            this.labelStatusText = new System.Windows.Forms.Label();
+            this.labelStatusValue = new System.Windows.Forms.Label();
+            this.textBoxMeasuredIlluminationExtension = new System.Windows.Forms.Label();
+            this.textBoxMeasuredIllumination = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // checkBoxXAuto
@@ -297,43 +302,109 @@
             this.labelStep.TabIndex = 30;
             this.labelStep.Text = "Step";
             // 
-            // labelFsmGonio
+            // labelCurrentPosition
             // 
-            this.labelFsmGonio.AutoSize = true;
-            this.labelFsmGonio.Location = new System.Drawing.Point(34, 128);
-            this.labelFsmGonio.Name = "labelFsmGonio";
-            this.labelFsmGonio.Size = new System.Drawing.Size(75, 13);
-            this.labelFsmGonio.TabIndex = 37;
-            this.labelFsmGonio.Text = "FSM Gonio 01";
+            this.labelCurrentPosition.AutoSize = true;
+            this.labelCurrentPosition.Location = new System.Drawing.Point(343, 9);
+            this.labelCurrentPosition.Name = "labelCurrentPosition";
+            this.labelCurrentPosition.Size = new System.Drawing.Size(61, 13);
+            this.labelCurrentPosition.TabIndex = 40;
+            this.labelCurrentPosition.Text = "Current pos";
             // 
-            // labelPokeys75U
+            // textBoxXCurrentPosition
             // 
-            this.labelPokeys75U.AutoSize = true;
-            this.labelPokeys75U.Location = new System.Drawing.Point(194, 128);
-            this.labelPokeys75U.Name = "labelPokeys75U";
-            this.labelPokeys75U.Size = new System.Drawing.Size(34, 13);
-            this.labelPokeys75U.TabIndex = 39;
-            this.labelPokeys75U.Text = "Motor";
+            this.textBoxXCurrentPosition.Enabled = false;
+            this.textBoxXCurrentPosition.Location = new System.Drawing.Point(335, 29);
+            this.textBoxXCurrentPosition.Name = "textBoxXCurrentPosition";
+            this.textBoxXCurrentPosition.ReadOnly = true;
+            this.textBoxXCurrentPosition.Size = new System.Drawing.Size(75, 20);
+            this.textBoxXCurrentPosition.TabIndex = 41;
             // 
-            // pictureBoxFsmGonioStatus
+            // textBoxYCurrentPosition
             // 
-            this.pictureBoxFsmGonioStatus.Image = global::ND.MTI.Gonio.Forms.Properties.Resources.disconnect;
-            this.pictureBoxFsmGonioStatus.Location = new System.Drawing.Point(12, 125);
-            this.pictureBoxFsmGonioStatus.Name = "pictureBoxFsmGonioStatus";
-            this.pictureBoxFsmGonioStatus.Size = new System.Drawing.Size(16, 16);
-            this.pictureBoxFsmGonioStatus.TabIndex = 36;
-            this.pictureBoxFsmGonioStatus.TabStop = false;
-            this.pictureBoxFsmGonioStatus.Click += new System.EventHandler(this.PictureBoxFsmGonioStatus_Click);
+            this.textBoxYCurrentPosition.Enabled = false;
+            this.textBoxYCurrentPosition.Location = new System.Drawing.Point(335, 51);
+            this.textBoxYCurrentPosition.Name = "textBoxYCurrentPosition";
+            this.textBoxYCurrentPosition.ReadOnly = true;
+            this.textBoxYCurrentPosition.Size = new System.Drawing.Size(75, 20);
+            this.textBoxYCurrentPosition.TabIndex = 42;
             // 
-            // pictureBoxPokeys75U
+            // buttonRegistration
             // 
-            this.pictureBoxPokeys75U.Image = global::ND.MTI.Gonio.Forms.Properties.Resources.disconnect;
-            this.pictureBoxPokeys75U.Location = new System.Drawing.Point(172, 125);
-            this.pictureBoxPokeys75U.Name = "pictureBoxPokeys75U";
-            this.pictureBoxPokeys75U.Size = new System.Drawing.Size(16, 16);
-            this.pictureBoxPokeys75U.TabIndex = 34;
-            this.pictureBoxPokeys75U.TabStop = false;
-            this.pictureBoxPokeys75U.Click += new System.EventHandler(this.PictureBoxPokeys75U_Click);
+            this.buttonRegistration.Location = new System.Drawing.Point(253, 208);
+            this.buttonRegistration.Name = "buttonRegistration";
+            this.buttonRegistration.Size = new System.Drawing.Size(75, 23);
+            this.buttonRegistration.TabIndex = 43;
+            this.buttonRegistration.Text = "Registration";
+            this.buttonRegistration.UseVisualStyleBackColor = true;
+            this.buttonRegistration.Click += new System.EventHandler(this.ButtonRegistration_Click);
+            // 
+            // buttonEncZero
+            // 
+            this.buttonEncZero.Location = new System.Drawing.Point(10, 179);
+            this.buttonEncZero.Name = "buttonEncZero";
+            this.buttonEncZero.Size = new System.Drawing.Size(75, 23);
+            this.buttonEncZero.TabIndex = 44;
+            this.buttonEncZero.Text = "ENC ZERO";
+            this.buttonEncZero.UseVisualStyleBackColor = true;
+            this.buttonEncZero.Click += new System.EventHandler(this.ButtonEncZero_Click);
+            // 
+            // buttonStatus
+            // 
+            this.buttonStatus.Location = new System.Drawing.Point(91, 208);
+            this.buttonStatus.Name = "buttonStatus";
+            this.buttonStatus.Size = new System.Drawing.Size(75, 23);
+            this.buttonStatus.TabIndex = 45;
+            this.buttonStatus.Text = "Status";
+            this.buttonStatus.UseVisualStyleBackColor = true;
+            // 
+            // labelMeasuredIlluminationText
+            // 
+            this.labelMeasuredIlluminationText.AutoSize = true;
+            this.labelMeasuredIlluminationText.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.labelMeasuredIlluminationText.Location = new System.Drawing.Point(12, 86);
+            this.labelMeasuredIlluminationText.Name = "labelMeasuredIlluminationText";
+            this.labelMeasuredIlluminationText.Size = new System.Drawing.Size(71, 15);
+            this.labelMeasuredIlluminationText.TabIndex = 46;
+            this.labelMeasuredIlluminationText.Text = "Illumination";
+            // 
+            // labelStatusText
+            // 
+            this.labelStatusText.AutoSize = true;
+            this.labelStatusText.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.labelStatusText.Location = new System.Drawing.Point(12, 109);
+            this.labelStatusText.Name = "labelStatusText";
+            this.labelStatusText.Size = new System.Drawing.Size(41, 15);
+            this.labelStatusText.TabIndex = 47;
+            this.labelStatusText.Text = "Status";
+            // 
+            // labelStatusValue
+            // 
+            this.labelStatusValue.AutoSize = true;
+            this.labelStatusValue.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.labelStatusValue.Location = new System.Drawing.Point(116, 109);
+            this.labelStatusValue.Name = "labelStatusValue";
+            this.labelStatusValue.Size = new System.Drawing.Size(47, 15);
+            this.labelStatusValue.TabIndex = 48;
+            this.labelStatusValue.Text = "READY";
+            // 
+            // textBoxMeasuredIlluminationExtension
+            // 
+            this.textBoxMeasuredIlluminationExtension.AutoSize = true;
+            this.textBoxMeasuredIlluminationExtension.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.textBoxMeasuredIlluminationExtension.Location = new System.Drawing.Point(169, 86);
+            this.textBoxMeasuredIlluminationExtension.Name = "textBoxMeasuredIlluminationExtension";
+            this.textBoxMeasuredIlluminationExtension.Size = new System.Drawing.Size(16, 15);
+            this.textBoxMeasuredIlluminationExtension.TabIndex = 49;
+            this.textBoxMeasuredIlluminationExtension.Text = "lx";
+            // 
+            // textBoxMeasuredIllumination
+            // 
+            this.textBoxMeasuredIllumination.Location = new System.Drawing.Point(88, 85);
+            this.textBoxMeasuredIllumination.Name = "textBoxMeasuredIllumination";
+            this.textBoxMeasuredIllumination.ReadOnly = true;
+            this.textBoxMeasuredIllumination.Size = new System.Drawing.Size(75, 20);
+            this.textBoxMeasuredIllumination.TabIndex = 50;
             // 
             // Form_MainForm
             // 
@@ -341,10 +412,17 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(416, 240);
             this.ControlBox = false;
-            this.Controls.Add(this.labelPokeys75U);
-            this.Controls.Add(this.labelFsmGonio);
-            this.Controls.Add(this.pictureBoxFsmGonioStatus);
-            this.Controls.Add(this.pictureBoxPokeys75U);
+            this.Controls.Add(this.textBoxMeasuredIllumination);
+            this.Controls.Add(this.textBoxMeasuredIlluminationExtension);
+            this.Controls.Add(this.labelStatusValue);
+            this.Controls.Add(this.labelStatusText);
+            this.Controls.Add(this.labelMeasuredIlluminationText);
+            this.Controls.Add(this.buttonStatus);
+            this.Controls.Add(this.buttonEncZero);
+            this.Controls.Add(this.buttonRegistration);
+            this.Controls.Add(this.textBoxYCurrentPosition);
+            this.Controls.Add(this.textBoxXCurrentPosition);
+            this.Controls.Add(this.labelCurrentPosition);
             this.Controls.Add(this.labelStep);
             this.Controls.Add(this.labelEnd);
             this.Controls.Add(this.labelStart);
@@ -375,8 +453,6 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "GONIO";
             this.Load += new System.EventHandler(this.Form_MainForm_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxFsmGonioStatus)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxPokeys75U)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -409,9 +485,16 @@
         private System.Windows.Forms.Label labelStart;
         private System.Windows.Forms.Label labelEnd;
         private System.Windows.Forms.Label labelStep;
-        private System.Windows.Forms.PictureBox pictureBoxPokeys75U;
-        private System.Windows.Forms.PictureBox pictureBoxFsmGonioStatus;
-        private System.Windows.Forms.Label labelFsmGonio;
-        private System.Windows.Forms.Label labelPokeys75U;
+        private System.Windows.Forms.Label labelCurrentPosition;
+        private System.Windows.Forms.TextBox textBoxXCurrentPosition;
+        private System.Windows.Forms.TextBox textBoxYCurrentPosition;
+        private System.Windows.Forms.Button buttonRegistration;
+        private System.Windows.Forms.Button buttonEncZero;
+        private System.Windows.Forms.Button buttonStatus;
+        private System.Windows.Forms.Label labelMeasuredIlluminationText;
+        private System.Windows.Forms.Label labelStatusText;
+        private System.Windows.Forms.Label labelStatusValue;
+        private System.Windows.Forms.Label textBoxMeasuredIlluminationExtension;
+        private System.Windows.Forms.TextBox textBoxMeasuredIllumination;
     }
 }

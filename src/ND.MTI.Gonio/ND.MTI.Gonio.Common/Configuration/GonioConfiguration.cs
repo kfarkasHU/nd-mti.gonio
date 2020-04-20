@@ -48,18 +48,29 @@ namespace ND.MTI.Gonio.Common.Configuration
             }
         }
 
+        public Complex_SSIConfig SSI_Config
+        {
+            get
+            {
+                var cfg = new Complex_SSIConfig();
+
+                cfg.ComPortName = GetConfigByKeyName("SSI_ComPortName", "COM6");
+                cfg.DataBits = Parser.StringToInteger(GetConfigByKeyName("SSI_DataBits", "8"));
+                cfg.Parity = Parser.StringIntToEnum<Parity>(GetConfigByKeyName("SSI_Parity", "0"));
+                cfg.ReadTimeout = Parser.StringToInteger(GetConfigByKeyName("SSI_ReadTimeout", "500"));
+                cfg.SpeedInBaud = Parser.StringToInteger(GetConfigByKeyName("SSI_SpeedInBaud", "115200"));
+                cfg.WriteTimeout = Parser.StringToInteger(GetConfigByKeyName("SSI_WriteTimeout", "500"));
+                cfg.StopBits = Parser.StringIntToEnum<StopBits>(GetConfigByKeyName("SSI_StopBits", "1"));
+
+                return cfg;
+            }
+        }
+
         public double Sensor_Distance => Parser.StringToDouble(GetConfigByKeyName("Sensor_Distance", "15"));
         public int Pokeys_ReadInterval => Parser.StringToInteger(GetConfigByKeyName("Pokeys_ReadInterval", "100"));
 
-        public bool Application_ConnectGonioAuto => Parser.StringToBoolean(GetConfigByKeyName("Application_ConnectGonioAuto", "0"));
-        public bool Application_ConnectPokeysAuto => Parser.StringToBoolean(GetConfigByKeyName("Application_ConnectPokeysAuto", "0"));
-
-        public int Encoder_DecXEnd => Parser.StringToInteger(GetConfigByKeyName("Encoder_DecXEnd", "1800"));
-        public int Encoder_IncXEnd => Parser.StringToInteger(GetConfigByKeyName("Encoder_IncXEnd", "1800"));
-        public int Encoder_MaxXEnc => Parser.StringToInteger(GetConfigByKeyName("Encoder_MaxXEnc", "4000"));
-        public int Encoder_DecYEnd => Parser.StringToInteger(GetConfigByKeyName("Encoder_DecYEnd", "1800"));
-        public int Encoder_IncYEnd => Parser.StringToInteger(GetConfigByKeyName("Encoder_IncYEnd", "1800"));
-        public int Encoder_MaxYEnc => Parser.StringToInteger(GetConfigByKeyName("Encoder_MaxYEnc", "4000"));
+        public double Position_AbsoluteZeroX => Parser.StringToDouble(GetConfigByKeyName("Position_AbsoluteZeroX", "-40,55"));
+        public double Position_AbsoluteZeroY => Parser.StringToDouble(GetConfigByKeyName("Position_AbsoluteZeroY", "-2,58"));
 
         private void CreateConfigCacheInternal()
         {

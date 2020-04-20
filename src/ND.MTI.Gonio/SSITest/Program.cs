@@ -3,9 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace ND.MTI.Gonio.Model
+namespace SSITest
 {
-    public class Complex_Pokeys57UConfig
+    class Program
     {
+        static void Main(string[] args)
+        {
+        }
     }
 }

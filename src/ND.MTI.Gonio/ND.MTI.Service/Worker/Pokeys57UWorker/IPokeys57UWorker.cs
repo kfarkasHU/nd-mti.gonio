@@ -2,7 +2,9 @@
 
 namespace ND.MTI.Service.Worker
 {
-    public interface IPokeys57UWorker : IPokeys57UCore
+    internal interface IPokeys57UWorker : IPokeys57UCore
     {
+        bool WriteDataX(string message);
+        bool WriteDataY(string message);
     }
 }

@@ -1,9 +1,11 @@
-﻿using ND.MTI.Gonio.Model;
+﻿using System;
+using ND.MTI.Gonio.Model;
 
 namespace ND.MTI.Service.Worker
 {
-    public interface IPositionWorker : IPokeys57UWorker
+    public interface IPositionWorker
     {
+
         void SetPosition(Primitive_Position position);
         Primitive_Position GetPosition();
 
@@ -15,5 +17,7 @@ namespace ND.MTI.Service.Worker
 
         void IncrementY();
         void IncrementX();
+
+        void EncoderZero();
     }
 }

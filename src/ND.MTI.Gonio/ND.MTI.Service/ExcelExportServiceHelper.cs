@@ -2,16 +2,16 @@
 using System.IO;
 using System.Linq;
 using System.Reflection;
-using ND.MTI.Service.Worker;
 using ND.MTI.Gonio.Common.Utils;
 using System.Collections.Generic;
+using ND.MTI.Gonio.Service.Worker;
 
-namespace ND.MTI.Service
+namespace ND.MTI.Gonio.Service
 {
     public class ExcelExportServiceHelper
     {
         private readonly IIOWorker _ioWorker;
-        private readonly IList<Tuple<int, double>> _cache;
+        private readonly IList<Tuple<double, double>> _cache;
         private readonly string _helpFilePath;
 
         public ExcelExportServiceHelper()
@@ -21,11 +21,11 @@ namespace ND.MTI.Service
             _helpFilePath = $"{Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location)}\\calculations.cfg";
             var helpLines = _ioWorker.ReadAllLines(_helpFilePath, '=');
 
-            _cache = new List<Tuple<int, double>>();
+            _cache = new List<Tuple<double, double>>();
             foreach(var line in helpLines)
                 _cache.Add(
-                    new Tuple<int, double>(
-                        Parser.StringToInteger(line.Item1),
+                    new Tuple<double, double>(
+                        Parser.StringToDouble(line.Item1),
                         Parser.StringToDouble(line.Item2)
                     )
                 );
@@ -66,11 +66,11 @@ namespace ND.MTI.Service
 
             #endregion [ y = mx + b ]
 
-            Tuple<int, double> GetBiggestSmallerItem() => _cache.LastOrDefault(n => n.Item1 > measuredValue);
+            Tuple<double, double> GetBiggestSmallerItem() => _cache.LastOrDefault(n => n.Item1 > measuredValue);
 
-            Tuple<int, double> GetSmallestBiggerItem() => _cache.FirstOrDefault(n => n.Item1 < measuredValue);
+            Tuple<double, double> GetSmallestBiggerItem() => _cache.FirstOrDefault(n => n.Item1 < measuredValue);
 
-            Tuple<int, double> GetEqualItem() => _cache.FirstOrDefault(n => n.Item1 == measuredValue);
+            Tuple<double, double> GetEqualItem() => _cache.FirstOrDefault(n => n.Item1 == measuredValue);
         }
     }
 }

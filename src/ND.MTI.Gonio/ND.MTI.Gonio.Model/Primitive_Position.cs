@@ -1,11 +1,13 @@
-﻿namespace ND.MTI.Gonio.Model
+﻿using System;
+
+namespace ND.MTI.Gonio.Model
 {
-    public class Primitive_Position
+    public sealed class Primitive_Position
     {
         public Primitive_Position(double x, double y)
         {
-            X = x;
-            Y = y;
+            X = Math.Round(x, 2);
+            Y = Math.Round(y, 2);
         }
 
         public double X { get; set; }

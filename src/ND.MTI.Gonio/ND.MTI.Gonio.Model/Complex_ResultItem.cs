@@ -1,23 +1,14 @@
 ﻿namespace ND.MTI.Gonio.Model
 {
-    public class Complex_ResultItem
+    public sealed class Complex_ResultItem
     {
-        public Complex_ResultItem(
-                double wX,
-                double wY,
-                double rX,
-                double rY,
-                double mI
-            )
+        public Complex_ResultItem(double x, double y, double i)
         {
-            WantedPosition = new Primitive_Position(wX, wY);
-            RealPosition = new Primitive_Position(rX, rY);
-
-            MeasuredIllumination = mI;
+            Position = new Primitive_Position(x, y);
+            MeasuredIllumination = i;
         }
 
-        public Primitive_Position WantedPosition { get; set; }
-        public Primitive_Position RealPosition { get; set; }
-        public double MeasuredIllumination { get; set; }
+        public Primitive_Position Position { get; private set; }
+        public double MeasuredIllumination { get; private set; }
     }
 }

@@ -7,7 +7,7 @@
     <ProjectGuid>{612EEEC8-DD6F-4812-8965-96390D059BD5}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>ND.MTI.Service</RootNamespace>
+    <RootNamespace>ND.MTI.Gonio.Service</RootNamespace>
     <AssemblyName>Service</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
@@ -53,6 +53,8 @@
   <ItemGroup>
     <Compile Include="ExcelExportService.cs" />
     <Compile Include="ExcelExportServiceHelper.cs" />
+    <Compile Include="IExcelExportService.cs" />
+    <Compile Include="IMeasurementService.cs" />
     <Compile Include="MeasurementService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Worker\ExcelFactory\ExcelFactory.cs" />
@@ -62,12 +64,11 @@
     <Compile Include="Worker\GonioWorker\IGonioWorker.cs" />
     <Compile Include="Worker\IOWorker\IIOWorker.cs" />
     <Compile Include="Worker\IOWorker\IOWorker.cs" />
-    <Compile Include="Worker\Pokeys57UCore\Debug_Helper\DebugHelper.cs" />
+    <Compile Include="Worker\IOWorker\IOWorker_Filter.cs" />
     <Compile Include="Worker\Pokeys57UCore\Helper\Pokeys57U_Pin.cs" />
     <Compile Include="Worker\Pokeys57UCore\Helper\Pokeys57U_PinFunction.cs" />
     <Compile Include="Worker\Pokeys57UCore\IPokeys57UCore.cs" />
-    <Compile Include="Worker\Pokeys57UCore\Pokeys57UCore.Debug.cs" />
-    <Compile Include="Worker\Pokeys57UCore\Pokeys57UCore.Release.cs" />
+    <Compile Include="Worker\Pokeys57UCore\Pokeys57UCore.cs" />
     <Compile Include="Worker\Pokeys57UWorker\Helper\GonioPokeys_Axis.cs" />
     <Compile Include="Worker\Pokeys57UWorker\Helper\GonioPokeys_Commands.cs" />
     <Compile Include="Worker\Pokeys57UWorker\Helper\GonioPokeys_Pinout.cs" />
@@ -77,6 +78,8 @@
     <Compile Include="Worker\PositionWorker\PositionWorker.cs" />
     <Compile Include="Worker\SerialCore\ISerialCore.cs" />
     <Compile Include="Worker\SerialCore\SerialCore.cs" />
+    <Compile Include="Worker\SSIWorker\ISSIWorker.cs" />
+    <Compile Include="Worker\SSIWorker\SSIWorker.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ND.MTI.Gonio.Common\ND.MTI.Gonio.Common.csproj">
@@ -86,10 +89,6 @@
     <ProjectReference Include="..\ND.MTI.Gonio.Model\ND.MTI.Gonio.Model.csproj">
       <Project>{680927AC-E6E3-47F1-8DA7-B8457DDAB8D9}</Project>
       <Name>ND.MTI.Gonio.Model</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\ND.MTI.Gonio.ServiceInterface\ND.MTI.Gonio.ServiceInterface.csproj">
-      <Project>{B65BF380-0265-479B-8BDB-B23A06534ECE}</Project>
-      <Name>ND.MTI.Gonio.ServiceInterface</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

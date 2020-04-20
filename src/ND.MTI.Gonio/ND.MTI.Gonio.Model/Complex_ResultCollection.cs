@@ -2,8 +2,7 @@
 
 namespace ND.MTI.Gonio.Model
 {
-    public class Complex_ResultCollection : List<Complex_ResultItem>
+    public sealed class Complex_ResultCollection : List<Complex_ResultItem>
     {
-        public void Reset() => Clear();
     }
 }
