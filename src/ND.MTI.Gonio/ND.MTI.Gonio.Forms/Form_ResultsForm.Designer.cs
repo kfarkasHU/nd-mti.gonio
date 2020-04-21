@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form_ResultsForm));
             this.buttonClose = new System.Windows.Forms.Button();
             this.buttonExcelExport = new System.Windows.Forms.Button();
             this.dataGridViewResults = new System.Windows.Forms.DataGridView();
@@ -84,6 +85,9 @@
             this.Controls.Add(this.buttonExcelExport);
             this.Controls.Add(this.buttonClose);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "Form_ResultsForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "GONIO::Results";

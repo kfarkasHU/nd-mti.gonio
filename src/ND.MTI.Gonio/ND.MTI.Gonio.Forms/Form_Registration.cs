@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Threading;
 using ND.MTI.Gonio.Model;
+using System.Diagnostics;
 using ND.MTI.Gonio.Service;
 using System.Windows.Forms;
-using ND.MTI.Service.Worker;
 using System.ComponentModel;
 using ND.MTI.Gonio.Common.Utils;
+using ND.MTI.Gonio.Service.Worker;
 
 namespace ND.MTI.Gonio.Forms
 {
@@ -13,6 +14,7 @@ namespace ND.MTI.Gonio.Forms
     {
         private int _interval;
         private Thread _thread;
+        private bool _isReading;
         private readonly IGonioWorker _gonioWorker;
         private readonly System.Windows.Forms.Timer _timer;
         private readonly Complex_RegistrationCollection _results;
@@ -31,6 +33,15 @@ namespace ND.MTI.Gonio.Forms
             InitializeComponent();
         }
 
+        ~Form_Registration()
+        {
+            _isReading = false;
+            _timer.Stop();
+
+            if(!(_thread is null))
+                _thread.Abort();
+        }
+
         private void OnTimerTick(object sender, EventArgs e)
         {
             var bindingList = new BindingList<Complex_RegistrationItem>(_results);
@@ -42,6 +53,11 @@ namespace ND.MTI.Gonio.Forms
 
         private void ButtonClose_Click(object sender, EventArgs e)
         {
+            _isReading = false;
+
+            if (!(_thread is null))
+                _thread.Abort();
+
             _timer.Stop();
             Close();
         }
@@ -55,7 +71,7 @@ namespace ND.MTI.Gonio.Forms
             buttonSave.Enabled = true;
             textBoxInterval.ReadOnly = false;
 
-            _thread.Abort();
+            _isReading = false;
         }
 
         private void ButtonStart_Click(object sender, EventArgs e)
@@ -71,7 +87,7 @@ namespace ND.MTI.Gonio.Forms
             var interval = Parser.StringToInteger(intervalStr);
 
             _interval = interval;
-
+            _isReading = true;
             _thread = new Thread(WorkingThreadImplementation);
             _thread.Start();
             _timer.Start();
@@ -87,16 +103,21 @@ namespace ND.MTI.Gonio.Forms
         
         private void WorkingThreadImplementation()
         {
-            while (true)
+            while (_isReading)
             {
-                // TODO Explicit time!
+                var stopwatch = new Stopwatch();
+                stopwatch.Start();
 
                 var data = _gonioWorker.Measure();
                 var time = DateTime.Now.TimeOfDay;
 
                 _results.Add(new Complex_RegistrationItem(time, data));
+                stopwatch.Stop();
 
-                Thread.Sleep(_interval * 900);
+                var remainingTime = _interval - (int)stopwatch.ElapsedMilliseconds;
+
+                if (remainingTime > 0)
+                    Thread.Sleep(remainingTime);
             }
         }
     }

@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form_Registration));
             this.buttonClose = new System.Windows.Forms.Button();
             this.dataGridViewResults = new System.Windows.Forms.DataGridView();
             this.buttonStart = new System.Windows.Forms.Button();
@@ -88,7 +89,7 @@
             this.buttonSave.UseVisualStyleBackColor = true;
             this.buttonSave.Click += new System.EventHandler(this.ButtonSave_Click);
             // 
-            // Reset
+            // buttonReset
             // 
             this.buttonReset.Enabled = false;
             this.buttonReset.Location = new System.Drawing.Point(147, 384);
@@ -129,9 +130,11 @@
             this.Controls.Add(this.buttonStart);
             this.Controls.Add(this.dataGridViewResults);
             this.Controls.Add(this.buttonClose);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "Form_Registration";
-            this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "GONIO::Registration";
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewResults)).EndInit();

@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form_Status));
             this.buttonClose = new System.Windows.Forms.Button();
             this.labelFSMGonioName = new System.Windows.Forms.Label();
             this.pictureBoxFSMGonio = new System.Windows.Forms.PictureBox();
@@ -61,8 +62,7 @@
             // 
             // pictureBoxFSMGonio
             // 
-            this.pictureBoxFSMGonio.Image = global::ND.MTI.Gonio.Forms.Properties.Resources.disconnect;
-            this.pictureBoxFSMGonio.InitialImage = global::ND.MTI.Gonio.Forms.Properties.Resources.disconnect;
+            this.pictureBoxFSMGonio.Image = ((System.Drawing.Image)(resources.GetObject("pictureBoxFSMGonio.Image")));
             this.pictureBoxFSMGonio.Location = new System.Drawing.Point(93, 6);
             this.pictureBoxFSMGonio.Name = "pictureBoxFSMGonio";
             this.pictureBoxFSMGonio.Size = new System.Drawing.Size(16, 16);
@@ -89,8 +89,7 @@
             // 
             // pictureBoxPokeys57U
             // 
-            this.pictureBoxPokeys57U.Image = global::ND.MTI.Gonio.Forms.Properties.Resources.disconnect;
-            this.pictureBoxPokeys57U.InitialImage = global::ND.MTI.Gonio.Forms.Properties.Resources.disconnect;
+            this.pictureBoxPokeys57U.Image = ((System.Drawing.Image)(resources.GetObject("pictureBoxPokeys57U.Image")));
             this.pictureBoxPokeys57U.Location = new System.Drawing.Point(93, 31);
             this.pictureBoxPokeys57U.Name = "pictureBoxPokeys57U";
             this.pictureBoxPokeys57U.Size = new System.Drawing.Size(16, 16);
@@ -99,8 +98,7 @@
             // 
             // pictureBoxSSIPanel
             // 
-            this.pictureBoxSSIPanel.Image = global::ND.MTI.Gonio.Forms.Properties.Resources.disconnect;
-            this.pictureBoxSSIPanel.InitialImage = global::ND.MTI.Gonio.Forms.Properties.Resources.disconnect;
+            this.pictureBoxSSIPanel.Image = ((System.Drawing.Image)(resources.GetObject("pictureBoxSSIPanel.Image")));
             this.pictureBoxSSIPanel.Location = new System.Drawing.Point(93, 54);
             this.pictureBoxSSIPanel.Name = "pictureBoxSSIPanel";
             this.pictureBoxSSIPanel.Size = new System.Drawing.Size(16, 16);
@@ -120,7 +118,8 @@
             this.Controls.Add(this.pictureBoxFSMGonio);
             this.Controls.Add(this.labelFSMGonioName);
             this.Controls.Add(this.buttonClose);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "Form_Status";

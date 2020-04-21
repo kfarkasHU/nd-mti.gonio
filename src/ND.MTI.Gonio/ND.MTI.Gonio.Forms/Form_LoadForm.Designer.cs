@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form_LoadForm));
             this.labelAppTitle = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
@@ -52,11 +53,15 @@
             this.ClientSize = new System.Drawing.Size(847, 315);
             this.ControlBox = false;
             this.Controls.Add(this.labelAppTitle);
+            this.Cursor = System.Windows.Forms.Cursors.AppStarting;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "Form_LoadForm";
+            this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "GONIO";
-            this.TopMost = true;
             this.ResumeLayout(false);
             this.PerformLayout();
 

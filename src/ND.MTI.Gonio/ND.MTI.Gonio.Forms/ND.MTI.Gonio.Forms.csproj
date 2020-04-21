@@ -31,6 +31,9 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>iconfinder_Bright_idea_lightbulb_solution_bulb_1886494.ico</ApplicationIcon>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -81,6 +84,7 @@
       <DependentUpon>Form_VirtualZeroForm.cs</DependentUpon>
     </Compile>
     <Compile Include="GonioErrorHandler.cs" />
+    <Compile Include="MainFormHelper.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Form_LoadForm.resx">
@@ -131,6 +135,7 @@
     <Content Include="Content\connect.png" />
     <Content Include="Content\disconnect.png" />
     <Content Include="Content\light_bulb_on.jpg" />
+    <Content Include="iconfinder_Bright_idea_lightbulb_solution_bulb_1886494.ico" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ND.MTI.Gonio.Common\ND.MTI.Gonio.Common.csproj">
@@ -141,7 +146,7 @@
       <Project>{680927ac-e6e3-47f1-8da7-b8457ddab8d9}</Project>
       <Name>ND.MTI.Gonio.Model</Name>
     </ProjectReference>
-    <ProjectReference Include="..\ND.MTI.Service\ND.MTI.Gonio.Service.csproj">
+    <ProjectReference Include="..\ND.MTI.Gonio.Service\ND.MTI.Gonio.Service.csproj">
       <Project>{612EEEC8-DD6F-4812-8965-96390D059BD5}</Project>
       <Name>ND.MTI.Gonio.Service</Name>
     </ProjectReference>

@@ -27,5 +27,11 @@ namespace ND.MTI.Gonio.Common.RuntimeContext
 
         public static Complex_ResultCollection Results { get; private set; }
         public static BindingList<Complex_ResultItem> ResultsBindingList { get; private set; }
+
+        public static bool IsFSMGonioConnected { get; set; } = false;
+        public static bool IsSSIPanelConnected { get; set; } = false;
+        public static bool IsPokeys57Connected { get; set; } = false;
+
+        public static bool IsAdminContext { get; set; } = false;
     }
 }

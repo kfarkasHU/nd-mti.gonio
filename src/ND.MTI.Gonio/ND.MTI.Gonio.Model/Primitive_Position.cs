@@ -24,5 +24,15 @@ namespace ND.MTI.Gonio.Model
 
             return sum;
         }
+
+        public static Primitive_Position operator -(Primitive_Position left, Primitive_Position right)
+        {
+            var sum = new Primitive_Position(0, 0);
+
+            sum.X = left.X - right.X;
+            sum.Y = left.Y - right.Y;
+
+            return sum;
+        }
     }
 }

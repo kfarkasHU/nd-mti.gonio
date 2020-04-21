@@ -1,7 +1,7 @@
 ﻿using System;
 using ND.MTI.Gonio.Model;
 using System.Windows.Forms;
-using ND.MTI.Service.Worker;
+using ND.MTI.Gonio.Service.Worker;
 using ND.MTI.Gonio.Common.RuntimeContext;
 using ND.MTI.Gonio.Common.Configuration;
 
@@ -30,7 +30,7 @@ namespace ND.MTI.Gonio.Forms
             _timer.Interval = _gonioConfiguration.Pokeys_ReadInterval * 3;
             _timer.Tick += OnTimerTick;
             _timer.Start();
-
+            
             EnableForm();
         }
 
@@ -129,6 +129,7 @@ namespace ND.MTI.Gonio.Forms
         private void OnTimerTick(object sender, EventArgs e)  => SetModelInternal(_positionWorker.GetPosition());
 
         private void DisableForm() => SetFormState(false, Cursors.No);
+
         private void EnableForm() => SetFormState(true, Cursors.Hand);
 
         private void SetFormState(bool enabled, Cursor cursor)
@@ -154,8 +155,11 @@ namespace ND.MTI.Gonio.Forms
 
         private void SetModelInternal(Primitive_Position position)
         {
-            textBoxXCoord.Text = position.X.ToString();
-            textBoxYCoord.Text = position.Y.ToString();
+            var posX = Math.Round(position.X, 3);
+            var posY = Math.Round(position.Y, 3);
+
+            textBoxXCoord.Text = posX.ToString();
+            textBoxYCoord.Text = posY.ToString();
         }
     }
 }

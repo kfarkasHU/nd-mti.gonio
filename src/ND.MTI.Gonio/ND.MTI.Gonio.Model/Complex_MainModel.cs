@@ -12,10 +12,11 @@ namespace ND.MTI.Gonio.Model
         public double? StepY { get; set; }
         public bool IsXAuto { get; set; }
         public bool IsYAuto { get; set; }
-        public Action OnFinishedCallback { get; set; }
+        public int HoldTime { get; set; }
+        public string ExternalRoute { get; set; }
 
+        public bool HasExternalRoute => ExternalRoute != string.Empty;
         public void Reset() => ResetInternal();
-
         public void Validate() => ValidateInternal();
 
         private void ResetInternal()
@@ -26,6 +27,8 @@ namespace ND.MTI.Gonio.Model
             StepY = null;
             IsXAuto = false;
             IsYAuto = false;
+            HoldTime = 0;
+            ExternalRoute = string.Empty;
         }
 
         private void ValidateInternal()
@@ -59,6 +62,9 @@ namespace ND.MTI.Gonio.Model
 
             if (End.Y > 174)
                 throw new Exception("End Y must be smaller than 174");
+
+            if (HoldTime < 0)
+                throw new Exception("Hold time must be greater than -1");
         }
     }
 }

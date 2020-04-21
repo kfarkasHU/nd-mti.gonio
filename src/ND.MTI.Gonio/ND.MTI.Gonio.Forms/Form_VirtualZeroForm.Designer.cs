@@ -30,20 +30,21 @@ namespace ND.MTI.Gonio.Forms
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form_VirtualZeroForm));
             this.groupBoxCurrentPosition = new System.Windows.Forms.GroupBox();
             this.textBoxYCoord = new System.Windows.Forms.TextBox();
             this.textBoxXCoord = new System.Windows.Forms.TextBox();
             this.labelYCoord = new System.Windows.Forms.Label();
             this.labelXCoord = new System.Windows.Forms.Label();
             this.groupBoxControl = new System.Windows.Forms.GroupBox();
+            this.buttonStopX = new System.Windows.Forms.Button();
+            this.buttonStopY = new System.Windows.Forms.Button();
             this.buttonIncrementY = new System.Windows.Forms.Button();
             this.buttonDecrementY = new System.Windows.Forms.Button();
             this.buttonIncrementX = new System.Windows.Forms.Button();
             this.buttonDecrementX = new System.Windows.Forms.Button();
             this.buttonSave = new System.Windows.Forms.Button();
             this.buttonClose = new System.Windows.Forms.Button();
-            this.buttonStopX = new System.Windows.Forms.Button();
-            this.buttonStopY = new System.Windows.Forms.Button();
             this.groupBoxCurrentPosition.SuspendLayout();
             this.groupBoxControl.SuspendLayout();
             this.SuspendLayout();
@@ -114,6 +115,26 @@ namespace ND.MTI.Gonio.Forms
             this.groupBoxControl.TabStop = false;
             this.groupBoxControl.Text = "Control";
             // 
+            // buttonStopX
+            // 
+            this.buttonStopX.Location = new System.Drawing.Point(91, 77);
+            this.buttonStopX.Name = "buttonStopX";
+            this.buttonStopX.Size = new System.Drawing.Size(75, 23);
+            this.buttonStopX.TabIndex = 5;
+            this.buttonStopX.Text = "Stop X";
+            this.buttonStopX.UseVisualStyleBackColor = true;
+            this.buttonStopX.Click += new System.EventHandler(this.ButtonStopX_Click);
+            // 
+            // buttonStopY
+            // 
+            this.buttonStopY.Location = new System.Drawing.Point(6, 77);
+            this.buttonStopY.Name = "buttonStopY";
+            this.buttonStopY.Size = new System.Drawing.Size(75, 23);
+            this.buttonStopY.TabIndex = 4;
+            this.buttonStopY.Text = "Stop Y";
+            this.buttonStopY.UseVisualStyleBackColor = true;
+            this.buttonStopY.Click += new System.EventHandler(this.ButtonStopY_Click);
+            // 
             // buttonIncrementY
             // 
             this.buttonIncrementY.Location = new System.Drawing.Point(91, 48);
@@ -174,26 +195,6 @@ namespace ND.MTI.Gonio.Forms
             this.buttonClose.UseVisualStyleBackColor = true;
             this.buttonClose.Click += new System.EventHandler(this.ButtonClose_Click);
             // 
-            // buttonStopX
-            // 
-            this.buttonStopX.Location = new System.Drawing.Point(91, 77);
-            this.buttonStopX.Name = "buttonStopX";
-            this.buttonStopX.Size = new System.Drawing.Size(75, 23);
-            this.buttonStopX.TabIndex = 5;
-            this.buttonStopX.Text = "Stop X";
-            this.buttonStopX.UseVisualStyleBackColor = true;
-            this.buttonStopX.Click += new System.EventHandler(this.ButtonStopX_Click);
-            // 
-            // buttonStopY
-            // 
-            this.buttonStopY.Location = new System.Drawing.Point(6, 77);
-            this.buttonStopY.Name = "buttonStopY";
-            this.buttonStopY.Size = new System.Drawing.Size(75, 23);
-            this.buttonStopY.TabIndex = 4;
-            this.buttonStopY.Text = "Stop Y";
-            this.buttonStopY.UseVisualStyleBackColor = true;
-            this.buttonStopY.Click += new System.EventHandler(this.ButtonStopY_Click);
-            // 
             // Form_VirtualZeroForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -205,6 +206,9 @@ namespace ND.MTI.Gonio.Forms
             this.Controls.Add(this.groupBoxControl);
             this.Controls.Add(this.groupBoxCurrentPosition);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "Form_VirtualZeroForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "GONIO::Set virtual zero";

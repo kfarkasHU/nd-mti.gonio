@@ -2,6 +2,7 @@
 using System.Drawing;
 using System.Windows.Forms;
 using ND.MTI.Gonio.Forms.Properties;
+using ND.MTI.Gonio.Common.RuntimeContext;
 
 namespace ND.MTI.Gonio.Forms
 {
@@ -14,10 +15,9 @@ namespace ND.MTI.Gonio.Forms
 
         private void Form_Status_Load(object sender, EventArgs e)
         {
-            //TODO: Implement this.
-            pictureBoxFSMGonio.Image = (Bitmap)Resources.ResourceManager.GetObject(GetImageFor(true));
-            pictureBoxPokeys57U.Image = (Bitmap)Resources.ResourceManager.GetObject(GetImageFor(true));
-            pictureBoxSSIPanel.Image = (Bitmap)Resources.ResourceManager.GetObject(GetImageFor(true));
+            pictureBoxFSMGonio.Image = (Bitmap)Resources.ResourceManager.GetObject(GetImageFor(RuntimeContext.IsFSMGonioConnected));
+            pictureBoxPokeys57U.Image = (Bitmap)Resources.ResourceManager.GetObject(GetImageFor(RuntimeContext.IsPokeys57Connected));
+            pictureBoxSSIPanel.Image = (Bitmap)Resources.ResourceManager.GetObject(GetImageFor(RuntimeContext.IsSSIPanelConnected));
         }
 
         private string GetImageFor(bool state) => state ? "connect" : "disconnect";

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Threading;
 using System.Windows.Forms;
-using ND.MTI.Service.Worker;
+using ND.MTI.Gonio.Service.Worker;
 using ND.MTI.Gonio.Common.Exceptions;
 
 namespace ND.MTI.Gonio.Forms

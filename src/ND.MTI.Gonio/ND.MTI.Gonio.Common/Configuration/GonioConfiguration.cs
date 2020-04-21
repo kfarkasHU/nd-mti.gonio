@@ -69,8 +69,8 @@ namespace ND.MTI.Gonio.Common.Configuration
         public double Sensor_Distance => Parser.StringToDouble(GetConfigByKeyName("Sensor_Distance", "15"));
         public int Pokeys_ReadInterval => Parser.StringToInteger(GetConfigByKeyName("Pokeys_ReadInterval", "100"));
 
-        public double Position_AbsoluteZeroX => Parser.StringToDouble(GetConfigByKeyName("Position_AbsoluteZeroX", "-40,55"));
-        public double Position_AbsoluteZeroY => Parser.StringToDouble(GetConfigByKeyName("Position_AbsoluteZeroY", "-2,58"));
+        public double Position_AbsoluteZeroX => Parser.StringToDouble(GetConfigByKeyName("Position_AbsoluteZeroX", "0"));
+        public double Position_AbsoluteZeroY => Parser.StringToDouble(GetConfigByKeyName("Position_AbsoluteZeroY", "0"));
 
         private void CreateConfigCacheInternal()
         {

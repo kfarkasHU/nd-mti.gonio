@@ -9,7 +9,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ND.MTI.Gonio.Common", "ND.M
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ND.MTI.Gonio.Model", "ND.MTI.Gonio.Model\ND.MTI.Gonio.Model.csproj", "{680927AC-E6E3-47F1-8DA7-B8457DDAB8D9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ND.MTI.Gonio.Service", "ND.MTI.Service\ND.MTI.Gonio.Service.csproj", "{612EEEC8-DD6F-4812-8965-96390D059BD5}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ND.MTI.Gonio.Service", "ND.MTI.Gonio.Service\ND.MTI.Gonio.Service.csproj", "{612EEEC8-DD6F-4812-8965-96390D059BD5}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{1FE7D508-D008-48C4-A75E-1088D2A66E6F}"
 	ProjectSection(SolutionItems) = preProject
@@ -18,16 +18,20 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		external\PoKeysDevice_DLL.dll = external\PoKeysDevice_DLL.dll
 		external\PoKeysDevice_DLL.tlb = external\PoKeysDevice_DLL.tlb
 		external\PoKeysDevice_DLL.XML = external\PoKeysDevice_DLL.XML
-		tools.txt = tools.txt
+		postBuild.ps1 = postBuild.ps1
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tools", "Tools", "{F5B6EE97-2290-42E8-A704-E518E6F4C3AE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ND.MTI.Gonio.COMScan", "ND.MTI.Gonio.COMScan\ND.MTI.Gonio.COMScan.csproj", "{769E6B40-5197-4E7B-B31D-DEB995D5CB9B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ND.MTI.Gonio.RawPosition", "tools\ND.MTI.Gonio.RawPosition\ND.MTI.Gonio.RawPosition.csproj", "{9559C4CE-7A5D-40A6-99FB-8B5C992D8BF3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ND.MTI.Gonio.Encoder", "ND.MTI.Gonio.Encoder2\ND.MTI.Gonio.Encoder.csproj", "{D695100B-0EBC-4F40-A1FD-E4048A8F127C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ND.MTI.Gonio.RouteGenerator", "tools\ND.MTI.Gonio.RouteGenerator\ND.MTI.Gonio.RouteGenerator.csproj", "{7A2BB03C-EF4B-431C-8FF5-8EBAB6BD9BCF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ND.MIT.Gonio.Scale", "ND.MIT.Gonio.Scale\ND.MIT.Gonio.Scale.csproj", "{FB4D073D-203C-40FB-96BD-5E2238523CE3}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "readme", "readme", "{E83EF18F-1A2C-4F01-9A9A-73155108D483}"
+	ProjectSection(SolutionItems) = preProject
+		README_EN.txt = README_EN.txt
+		README_HU.txt = README_HU.txt
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -51,26 +55,22 @@ Global
 		{612EEEC8-DD6F-4812-8965-96390D059BD5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{612EEEC8-DD6F-4812-8965-96390D059BD5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{612EEEC8-DD6F-4812-8965-96390D059BD5}.Release|Any CPU.Build.0 = Release|Any CPU
-		{769E6B40-5197-4E7B-B31D-DEB995D5CB9B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{769E6B40-5197-4E7B-B31D-DEB995D5CB9B}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{769E6B40-5197-4E7B-B31D-DEB995D5CB9B}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{769E6B40-5197-4E7B-B31D-DEB995D5CB9B}.Release|Any CPU.Build.0 = Release|Any CPU
-		{D695100B-0EBC-4F40-A1FD-E4048A8F127C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{D695100B-0EBC-4F40-A1FD-E4048A8F127C}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{D695100B-0EBC-4F40-A1FD-E4048A8F127C}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{D695100B-0EBC-4F40-A1FD-E4048A8F127C}.Release|Any CPU.Build.0 = Release|Any CPU
-		{FB4D073D-203C-40FB-96BD-5E2238523CE3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{FB4D073D-203C-40FB-96BD-5E2238523CE3}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{FB4D073D-203C-40FB-96BD-5E2238523CE3}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{FB4D073D-203C-40FB-96BD-5E2238523CE3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9559C4CE-7A5D-40A6-99FB-8B5C992D8BF3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9559C4CE-7A5D-40A6-99FB-8B5C992D8BF3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9559C4CE-7A5D-40A6-99FB-8B5C992D8BF3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9559C4CE-7A5D-40A6-99FB-8B5C992D8BF3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7A2BB03C-EF4B-431C-8FF5-8EBAB6BD9BCF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7A2BB03C-EF4B-431C-8FF5-8EBAB6BD9BCF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7A2BB03C-EF4B-431C-8FF5-8EBAB6BD9BCF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7A2BB03C-EF4B-431C-8FF5-8EBAB6BD9BCF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{769E6B40-5197-4E7B-B31D-DEB995D5CB9B} = {F5B6EE97-2290-42E8-A704-E518E6F4C3AE}
-		{D695100B-0EBC-4F40-A1FD-E4048A8F127C} = {F5B6EE97-2290-42E8-A704-E518E6F4C3AE}
-		{FB4D073D-203C-40FB-96BD-5E2238523CE3} = {F5B6EE97-2290-42E8-A704-E518E6F4C3AE}
+		{9559C4CE-7A5D-40A6-99FB-8B5C992D8BF3} = {F5B6EE97-2290-42E8-A704-E518E6F4C3AE}
+		{7A2BB03C-EF4B-431C-8FF5-8EBAB6BD9BCF} = {F5B6EE97-2290-42E8-A704-E518E6F4C3AE}
+		{E83EF18F-1A2C-4F01-9A9A-73155108D483} = {1FE7D508-D008-48C4-A75E-1088D2A66E6F}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {D7521CD1-B974-4102-BF23-A1A7539ADF02}
