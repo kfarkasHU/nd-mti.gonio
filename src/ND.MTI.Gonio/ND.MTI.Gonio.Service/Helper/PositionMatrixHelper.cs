@@ -56,6 +56,10 @@ namespace ND.MTI.Gonio.Service.Helper
 
             IList<double> CreateAxisVectCore(double bigger, double smaller)
             {
+                var diff = bigger - smaller;
+                if (diff % step != 0)
+                    throw new Exception($"Invalid parameters!\nBigger: {bigger}\nSmaller: {smaller}\nStep: {step}");
+
                 var coreList = new List<double>();
 
                 for (var current = bigger; current > smaller - step.Value; current -= step.Value)

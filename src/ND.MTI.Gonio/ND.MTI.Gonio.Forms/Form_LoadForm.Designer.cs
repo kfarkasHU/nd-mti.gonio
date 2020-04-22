@@ -30,6 +30,7 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form_LoadForm));
             this.labelAppTitle = new System.Windows.Forms.Label();
+            this.labelVersion = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // labelAppTitle
@@ -44,6 +45,17 @@
             this.labelAppTitle.TabIndex = 0;
             this.labelAppTitle.Text = "MTI.GONIO";
             // 
+            // labelVersion
+            // 
+            this.labelVersion.AutoSize = true;
+            this.labelVersion.BackColor = System.Drawing.Color.Transparent;
+            this.labelVersion.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.labelVersion.ForeColor = System.Drawing.Color.White;
+            this.labelVersion.Location = new System.Drawing.Point(175, 287);
+            this.labelVersion.Name = "labelVersion";
+            this.labelVersion.Size = new System.Drawing.Size(0, 16);
+            this.labelVersion.TabIndex = 1;
+            // 
             // Form_LoadForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -52,6 +64,7 @@
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.ClientSize = new System.Drawing.Size(847, 315);
             this.ControlBox = false;
+            this.Controls.Add(this.labelVersion);
             this.Controls.Add(this.labelAppTitle);
             this.Cursor = System.Windows.Forms.Cursors.AppStarting;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
@@ -62,6 +75,7 @@
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "GONIO";
+            this.Load += new System.EventHandler(this.Form_LoadForm_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -70,6 +84,7 @@
         #endregion
 
         private System.Windows.Forms.Label labelAppTitle;
+        private System.Windows.Forms.Label labelVersion;
     }
 }
 

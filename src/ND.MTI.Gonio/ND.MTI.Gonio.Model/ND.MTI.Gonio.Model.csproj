@@ -51,6 +51,7 @@
     <Compile Include="Enum\MeasurementStatus.cs" />
     <Compile Include="Primitive_Position.cs" />
     <Compile Include="Primitive_PositionCollection.cs" />
+    <Compile Include="Primitive_Userconfig.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

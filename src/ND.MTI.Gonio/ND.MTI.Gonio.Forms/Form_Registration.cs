@@ -48,7 +48,8 @@ namespace ND.MTI.Gonio.Forms
             var source = new BindingSource(bindingList, null);
 
             dataGridViewResults.DataSource = source;
-            dataGridViewResults.AutoResizeColumns();
+            dataGridViewResults.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            dataGridViewResults.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
         }
 
         private void ButtonClose_Click(object sender, EventArgs e)
@@ -89,6 +90,7 @@ namespace ND.MTI.Gonio.Forms
             _interval = interval;
             _isReading = true;
             _thread = new Thread(WorkingThreadImplementation);
+            _thread.IsBackground = true;
             _thread.Start();
             _timer.Start();
         }

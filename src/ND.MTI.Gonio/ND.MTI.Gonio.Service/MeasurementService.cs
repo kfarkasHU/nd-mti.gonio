@@ -1,4 +1,5 @@
-﻿using System.Threading;
+﻿using System;
+using System.Threading;
 using ND.MTI.Gonio.Model;
 using ND.MTI.Gonio.Model.Enum;
 using ND.MTI.Gonio.Service.Worker;
@@ -30,6 +31,8 @@ namespace ND.MTI.Gonio.Service
 
         public void Configure(Complex_MainModel mainModel) => _config = mainModel;
 
+        public double MeasureLumenance() => MeasureInternal() * Math.Pow(15, 2);
+
         public void Continue()
         {
             _waitHandle.Set();
@@ -47,8 +50,8 @@ namespace ND.MTI.Gonio.Service
         public void Start()
         {
             _positionMatrix = PositionMatrixHelper.CalculatePositionMatrix(_config);
-            if (_config.HasExternalRoute)
-                _positionMatrix = PositionMatrixHelper.GetRouteFrom(_config.ExternalRoute);
+            if (_config.Userconfig.ExternalRouteFilePath != string.Empty)
+                _positionMatrix = PositionMatrixHelper.GetRouteFrom(_config.Userconfig.ExternalRouteFilePath);
 
             _thread = new Thread(WorkingThreadImplementation);
             _thread.IsBackground = true;
@@ -91,7 +94,14 @@ namespace ND.MTI.Gonio.Service
                 Thread.Sleep(_config.HoldTime);
 
                 var measured = MeasureInternal();
-                var correction = _measurementServiceHelper.GetCorrectionValue(measured);
+                var correction = _config.Userconfig.UseCorrection
+                    ? _measurementServiceHelper.GetCorrectionValue(measured)
+                    : 1;
+
+                if(_config.Userconfig.Amplification > 0)
+                    measured *= _config.Userconfig.Amplification;
+
+                measured += _config.Userconfig.Offset;
 
                 RuntimeContext
                     .AddResult(
@@ -103,6 +113,12 @@ namespace ND.MTI.Gonio.Service
                     )
                 ); ;
             }
+
+            if (_config.Userconfig.ResetToZero)
+                SetPositionInternal(new Primitive_Position(0, 0) - RuntimeContext.VirtualZeroPosition);
+
+            if (_config.Userconfig.ResetToVZero)
+                SetPositionInternal(GetPositionInternal() - RuntimeContext.VirtualZeroPosition);
 
             State = MeasurementStatus.READY;
 

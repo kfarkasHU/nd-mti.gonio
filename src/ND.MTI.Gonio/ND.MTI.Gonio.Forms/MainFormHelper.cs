@@ -26,6 +26,7 @@ namespace ND.MTI.Gonio.Forms
         private void SetPositionInternal(Primitive_Position position)
         {
             _thread = new Thread(OnThreadWorking);
+            _thread.IsBackground = true;
             _primitivePosition = position;
 
             _thread.Start();

@@ -7,7 +7,7 @@
     <ProjectGuid>{9559C4CE-7A5D-40A6-99FB-8B5C992D8BF3}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <RootNamespace>ND.MTI.Gonio.RawPosition</RootNamespace>
-    <AssemblyName>ND.MTI.Gonio.RawPosition</AssemblyName>
+    <AssemblyName>Gonio.RawPosition</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
@@ -30,6 +30,9 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>icon.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -95,5 +98,11 @@
       <Name>ND.MTI.Gonio.Service</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="icon.ico" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>xcopy "$(TargetDir)*" "$(SolutionDir)Build/_TOOLS/$(ProjectName)"  /s /i /Y</PostBuildEvent>
+  </PropertyGroup>
 </Project>

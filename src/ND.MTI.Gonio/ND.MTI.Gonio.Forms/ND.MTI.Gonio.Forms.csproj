@@ -32,7 +32,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>iconfinder_Bright_idea_lightbulb_solution_bulb_1886494.ico</ApplicationIcon>
+    <ApplicationIcon>icon.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -47,6 +47,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Form_AdvancedForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form_AdvancedForm.Designer.cs">
+      <DependentUpon>Form_AdvancedForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Form_LoadForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -87,6 +93,9 @@
     <Compile Include="MainFormHelper.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Form_AdvancedForm.resx">
+      <DependentUpon>Form_AdvancedForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Form_LoadForm.resx">
       <DependentUpon>Form_LoadForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -130,12 +139,15 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <None Include="userconfig.cfg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\connect.png" />
     <Content Include="Content\disconnect.png" />
     <Content Include="Content\light_bulb_on.jpg" />
-    <Content Include="iconfinder_Bright_idea_lightbulb_solution_bulb_1886494.ico" />
+    <Content Include="icon.ico" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ND.MTI.Gonio.Common\ND.MTI.Gonio.Common.csproj">
@@ -152,4 +164,7 @@
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>xcopy "$(TargetDir)*" "$(SolutionDir)Build/_GONIOAPP"  /s /i /Y</PostBuildEvent>
+  </PropertyGroup>
 </Project>

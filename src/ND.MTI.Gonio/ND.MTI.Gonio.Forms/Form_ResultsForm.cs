@@ -35,7 +35,7 @@ namespace ND.MTI.Gonio.Forms
             var source = new BindingSource(RuntimeContext.ResultsBindingList, null);
 
             dataGridViewResults.DataSource = source;
-            dataGridViewResults.AutoResizeColumns();
+            dataGridViewResults.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
         }
     }
 }

@@ -30,5 +30,7 @@ namespace ND.MTI.Gonio.Forms
 
             Hide();
         }
+
+        private void Form_LoadForm_Load(object sender, EventArgs e) => labelVersion.Text = $"ver.: v{Application.ProductVersion}";
     }
 }

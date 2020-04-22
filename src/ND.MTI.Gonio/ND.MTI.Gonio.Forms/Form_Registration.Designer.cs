@@ -52,9 +52,14 @@
             // 
             // dataGridViewResults
             // 
+            this.dataGridViewResults.AllowUserToAddRows = false;
+            this.dataGridViewResults.AllowUserToDeleteRows = false;
+            this.dataGridViewResults.AllowUserToResizeRows = false;
             this.dataGridViewResults.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridViewResults.Location = new System.Drawing.Point(12, 12);
+            this.dataGridViewResults.MultiSelect = false;
             this.dataGridViewResults.Name = "dataGridViewResults";
+            this.dataGridViewResults.ReadOnly = true;
             this.dataGridViewResults.Size = new System.Drawing.Size(372, 337);
             this.dataGridViewResults.TabIndex = 1;
             // 
@@ -105,9 +110,9 @@
             this.labelInterval.AutoSize = true;
             this.labelInterval.Location = new System.Drawing.Point(12, 360);
             this.labelInterval.Name = "labelInterval";
-            this.labelInterval.Size = new System.Drawing.Size(56, 13);
+            this.labelInterval.Size = new System.Drawing.Size(64, 13);
             this.labelInterval.TabIndex = 6;
-            this.labelInterval.Text = "Interval (s)";
+            this.labelInterval.Text = "Interval (ms)";
             // 
             // textBoxInterval
             // 

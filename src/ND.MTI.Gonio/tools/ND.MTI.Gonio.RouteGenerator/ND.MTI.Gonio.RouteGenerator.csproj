@@ -7,7 +7,7 @@
     <ProjectGuid>{7A2BB03C-EF4B-431C-8FF5-8EBAB6BD9BCF}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <RootNamespace>ND.MTI.Gonio.RouteGenerator</RootNamespace>
-    <AssemblyName>ND.MTI.Gonio.RouteGenerator</AssemblyName>
+    <AssemblyName>Gonio.RouteGenerator</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
@@ -30,6 +30,9 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>icon.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -89,5 +92,11 @@
       <Name>ND.MTI.Gonio.Service</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="icon.ico" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>xcopy "$(TargetDir)*" "$(SolutionDir)Build/_TOOLS/$(ProjectName)"  /s /i /Y</PostBuildEvent>
+  </PropertyGroup>
 </Project>

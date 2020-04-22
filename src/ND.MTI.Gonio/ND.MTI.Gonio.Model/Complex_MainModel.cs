@@ -13,9 +13,8 @@ namespace ND.MTI.Gonio.Model
         public bool IsXAuto { get; set; }
         public bool IsYAuto { get; set; }
         public int HoldTime { get; set; }
-        public string ExternalRoute { get; set; }
+        public Primitive_Userconfig Userconfig { get; set; }
 
-        public bool HasExternalRoute => ExternalRoute != string.Empty;
         public void Reset() => ResetInternal();
         public void Validate() => ValidateInternal();
 
@@ -28,7 +27,6 @@ namespace ND.MTI.Gonio.Model
             IsXAuto = false;
             IsYAuto = false;
             HoldTime = 0;
-            ExternalRoute = string.Empty;
         }
 
         private void ValidateInternal()

@@ -1,39 +1,39 @@
 ﻿using System;
+using System.Threading;
 using ND.MTI.Gonio.Model;
 using System.Windows.Forms;
 using ND.MTI.Gonio.Service;
 using ND.MTI.Gonio.Model.Enum;
 using ND.MTI.Gonio.Common.Utils;
-using ND.MTI.Gonio.Service.Worker;
+using ND.MTI.Gonio.Common.Userconfig;
 using ND.MTI.Gonio.Common.Configuration;
 using ND.MTI.Gonio.Common.RuntimeContext;
 
+using Timer = System.Windows.Forms.Timer;
+
 namespace ND.MTI.Gonio.Forms
 {
-    // TODO: Exit?
-    // TODO: DgView scrolls (update from thread, and scrollable)
-    // TODO: Optional correction.
-    // TODO: Amplifier (0 - 2 double) Optional
-    // TODO: Offset optional
-    // TODO: Userconfig
+    // https://www.iconfinder.com/iconsets/ios-web-user-interface-multi-circle-flat-vol-3
 
-    /* TODO: Advanced
-            - ENC ZERO
-            - Status
-            - Optional correction
-            - Amplifier
-            - Offset
-            - External route
-    */
+    // TODO: Hints
+    // TODO: Error messages
+    // TODO: V0 174 validation
+    // TODO: External EDT exporter
+    // TODO: DgView disable selections
+    // TODO: DgView scrolls (update from thread, and scrollable)
+    // TODO: Gonio worker result to candela everywhere (userconfig usage).
+    // TODO: Remove duplicated routes values from matrix
+    // TODO: Multiple measurements in same point (advanced)
 
     internal partial class Form_MainForm : Form
     {
         private readonly Timer _timer;
-        private readonly IIOWorker _ioWorker;
+        private readonly Thread _thread;
+        private readonly IUserconfig _userconfig;
         private readonly Complex_MainModel _model;
+        private readonly EventWaitHandle _waitHandle;
         private readonly MainFormHelper _mainFormHelper;
         private readonly IMeasurementService _measurementService;
-        private readonly IExcelExportService _excelExportService;
         private readonly IGonioConfiguration _gonioConfiguration;
 
         internal Form_MainForm()
@@ -41,11 +41,12 @@ namespace ND.MTI.Gonio.Forms
             InitializeComponent();
 
             _timer = new Timer();
-            _ioWorker = new IOWorker();
             _model = new Complex_MainModel();
+            _thread = new Thread(ThreadWorker);
+            _userconfig = Userconfig.GetInstance();
             _mainFormHelper = new MainFormHelper();
             _measurementService = new MeasurementService();
-            _excelExportService = new ExcelExportService();
+            _waitHandle = new ManualResetEvent(initialState: true);
             _gonioConfiguration = GonioConfiguration.GetInstance();
             
             SetModel();
@@ -54,8 +55,23 @@ namespace ND.MTI.Gonio.Forms
             _timer.Tick += OnTimerTick;
             _timer.Start();
 
+            _thread.IsBackground = true;
+            _thread.Start();
+
+            _model.Userconfig = _userconfig.UserConfig;
+
             if (RuntimeContext.IsAdminContext)
-                buttonEncZero.Enabled = true;
+                buttonAdvanced.Enabled = true;
+        }
+
+        private void ThreadWorker()
+        {
+            while (true)
+            {
+                _ = _waitHandle.WaitOne();
+                // TODO: Set this from the thread.
+                //textBoxLuminousIntensivity.Text = _measurementService.MeasureLumenance().ToString();
+            }
         }
 
         private void Form_MainForm_Load(object sender, EventArgs e) => Text = $"GONIO v{Application.ProductVersion}";
@@ -67,6 +83,8 @@ namespace ND.MTI.Gonio.Forms
             textBoxXCurrentPosition.Text = position.X.ToString();
             textBoxYCurrentPosition.Text = position.Y.ToString();
 
+            textBoxVirtualZero.Text = RuntimeContext.VirtualZeroPosition.ToString();
+
             HandleState(_measurementService.State);
         }
 
@@ -77,6 +95,8 @@ namespace ND.MTI.Gonio.Forms
             switch (state)
             {
                 case MeasurementStatus.RUNNING:
+                    _waitHandle.Reset();
+
                     #region [ UI ]
 
                     buttonNew.Enabled = false;
@@ -89,16 +109,10 @@ namespace ND.MTI.Gonio.Forms
                     buttonGoToZero.Cursor = Cursors.No;
                     buttonContinue.Enabled = false;
                     buttonContinue.Cursor = Cursors.No;
-                    buttonExcelExport.Enabled = false;
-                    buttonExcelExport.Cursor = Cursors.No;
                     buttonSetVirtualZero.Enabled = false;
                     buttonSetVirtualZero.Cursor = Cursors.No;
                     buttonGoToVirtualZero.Enabled = false;
                     buttonGoToVirtualZero.Cursor = Cursors.No;
-                    buttonClearExternelRoute.Enabled = false;
-                    buttonClearExternelRoute.Cursor = Cursors.No;
-                    buttonBrowseExternalRoute.Enabled = false;
-                    buttonBrowseExternalRoute.Cursor = Cursors.No;
                     
                     buttonStop.Enabled = true;
                     buttonStop.Cursor = Cursors.Hand;
@@ -143,8 +157,6 @@ namespace ND.MTI.Gonio.Forms
                     buttonStart.Cursor = Cursors.No;
                     buttonGoToZero.Enabled = false;
                     buttonGoToZero.Cursor = Cursors.No;
-                    buttonExcelExport.Enabled = false;
-                    buttonExcelExport.Cursor = Cursors.No;
                     buttonSetVirtualZero.Enabled = false;
                     buttonSetVirtualZero.Cursor = Cursors.No;
                     buttonGoToVirtualZero.Enabled = false;
@@ -179,6 +191,8 @@ namespace ND.MTI.Gonio.Forms
                     break;
 
                 case MeasurementStatus.READY:
+                    _waitHandle.Set();
+
                     #region [ UI ]
 
                     buttonNew.Enabled = true;
@@ -191,17 +205,10 @@ namespace ND.MTI.Gonio.Forms
                     buttonResults.Cursor = Cursors.Hand;
                     buttonGoToZero.Enabled = true;
                     buttonGoToZero.Cursor = Cursors.Hand;
-                    buttonExcelExport.Enabled = true;
-                    buttonExcelExport.Cursor = Cursors.Hand;
                     buttonSetVirtualZero.Enabled = true;
                     buttonSetVirtualZero.Cursor = Cursors.Hand;
                     buttonGoToVirtualZero.Enabled = true;
                     buttonGoToVirtualZero.Cursor = Cursors.Hand;
-                    buttonClearExternelRoute.Enabled = true;
-                    buttonClearExternelRoute.Cursor = Cursors.Hand;
-                    buttonBrowseExternalRoute.Enabled = true;
-                    buttonBrowseExternalRoute.Cursor = Cursors.Hand;
-
                     buttonStop.Enabled = false;
                     buttonStop.Cursor = Cursors.No;
                     buttonPause.Enabled = false;
@@ -234,7 +241,13 @@ namespace ND.MTI.Gonio.Forms
             }
         }
 
-        private void ButtonExit_Click(object sender, EventArgs e) => RuntimeContext.LoadFormInstance.Close();
+        private void ButtonExit_Click(object sender, EventArgs e)
+        {
+            var exit = MessageBox.Show("Are your sure?", "Exit", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+            if(exit == DialogResult.Yes)
+                RuntimeContext.LoadFormInstance.Close();
+        }
 
         private void CheckBoxYAuto_CheckedChanged(object sender, EventArgs e)
         {
@@ -269,7 +282,6 @@ namespace ND.MTI.Gonio.Forms
             textBoxStepX.Text = _model.IsXAuto ? _model.StepX.ToString() : string.Empty;
             textBoxStepY.Text = _model.IsYAuto ? _model.StepY.ToString() : string.Empty;
             textBoxHoldTime.Text = _model.HoldTime.ToString();
-            textBoxExternalRouteFile.Text = _model.ExternalRoute;
         }
 
         private void GetModel()
@@ -283,7 +295,6 @@ namespace ND.MTI.Gonio.Forms
             _model.StepX = _model.IsXAuto ? Parser.StringToDouble(textBoxStepX.Text) : (double?)null;
             _model.StepY = _model.IsYAuto ? Parser.StringToDouble(textBoxStepY.Text) : (double?)null;
             _model.HoldTime = Parser.StringToInteger(textBoxHoldTime.Text);
-            _model.ExternalRoute = textBoxExternalRouteFile.Text;
         }
 
         private void ButtonStart_Click(object sender, EventArgs e)
@@ -308,8 +319,6 @@ namespace ND.MTI.Gonio.Forms
 
         private void ButtonPause_Click(object sender, EventArgs e) => _measurementService.Pause();
 
-        private void ButtonExcelExport_Click(object sender, EventArgs e) => _excelExportService.ExportToExcel(RuntimeContext.Results);
-
         private void ButtonResults_Click(object sender, EventArgs e)
         {
             var resultsFrom = new Form_ResultsForm();
@@ -327,24 +336,11 @@ namespace ND.MTI.Gonio.Forms
             virtualZeroForm.Show();
         }
 
-        private void ButtonEncZero_Click(object sender, EventArgs e) => _measurementService.EncoderZero();
-
-        private void ButtonStatus_Click(object sender, EventArgs e)
+        private void ButtonAdvanced_Click(object sender, EventArgs e)
         {
-            var statusForm = new Form_Status();
-            statusForm.Show();
+            var advancedForm = new Form_AdvancedForm();
+            if (advancedForm.ShowDialog() == DialogResult.OK)
+                _model.Userconfig = _userconfig.UserConfig;
         }
-
-        private void ButtonBrowseExternalRoute_Click(object sender, EventArgs e)
-        {
-            var file = _ioWorker.LoadFile(IOWorker_Filter.RouteFile);
-
-            if (file == string.Empty)
-                return;
-
-            textBoxExternalRouteFile.Text = file;
-        }
-
-        private void ButtonClearExternelRoute_Click(object sender, EventArgs e) => textBoxExternalRouteFile.Text = string.Empty;
     }
 }

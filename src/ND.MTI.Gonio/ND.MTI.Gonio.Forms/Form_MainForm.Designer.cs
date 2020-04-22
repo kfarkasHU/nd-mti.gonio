@@ -39,8 +39,6 @@
             this.buttonStart = new System.Windows.Forms.Button();
             this.buttonPause = new System.Windows.Forms.Button();
             this.buttonResults = new System.Windows.Forms.Button();
-            this.buttonExcelExport = new System.Windows.Forms.Button();
-            this.buttonEdtExport = new System.Windows.Forms.Button();
             this.buttonExit = new System.Windows.Forms.Button();
             this.labelX = new System.Windows.Forms.Label();
             this.labelY = new System.Windows.Forms.Label();
@@ -58,31 +56,31 @@
             this.textBoxXCurrentPosition = new System.Windows.Forms.TextBox();
             this.textBoxYCurrentPosition = new System.Windows.Forms.TextBox();
             this.buttonRegistration = new System.Windows.Forms.Button();
-            this.buttonEncZero = new System.Windows.Forms.Button();
-            this.buttonStatus = new System.Windows.Forms.Button();
             this.labelStatusText = new System.Windows.Forms.Label();
             this.textBoxHoldTime = new System.Windows.Forms.TextBox();
             this.LabelHold = new System.Windows.Forms.Label();
             this.textBoxMeasurementStatus = new System.Windows.Forms.TextBox();
-            this.textBoxExternalRouteFile = new System.Windows.Forms.TextBox();
-            this.buttonBrowseExternalRoute = new System.Windows.Forms.Button();
-            this.buttonClearExternelRoute = new System.Windows.Forms.Button();
+            this.buttonAdvanced = new System.Windows.Forms.Button();
+            this.textBoxLuminousIntensivity = new System.Windows.Forms.TextBox();
+            this.labelLuminousIntensivity = new System.Windows.Forms.Label();
+            this.textBoxVirtualZero = new System.Windows.Forms.TextBox();
+            this.labelVirtualZero = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // checkBoxXAuto
             // 
             this.checkBoxXAuto.AutoSize = true;
-            this.checkBoxXAuto.Location = new System.Drawing.Point(291, 31);
+            this.checkBoxXAuto.Location = new System.Drawing.Point(210, 31);
             this.checkBoxXAuto.Name = "checkBoxXAuto";
             this.checkBoxXAuto.Size = new System.Drawing.Size(47, 17);
-            this.checkBoxXAuto.TabIndex = 5;
+            this.checkBoxXAuto.TabIndex = 3;
             this.checkBoxXAuto.Text = "auto";
             this.checkBoxXAuto.UseVisualStyleBackColor = true;
             this.checkBoxXAuto.CheckedChanged += new System.EventHandler(this.CheckBoxXAuto_CheckedChanged);
             // 
             // buttonNew
             // 
-            this.buttonNew.Location = new System.Drawing.Point(10, 188);
+            this.buttonNew.Location = new System.Drawing.Point(10, 130);
             this.buttonNew.Name = "buttonNew";
             this.buttonNew.Size = new System.Drawing.Size(75, 23);
             this.buttonNew.TabIndex = 16;
@@ -92,7 +90,7 @@
             // 
             // buttonGoToZero
             // 
-            this.buttonGoToZero.Location = new System.Drawing.Point(10, 130);
+            this.buttonGoToZero.Location = new System.Drawing.Point(10, 159);
             this.buttonGoToZero.Name = "buttonGoToZero";
             this.buttonGoToZero.Size = new System.Drawing.Size(75, 23);
             this.buttonGoToZero.TabIndex = 17;
@@ -166,7 +164,7 @@
             // 
             // buttonResults
             // 
-            this.buttonResults.Location = new System.Drawing.Point(172, 188);
+            this.buttonResults.Location = new System.Drawing.Point(334, 159);
             this.buttonResults.Name = "buttonResults";
             this.buttonResults.Size = new System.Drawing.Size(75, 23);
             this.buttonResults.TabIndex = 11;
@@ -174,30 +172,9 @@
             this.buttonResults.UseVisualStyleBackColor = true;
             this.buttonResults.Click += new System.EventHandler(this.ButtonResults_Click);
             // 
-            // buttonExcelExport
-            // 
-            this.buttonExcelExport.Enabled = false;
-            this.buttonExcelExport.Location = new System.Drawing.Point(332, 130);
-            this.buttonExcelExport.Name = "buttonExcelExport";
-            this.buttonExcelExport.Size = new System.Drawing.Size(75, 23);
-            this.buttonExcelExport.TabIndex = 15;
-            this.buttonExcelExport.Text = "Excel export";
-            this.buttonExcelExport.UseVisualStyleBackColor = true;
-            this.buttonExcelExport.Click += new System.EventHandler(this.ButtonExcelExport_Click);
-            // 
-            // buttonEdtExport
-            // 
-            this.buttonEdtExport.Enabled = false;
-            this.buttonEdtExport.Location = new System.Drawing.Point(332, 159);
-            this.buttonEdtExport.Name = "buttonEdtExport";
-            this.buttonEdtExport.Size = new System.Drawing.Size(75, 23);
-            this.buttonEdtExport.TabIndex = 15;
-            this.buttonEdtExport.Text = "EDT export";
-            this.buttonEdtExport.UseVisualStyleBackColor = true;
-            // 
             // buttonExit
             // 
-            this.buttonExit.Location = new System.Drawing.Point(332, 188);
+            this.buttonExit.Location = new System.Drawing.Point(334, 207);
             this.buttonExit.Name = "buttonExit";
             this.buttonExit.Size = new System.Drawing.Size(75, 23);
             this.buttonExit.TabIndex = 23;
@@ -236,7 +213,7 @@
             this.textBoxStartY.Location = new System.Drawing.Point(48, 52);
             this.textBoxStartY.Name = "textBoxStartY";
             this.textBoxStartY.Size = new System.Drawing.Size(75, 20);
-            this.textBoxStartY.TabIndex = 2;
+            this.textBoxStartY.TabIndex = 5;
             this.textBoxStartY.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // textBoxEndY
@@ -244,7 +221,7 @@
             this.textBoxEndY.Location = new System.Drawing.Point(129, 52);
             this.textBoxEndY.Name = "textBoxEndY";
             this.textBoxEndY.Size = new System.Drawing.Size(75, 20);
-            this.textBoxEndY.TabIndex = 4;
+            this.textBoxEndY.TabIndex = 6;
             this.textBoxEndY.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // textBoxEndX
@@ -252,13 +229,13 @@
             this.textBoxEndX.Location = new System.Drawing.Point(129, 29);
             this.textBoxEndX.Name = "textBoxEndX";
             this.textBoxEndX.Size = new System.Drawing.Size(75, 20);
-            this.textBoxEndX.TabIndex = 3;
+            this.textBoxEndX.TabIndex = 2;
             this.textBoxEndX.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // textBoxStepY
             // 
             this.textBoxStepY.Enabled = false;
-            this.textBoxStepY.Location = new System.Drawing.Point(210, 52);
+            this.textBoxStepY.Location = new System.Drawing.Point(257, 51);
             this.textBoxStepY.Name = "textBoxStepY";
             this.textBoxStepY.Size = new System.Drawing.Size(75, 20);
             this.textBoxStepY.TabIndex = 8;
@@ -267,19 +244,19 @@
             // textBoxStepX
             // 
             this.textBoxStepX.Enabled = false;
-            this.textBoxStepX.Location = new System.Drawing.Point(210, 29);
+            this.textBoxStepX.Location = new System.Drawing.Point(257, 28);
             this.textBoxStepX.Name = "textBoxStepX";
             this.textBoxStepX.Size = new System.Drawing.Size(75, 20);
-            this.textBoxStepX.TabIndex = 7;
+            this.textBoxStepX.TabIndex = 4;
             this.textBoxStepX.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // checkBoxYAuto
             // 
             this.checkBoxYAuto.AutoSize = true;
-            this.checkBoxYAuto.Location = new System.Drawing.Point(291, 54);
+            this.checkBoxYAuto.Location = new System.Drawing.Point(210, 54);
             this.checkBoxYAuto.Name = "checkBoxYAuto";
             this.checkBoxYAuto.Size = new System.Drawing.Size(47, 17);
-            this.checkBoxYAuto.TabIndex = 6;
+            this.checkBoxYAuto.TabIndex = 7;
             this.checkBoxYAuto.Text = "auto";
             this.checkBoxYAuto.UseVisualStyleBackColor = true;
             this.checkBoxYAuto.CheckedChanged += new System.EventHandler(this.CheckBoxYAuto_CheckedChanged);
@@ -305,7 +282,7 @@
             // labelStep
             // 
             this.labelStep.AutoSize = true;
-            this.labelStep.Location = new System.Drawing.Point(234, 9);
+            this.labelStep.Location = new System.Drawing.Point(281, 8);
             this.labelStep.Name = "labelStep";
             this.labelStep.Size = new System.Drawing.Size(29, 13);
             this.labelStep.TabIndex = 30;
@@ -340,7 +317,8 @@
             // 
             // buttonRegistration
             // 
-            this.buttonRegistration.Location = new System.Drawing.Point(253, 188);
+            this.buttonRegistration.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.buttonRegistration.Location = new System.Drawing.Point(334, 130);
             this.buttonRegistration.Name = "buttonRegistration";
             this.buttonRegistration.Size = new System.Drawing.Size(75, 23);
             this.buttonRegistration.TabIndex = 20;
@@ -348,33 +326,11 @@
             this.buttonRegistration.UseVisualStyleBackColor = true;
             this.buttonRegistration.Click += new System.EventHandler(this.ButtonRegistration_Click);
             // 
-            // buttonEncZero
-            // 
-            this.buttonEncZero.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.buttonEncZero.Enabled = false;
-            this.buttonEncZero.Location = new System.Drawing.Point(10, 159);
-            this.buttonEncZero.Name = "buttonEncZero";
-            this.buttonEncZero.Size = new System.Drawing.Size(75, 23);
-            this.buttonEncZero.TabIndex = 21;
-            this.buttonEncZero.Text = "ENC ZERO";
-            this.buttonEncZero.UseVisualStyleBackColor = true;
-            this.buttonEncZero.Click += new System.EventHandler(this.ButtonEncZero_Click);
-            // 
-            // buttonStatus
-            // 
-            this.buttonStatus.Location = new System.Drawing.Point(91, 188);
-            this.buttonStatus.Name = "buttonStatus";
-            this.buttonStatus.Size = new System.Drawing.Size(75, 23);
-            this.buttonStatus.TabIndex = 22;
-            this.buttonStatus.Text = "Status";
-            this.buttonStatus.UseVisualStyleBackColor = true;
-            this.buttonStatus.Click += new System.EventHandler(this.ButtonStatus_Click);
-            // 
             // labelStatusText
             // 
             this.labelStatusText.AutoSize = true;
             this.labelStatusText.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.labelStatusText.Location = new System.Drawing.Point(12, 105);
+            this.labelStatusText.Location = new System.Drawing.Point(7, 105);
             this.labelStatusText.Name = "labelStatusText";
             this.labelStatusText.Size = new System.Drawing.Size(41, 15);
             this.labelStatusText.TabIndex = 47;
@@ -382,7 +338,7 @@
             // 
             // textBoxHoldTime
             // 
-            this.textBoxHoldTime.Location = new System.Drawing.Point(79, 78);
+            this.textBoxHoldTime.Location = new System.Drawing.Point(71, 78);
             this.textBoxHoldTime.Name = "textBoxHoldTime";
             this.textBoxHoldTime.Size = new System.Drawing.Size(87, 20);
             this.textBoxHoldTime.TabIndex = 9;
@@ -392,69 +348,90 @@
             // 
             this.LabelHold.AutoSize = true;
             this.LabelHold.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.LabelHold.Location = new System.Drawing.Point(12, 79);
+            this.LabelHold.Location = new System.Drawing.Point(7, 78);
             this.LabelHold.Name = "LabelHold";
-            this.LabelHold.Size = new System.Drawing.Size(61, 15);
+            this.LabelHold.Size = new System.Drawing.Size(58, 15);
             this.LabelHold.TabIndex = 51;
-            this.LabelHold.Text = "Hold(ms):";
+            this.LabelHold.Text = "Hold(ms)";
             // 
             // textBoxMeasurementStatus
             // 
             this.textBoxMeasurementStatus.Cursor = System.Windows.Forms.Cursors.No;
             this.textBoxMeasurementStatus.Enabled = false;
-            this.textBoxMeasurementStatus.Location = new System.Drawing.Point(79, 104);
+            this.textBoxMeasurementStatus.Location = new System.Drawing.Point(71, 104);
             this.textBoxMeasurementStatus.Name = "textBoxMeasurementStatus";
             this.textBoxMeasurementStatus.ReadOnly = true;
             this.textBoxMeasurementStatus.Size = new System.Drawing.Size(87, 20);
             this.textBoxMeasurementStatus.TabIndex = 54;
             this.textBoxMeasurementStatus.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
-            // textBoxExternalRouteFile
+            // buttonAdvanced
             // 
-            this.textBoxExternalRouteFile.Cursor = System.Windows.Forms.Cursors.No;
-            this.textBoxExternalRouteFile.Enabled = false;
-            this.textBoxExternalRouteFile.Location = new System.Drawing.Point(171, 104);
-            this.textBoxExternalRouteFile.Name = "textBoxExternalRouteFile";
-            this.textBoxExternalRouteFile.ReadOnly = true;
-            this.textBoxExternalRouteFile.Size = new System.Drawing.Size(126, 20);
-            this.textBoxExternalRouteFile.TabIndex = 55;
+            this.buttonAdvanced.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.buttonAdvanced.Enabled = false;
+            this.buttonAdvanced.Location = new System.Drawing.Point(335, 76);
+            this.buttonAdvanced.Name = "buttonAdvanced";
+            this.buttonAdvanced.Size = new System.Drawing.Size(75, 23);
+            this.buttonAdvanced.TabIndex = 58;
+            this.buttonAdvanced.Text = "Advanced";
+            this.buttonAdvanced.UseVisualStyleBackColor = true;
+            this.buttonAdvanced.Click += new System.EventHandler(this.ButtonAdvanced_Click);
             // 
-            // buttonBrowseExternalRoute
+            // textBoxLuminousIntensivity
             // 
-            this.buttonBrowseExternalRoute.Location = new System.Drawing.Point(332, 104);
-            this.buttonBrowseExternalRoute.Name = "buttonBrowseExternalRoute";
-            this.buttonBrowseExternalRoute.Size = new System.Drawing.Size(75, 23);
-            this.buttonBrowseExternalRoute.TabIndex = 56;
-            this.buttonBrowseExternalRoute.Text = "Browse";
-            this.buttonBrowseExternalRoute.UseVisualStyleBackColor = true;
-            this.buttonBrowseExternalRoute.Click += new System.EventHandler(this.ButtonBrowseExternalRoute_Click);
+            this.textBoxLuminousIntensivity.Enabled = false;
+            this.textBoxLuminousIntensivity.Location = new System.Drawing.Point(257, 78);
+            this.textBoxLuminousIntensivity.Name = "textBoxLuminousIntensivity";
+            this.textBoxLuminousIntensivity.ReadOnly = true;
+            this.textBoxLuminousIntensivity.Size = new System.Drawing.Size(75, 20);
+            this.textBoxLuminousIntensivity.TabIndex = 59;
+            this.textBoxLuminousIntensivity.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
-            // buttonClearExternelRoute
+            // labelLuminousIntensivity
             // 
-            this.buttonClearExternelRoute.Enabled = false;
-            this.buttonClearExternelRoute.Location = new System.Drawing.Point(303, 104);
-            this.buttonClearExternelRoute.Name = "buttonClearExternelRoute";
-            this.buttonClearExternelRoute.Size = new System.Drawing.Size(25, 23);
-            this.buttonClearExternelRoute.TabIndex = 57;
-            this.buttonClearExternelRoute.Text = "X";
-            this.buttonClearExternelRoute.UseVisualStyleBackColor = true;
-            this.buttonClearExternelRoute.Click += new System.EventHandler(this.ButtonClearExternelRoute_Click);
+            this.labelLuminousIntensivity.AutoSize = true;
+            this.labelLuminousIntensivity.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.labelLuminousIntensivity.Location = new System.Drawing.Point(161, 79);
+            this.labelLuminousIntensivity.Name = "labelLuminousIntensivity";
+            this.labelLuminousIntensivity.Size = new System.Drawing.Size(90, 15);
+            this.labelLuminousIntensivity.TabIndex = 60;
+            this.labelLuminousIntensivity.Text = "Lum. intensivity";
+            // 
+            // textBoxVirtualZero
+            // 
+            this.textBoxVirtualZero.Enabled = false;
+            this.textBoxVirtualZero.Location = new System.Drawing.Point(257, 104);
+            this.textBoxVirtualZero.Name = "textBoxVirtualZero";
+            this.textBoxVirtualZero.ReadOnly = true;
+            this.textBoxVirtualZero.Size = new System.Drawing.Size(153, 20);
+            this.textBoxVirtualZero.TabIndex = 61;
+            this.textBoxVirtualZero.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // labelVirtualZero
+            // 
+            this.labelVirtualZero.AutoSize = true;
+            this.labelVirtualZero.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.labelVirtualZero.Location = new System.Drawing.Point(183, 105);
+            this.labelVirtualZero.Name = "labelVirtualZero";
+            this.labelVirtualZero.Size = new System.Drawing.Size(68, 15);
+            this.labelVirtualZero.TabIndex = 62;
+            this.labelVirtualZero.Text = "Virtual zero";
             // 
             // Form_MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(421, 222);
+            this.ClientSize = new System.Drawing.Size(420, 242);
             this.ControlBox = false;
-            this.Controls.Add(this.buttonClearExternelRoute);
-            this.Controls.Add(this.buttonBrowseExternalRoute);
-            this.Controls.Add(this.textBoxExternalRouteFile);
+            this.Controls.Add(this.textBoxVirtualZero);
+            this.Controls.Add(this.labelVirtualZero);
+            this.Controls.Add(this.textBoxLuminousIntensivity);
+            this.Controls.Add(this.labelLuminousIntensivity);
+            this.Controls.Add(this.buttonAdvanced);
             this.Controls.Add(this.textBoxMeasurementStatus);
             this.Controls.Add(this.textBoxHoldTime);
             this.Controls.Add(this.LabelHold);
             this.Controls.Add(this.labelStatusText);
-            this.Controls.Add(this.buttonStatus);
-            this.Controls.Add(this.buttonEncZero);
             this.Controls.Add(this.buttonRegistration);
             this.Controls.Add(this.textBoxYCurrentPosition);
             this.Controls.Add(this.textBoxXCurrentPosition);
@@ -471,8 +448,6 @@
             this.Controls.Add(this.textBoxStartX);
             this.Controls.Add(this.labelY);
             this.Controls.Add(this.labelX);
-            this.Controls.Add(this.buttonExcelExport);
-            this.Controls.Add(this.buttonEdtExport);
             this.Controls.Add(this.buttonExit);
             this.Controls.Add(this.buttonStop);
             this.Controls.Add(this.buttonContinue);
@@ -510,8 +485,6 @@
         private System.Windows.Forms.Button buttonStart;
         private System.Windows.Forms.Button buttonPause;
         private System.Windows.Forms.Button buttonResults;
-        private System.Windows.Forms.Button buttonExcelExport;
-        private System.Windows.Forms.Button buttonEdtExport;
         private System.Windows.Forms.Button buttonExit;
         private System.Windows.Forms.Label labelX;
         private System.Windows.Forms.Label labelY;
@@ -529,14 +502,14 @@
         private System.Windows.Forms.TextBox textBoxXCurrentPosition;
         private System.Windows.Forms.TextBox textBoxYCurrentPosition;
         private System.Windows.Forms.Button buttonRegistration;
-        private System.Windows.Forms.Button buttonEncZero;
-        private System.Windows.Forms.Button buttonStatus;
         private System.Windows.Forms.Label labelStatusText;
         private System.Windows.Forms.TextBox textBoxHoldTime;
         private System.Windows.Forms.Label LabelHold;
         private System.Windows.Forms.TextBox textBoxMeasurementStatus;
-        private System.Windows.Forms.TextBox textBoxExternalRouteFile;
-        private System.Windows.Forms.Button buttonBrowseExternalRoute;
-        private System.Windows.Forms.Button buttonClearExternelRoute;
+        private System.Windows.Forms.Button buttonAdvanced;
+        private System.Windows.Forms.TextBox textBoxLuminousIntensivity;
+        private System.Windows.Forms.Label labelLuminousIntensivity;
+        private System.Windows.Forms.TextBox textBoxVirtualZero;
+        private System.Windows.Forms.Label labelVirtualZero;
     }
 }

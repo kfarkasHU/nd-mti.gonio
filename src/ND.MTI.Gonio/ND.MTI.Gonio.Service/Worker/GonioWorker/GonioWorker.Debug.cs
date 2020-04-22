@@ -37,7 +37,7 @@ namespace ND.MTI.Gonio.Service.Worker
 
             var random = new Random(seed);
 
-            return random.NextDouble() * 1000;
+            return random.NextDouble() * 10;
         }
 
         public void Reset() => Thread.Sleep(500);

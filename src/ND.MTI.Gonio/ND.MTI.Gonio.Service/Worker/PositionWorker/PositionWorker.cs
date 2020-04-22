@@ -147,7 +147,12 @@ namespace ND.MTI.Gonio.Service.Worker
             SetPositionYInternal(pos);
         }
 
-        private bool CloseEnough(double current, double target) => current - 0.1 < target && current + 0.1 > target;
+        private bool CloseEnough(double current, double target)
+        {
+            var precision = _gonioConfiguration.Encoder_Precision;
+            
+            return current - precision < target && current + precision > target;
+        }
 
         private void IncrementXInternal() => _ = _pokeysWorker.WriteDataX(GonioPokeys_Commands.ENA1_SR1_DIR0_RES0);
 

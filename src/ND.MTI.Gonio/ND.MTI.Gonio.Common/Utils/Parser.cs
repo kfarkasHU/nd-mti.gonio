@@ -31,5 +31,9 @@ namespace ND.MTI.Gonio.Common.Utils
         }
 
         public static TEnum StringIntToEnum<TEnum>(string strInt) => (TEnum)Enum.Parse(typeof(TEnum), strInt);
+
+        public static double DecimalToDouble(decimal dec) => (double)dec;
+
+        public static bool StringToBoolean(string boolStr) => boolStr == "1" || boolStr.ToLower() == "true";
     }
 }

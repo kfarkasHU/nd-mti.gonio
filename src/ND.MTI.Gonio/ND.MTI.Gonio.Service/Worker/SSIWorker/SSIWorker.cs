@@ -19,6 +19,7 @@ namespace ND.MTI.Gonio.Service.Worker.SSIWorker
         public SSIWorker()
         {
             _thread = new Thread(OnRead);
+            _thread.IsBackground = true;
             _isReading = true;
         }
 

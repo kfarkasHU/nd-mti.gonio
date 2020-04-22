@@ -6,10 +6,11 @@ namespace ND.MTI.Gonio.Common.Configuration
     {
         Complex_FSMGonioConfig FSM_GonioConfig { get; }
         Complex_SSIConfig SSI_Config { get; }
-        double Sensor_Distance { get; }
         int Pokeys_ReadInterval { get; }
 
         double Position_AbsoluteZeroX { get; }
         double Position_AbsoluteZeroY { get; }
+
+        double Encoder_Precision { get; }
     }
 }
