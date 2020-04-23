@@ -1,7 +1,7 @@
 ﻿#if DEBUG
 
 using System;
-using System.Windows.Forms;
+using ND.MTI.Gonio.Common.Utils;
 
 namespace ND.MTI.Gonio.Service.Worker
 {
@@ -15,8 +15,7 @@ namespace ND.MTI.Gonio.Service.Worker
         internal static int CurrentX { get; private set; }
         internal static int CurrentY { get; private set; }
 
-        // TODO: Replace with GonioTimer
-        private static Timer _timer;
+        private static GonioTimer _timer;
         private static int _changeX = 0;
         private static int _changeY = 0;
 
@@ -25,10 +24,7 @@ namespace ND.MTI.Gonio.Service.Worker
             CurrentX = (ENCODER_MIN + ENCODER_MAX) / 2; 
             CurrentY = (ENCODER_MIN + ENCODER_MAX) / 2;
 
-            _timer = new Timer();
-            _timer.Tick += OnTimerTick;
-            _timer.Interval = 10;
-
+            _timer = new GonioTimer(OnTimerTick, 10);
             _timer.Start();
         }
 
