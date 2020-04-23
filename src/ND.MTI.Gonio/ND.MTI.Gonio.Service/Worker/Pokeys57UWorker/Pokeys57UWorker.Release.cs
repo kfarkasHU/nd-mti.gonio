@@ -1,6 +1,8 @@
-﻿using System;
+﻿#if !DEBUG
+
+using System;
 using System.Linq;
-using System.Timers;
+using ND.MTI.Gonio.Common.Utils;
 using System.Collections.Generic;
 using ND.MTI.Gonio.Common.Exceptions;
 using ND.MTI.Gonio.Service.Worker.PokeysCore;
@@ -11,15 +13,14 @@ namespace ND.MTI.Gonio.Service.Worker.Pokeys
 {
     public sealed class Pokeys57UWorker : Pokeys57UCore, IPokeys57UWorker
     {
-        private readonly Timer _timer;
+        private readonly GonioTimer _timer;
 
         private bool _endpoint_X;
         private bool _endpoint_Y;
 
         public Pokeys57UWorker(int readInterval)
         {
-            _timer = new Timer(readInterval);
-            _timer.Elapsed += OnTimerTick;
+            _timer = new GonioTimer(OnTimerTick, readInterval);
         }
 
         public override bool Connect()
@@ -47,7 +48,7 @@ namespace ND.MTI.Gonio.Service.Worker.Pokeys
             InitDigitalOutputPins(GonioPokeys_Pinout.Y_Output);
         }
 
-        private void OnTimerTick(object sender, ElapsedEventArgs e)
+        private void OnTimerTick(object sender, EventArgs e)
         {
             ReadEndpointX();
             ReadEndpointY();
@@ -130,3 +131,5 @@ namespace ND.MTI.Gonio.Service.Worker.Pokeys
         }
     }
 }
+
+#endif

@@ -1,20 +1,19 @@
 ﻿using System;
 using System.Windows.Forms;
+using ND.MTI.Gonio.Common.Utils;
 using ND.MTI.Gonio.Common.RuntimeContext;
 
 namespace ND.MTI.Gonio.Forms
 {
     internal partial class Form_LoadForm : Form
     {
-        private readonly Timer _timer;
+        private readonly GonioTimer _timer;
 
         internal Form_LoadForm()
         {
             InitializeComponent();
 
-            _timer = new Timer();
-            _timer.Tick += OnTimerTick;
-            _timer.Interval = 1500;
+            _timer = new GonioTimer(OnTimerTick, 1500);
 
             _timer.Start();
 

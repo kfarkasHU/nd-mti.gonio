@@ -75,13 +75,15 @@
     <Compile Include="Worker\Pokeys57UWorker\Helper\GonioPokeys_Commands.cs" />
     <Compile Include="Worker\Pokeys57UWorker\Helper\GonioPokeys_Pinout.cs" />
     <Compile Include="Worker\Pokeys57UWorker\IPokeys57UWorker.cs" />
-    <Compile Include="Worker\Pokeys57UWorker\Pokeys57UWorker.cs" />
+    <Compile Include="Worker\Pokeys57UWorker\Pokeys57UWorker.Release.cs" />
     <Compile Include="Worker\PositionWorker\IPositionWorker.cs" />
     <Compile Include="Worker\PositionWorker\PositionWorker.cs" />
     <Compile Include="Worker\SerialCore\ISerialCore.cs" />
     <Compile Include="Worker\SerialCore\SerialCore.cs" />
     <Compile Include="Worker\SSIWorker\ISSIWorker.cs" />
-    <Compile Include="Worker\SSIWorker\SSIWorker.cs" />
+    <Compile Include="Worker\SSIWorker\SSIWorker.Debug.cs" />
+    <Compile Include="Worker\SSIWorker\SSIWorker.Release.cs" />
+    <Compile Include="Worker\WorkerHelper.Debug.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ND.MTI.Gonio.Common\ND.MTI.Gonio.Common.csproj">
@@ -95,6 +97,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+    <Compile Include="Worker\Pokeys57UWorker\Pokeys57UWorker.Debug.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

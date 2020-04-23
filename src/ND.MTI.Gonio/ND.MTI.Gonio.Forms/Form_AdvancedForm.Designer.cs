@@ -31,6 +31,10 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form_AdvancedForm));
             this.buttonSave = new System.Windows.Forms.Button();
             this.groupBoxOptions = new System.Windows.Forms.GroupBox();
+            this.labelResetV0 = new System.Windows.Forms.Label();
+            this.checkBoxResetV0 = new System.Windows.Forms.CheckBox();
+            this.labelReset0 = new System.Windows.Forms.Label();
+            this.checkBoxReset0 = new System.Windows.Forms.CheckBox();
             this.labelOffset = new System.Windows.Forms.Label();
             this.textBoxOffset = new System.Windows.Forms.TextBox();
             this.buttonStatus = new System.Windows.Forms.Button();
@@ -44,10 +48,8 @@
             this.buttonClearExternalRoute = new System.Windows.Forms.Button();
             this.buttonBrowseExternalRoute = new System.Windows.Forms.Button();
             this.textBoxExternalRoute = new System.Windows.Forms.TextBox();
-            this.labelReset0 = new System.Windows.Forms.Label();
-            this.checkBoxReset0 = new System.Windows.Forms.CheckBox();
-            this.labelResetV0 = new System.Windows.Forms.Label();
-            this.checkBoxResetV0 = new System.Windows.Forms.CheckBox();
+            this.labelMeasuresInSamePosition = new System.Windows.Forms.Label();
+            this.textBoxMeasuresInSamePosition = new System.Windows.Forms.TextBox();
             this.groupBoxOptions.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownAmplifier)).BeginInit();
             this.groupBoxExternalRoute.SuspendLayout();
@@ -55,7 +57,7 @@
             // 
             // buttonSave
             // 
-            this.buttonSave.Location = new System.Drawing.Point(173, 288);
+            this.buttonSave.Location = new System.Drawing.Point(173, 332);
             this.buttonSave.Name = "buttonSave";
             this.buttonSave.Size = new System.Drawing.Size(75, 23);
             this.buttonSave.TabIndex = 0;
@@ -65,6 +67,8 @@
             // 
             // groupBoxOptions
             // 
+            this.groupBoxOptions.Controls.Add(this.labelMeasuresInSamePosition);
+            this.groupBoxOptions.Controls.Add(this.textBoxMeasuresInSamePosition);
             this.groupBoxOptions.Controls.Add(this.labelResetV0);
             this.groupBoxOptions.Controls.Add(this.checkBoxResetV0);
             this.groupBoxOptions.Controls.Add(this.labelReset0);
@@ -79,10 +83,48 @@
             this.groupBoxOptions.Controls.Add(this.checkBoxUseCorrection);
             this.groupBoxOptions.Location = new System.Drawing.Point(12, 12);
             this.groupBoxOptions.Name = "groupBoxOptions";
-            this.groupBoxOptions.Size = new System.Drawing.Size(236, 187);
+            this.groupBoxOptions.Size = new System.Drawing.Size(236, 231);
             this.groupBoxOptions.TabIndex = 1;
             this.groupBoxOptions.TabStop = false;
             this.groupBoxOptions.Text = "Options";
+            // 
+            // labelResetV0
+            // 
+            this.labelResetV0.AutoSize = true;
+            this.labelResetV0.Location = new System.Drawing.Point(6, 118);
+            this.labelResetV0.Name = "labelResetV0";
+            this.labelResetV0.Size = new System.Drawing.Size(131, 13);
+            this.labelResetV0.TabIndex = 10;
+            this.labelResetV0.Text = "Reset to V0 when finished";
+            // 
+            // checkBoxResetV0
+            // 
+            this.checkBoxResetV0.AutoSize = true;
+            this.checkBoxResetV0.Location = new System.Drawing.Point(172, 117);
+            this.checkBoxResetV0.Name = "checkBoxResetV0";
+            this.checkBoxResetV0.Size = new System.Drawing.Size(43, 17);
+            this.checkBoxResetV0.TabIndex = 9;
+            this.checkBoxResetV0.Text = "use";
+            this.checkBoxResetV0.UseVisualStyleBackColor = true;
+            // 
+            // labelReset0
+            // 
+            this.labelReset0.AutoSize = true;
+            this.labelReset0.Location = new System.Drawing.Point(6, 95);
+            this.labelReset0.Name = "labelReset0";
+            this.labelReset0.Size = new System.Drawing.Size(124, 13);
+            this.labelReset0.TabIndex = 8;
+            this.labelReset0.Text = "Reset to 0 when finished";
+            // 
+            // checkBoxReset0
+            // 
+            this.checkBoxReset0.AutoSize = true;
+            this.checkBoxReset0.Location = new System.Drawing.Point(172, 94);
+            this.checkBoxReset0.Name = "checkBoxReset0";
+            this.checkBoxReset0.Size = new System.Drawing.Size(43, 17);
+            this.checkBoxReset0.TabIndex = 7;
+            this.checkBoxReset0.Text = "use";
+            this.checkBoxReset0.UseVisualStyleBackColor = true;
             // 
             // labelOffset
             // 
@@ -102,7 +144,7 @@
             // 
             // buttonStatus
             // 
-            this.buttonStatus.Location = new System.Drawing.Point(6, 158);
+            this.buttonStatus.Location = new System.Drawing.Point(6, 202);
             this.buttonStatus.Name = "buttonStatus";
             this.buttonStatus.Size = new System.Drawing.Size(75, 23);
             this.buttonStatus.TabIndex = 4;
@@ -112,7 +154,7 @@
             // 
             // buttonEncZero
             // 
-            this.buttonEncZero.Location = new System.Drawing.Point(155, 158);
+            this.buttonEncZero.Location = new System.Drawing.Point(155, 202);
             this.buttonEncZero.Name = "buttonEncZero";
             this.buttonEncZero.Size = new System.Drawing.Size(75, 23);
             this.buttonEncZero.TabIndex = 3;
@@ -167,7 +209,7 @@
             // 
             // buttonCancel
             // 
-            this.buttonCancel.Location = new System.Drawing.Point(12, 288);
+            this.buttonCancel.Location = new System.Drawing.Point(12, 332);
             this.buttonCancel.Name = "buttonCancel";
             this.buttonCancel.Size = new System.Drawing.Size(75, 23);
             this.buttonCancel.TabIndex = 2;
@@ -180,7 +222,7 @@
             this.groupBoxExternalRoute.Controls.Add(this.buttonClearExternalRoute);
             this.groupBoxExternalRoute.Controls.Add(this.buttonBrowseExternalRoute);
             this.groupBoxExternalRoute.Controls.Add(this.textBoxExternalRoute);
-            this.groupBoxExternalRoute.Location = new System.Drawing.Point(12, 205);
+            this.groupBoxExternalRoute.Location = new System.Drawing.Point(12, 249);
             this.groupBoxExternalRoute.Name = "groupBoxExternalRoute";
             this.groupBoxExternalRoute.Size = new System.Drawing.Size(236, 77);
             this.groupBoxExternalRoute.TabIndex = 3;
@@ -216,49 +258,27 @@
             this.textBoxExternalRoute.Size = new System.Drawing.Size(224, 20);
             this.textBoxExternalRoute.TabIndex = 0;
             // 
-            // labelReset0
+            // labelMeasuresInSamePosition
             // 
-            this.labelReset0.AutoSize = true;
-            this.labelReset0.Location = new System.Drawing.Point(6, 95);
-            this.labelReset0.Name = "labelReset0";
-            this.labelReset0.Size = new System.Drawing.Size(124, 13);
-            this.labelReset0.TabIndex = 8;
-            this.labelReset0.Text = "Reset to 0 when finished";
+            this.labelMeasuresInSamePosition.AutoSize = true;
+            this.labelMeasuresInSamePosition.Location = new System.Drawing.Point(6, 143);
+            this.labelMeasuresInSamePosition.Name = "labelMeasuresInSamePosition";
+            this.labelMeasuresInSamePosition.Size = new System.Drawing.Size(131, 13);
+            this.labelMeasuresInSamePosition.TabIndex = 12;
+            this.labelMeasuresInSamePosition.Text = "Measures in same position";
             // 
-            // checkBoxReset0
+            // textBoxMeasuresInSamePosition
             // 
-            this.checkBoxReset0.AutoSize = true;
-            this.checkBoxReset0.Location = new System.Drawing.Point(172, 94);
-            this.checkBoxReset0.Name = "checkBoxReset0";
-            this.checkBoxReset0.Size = new System.Drawing.Size(43, 17);
-            this.checkBoxReset0.TabIndex = 7;
-            this.checkBoxReset0.Text = "use";
-            this.checkBoxReset0.UseVisualStyleBackColor = true;
-            // 
-            // labelResetV0
-            // 
-            this.labelResetV0.AutoSize = true;
-            this.labelResetV0.Location = new System.Drawing.Point(6, 118);
-            this.labelResetV0.Name = "labelResetV0";
-            this.labelResetV0.Size = new System.Drawing.Size(131, 13);
-            this.labelResetV0.TabIndex = 10;
-            this.labelResetV0.Text = "Reset to V0 when finished";
-            // 
-            // checkBoxResetV0
-            // 
-            this.checkBoxResetV0.AutoSize = true;
-            this.checkBoxResetV0.Location = new System.Drawing.Point(172, 117);
-            this.checkBoxResetV0.Name = "checkBoxResetV0";
-            this.checkBoxResetV0.Size = new System.Drawing.Size(43, 17);
-            this.checkBoxResetV0.TabIndex = 9;
-            this.checkBoxResetV0.Text = "use";
-            this.checkBoxResetV0.UseVisualStyleBackColor = true;
+            this.textBoxMeasuresInSamePosition.Location = new System.Drawing.Point(146, 140);
+            this.textBoxMeasuresInSamePosition.Name = "textBoxMeasuresInSamePosition";
+            this.textBoxMeasuresInSamePosition.Size = new System.Drawing.Size(69, 20);
+            this.textBoxMeasuresInSamePosition.TabIndex = 11;
             // 
             // Form_AdvancedForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(260, 323);
+            this.ClientSize = new System.Drawing.Size(260, 367);
             this.ControlBox = false;
             this.Controls.Add(this.groupBoxExternalRoute);
             this.Controls.Add(this.buttonCancel);
@@ -301,5 +321,7 @@
         private System.Windows.Forms.CheckBox checkBoxResetV0;
         private System.Windows.Forms.Label labelReset0;
         private System.Windows.Forms.CheckBox checkBoxReset0;
+        private System.Windows.Forms.Label labelMeasuresInSamePosition;
+        private System.Windows.Forms.TextBox textBoxMeasuresInSamePosition;
     }
 }

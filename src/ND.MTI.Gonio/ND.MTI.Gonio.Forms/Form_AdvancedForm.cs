@@ -30,7 +30,8 @@ namespace ND.MTI.Gonio.Forms
             checkBoxResetV0.Checked = _model.ResetToVZero;
             textBoxOffset.Text = _model.Offset.ToString();
             checkBoxUseCorrection.Checked = _model.UseCorrection;
-            numericUpDownAmplifier.Value = (decimal)_model.Amplification;            
+            numericUpDownAmplifier.Value = (decimal)_model.Amplification;
+            textBoxMeasuresInSamePosition.Text = _model.MeasuresInSamePosition.ToString();
         }
 
         private void ButtonCancel_Click(object sender, EventArgs e)
@@ -57,9 +58,15 @@ namespace ND.MTI.Gonio.Forms
             if (MessageBox.Show("Are you sure?", "Save", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No)
                 return;
 
+            var measuresInSamePosition = Parser.StringToInteger(textBoxMeasuresInSamePosition.Text);
+
+            if (measuresInSamePosition < 1)
+                throw new Exception("Measures in same position must be greater than 1!");
+
             _model.ResetToZero = checkBoxReset0.Checked;
             _model.ResetToVZero = checkBoxResetV0.Checked;
             _model.UseCorrection = checkBoxUseCorrection.Checked;
+            _model.MeasuresInSamePosition = measuresInSamePosition;
             _model.Offset = Parser.StringToDouble(textBoxOffset.Text);
             _model.Amplification = Parser.DecimalToDouble(numericUpDownAmplifier.Value);
 

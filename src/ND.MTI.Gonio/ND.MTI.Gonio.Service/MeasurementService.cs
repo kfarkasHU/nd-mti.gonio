@@ -94,27 +94,30 @@ namespace ND.MTI.Gonio.Service
                 SetPositionInternal(_positionMatrix[i]);
                 var position = GetPositionInternal();
 
-                Thread.Sleep(_config.HoldTime);
+                foreach(var _ in Enumerable.Range(0, _config.Userconfig.MeasuresInSamePosition))
+                {
+                    Thread.Sleep(_config.HoldTime);
 
-                var measured = MeasureInternal();
-                var correction = _config.Userconfig.UseCorrection
-                    ? _measurementServiceHelper.GetCorrectionValue(measured)
-                    : 1;
+                    var measured = MeasureInternal();
+                    var correction = _config.Userconfig.UseCorrection
+                        ? _measurementServiceHelper.GetCorrectionValue(measured)
+                        : 1;
 
-                if(_config.Userconfig.Amplification > 0)
-                    measured *= _config.Userconfig.Amplification;
+                    if (_config.Userconfig.Amplification > 0)
+                        measured *= _config.Userconfig.Amplification;
 
-                measured += _config.Userconfig.Offset;
+                    measured += _config.Userconfig.Offset;
 
-                RuntimeContext
-                    .AddResult(
-                        new Complex_ResultItem(
-                            position.X,
-                            position.Y,
-                            measured,
-                            correction
-                    )
-                ); ;
+                    RuntimeContext
+                        .AddResult(
+                            new Complex_ResultItem(
+                                position.X,
+                                position.Y,
+                                measured,
+                                correction
+                        )
+                    );
+                }
             }
 
             if (_config.Userconfig.ResetToZero)
