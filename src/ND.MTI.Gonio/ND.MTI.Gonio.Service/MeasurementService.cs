@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Threading;
 using ND.MTI.Gonio.Model;
 using ND.MTI.Gonio.Model.Enum;
@@ -52,6 +53,8 @@ namespace ND.MTI.Gonio.Service
             _positionMatrix = PositionMatrixHelper.CalculatePositionMatrix(_config);
             if (_config.Userconfig.ExternalRouteFilePath != string.Empty)
                 _positionMatrix = PositionMatrixHelper.GetRouteFrom(_config.Userconfig.ExternalRouteFilePath);
+
+            _positionMatrix = _positionMatrix.RemoveDuplicates();
 
             _thread = new Thread(WorkingThreadImplementation);
             _thread.IsBackground = true;
