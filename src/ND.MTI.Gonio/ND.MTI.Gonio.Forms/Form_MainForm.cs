@@ -12,17 +12,7 @@ using ND.MTI.Gonio.Common.RuntimeContext;
 namespace ND.MTI.Gonio.Forms
 {
     // https://www.iconfinder.com/iconsets/ios-web-user-interface-multi-circle-flat-vol-3
-
-    // TODO: Hints
-    // TODO: Error messages
-    // TODO: V0 174 validation
-    // TODO: External EDT exporter
-    // TODO: DgView disable selections
-    // TODO: DgView scrolls (update from thread, and scrollable)
-    // TODO: Gonio worker result to candela everywhere (userconfig usage).
-    // TODO: Remove duplicated routes values from matrix
-    // TODO: Multiple measurements in same point (advanced)
-
+    
     internal partial class Form_MainForm : Form
     {
         private readonly Thread _thread;
@@ -65,7 +55,6 @@ namespace ND.MTI.Gonio.Forms
             while (true)
             {
                 _ = _waitHandle.WaitOne();
-                // TODO: Set this from the thread.
                 //textBoxLuminousIntensivity.Text = _measurementService.MeasureLumenance().ToString();
             }
         }
@@ -80,6 +69,7 @@ namespace ND.MTI.Gonio.Forms
             textBoxYCurrentPosition.Text = position.Y.ToString();
 
             textBoxVirtualZero.Text = RuntimeContext.VirtualZeroPosition.ToString();
+            textBoxLuminousIntensivity.Text = _measurementService.MeasureLumenance().ToString();
 
             HandleState(_measurementService.State);
         }

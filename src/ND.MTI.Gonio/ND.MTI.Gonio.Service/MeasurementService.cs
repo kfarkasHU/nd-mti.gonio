@@ -54,6 +54,8 @@ namespace ND.MTI.Gonio.Service
             if (_config.Userconfig.ExternalRouteFilePath != string.Empty)
                 _positionMatrix = PositionMatrixHelper.GetRouteFrom(_config.Userconfig.ExternalRouteFilePath);
 
+            _positionMatrix = _positionMatrix.RemoveDuplicates();
+
             _thread = new Thread(WorkingThreadImplementation);
             _thread.IsBackground = true;
             _thread.Start();
