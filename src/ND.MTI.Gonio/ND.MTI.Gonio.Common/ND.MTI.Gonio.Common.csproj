@@ -51,6 +51,9 @@
     <Compile Include="RuntimeContext\RuntimeContext.cs" />
     <Compile Include="Userconfig\IUserconfig.cs" />
     <Compile Include="Userconfig\Userconfig.cs" />
+    <Compile Include="Utils\GonioTimer.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Utils\Parser.cs" />
   </ItemGroup>
   <ItemGroup>
