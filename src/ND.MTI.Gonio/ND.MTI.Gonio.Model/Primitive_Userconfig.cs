@@ -9,5 +9,6 @@
         public double Amplification { get; set; }
 
         public string ExternalRouteFilePath { get; set; }
+        public int MeasuresInSamePosition { get; set; }
     }
 }
