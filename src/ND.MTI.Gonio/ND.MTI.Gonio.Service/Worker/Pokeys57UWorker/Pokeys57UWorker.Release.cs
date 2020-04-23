@@ -1,4 +1,6 @@
-﻿using System;
+﻿#if !DEBUG
+
+using System;
 using System.Linq;
 using System.Timers;
 using System.Collections.Generic;
@@ -130,3 +132,5 @@ namespace ND.MTI.Gonio.Service.Worker.Pokeys
         }
     }
 }
+
+#endif

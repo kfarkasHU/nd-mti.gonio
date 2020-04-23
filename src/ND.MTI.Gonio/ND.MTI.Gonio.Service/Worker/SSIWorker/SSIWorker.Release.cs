@@ -1,4 +1,6 @@
-﻿using System;
+﻿#if !DEBUG
+
+using System;
 using System.Threading;
 using ND.MTI.Gonio.Model;
 using ND.MTI.Gonio.Service.Worker.Serial;
@@ -78,3 +80,5 @@ namespace ND.MTI.Gonio.Service.Worker.SSIWorker
         }
     }
 }
+
+#endif

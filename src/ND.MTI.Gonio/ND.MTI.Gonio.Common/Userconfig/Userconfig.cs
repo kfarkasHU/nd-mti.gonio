@@ -88,7 +88,7 @@ namespace ND.MTI.Gonio.Common.Userconfig
             lines[3] = $"ExternalRouteFilePath={config.ExternalRouteFilePath}";
             lines[4] = $"User_ResetToZero={config.ResetToZero}";
             lines[5] = $"User_ResetToVZero={config.ResetToVZero}";
-            lines[6] = $"MeasuresIsSamePosition={config.ResetToVZero}";
+            lines[6] = $"MeasuresIsSamePosition={config.MeasuresInSamePosition}";
 
             File.WriteAllLines(_configFileAbsolutePath, lines);
         }

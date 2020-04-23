@@ -21,6 +21,10 @@ namespace ND.MTI.Gonio.Service.Worker
         {
             _gonioConfiguration = GonioConfiguration.GetInstance();
 
+#if DEBUG
+            WorkerHelper.Init();
+#endif
+
             _ssiWorker = new SSIWorker.SSIWorker();
             RuntimeContext.IsSSIPanelConnected = _ssiWorker.Connect(_gonioConfiguration.SSI_Config);
 
