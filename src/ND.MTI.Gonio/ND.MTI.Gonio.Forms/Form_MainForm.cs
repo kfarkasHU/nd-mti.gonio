@@ -9,8 +9,6 @@ using ND.MTI.Gonio.Common.Userconfig;
 using ND.MTI.Gonio.Common.Configuration;
 using ND.MTI.Gonio.Common.RuntimeContext;
 
-using Timer = System.Windows.Forms.Timer;
-
 namespace ND.MTI.Gonio.Forms
 {
     // https://www.iconfinder.com/iconsets/ios-web-user-interface-multi-circle-flat-vol-3
@@ -27,8 +25,8 @@ namespace ND.MTI.Gonio.Forms
 
     internal partial class Form_MainForm : Form
     {
-        private readonly Timer _timer;
         private readonly Thread _thread;
+        private readonly GonioTimer _timer;
         private readonly IUserconfig _userconfig;
         private readonly Complex_MainModel _model;
         private readonly EventWaitHandle _waitHandle;
@@ -40,7 +38,6 @@ namespace ND.MTI.Gonio.Forms
         {
             InitializeComponent();
 
-            _timer = new Timer();
             _model = new Complex_MainModel();
             _thread = new Thread(ThreadWorker);
             _userconfig = Userconfig.GetInstance();
@@ -48,11 +45,10 @@ namespace ND.MTI.Gonio.Forms
             _measurementService = new MeasurementService();
             _waitHandle = new ManualResetEvent(initialState: true);
             _gonioConfiguration = GonioConfiguration.GetInstance();
-            
+            _timer = new GonioTimer(OnTimerTick, _gonioConfiguration.Pokeys_ReadInterval);
+
             SetModel();
 
-            _timer.Interval = _gonioConfiguration.Pokeys_ReadInterval;
-            _timer.Tick += OnTimerTick;
             _timer.Start();
 
             _thread.IsBackground = true;
