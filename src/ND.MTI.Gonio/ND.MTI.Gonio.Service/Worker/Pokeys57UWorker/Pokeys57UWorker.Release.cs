@@ -1,4 +1,6 @@
-﻿using System;
+﻿#if !DEBUG
+
+using System;
 using System.Linq;
 using ND.MTI.Gonio.Common.Utils;
 using System.Collections.Generic;
@@ -129,3 +131,5 @@ namespace ND.MTI.Gonio.Service.Worker.Pokeys
         }
     }
 }
+
+#endif
