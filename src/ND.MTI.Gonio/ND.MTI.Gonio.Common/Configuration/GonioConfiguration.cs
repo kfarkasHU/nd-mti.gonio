@@ -66,13 +66,18 @@ namespace ND.MTI.Gonio.Common.Configuration
             }
         }
 
-        public int Pokeys_ReadInterval => Parser.StringToInteger(GetConfigByKeyName("Pokeys_ReadInterval", "100"));
+        public int Pokeys_ReadInterval => Parser.StringToInteger(GetConfigByKeyName(nameof(Pokeys_ReadInterval), "100"));
 
-        public double Position_AbsoluteZeroX => Parser.StringToDouble(GetConfigByKeyName("Position_AbsoluteZeroX", "0"));
-        public double Position_AbsoluteZeroY => Parser.StringToDouble(GetConfigByKeyName("Position_AbsoluteZeroY", "0"));
+        public double Position_AbsoluteZeroX => Parser.StringToDouble(GetConfigByKeyName(nameof(Position_AbsoluteZeroX), "0"));
+        public double Position_AbsoluteZeroY => Parser.StringToDouble(GetConfigByKeyName(nameof(Position_AbsoluteZeroY), "0"));
 
-        public double Encoder_Precision => Parser.StringToDouble(GetConfigByKeyName("Encoder_Precision", "0.1"));
-        public double Excel_Precision => Parser.StringToDouble(GetConfigByKeyName("Excel_Precision", "0.1"));
+        public double Encoder_Precision => Parser.StringToDouble(GetConfigByKeyName(nameof(Encoder_Precision), "0.1"));
+        public double Excel_Precision => Parser.StringToDouble(GetConfigByKeyName(nameof(Excel_Precision), "0.1"));
+
+        public double Endpoint_XMax => Parser.StringToDouble(GetConfigByKeyName(nameof(Endpoint_XMax), "176"));        
+        public double Endpoint_XMin => Parser.StringToDouble(GetConfigByKeyName(nameof(Endpoint_XMin), "-176"));
+        public double Endpoint_YMin => Parser.StringToDouble(GetConfigByKeyName(nameof(Endpoint_YMin), "-176"));
+        public double Endpoint_YMax => Parser.StringToDouble(GetConfigByKeyName(nameof(Endpoint_YMax), "176"));
 
         private void CreateConfigCacheInternal()
         {
@@ -85,7 +90,6 @@ namespace ND.MTI.Gonio.Common.Configuration
             }
             catch (FileNotFoundException)
             {
-
             }
 
             void CreateConfigItem(string line)
