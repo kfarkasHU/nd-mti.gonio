@@ -14,9 +14,8 @@ namespace ND.MTI.Gonio.Forms
     {
         private int _interval;
         private Thread _thread;
-        private bool _isReading;
+        private readonly GonioTimer _timer;
         private readonly IGonioWorker _gonioWorker;
-        private readonly System.Windows.Forms.Timer _timer;
         private readonly Complex_RegistrationCollection _results;
         private readonly IExcelExportService _excelExportService;
 
@@ -26,20 +25,9 @@ namespace ND.MTI.Gonio.Forms
             _results = new Complex_RegistrationCollection();
             _excelExportService = new ExcelExportService();
 
-            _timer = new System.Windows.Forms.Timer();
-            _timer.Interval = 100;
-            _timer.Tick += OnTimerTick;
+            _timer = new GonioTimer(OnTimerTick, 100);
 
             InitializeComponent();
-        }
-
-        ~Form_Registration()
-        {
-            _isReading = false;
-            _timer.Stop();
-
-            if(!(_thread is null))
-                _thread.Abort();
         }
 
         private void OnTimerTick(object sender, EventArgs e)
@@ -54,8 +42,6 @@ namespace ND.MTI.Gonio.Forms
 
         private void ButtonClose_Click(object sender, EventArgs e)
         {
-            _isReading = false;
-
             if (!(_thread is null))
                 _thread.Abort();
 
@@ -71,8 +57,6 @@ namespace ND.MTI.Gonio.Forms
             buttonClose.Enabled = true;
             buttonSave.Enabled = true;
             textBoxInterval.ReadOnly = false;
-
-            _isReading = false;
         }
 
         private void ButtonStart_Click(object sender, EventArgs e)
@@ -88,7 +72,6 @@ namespace ND.MTI.Gonio.Forms
             var interval = Parser.StringToInteger(intervalStr);
 
             _interval = interval;
-            _isReading = true;
             _thread = new Thread(WorkingThreadImplementation);
             _thread.IsBackground = true;
             _thread.Start();
@@ -105,7 +88,7 @@ namespace ND.MTI.Gonio.Forms
         
         private void WorkingThreadImplementation()
         {
-            while (_isReading)
+            while (true)
             {
                 var stopwatch = new Stopwatch();
                 stopwatch.Start();

@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Windows.Forms;
+using ND.MTI.Gonio.Common.Utils;
 using ND.MTI.Gonio.Service.Worker;
 
 namespace ND.MTI.Gonio.RawPosition
 {
     public partial class RawPositionForm : Form
     {
-        private readonly Timer _timer;
+        private readonly GonioTimer _timer;
         private readonly IPositionWorker _positionWorker;
 
         private bool _keyPressed;
@@ -15,7 +16,7 @@ namespace ND.MTI.Gonio.RawPosition
         {
             InitializeComponent();
 
-            _timer = new Timer();
+            _timer = new GonioTimer(OnTimerTick, 10);
             _positionWorker = PositionWorker.GetInstance();
 
             _positionWorker.StopX();
@@ -25,9 +26,7 @@ namespace ND.MTI.Gonio.RawPosition
             KeyDown += new KeyEventHandler(OnKeyDown);
             KeyUp += new KeyEventHandler(OnKeyUp);
 
-            _timer.Interval = 10;
-            _timer.Tick += OnTimerTick;
-            _timer.Enabled = true;
+            _timer.Start();
         }
 
         private void OnTimerTick(object sender, EventArgs e)

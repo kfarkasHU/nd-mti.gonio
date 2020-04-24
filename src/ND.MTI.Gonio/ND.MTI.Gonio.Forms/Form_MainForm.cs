@@ -80,6 +80,7 @@ namespace ND.MTI.Gonio.Forms
             textBoxYCurrentPosition.Text = position.Y.ToString();
 
             textBoxVirtualZero.Text = RuntimeContext.VirtualZeroPosition.ToString();
+            textBoxLuminousIntensivity.Text = _measurementService.MeasureLumenance().ToString();
 
             HandleState(_measurementService.State);
         }

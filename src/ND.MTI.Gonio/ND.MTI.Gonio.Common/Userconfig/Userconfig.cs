@@ -72,6 +72,7 @@ namespace ND.MTI.Gonio.Common.Userconfig
                 userconfig.ExternalRouteFilePath = GetConfigByKeyName("ExternalRouteFilePath", string.Empty);
                 userconfig.ResetToZero = Parser.StringToBoolean(GetConfigByKeyName("User_ResetToZero", "0"));
                 userconfig.ResetToVZero = Parser.StringToBoolean(GetConfigByKeyName("User_ResetToVZero", "0"));
+                userconfig.MeasuresInSamePosition = Parser.StringToInteger(GetConfigByKeyName("MeasuresIsSamePosition", "1"));
 
                 return userconfig;
             }
@@ -79,7 +80,7 @@ namespace ND.MTI.Gonio.Common.Userconfig
 
         public void SaveUserConfig(Primitive_Userconfig config)
         {
-            var lines = new string[6];
+            var lines = new string[7];
 
             lines[0] = $"User_Amplification={config.Amplification}";
             lines[1] = $"User_Offset={config.Offset}";
@@ -87,6 +88,7 @@ namespace ND.MTI.Gonio.Common.Userconfig
             lines[3] = $"ExternalRouteFilePath={config.ExternalRouteFilePath}";
             lines[4] = $"User_ResetToZero={config.ResetToZero}";
             lines[5] = $"User_ResetToVZero={config.ResetToVZero}";
+            lines[6] = $"MeasuresIsSamePosition={config.MeasuresInSamePosition}";
 
             File.WriteAllLines(_configFileAbsolutePath, lines);
         }
