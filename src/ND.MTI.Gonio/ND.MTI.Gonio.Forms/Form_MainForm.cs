@@ -55,8 +55,19 @@ namespace ND.MTI.Gonio.Forms
             while (true)
             {
                 _ = _waitHandle.WaitOne();
-                //textBoxLuminousIntensivity.Text = _measurementService.MeasureLumenance().ToString();
+                UpdateLuminousText(_measurementService.MeasureLumenance().ToString());
             }
+        }
+
+        private void UpdateLuminousText(string text)
+        {
+            if (InvokeRequired)
+            {
+                _ = Invoke(new Action<string>(UpdateLuminousText), text);
+                return;
+            }
+
+            textBoxLuminousIntensivity.Text = text;
         }
 
         private void Form_MainForm_Load(object sender, EventArgs e) => Text = $"GONIO v{Application.ProductVersion}";
