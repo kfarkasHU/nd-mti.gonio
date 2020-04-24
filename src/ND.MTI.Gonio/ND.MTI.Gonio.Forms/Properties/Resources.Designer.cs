@@ -83,6 +83,16 @@ namespace ND.MTI.Gonio.Forms.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap ezgif_5_017d2c77cf11 {
+            get {
+                object obj = ResourceManager.GetObject("ezgif-5-017d2c77cf11", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap light_bulb_on {
             get {
                 object obj = ResourceManager.GetObject("light_bulb_on", resourceCulture);

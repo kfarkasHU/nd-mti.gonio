@@ -53,6 +53,12 @@
     <Compile Include="Form_AdvancedForm.Designer.cs">
       <DependentUpon>Form_AdvancedForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Form_Finished.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form_Finished.Designer.cs">
+      <DependentUpon>Form_Finished.cs</DependentUpon>
+    </Compile>
     <Compile Include="Form_LoadForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -95,6 +101,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Form_AdvancedForm.resx">
       <DependentUpon>Form_AdvancedForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form_Finished.resx">
+      <DependentUpon>Form_Finished.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Form_LoadForm.resx">
       <DependentUpon>Form_LoadForm.cs</DependentUpon>
@@ -148,6 +157,7 @@
     <Content Include="Content\disconnect.png" />
     <Content Include="Content\light_bulb_on.jpg" />
     <Content Include="icon.ico" />
+    <None Include="Resources\ezgif-5-017d2c77cf11.gif" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ND.MTI.Gonio.Common\ND.MTI.Gonio.Common.csproj">
