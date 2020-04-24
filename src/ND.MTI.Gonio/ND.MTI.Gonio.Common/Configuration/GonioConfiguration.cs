@@ -72,6 +72,7 @@ namespace ND.MTI.Gonio.Common.Configuration
         public double Position_AbsoluteZeroY => Parser.StringToDouble(GetConfigByKeyName("Position_AbsoluteZeroY", "0"));
 
         public double Encoder_Precision => Parser.StringToDouble(GetConfigByKeyName("Encoder_Precision", "0.1"));
+        public double Excel_Precision => Parser.StringToDouble(GetConfigByKeyName("Excel_Precision", "0.1"));
 
         private void CreateConfigCacheInternal()
         {
