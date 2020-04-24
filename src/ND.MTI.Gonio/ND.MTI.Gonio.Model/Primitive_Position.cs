@@ -15,6 +15,17 @@ namespace ND.MTI.Gonio.Model
 
         public override string ToString() => $"X: {X} Y: {Y}";
 
+        public bool CloseEnoughTo(Primitive_Position target, double precision) =>
+            CloseEnoughToInternal(X, target.X, precision) &&
+            CloseEnoughToInternal(Y, target.Y, precision);
+
+        public bool CloseEnoughTo(double current, double target, double precision) => 
+            CloseEnoughToInternal(current, target, precision);
+
+        private bool CloseEnoughToInternal(double current, double target, double precision) =>
+            target - precision < current &&
+            target + precision > current;
+
         public static Primitive_Position operator +(Primitive_Position left, Primitive_Position right)
         {
             var sum = new Primitive_Position(0, 0);

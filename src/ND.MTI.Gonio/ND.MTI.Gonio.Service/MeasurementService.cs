@@ -5,6 +5,7 @@ using ND.MTI.Gonio.Model;
 using ND.MTI.Gonio.Model.Enum;
 using ND.MTI.Gonio.Service.Worker;
 using ND.MTI.Gonio.Service.Helper;
+using ND.MTI.Gonio.Common.Configuration;
 using ND.MTI.Gonio.Common.RuntimeContext;
 using System.Windows.Forms;
 
@@ -19,6 +20,7 @@ namespace ND.MTI.Gonio.Service
         private readonly IGonioWorker _gonioWorker;
         private readonly EventWaitHandle _waitHandle;
         private readonly IPositionWorker _positionWorker;
+        private readonly IGonioConfiguration _gonioConfiguration;
         private readonly MeasurementServiceHelper _measurementServiceHelper;
 
         public MeasurementStatus State { get; private set; } = MeasurementStatus.READY;
@@ -28,6 +30,7 @@ namespace ND.MTI.Gonio.Service
             _gonioWorker = GonioWorker.GetInstance();
             _positionWorker = PositionWorker.GetInstance();
             _waitHandle = new ManualResetEvent(initialState: true);
+            _gonioConfiguration = GonioConfiguration.GetInstance();
             _measurementServiceHelper = MeasurementServiceHelper.GetInstance();
         }
 
@@ -90,12 +93,16 @@ namespace ND.MTI.Gonio.Service
         {
             RuntimeContext.Results.Clear();
 
+            var position = GetPositionInternal();
             for(var i = 0; i < _positionMatrix.Count; i++)
             {
                 _ = _waitHandle.WaitOne();
 
-                SetPositionInternal(_positionMatrix[i]);
-                var position = GetPositionInternal();
+                if (!position.CloseEnoughTo(_positionMatrix[i], _gonioConfiguration.Excel_Precision))
+                {
+                    SetPositionInternal(_positionMatrix[i]);
+                    position = GetPositionInternal();
+                }
 
                 foreach(var _ in Enumerable.Range(0, _config.Userconfig.MeasuresInSamePosition))
                 {

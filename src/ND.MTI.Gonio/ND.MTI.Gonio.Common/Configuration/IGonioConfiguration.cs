@@ -12,5 +12,6 @@ namespace ND.MTI.Gonio.Common.Configuration
         double Position_AbsoluteZeroY { get; }
 
         double Encoder_Precision { get; }
+        double Excel_Precision { get; }
     }
 }
