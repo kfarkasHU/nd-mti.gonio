@@ -5,5 +5,6 @@
         READY,
         PAUSED,
         RUNNING,
+        FINISHED,
     }
 }

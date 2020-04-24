@@ -14,6 +14,7 @@ namespace ND.MTI.Gonio.Service
         void Continue();
 
         void EncoderZero();
+        void SetReady();
 
         Primitive_Position GetPosition();
         double MeasureLumenance();
