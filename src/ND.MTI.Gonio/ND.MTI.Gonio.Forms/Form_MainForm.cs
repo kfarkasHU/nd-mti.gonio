@@ -6,6 +6,7 @@ using System.Windows.Forms;
 using ND.MTI.Gonio.Service;
 using ND.MTI.Gonio.Model.Enum;
 using ND.MTI.Gonio.Common.Utils;
+using ND.MTI.Gonio.Common.Validator;
 using ND.MTI.Gonio.Common.Userconfig;
 using ND.MTI.Gonio.Common.Configuration;
 using ND.MTI.Gonio.Common.RuntimeContext;
@@ -307,7 +308,8 @@ namespace ND.MTI.Gonio.Forms
         {
             GetModel();
 
-            _model.Validate();
+            Complex_MainModelValidator.ValidateModel(_model);
+
             _measurementService.Configure(_model);
 
             _measurementService.Start();

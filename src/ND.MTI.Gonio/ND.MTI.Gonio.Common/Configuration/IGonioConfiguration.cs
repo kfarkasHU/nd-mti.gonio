@@ -13,5 +13,10 @@ namespace ND.MTI.Gonio.Common.Configuration
 
         double Encoder_Precision { get; }
         double Excel_Precision { get; }
+
+        double Endpoint_XMin { get; }
+        double Endpoint_XMax { get; }
+        double Endpoint_YMin { get; }
+        double Endpoint_YMax { get; }
     }
 }
