@@ -1,5 +1,7 @@
 ﻿using System;
 using System.IO.Ports;
+using ND.MTI.Gonio.Common.Utils;
+using ND.MTI.Gonio.Common.Configuration;
 
 namespace ND.MTI.Gonio.Service.Worker.Serial
 {
@@ -7,11 +9,24 @@ namespace ND.MTI.Gonio.Service.Worker.Serial
     {
         protected readonly SerialPort _serialPort;
 
+        private readonly GonioTimer _timer;
+        private readonly IGonioConfiguration _gonioConfiguration;
+
         public bool IsConnected => _serialPort.IsOpen;
 
         public SerialCore()
         {
             _serialPort = new SerialPort();
+            _gonioConfiguration = GonioConfiguration.GetInstance();
+            _timer = new GonioTimer(OnHeartbeatTick, _gonioConfiguration.SerialCore_Heartbeat);
+        }
+
+        private void OnHeartbeatTick(object sender, EventArgs e)
+        {
+            if (_serialPort.IsOpen)
+                return;
+
+            throw new Exception($"Device removed from {_serialPort.PortName}!");
         }
 
         public virtual bool Connect(
@@ -37,6 +52,7 @@ namespace ND.MTI.Gonio.Service.Worker.Serial
                 _serialPort.ReadTimeout = readTimeout;
 
                 _serialPort.Open();
+                _timer.Start();
             }
             catch (Exception)
             {
