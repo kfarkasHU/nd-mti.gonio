@@ -23,6 +23,8 @@ namespace ND.MTI.Gonio.Service
         private readonly IGonioConfiguration _gonioConfiguration;
         private readonly MeasurementServiceHelper _measurementServiceHelper;
 
+        public int NumberOfSteps { get; private set; } = 0;
+        public int CurrentStepNumber { get; private set; } = 0;
         public MeasurementStatus State { get; private set; } = MeasurementStatus.READY;
 
         public MeasurementService()
@@ -54,11 +56,15 @@ namespace ND.MTI.Gonio.Service
 
         public void Start()
         {
+            NumberOfSteps = 0;
+            CurrentStepNumber = 0;
+
             _positionMatrix = PositionMatrixHelper.CalculatePositionMatrix(_config);
             if (_config.Userconfig.ExternalRouteFilePath != string.Empty)
                 _positionMatrix = PositionMatrixHelper.GetRouteFrom(_config.Userconfig.ExternalRouteFilePath);
 
             _positionMatrix = _positionMatrix.RemoveDuplicates();
+            NumberOfSteps = _positionMatrix.Count * _config.Userconfig.MeasuresInSamePosition;
 
             _thread = new Thread(WorkingThreadImplementation);
             _thread.IsBackground = true;
@@ -106,6 +112,8 @@ namespace ND.MTI.Gonio.Service
 
                 foreach(var _ in Enumerable.Range(0, _config.Userconfig.MeasuresInSamePosition))
                 {
+                    CurrentStepNumber++;
+
                     Thread.Sleep(_config.HoldTime);
 
                     var measured = MeasureInternal();

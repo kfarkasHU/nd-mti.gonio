@@ -47,9 +47,6 @@ namespace ND.MTI.Gonio.Forms
             _thread.Start();
 
             _model.Userconfig = _userconfig.UserConfig;
-
-            if (RuntimeContext.IsAdminContext)
-                buttonAdvanced.Enabled = true;
         }
 
         private void ThreadWorker()
@@ -138,6 +135,14 @@ namespace ND.MTI.Gonio.Forms
                     textBoxHoldTime.Enabled = false;
                     textBoxHoldTime.Cursor = Cursors.No;
 
+                    var current = _measurementService.CurrentStepNumber;
+                    var max = _measurementService.NumberOfSteps;
+
+                    var percentage = (current / max) * 100;
+                    labelPercentage.Text = $"{current}/{max} ({percentage}%)";
+                    progressBarProgress.Maximum = max;
+                    progressBarProgress.Value = current;
+
                     #endregion [ UI ]
 
                     break;
@@ -213,6 +218,11 @@ namespace ND.MTI.Gonio.Forms
                     buttonPause.Cursor = Cursors.No;
                     buttonContinue.Enabled = false;
                     buttonContinue.Cursor = Cursors.No;
+                    buttonRegistration.Enabled = true;
+                    buttonRegistration.Cursor = Cursors.Hand;
+                    buttonAdvanced.Enabled = RuntimeContext.IsAdminContext;
+                    buttonAdvanced.Cursor = RuntimeContext.IsAdminContext ? Cursors.Hand : Cursors.No;
+
 
                     textBoxEndX.Enabled = true;
                     textBoxEndX.Cursor = Cursors.Hand;
@@ -233,13 +243,33 @@ namespace ND.MTI.Gonio.Forms
                     textBoxHoldTime.Enabled = true;
                     textBoxHoldTime.Cursor = Cursors.Hand;
 
+                    progressBarProgress.Value = 0;
+                    labelPercentage.Text = $"0/0 (0%)";
+
                     #endregion [ UI ]
 
                     break;
 
                 case MeasurementStatus.FINISHED:
+                    
                     if (Application.OpenForms.OfType<Form_Finished>().Any())
                         return;
+
+                    #region [ UI ]
+                    
+                    buttonStop.Enabled = false;
+                    buttonPause.Enabled = false;
+                    buttonResults.Enabled = false;
+                    buttonAdvanced.Enabled = false;
+                    buttonRegistration.Enabled = false;
+
+                    buttonStop.Cursor = Cursors.No;
+                    buttonPause.Cursor = Cursors.No;
+                    buttonResults.Cursor = Cursors.No;
+                    buttonAdvanced.Cursor = Cursors.No;
+                    buttonRegistration.Cursor = Cursors.No;
+
+                    #endregion [ UI ]
 
                     var finishedForm = new Form_Finished(_measurementService);
                     finishedForm.Show();

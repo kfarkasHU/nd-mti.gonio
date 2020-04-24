@@ -52,7 +52,7 @@
             this.pictureBoxFinished.Image = global::ND.MTI.Gonio.Forms.Properties.Resources.ezgif_5_017d2c77cf11;
             this.pictureBoxFinished.Location = new System.Drawing.Point(0, 0);
             this.pictureBoxFinished.Name = "pictureBoxFinished";
-            this.pictureBoxFinished.Size = new System.Drawing.Size(499, 202);
+            this.pictureBoxFinished.Size = new System.Drawing.Size(500, 202);
             this.pictureBoxFinished.TabIndex = 2;
             this.pictureBoxFinished.TabStop = false;
             this.pictureBoxFinished.Click += new System.EventHandler(this.PictureBoxFinished_Click);

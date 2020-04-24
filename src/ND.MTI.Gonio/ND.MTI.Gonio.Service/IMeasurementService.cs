@@ -6,6 +6,8 @@ namespace ND.MTI.Gonio.Service
     public interface IMeasurementService
     {
         MeasurementStatus State { get; }
+        int NumberOfSteps { get; }
+        int CurrentStepNumber { get; }
 
         void Configure(Complex_MainModel mainModel);
         void Start();

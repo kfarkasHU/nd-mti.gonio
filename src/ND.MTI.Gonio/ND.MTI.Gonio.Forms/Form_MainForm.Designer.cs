@@ -65,6 +65,8 @@
             this.labelLuminousIntensivity = new System.Windows.Forms.Label();
             this.textBoxVirtualZero = new System.Windows.Forms.TextBox();
             this.labelVirtualZero = new System.Windows.Forms.Label();
+            this.progressBarProgress = new System.Windows.Forms.ProgressBar();
+            this.labelPercentage = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // checkBoxXAuto
@@ -164,7 +166,7 @@
             // 
             // buttonResults
             // 
-            this.buttonResults.Location = new System.Drawing.Point(334, 159);
+            this.buttonResults.Location = new System.Drawing.Point(335, 159);
             this.buttonResults.Name = "buttonResults";
             this.buttonResults.Size = new System.Drawing.Size(75, 23);
             this.buttonResults.TabIndex = 11;
@@ -174,7 +176,7 @@
             // 
             // buttonExit
             // 
-            this.buttonExit.Location = new System.Drawing.Point(334, 207);
+            this.buttonExit.Location = new System.Drawing.Point(335, 241);
             this.buttonExit.Name = "buttonExit";
             this.buttonExit.Size = new System.Drawing.Size(75, 23);
             this.buttonExit.TabIndex = 23;
@@ -318,7 +320,7 @@
             // buttonRegistration
             // 
             this.buttonRegistration.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.buttonRegistration.Location = new System.Drawing.Point(334, 130);
+            this.buttonRegistration.Location = new System.Drawing.Point(335, 130);
             this.buttonRegistration.Name = "buttonRegistration";
             this.buttonRegistration.Size = new System.Drawing.Size(75, 23);
             this.buttonRegistration.TabIndex = 20;
@@ -417,12 +419,31 @@
             this.labelVirtualZero.TabIndex = 62;
             this.labelVirtualZero.Text = "Virtual zero";
             // 
+            // progressBarProgress
+            // 
+            this.progressBarProgress.Location = new System.Drawing.Point(10, 188);
+            this.progressBarProgress.Name = "progressBarProgress";
+            this.progressBarProgress.Size = new System.Drawing.Size(400, 23);
+            this.progressBarProgress.TabIndex = 63;
+            // 
+            // labelPercentage
+            // 
+            this.labelPercentage.AutoSize = true;
+            this.labelPercentage.BackColor = System.Drawing.Color.Transparent;
+            this.labelPercentage.Location = new System.Drawing.Point(182, 217);
+            this.labelPercentage.Name = "labelPercentage";
+            this.labelPercentage.Size = new System.Drawing.Size(47, 13);
+            this.labelPercentage.TabIndex = 64;
+            this.labelPercentage.Text = "0/0 (0%)";
+            // 
             // Form_MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(420, 242);
+            this.ClientSize = new System.Drawing.Size(420, 276);
             this.ControlBox = false;
+            this.Controls.Add(this.labelPercentage);
+            this.Controls.Add(this.progressBarProgress);
             this.Controls.Add(this.textBoxVirtualZero);
             this.Controls.Add(this.labelVirtualZero);
             this.Controls.Add(this.textBoxLuminousIntensivity);
@@ -511,5 +532,7 @@
         private System.Windows.Forms.Label labelLuminousIntensivity;
         private System.Windows.Forms.TextBox textBoxVirtualZero;
         private System.Windows.Forms.Label labelVirtualZero;
+        private System.Windows.Forms.ProgressBar progressBarProgress;
+        private System.Windows.Forms.Label labelPercentage;
     }
 }
