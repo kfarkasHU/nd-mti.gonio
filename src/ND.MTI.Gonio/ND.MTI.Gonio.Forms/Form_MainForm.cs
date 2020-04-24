@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Threading;
 using ND.MTI.Gonio.Model;
 using System.Windows.Forms;
@@ -80,7 +81,6 @@ namespace ND.MTI.Gonio.Forms
             textBoxYCurrentPosition.Text = position.Y.ToString();
 
             textBoxVirtualZero.Text = RuntimeContext.VirtualZeroPosition.ToString();
-            textBoxLuminousIntensivity.Text = _measurementService.MeasureLumenance().ToString();
 
             HandleState(_measurementService.State);
         }
@@ -233,6 +233,15 @@ namespace ND.MTI.Gonio.Forms
                     textBoxHoldTime.Cursor = Cursors.Hand;
 
                     #endregion [ UI ]
+
+                    break;
+
+                case MeasurementStatus.FINISHED:
+                    if (Application.OpenForms.OfType<Form_Finished>().Any())
+                        return;
+
+                    var finishedForm = new Form_Finished(_measurementService);
+                    finishedForm.Show();
 
                     break;
             }

@@ -6,6 +6,7 @@ using ND.MTI.Gonio.Model.Enum;
 using ND.MTI.Gonio.Service.Worker;
 using ND.MTI.Gonio.Service.Helper;
 using ND.MTI.Gonio.Common.RuntimeContext;
+using System.Windows.Forms;
 
 namespace ND.MTI.Gonio.Service
 {
@@ -75,6 +76,8 @@ namespace ND.MTI.Gonio.Service
         
         public void EncoderZero() => _positionWorker.EncoderZero();
 
+        public void SetReady() => State = MeasurementStatus.READY;
+
         public Primitive_Position GetPosition() => GetPositionInternal();
         
         private void SetPositionInternal(Primitive_Position position) => _positionWorker.SetPosition(position);        
@@ -126,7 +129,7 @@ namespace ND.MTI.Gonio.Service
             if (_config.Userconfig.ResetToVZero)
                 SetPositionInternal(GetPositionInternal() - RuntimeContext.VirtualZeroPosition);
 
-            State = MeasurementStatus.READY;
+            State = MeasurementStatus.FINISHED;
 
             _thread.Abort();
         }
