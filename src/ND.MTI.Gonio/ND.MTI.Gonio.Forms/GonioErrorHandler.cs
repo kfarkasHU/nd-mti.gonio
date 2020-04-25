@@ -41,7 +41,7 @@ namespace ND.MTI.Gonio.Forms
                 MessageBoxIcon.Error
             );
 
-            if(RuntimeContext.SendNotificationOnError)
+            if(RuntimeContext.UserConfig.SendNotificationOnError)
             {
                 var config = GonioConfiguration.GetInstance();
 

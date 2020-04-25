@@ -49,7 +49,7 @@ namespace ND.MTI.Gonio.Common.Userconfig
             return success ? val : defaultValue;
         }
 
-        public static IUserconfig GetInstance()
+        internal static IUserconfig GetInstance()
         {
             if (_instance is null)
                 _instance = new Userconfig();

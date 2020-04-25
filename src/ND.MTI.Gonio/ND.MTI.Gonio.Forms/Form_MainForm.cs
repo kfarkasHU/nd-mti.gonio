@@ -19,7 +19,6 @@ namespace ND.MTI.Gonio.Forms
     {
         private readonly Thread _thread;
         private readonly GonioTimer _timer;
-        private readonly IUserconfig _userconfig;
         private readonly Complex_MainModel _model;
         private readonly EventWaitHandle _waitHandle;
         private readonly MainFormHelper _mainFormHelper;
@@ -32,7 +31,6 @@ namespace ND.MTI.Gonio.Forms
 
             _model = new Complex_MainModel();
             _thread = new Thread(ThreadWorker);
-            _userconfig = Userconfig.GetInstance();
             _mainFormHelper = new MainFormHelper();
             _measurementService = new MeasurementService();
             _waitHandle = new ManualResetEvent(initialState: true);
@@ -45,8 +43,6 @@ namespace ND.MTI.Gonio.Forms
 
             _thread.IsBackground = true;
             _thread.Start();
-
-            _model.Userconfig = _userconfig.UserConfig;
         }
 
         private void ThreadWorker()
@@ -377,8 +373,7 @@ namespace ND.MTI.Gonio.Forms
         private void ButtonAdvanced_Click(object sender, EventArgs e)
         {
             var advancedForm = new Form_AdvancedForm();
-            if (advancedForm.ShowDialog() == DialogResult.OK)
-                _model.Userconfig = _userconfig.UserConfig;
+            advancedForm.Show();
         }
     }
 }

@@ -5,6 +5,7 @@ using System.Windows.Forms;
 using ND.MTI.Gonio.Common.Utils;
 using ND.MTI.Gonio.Service.Worker;
 using ND.MTI.Gonio.Common.Userconfig;
+using ND.MTI.Gonio.Common.RuntimeContext;
 
 namespace ND.MTI.Gonio.Forms
 {
@@ -13,7 +14,6 @@ namespace ND.MTI.Gonio.Forms
         private Primitive_Userconfig _model;
 
         private readonly IIOWorker _ioWorker;
-        private readonly IUserconfig _userconfig;
         private readonly IMeasurementService _measurementService;
 
         public Form_AdvancedForm()
@@ -21,10 +21,9 @@ namespace ND.MTI.Gonio.Forms
             InitializeComponent();
 
             _ioWorker = new IOWorker();
-            _userconfig = Userconfig.GetInstance();
             _measurementService = new MeasurementService();
 
-            _model = _userconfig.UserConfig;
+            _model = RuntimeContext.UserConfig;
 
             checkBoxReset0.Checked = _model.ResetToZero;
             checkBoxResetV0.Checked = _model.ResetToVZero;
@@ -36,12 +35,7 @@ namespace ND.MTI.Gonio.Forms
             checkBoxSendNotificationError.Checked = _model.SendNotificationOnError;
         }
 
-        private void ButtonCancel_Click(object sender, EventArgs e)
-        {
-            DialogResult = DialogResult.Cancel;
-
-            Close();
-        }
+        private void ButtonCancel_Click(object sender, EventArgs e) => Close();
 
         private void ButtonStatus_Click(object sender, EventArgs e)
         {
@@ -74,9 +68,7 @@ namespace ND.MTI.Gonio.Forms
             _model.SendNotificationOnError = checkBoxSendNotificationError.Checked;
             _model.SendNotificationOnComplete = checkBoxSendNotificationFinished.Checked;
 
-            _userconfig.SaveUserConfig(_model);
-
-            DialogResult = DialogResult.OK;
+            RuntimeContext.UserConfig = _model;
 
             Close();
         }

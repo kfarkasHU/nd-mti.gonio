@@ -37,6 +37,18 @@ namespace ND.MTI.Gonio.Common.RuntimeContext
         public static bool IsPokeys57Connected { get; set; } = false;
 
         public static bool IsAdminContext { get; set; } = false;
-        public static bool SendNotificationOnError => _userconfig.UserConfig.SendNotificationOnError;
+
+        public static Primitive_Userconfig UserConfig
+        {
+            get
+            {
+                return _userconfig.UserConfig;
+            }
+
+            set
+            {
+                _userconfig.SaveUserConfig(value);
+            }
+        }
     }
 }
