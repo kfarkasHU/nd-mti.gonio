@@ -8,6 +8,7 @@ using ND.MTI.Gonio.Service.Helper;
 using ND.MTI.Gonio.Common.Configuration;
 using ND.MTI.Gonio.Common.RuntimeContext;
 using System.Windows.Forms;
+using ND.MTI.Gonio.Notifier;
 
 namespace ND.MTI.Gonio.Service
 {
@@ -97,6 +98,7 @@ namespace ND.MTI.Gonio.Service
 
         private void WorkingThreadImplementation()
         {
+            var startDate = DateTime.Now;
             RuntimeContext.Results.Clear();
 
             var position = GetPositionInternal();
@@ -145,6 +147,12 @@ namespace ND.MTI.Gonio.Service
                 SetPositionInternal(GetPositionInternal() - RuntimeContext.VirtualZeroPosition);
 
             State = MeasurementStatus.FINISHED;
+
+            var template = _gonioConfiguration.Notification_Email_MeasurementFinishedHTMLTemplate;
+            var text = string.Format(template, startDate.ToString(), DateTime.Now.ToString());
+
+            NotifyHub.AddMessage(_gonioConfiguration.Notification_Email_MeasurementFinishedSubject, text);
+            NotifyHub.SendMessages();
 
             _thread.Abort();
         }

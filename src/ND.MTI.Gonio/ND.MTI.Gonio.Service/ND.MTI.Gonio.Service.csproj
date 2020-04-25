@@ -94,6 +94,10 @@
       <Project>{680927AC-E6E3-47F1-8DA7-B8457DDAB8D9}</Project>
       <Name>ND.MTI.Gonio.Model</Name>
     </ProjectReference>
+    <ProjectReference Include="..\ND.MTI.Gonio.Notifier\ND.MTI.Gonio.Notifier.csproj">
+      <Project>{EE2C3675-C018-4FD5-B85D-7DA373F17920}</Project>
+      <Name>ND.MTI.Gonio.Notifier</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

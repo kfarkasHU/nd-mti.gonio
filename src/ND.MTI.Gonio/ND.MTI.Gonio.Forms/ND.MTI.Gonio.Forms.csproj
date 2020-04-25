@@ -168,6 +168,10 @@
       <Project>{680927ac-e6e3-47f1-8da7-b8457ddab8d9}</Project>
       <Name>ND.MTI.Gonio.Model</Name>
     </ProjectReference>
+    <ProjectReference Include="..\ND.MTI.Gonio.Notifier\ND.MTI.Gonio.Notifier.csproj">
+      <Project>{ee2c3675-c018-4fd5-b85d-7da373f17920}</Project>
+      <Name>ND.MTI.Gonio.Notifier</Name>
+    </ProjectReference>
     <ProjectReference Include="..\ND.MTI.Gonio.Service\ND.MTI.Gonio.Service.csproj">
       <Project>{612EEEC8-DD6F-4812-8965-96390D059BD5}</Project>
       <Name>ND.MTI.Gonio.Service</Name>

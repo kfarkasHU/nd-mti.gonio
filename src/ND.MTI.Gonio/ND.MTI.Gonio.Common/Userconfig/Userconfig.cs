@@ -73,6 +73,8 @@ namespace ND.MTI.Gonio.Common.Userconfig
                 userconfig.ResetToZero = Parser.StringToBoolean(GetConfigByKeyName("User_ResetToZero", "0"));
                 userconfig.ResetToVZero = Parser.StringToBoolean(GetConfigByKeyName("User_ResetToVZero", "0"));
                 userconfig.MeasuresInSamePosition = Parser.StringToInteger(GetConfigByKeyName("MeasuresIsSamePosition", "1"));
+                userconfig.SendNotificationOnError = Parser.StringToBoolean(GetConfigByKeyName("SendNotificationOnError", "1"));
+                userconfig.SendNotificationOnComplete = Parser.StringToBoolean(GetConfigByKeyName("SendNotificationOnComplete", "1"));
 
                 return userconfig;
             }
@@ -80,7 +82,7 @@ namespace ND.MTI.Gonio.Common.Userconfig
 
         public void SaveUserConfig(Primitive_Userconfig config)
         {
-            var lines = new string[7];
+            var lines = new string[9];
 
             lines[0] = $"User_Amplification={config.Amplification}";
             lines[1] = $"User_Offset={config.Offset}";
@@ -89,7 +91,9 @@ namespace ND.MTI.Gonio.Common.Userconfig
             lines[4] = $"User_ResetToZero={config.ResetToZero}";
             lines[5] = $"User_ResetToVZero={config.ResetToVZero}";
             lines[6] = $"MeasuresIsSamePosition={config.MeasuresInSamePosition}";
-
+            lines[7] = $"SendNotificationOnError={config.SendNotificationOnError}";
+            lines[8] = $"SendNotificationOnComplete={config.SendNotificationOnComplete}";
+            
             File.WriteAllLines(_configFileAbsolutePath, lines);
         }
     }

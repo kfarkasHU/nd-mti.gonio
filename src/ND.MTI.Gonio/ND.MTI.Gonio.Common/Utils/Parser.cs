@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace ND.MTI.Gonio.Common.Utils
 {
@@ -35,5 +36,21 @@ namespace ND.MTI.Gonio.Common.Utils
         public static double DecimalToDouble(decimal dec) => (double)dec;
 
         public static bool StringToBoolean(string boolStr) => boolStr == "1" || boolStr.ToLower() == "true";
+
+        public static IList<string> StringToStringList(string listStr)
+        {
+            var separator = ';';
+
+            if (!listStr.Contains(separator.ToString()))
+                return new List<string>() { listStr };
+
+            var p = listStr.Split(separator);
+            var list = new List<string>();
+
+            foreach (var i in p)
+                list.Add(i);
+
+            return list;
+        }
     }
 }
