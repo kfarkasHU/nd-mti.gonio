@@ -6,7 +6,9 @@ namespace ND.MTI.Gonio.Common.Configuration
     {
         Complex_FSMGonioConfig FSM_GonioConfig { get; }
         Complex_SSIConfig SSI_Config { get; }
+        
         int Pokeys_ReadInterval { get; }
+        int SerialCore_Heartbeat { get; }
 
         double Position_AbsoluteZeroX { get; }
         double Position_AbsoluteZeroY { get; }

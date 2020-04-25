@@ -67,6 +67,7 @@ namespace ND.MTI.Gonio.Common.Configuration
         }
 
         public int Pokeys_ReadInterval => Parser.StringToInteger(GetConfigByKeyName(nameof(Pokeys_ReadInterval), "100"));
+        public int SerialCore_Heartbeat => Parser.StringToInteger(GetConfigByKeyName(nameof(SerialCore_Heartbeat), "100"));
 
         public double Position_AbsoluteZeroX => Parser.StringToDouble(GetConfigByKeyName(nameof(Position_AbsoluteZeroX), "0"));
         public double Position_AbsoluteZeroY => Parser.StringToDouble(GetConfigByKeyName(nameof(Position_AbsoluteZeroY), "0"));
