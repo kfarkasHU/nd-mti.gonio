@@ -13,7 +13,6 @@ namespace ND.MTI.Gonio.Model
         public bool IsXAuto { get; set; }
         public bool IsYAuto { get; set; }
         public int HoldTime { get; set; }
-        public Primitive_Userconfig Userconfig { get; set; }
 
         public void Reset()
         {

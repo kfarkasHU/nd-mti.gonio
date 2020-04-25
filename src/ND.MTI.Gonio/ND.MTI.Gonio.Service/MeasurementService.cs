@@ -2,13 +2,12 @@
 using System.Linq;
 using System.Threading;
 using ND.MTI.Gonio.Model;
+using ND.MTI.Gonio.Notifier;
 using ND.MTI.Gonio.Model.Enum;
 using ND.MTI.Gonio.Service.Worker;
 using ND.MTI.Gonio.Service.Helper;
 using ND.MTI.Gonio.Common.Configuration;
 using ND.MTI.Gonio.Common.RuntimeContext;
-using System.Windows.Forms;
-using ND.MTI.Gonio.Notifier;
 
 namespace ND.MTI.Gonio.Service
 {
@@ -61,11 +60,11 @@ namespace ND.MTI.Gonio.Service
             CurrentStepNumber = 0;
 
             _positionMatrix = PositionMatrixHelper.CalculatePositionMatrix(_config);
-            if (_config.Userconfig.ExternalRouteFilePath != string.Empty)
-                _positionMatrix = PositionMatrixHelper.GetRouteFrom(_config.Userconfig.ExternalRouteFilePath);
+            if (RuntimeContext.UserConfig.ExternalRouteFilePath != string.Empty)
+                _positionMatrix = PositionMatrixHelper.GetRouteFrom(RuntimeContext.UserConfig.ExternalRouteFilePath);
 
             _positionMatrix = _positionMatrix.RemoveDuplicates();
-            NumberOfSteps = _positionMatrix.Count * _config.Userconfig.MeasuresInSamePosition;
+            NumberOfSteps = _positionMatrix.Count * RuntimeContext.UserConfig.MeasuresInSamePosition;
 
             _thread = new Thread(WorkingThreadImplementation);
             _thread.IsBackground = true;
@@ -112,21 +111,21 @@ namespace ND.MTI.Gonio.Service
                     position = GetPositionInternal();
                 }
 
-                foreach(var _ in Enumerable.Range(0, _config.Userconfig.MeasuresInSamePosition))
+                foreach(var _ in Enumerable.Range(0, RuntimeContext.UserConfig.MeasuresInSamePosition))
                 {
                     CurrentStepNumber++;
 
                     Thread.Sleep(_config.HoldTime);
 
                     var measured = MeasureInternal();
-                    var correction = _config.Userconfig.UseCorrection
+                    var correction = RuntimeContext.UserConfig.UseCorrection
                         ? _measurementServiceHelper.GetCorrectionValue(measured)
                         : 1;
 
-                    if (_config.Userconfig.Amplification > 0)
-                        measured *= _config.Userconfig.Amplification;
+                    if (RuntimeContext.UserConfig.Amplification > 0)
+                        measured *= RuntimeContext.UserConfig.Amplification;
 
-                    measured += _config.Userconfig.Offset;
+                    measured += RuntimeContext.UserConfig.Offset;
 
                     RuntimeContext
                         .AddResult(
@@ -140,19 +139,22 @@ namespace ND.MTI.Gonio.Service
                 }
             }
 
-            if (_config.Userconfig.ResetToZero)
+            if (RuntimeContext.UserConfig.ResetToZero)
                 SetPositionInternal(new Primitive_Position(0, 0) - RuntimeContext.VirtualZeroPosition);
 
-            if (_config.Userconfig.ResetToVZero)
+            if (RuntimeContext.UserConfig.ResetToVZero)
                 SetPositionInternal(GetPositionInternal() - RuntimeContext.VirtualZeroPosition);
 
             State = MeasurementStatus.FINISHED;
 
-            var template = _gonioConfiguration.Notification_Email_MeasurementFinishedHTMLTemplate;
-            var text = string.Format(template, startDate.ToString(), DateTime.Now.ToString());
+            if (RuntimeContext.UserConfig.SendNotificationOnComplete)
+            {
+                var template = _gonioConfiguration.Notification_Email_MeasurementFinishedHTMLTemplate;
+                var text = string.Format(template, startDate.ToString(), DateTime.Now.ToString());
 
-            NotifyHub.AddMessage(_gonioConfiguration.Notification_Email_MeasurementFinishedSubject, text);
-            NotifyHub.SendMessages();
+                NotifyHub.AddMessage(_gonioConfiguration.Notification_Email_MeasurementFinishedSubject, text);
+                NotifyHub.SendMessages();
+            }
 
             _thread.Abort();
         }
