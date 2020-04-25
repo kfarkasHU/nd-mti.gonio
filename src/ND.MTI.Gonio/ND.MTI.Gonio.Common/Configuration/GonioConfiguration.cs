@@ -79,6 +79,19 @@ namespace ND.MTI.Gonio.Common.Configuration
         public double Endpoint_YMin => Parser.StringToDouble(GetConfigByKeyName(nameof(Endpoint_YMin), "-176"));
         public double Endpoint_YMax => Parser.StringToDouble(GetConfigByKeyName(nameof(Endpoint_YMax), "176"));
 
+        public int Notification_Email_SMTPPort => Parser.StringToInteger(GetConfigByKeyName(nameof(Notification_Email_SMTPPort), "587"));
+        public bool Notification_Email_SMTPSSLEnabled => Parser.StringToBoolean(GetConfigByKeyName(nameof(Notification_Email_SMTPSSLEnabled), "1"));
+        public string Notification_Email_SMTPAddress => GetConfigByKeyName(nameof(Notification_Email_SMTPAddress), "smtp.gmail.com");
+        public string Notification_Email_SMTPUsername => GetConfigByKeyName(nameof(Notification_Email_SMTPUsername), "oekvk.gonio@gmail.com");
+        public string Notification_Email_SMTPPassword => GetConfigByKeyName(nameof(Notification_Email_SMTPPassword), "xUpmWjT5wrEhtHmGYsEyFWLQLhjevMEtyxePxQk2FkkTLNVARcV7Gg76svXxk2zm");
+        public string Notification_Email_FromDisplayName => GetConfigByKeyName(nameof(Notification_Email_FromDisplayName), "GonioApp");
+        public string Notification_Email_FromEmailAddress => GetConfigByKeyName(nameof(Notification_Email_FromEmailAddress), "oekvk.gonio@gmail.com");
+        public IList<string> Notification_Email_TargetAddresses => Parser.StringToStringList(GetConfigByKeyName(nameof(Notification_Email_TargetAddresses), "fenymeres@fenymeres.hu"));
+        public string Notification_Email_ApplicationErrorHTMLTemplate => GetConfigByKeyName(nameof(Notification_Email_ApplicationErrorHTMLTemplate), "<p>Tisztelt C&iacute;mzett,</p><p>Az alkalmaz&aacute;s fut&aacute;sa sor&aacute;n {0} időpontban nem v&aacute;rt hiba l&eacute;pett fel.<br />A hiba r&eacute;szletei:</p><p style='font - family: courier;'>{1}</p><p><br />Tisztelettel,<br />GonioApp</p>");
+        public string Notification_Email_MeasurementFinishedHTMLTemplate => GetConfigByKeyName(nameof(Notification_Email_MeasurementFinishedHTMLTemplate), "<p>Tisztelt C&iacute;mzett,</p><p>Az &Ouml;n &aacute;ltal {0} időpontban ind&iacute;tott m&eacute;r&eacute;s {1} időpontban sikeresen befejeződ&ouml;tt.</p><p><br />Tisztelettel,<br />GonioApp</p>");
+        public string Notification_Email_ApplicationErrorSubject => GetConfigByKeyName(nameof(Notification_Email_ApplicationErrorSubject), "Error");
+        public string Notification_Email_MeasurementFinishedSubject => GetConfigByKeyName(nameof(Notification_Email_MeasurementFinishedSubject), "Work complete");
+
         private void CreateConfigCacheInternal()
         {
             try

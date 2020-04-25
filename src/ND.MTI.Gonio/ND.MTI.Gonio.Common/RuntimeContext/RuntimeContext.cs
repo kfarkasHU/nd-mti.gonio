@@ -2,15 +2,18 @@
 using System.Windows.Forms;
 using System.ComponentModel;
 using ND.MTI.Gonio.Common.Configuration;
+using ND.MTI.Gonio.Common.Userconfig;
 
 namespace ND.MTI.Gonio.Common.RuntimeContext
 {
     public static class RuntimeContext
     {
+        private static IUserconfig _userconfig;
         private static IGonioConfiguration _config;
 
         public static void Init()
         {
+            _userconfig = Userconfig.Userconfig.GetInstance();
             _config = GonioConfiguration.GetInstance();
 
             ZeroPosition = new Primitive_Position(_config.Position_AbsoluteZeroX, _config.Position_AbsoluteZeroY);
@@ -18,6 +21,7 @@ namespace ND.MTI.Gonio.Common.RuntimeContext
 
             Results = new Complex_ResultCollection();
             ResultsBindingList = new BindingList<Complex_ResultItem>(Results);
+
         }
 
         public static Form LoadFormInstance { get; set; }
@@ -33,5 +37,6 @@ namespace ND.MTI.Gonio.Common.RuntimeContext
         public static bool IsPokeys57Connected { get; set; } = false;
 
         public static bool IsAdminContext { get; set; } = false;
+        public static bool SendNotificationOnError => _userconfig.UserConfig.SendNotificationOnError;
     }
 }

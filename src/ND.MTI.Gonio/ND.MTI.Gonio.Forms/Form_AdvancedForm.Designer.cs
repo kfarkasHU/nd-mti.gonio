@@ -31,6 +31,8 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form_AdvancedForm));
             this.buttonSave = new System.Windows.Forms.Button();
             this.groupBoxOptions = new System.Windows.Forms.GroupBox();
+            this.labelMeasuresInSamePosition = new System.Windows.Forms.Label();
+            this.textBoxMeasuresInSamePosition = new System.Windows.Forms.TextBox();
             this.labelResetV0 = new System.Windows.Forms.Label();
             this.checkBoxResetV0 = new System.Windows.Forms.CheckBox();
             this.labelReset0 = new System.Windows.Forms.Label();
@@ -48,8 +50,10 @@
             this.buttonClearExternalRoute = new System.Windows.Forms.Button();
             this.buttonBrowseExternalRoute = new System.Windows.Forms.Button();
             this.textBoxExternalRoute = new System.Windows.Forms.TextBox();
-            this.labelMeasuresInSamePosition = new System.Windows.Forms.Label();
-            this.textBoxMeasuresInSamePosition = new System.Windows.Forms.TextBox();
+            this.labelSendNotificationError = new System.Windows.Forms.Label();
+            this.checkBoxSendNotificationError = new System.Windows.Forms.CheckBox();
+            this.checkBoxSendNotificationFinished = new System.Windows.Forms.CheckBox();
+            this.labelSendNotificationFinished = new System.Windows.Forms.Label();
             this.groupBoxOptions.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownAmplifier)).BeginInit();
             this.groupBoxExternalRoute.SuspendLayout();
@@ -57,7 +61,7 @@
             // 
             // buttonSave
             // 
-            this.buttonSave.Location = new System.Drawing.Point(173, 332);
+            this.buttonSave.Location = new System.Drawing.Point(173, 368);
             this.buttonSave.Name = "buttonSave";
             this.buttonSave.Size = new System.Drawing.Size(75, 23);
             this.buttonSave.TabIndex = 0;
@@ -67,6 +71,10 @@
             // 
             // groupBoxOptions
             // 
+            this.groupBoxOptions.Controls.Add(this.labelSendNotificationFinished);
+            this.groupBoxOptions.Controls.Add(this.checkBoxSendNotificationFinished);
+            this.groupBoxOptions.Controls.Add(this.labelSendNotificationError);
+            this.groupBoxOptions.Controls.Add(this.checkBoxSendNotificationError);
             this.groupBoxOptions.Controls.Add(this.labelMeasuresInSamePosition);
             this.groupBoxOptions.Controls.Add(this.textBoxMeasuresInSamePosition);
             this.groupBoxOptions.Controls.Add(this.labelResetV0);
@@ -83,10 +91,26 @@
             this.groupBoxOptions.Controls.Add(this.checkBoxUseCorrection);
             this.groupBoxOptions.Location = new System.Drawing.Point(12, 12);
             this.groupBoxOptions.Name = "groupBoxOptions";
-            this.groupBoxOptions.Size = new System.Drawing.Size(236, 231);
+            this.groupBoxOptions.Size = new System.Drawing.Size(236, 267);
             this.groupBoxOptions.TabIndex = 1;
             this.groupBoxOptions.TabStop = false;
             this.groupBoxOptions.Text = "Options";
+            // 
+            // labelMeasuresInSamePosition
+            // 
+            this.labelMeasuresInSamePosition.AutoSize = true;
+            this.labelMeasuresInSamePosition.Location = new System.Drawing.Point(6, 143);
+            this.labelMeasuresInSamePosition.Name = "labelMeasuresInSamePosition";
+            this.labelMeasuresInSamePosition.Size = new System.Drawing.Size(131, 13);
+            this.labelMeasuresInSamePosition.TabIndex = 12;
+            this.labelMeasuresInSamePosition.Text = "Measures in same position";
+            // 
+            // textBoxMeasuresInSamePosition
+            // 
+            this.textBoxMeasuresInSamePosition.Location = new System.Drawing.Point(146, 140);
+            this.textBoxMeasuresInSamePosition.Name = "textBoxMeasuresInSamePosition";
+            this.textBoxMeasuresInSamePosition.Size = new System.Drawing.Size(69, 20);
+            this.textBoxMeasuresInSamePosition.TabIndex = 11;
             // 
             // labelResetV0
             // 
@@ -144,7 +168,7 @@
             // 
             // buttonStatus
             // 
-            this.buttonStatus.Location = new System.Drawing.Point(6, 202);
+            this.buttonStatus.Location = new System.Drawing.Point(6, 238);
             this.buttonStatus.Name = "buttonStatus";
             this.buttonStatus.Size = new System.Drawing.Size(75, 23);
             this.buttonStatus.TabIndex = 4;
@@ -154,7 +178,7 @@
             // 
             // buttonEncZero
             // 
-            this.buttonEncZero.Location = new System.Drawing.Point(155, 202);
+            this.buttonEncZero.Location = new System.Drawing.Point(155, 238);
             this.buttonEncZero.Name = "buttonEncZero";
             this.buttonEncZero.Size = new System.Drawing.Size(75, 23);
             this.buttonEncZero.TabIndex = 3;
@@ -209,7 +233,7 @@
             // 
             // buttonCancel
             // 
-            this.buttonCancel.Location = new System.Drawing.Point(12, 332);
+            this.buttonCancel.Location = new System.Drawing.Point(12, 368);
             this.buttonCancel.Name = "buttonCancel";
             this.buttonCancel.Size = new System.Drawing.Size(75, 23);
             this.buttonCancel.TabIndex = 2;
@@ -222,7 +246,7 @@
             this.groupBoxExternalRoute.Controls.Add(this.buttonClearExternalRoute);
             this.groupBoxExternalRoute.Controls.Add(this.buttonBrowseExternalRoute);
             this.groupBoxExternalRoute.Controls.Add(this.textBoxExternalRoute);
-            this.groupBoxExternalRoute.Location = new System.Drawing.Point(12, 249);
+            this.groupBoxExternalRoute.Location = new System.Drawing.Point(12, 285);
             this.groupBoxExternalRoute.Name = "groupBoxExternalRoute";
             this.groupBoxExternalRoute.Size = new System.Drawing.Size(236, 77);
             this.groupBoxExternalRoute.TabIndex = 3;
@@ -258,27 +282,49 @@
             this.textBoxExternalRoute.Size = new System.Drawing.Size(224, 20);
             this.textBoxExternalRoute.TabIndex = 0;
             // 
-            // labelMeasuresInSamePosition
+            // labelSendNotificationError
             // 
-            this.labelMeasuresInSamePosition.AutoSize = true;
-            this.labelMeasuresInSamePosition.Location = new System.Drawing.Point(6, 143);
-            this.labelMeasuresInSamePosition.Name = "labelMeasuresInSamePosition";
-            this.labelMeasuresInSamePosition.Size = new System.Drawing.Size(131, 13);
-            this.labelMeasuresInSamePosition.TabIndex = 12;
-            this.labelMeasuresInSamePosition.Text = "Measures in same position";
+            this.labelSendNotificationError.AutoSize = true;
+            this.labelSendNotificationError.Location = new System.Drawing.Point(6, 167);
+            this.labelSendNotificationError.Name = "labelSendNotificationError";
+            this.labelSendNotificationError.Size = new System.Drawing.Size(125, 13);
+            this.labelSendNotificationError.TabIndex = 14;
+            this.labelSendNotificationError.Text = "Send notification on error";
             // 
-            // textBoxMeasuresInSamePosition
+            // checkBoxSendNotificationError
             // 
-            this.textBoxMeasuresInSamePosition.Location = new System.Drawing.Point(146, 140);
-            this.textBoxMeasuresInSamePosition.Name = "textBoxMeasuresInSamePosition";
-            this.textBoxMeasuresInSamePosition.Size = new System.Drawing.Size(69, 20);
-            this.textBoxMeasuresInSamePosition.TabIndex = 11;
+            this.checkBoxSendNotificationError.AutoSize = true;
+            this.checkBoxSendNotificationError.Location = new System.Drawing.Point(172, 166);
+            this.checkBoxSendNotificationError.Name = "checkBoxSendNotificationError";
+            this.checkBoxSendNotificationError.Size = new System.Drawing.Size(49, 17);
+            this.checkBoxSendNotificationError.TabIndex = 13;
+            this.checkBoxSendNotificationError.Text = "send";
+            this.checkBoxSendNotificationError.UseVisualStyleBackColor = true;
+            // 
+            // checkBoxSendNotificationFinished
+            // 
+            this.checkBoxSendNotificationFinished.AutoSize = true;
+            this.checkBoxSendNotificationFinished.Location = new System.Drawing.Point(172, 189);
+            this.checkBoxSendNotificationFinished.Name = "checkBoxSendNotificationFinished";
+            this.checkBoxSendNotificationFinished.Size = new System.Drawing.Size(49, 17);
+            this.checkBoxSendNotificationFinished.TabIndex = 15;
+            this.checkBoxSendNotificationFinished.Text = "send";
+            this.checkBoxSendNotificationFinished.UseVisualStyleBackColor = true;
+            // 
+            // labelSendNotificationFinished
+            // 
+            this.labelSendNotificationFinished.AutoSize = true;
+            this.labelSendNotificationFinished.Location = new System.Drawing.Point(6, 190);
+            this.labelSendNotificationFinished.Name = "labelSendNotificationFinished";
+            this.labelSendNotificationFinished.Size = new System.Drawing.Size(154, 13);
+            this.labelSendNotificationFinished.TabIndex = 16;
+            this.labelSendNotificationFinished.Text = "Send notification when finished";
             // 
             // Form_AdvancedForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(260, 367);
+            this.ClientSize = new System.Drawing.Size(260, 403);
             this.ControlBox = false;
             this.Controls.Add(this.groupBoxExternalRoute);
             this.Controls.Add(this.buttonCancel);
@@ -323,5 +369,9 @@
         private System.Windows.Forms.CheckBox checkBoxReset0;
         private System.Windows.Forms.Label labelMeasuresInSamePosition;
         private System.Windows.Forms.TextBox textBoxMeasuresInSamePosition;
+        private System.Windows.Forms.Label labelSendNotificationError;
+        private System.Windows.Forms.CheckBox checkBoxSendNotificationError;
+        private System.Windows.Forms.CheckBox checkBoxSendNotificationFinished;
+        private System.Windows.Forms.Label labelSendNotificationFinished;
     }
 }

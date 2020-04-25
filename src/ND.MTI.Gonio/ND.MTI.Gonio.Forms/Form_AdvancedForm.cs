@@ -32,6 +32,8 @@ namespace ND.MTI.Gonio.Forms
             checkBoxUseCorrection.Checked = _model.UseCorrection;
             numericUpDownAmplifier.Value = (decimal)_model.Amplification;
             textBoxMeasuresInSamePosition.Text = _model.MeasuresInSamePosition.ToString();
+            checkBoxSendNotificationFinished.Checked = _model.SendNotificationOnComplete;
+            checkBoxSendNotificationError.Checked = _model.SendNotificationOnError;
         }
 
         private void ButtonCancel_Click(object sender, EventArgs e)
@@ -69,6 +71,8 @@ namespace ND.MTI.Gonio.Forms
             _model.MeasuresInSamePosition = measuresInSamePosition;
             _model.Offset = Parser.StringToDouble(textBoxOffset.Text);
             _model.Amplification = Parser.DecimalToDouble(numericUpDownAmplifier.Value);
+            _model.SendNotificationOnError = checkBoxSendNotificationError.Checked;
+            _model.SendNotificationOnComplete = checkBoxSendNotificationFinished.Checked;
 
             _userconfig.SaveUserConfig(_model);
 
