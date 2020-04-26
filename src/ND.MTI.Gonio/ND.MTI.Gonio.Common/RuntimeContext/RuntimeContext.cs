@@ -20,17 +20,13 @@ namespace ND.MTI.Gonio.Common.RuntimeContext
             VirtualZeroPosition = new Primitive_Position(0, 0);
 
             Results = new Complex_ResultCollection();
-            ResultsBindingList = new BindingList<Complex_ResultItem>(Results);
-
         }
 
         public static Form LoadFormInstance { get; set; }
         public static Primitive_Position ZeroPosition { get; set; }
         public static Primitive_Position VirtualZeroPosition { get; set; }
-        public static void AddResult(Complex_ResultItem resultItem) => Results.Add(resultItem);
 
         public static Complex_ResultCollection Results { get; private set; }
-        public static BindingList<Complex_ResultItem> ResultsBindingList { get; private set; }
 
         public static bool IsFSMGonioConnected { get; set; } = false;
         public static bool IsSSIPanelConnected { get; set; } = false;
