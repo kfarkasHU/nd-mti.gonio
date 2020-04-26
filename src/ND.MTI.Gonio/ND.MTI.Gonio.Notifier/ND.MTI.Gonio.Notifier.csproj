@@ -42,7 +42,8 @@
   <ItemGroup>
     <Compile Include="Contexts\EmailNotifierData.cs" />
     <Compile Include="Implementations\EmailNotifier.cs" />
-    <Compile Include="NotifierCore.cs" />
+    <Compile Include="NotifierCore.Debug.cs" />
+    <Compile Include="NotifierCore.Release.cs" />
     <Compile Include="NotifierBase.cs" />
     <Compile Include="NotifyContext.cs" />
     <Compile Include="NotifyHub.cs" />
