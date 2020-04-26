@@ -53,6 +53,7 @@
   <ItemGroup>
     <Compile Include="ExcelExportService.cs" />
     <Compile Include="Helper\MeasurementServiceHelper.cs" />
+    <Compile Include="Helper\PositionHelper.cs" />
     <Compile Include="Helper\PositionMatrixHelper.cs" />
     <Compile Include="IExcelExportService.cs" />
     <Compile Include="IExternalDevice.cs" />
