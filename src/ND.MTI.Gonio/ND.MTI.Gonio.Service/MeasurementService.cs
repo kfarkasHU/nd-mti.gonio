@@ -127,8 +127,8 @@ namespace ND.MTI.Gonio.Service
 
                     measured += RuntimeContext.UserConfig.Offset;
 
-                    RuntimeContext
-                        .AddResult(
+                    RuntimeContext.Results
+                        .Add(
                             new Complex_ResultItem(
                                 position.X,
                                 position.Y,

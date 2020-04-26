@@ -20,21 +20,62 @@ namespace ND.MTI.Gonio.Forms
 
             InitializeComponent();
 
+            var positionCol = new DataGridViewTextBoxColumn();
+            positionCol.HeaderText = "Position";
+
+            var measuredIlluminationCol = new DataGridViewTextBoxColumn();
+            measuredIlluminationCol.HeaderText = "Measured illumination (lx)";
+
+            var correctionCol = new DataGridViewTextBoxColumn();
+            correctionCol.HeaderText = "Correction";
+
+            var correctedIlluminationCol = new DataGridViewTextBoxColumn();
+            correctedIlluminationCol.HeaderText = "Corrected illumination (lx)";
+
+            var luminousIntensityCol = new DataGridViewTextBoxColumn();
+            luminousIntensityCol.HeaderText = "Lum. intensity (cd)";
+
+            dataGridViewResults.Columns.Add(positionCol);
+            dataGridViewResults.Columns.Add(measuredIlluminationCol);
+            dataGridViewResults.Columns.Add(correctionCol);
+            dataGridViewResults.Columns.Add(correctedIlluminationCol);
+            dataGridViewResults.Columns.Add(luminousIntensityCol);
+
+            dataGridViewResults.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+
             BindData();
         }
 
         private void OnTimerTick(object sender, EventArgs e) => BindData();
 
-        private void ButtonClose_Click(object sender, EventArgs e) => Close();
+        private void ButtonClose_Click(object sender, EventArgs e)
+        {
+            _timer.Stop();
+            Close();
+        }
 
         private void ButtonExcelExport_Click(object sender, EventArgs e) => _excelExportService.ExportToExcel(RuntimeContext.Results);
 
         private void BindData()
         {
-            var source = new BindingSource(RuntimeContext.ResultsBindingList, null);
+            for (var i = 0; i < RuntimeContext.Results.Count; i++)
+            {
+                var needToAdd = true;
 
-            dataGridViewResults.DataSource = source;
-            dataGridViewResults.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+                foreach (DataGridViewRow row in dataGridViewResults.Rows)
+                    if (row.Cells[0].Value.ToString() == RuntimeContext.Results[i].Position.ToString())
+                        needToAdd = false;
+
+                if (needToAdd)
+                    dataGridViewResults.Rows.Add(
+                        RuntimeContext.Results[i].Position,
+                        RuntimeContext.Results[i].MeasuredIllumination,
+                        RuntimeContext.Results[i].Correction,
+                        RuntimeContext.Results[i].CorrectedIllumination,
+                        RuntimeContext.Results[i].Candela
+                    );
+            }
+            dataGridViewResults.Update();
         }
     }
 }

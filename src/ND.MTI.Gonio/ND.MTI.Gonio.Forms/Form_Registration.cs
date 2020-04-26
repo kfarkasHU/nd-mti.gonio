@@ -4,7 +4,6 @@ using ND.MTI.Gonio.Model;
 using System.Diagnostics;
 using ND.MTI.Gonio.Service;
 using System.Windows.Forms;
-using System.ComponentModel;
 using ND.MTI.Gonio.Common.Utils;
 using ND.MTI.Gonio.Service.Worker;
 
@@ -28,16 +27,31 @@ namespace ND.MTI.Gonio.Forms
             _timer = new GonioTimer(OnTimerTick, 100);
 
             InitializeComponent();
+
+            var timeCol = new DataGridViewTextBoxColumn();
+            timeCol.HeaderText = "Time";
+
+            var valueCol = new DataGridViewTextBoxColumn();
+            valueCol.HeaderText = "Data";
+
+            dataGridViewResults.Columns.AddRange(timeCol, valueCol);
+            dataGridViewResults.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
         }
 
         private void OnTimerTick(object sender, EventArgs e)
         {
-            var bindingList = new BindingList<Complex_RegistrationItem>(_results);
-            var source = new BindingSource(bindingList, null);
+            for(var i = 0; i < _results.Count; i++)
+            {
+                var needToAdd = true;
 
-            dataGridViewResults.DataSource = source;
-            dataGridViewResults.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dataGridViewResults.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+                foreach (DataGridViewRow row in dataGridViewResults.Rows)
+                    if (row.Cells[0].Value.ToString() == _results[i].Time.ToString())
+                        needToAdd = false;
+
+                if(needToAdd)
+                    dataGridViewResults.Rows.Add(_results[i].Time, _results[i].Data);
+            }
+            dataGridViewResults.Update();
         }
 
         private void ButtonClose_Click(object sender, EventArgs e)
@@ -57,10 +71,16 @@ namespace ND.MTI.Gonio.Forms
             buttonClose.Enabled = true;
             buttonSave.Enabled = true;
             textBoxInterval.ReadOnly = false;
+
+            _thread.Abort();
+            _timer.Stop();
         }
 
         private void ButtonStart_Click(object sender, EventArgs e)
         {
+            dataGridViewResults.Rows.Clear();
+            _results.Clear();
+
             buttonStop.Enabled = true;
             buttonReset.Enabled = false;
             buttonClose.Enabled = false;
@@ -82,6 +102,8 @@ namespace ND.MTI.Gonio.Forms
 
         private void ButtonReset_Click(object sender, EventArgs e)
         {
+            dataGridViewResults.Rows.Clear();
+
             buttonSave.Enabled = false;
             _results.Clear();
         }
