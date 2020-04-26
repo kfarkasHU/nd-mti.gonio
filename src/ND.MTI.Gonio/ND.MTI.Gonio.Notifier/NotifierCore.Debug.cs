@@ -1,4 +1,6 @@
-﻿using System;
+﻿#if DEBUG
+
+using System.Threading;
 using System.Collections.Generic;
 
 namespace ND.MTI.Gonio.Notifier
@@ -19,19 +21,7 @@ namespace ND.MTI.Gonio.Notifier
 
         internal void SendMessages()
         {
-            try
-            {
-                BeforeSendMessages();
-
-                foreach (var message in _messages)
-                    foreach (var target in _targetAddresses)
-                        ExecuteMessage(target, message.Body, message.Title);
-
-                AfterSendMessages();
-            }
-            catch (Exception)
-            {
-            }
+            Thread.Sleep(500);
         }
 
         protected abstract void BeforeSendMessages();
@@ -39,3 +29,5 @@ namespace ND.MTI.Gonio.Notifier
         protected abstract void ExecuteMessage(string target, string body, string title);
     }
 }
+
+#endif
