@@ -2,6 +2,7 @@
 using ND.MTI.Gonio.Model;
 using ND.MTI.Gonio.Service.Worker;
 using ND.MTI.Gonio.Common.RuntimeContext;
+using ND.MTI.Gonio.Service.Helper;
 
 namespace ND.MTI.Gonio.Forms
 {
@@ -17,9 +18,9 @@ namespace ND.MTI.Gonio.Forms
         }
 
 
-        internal void SetPositionVirtualZero() => SetPositionInternal(GetPositionInternal() - RuntimeContext.VirtualZeroPosition);
+        internal void SetPositionVirtualZero() => SetPositionInternal(PositionHelper.VirtualZeroPositionToCurrent(GetPositionInternal()));
 
-        internal void SetPositionToZero() => SetPositionInternal(new Primitive_Position(0, 0) - RuntimeContext.VirtualZeroPosition);
+        internal void SetPositionToZero() => SetPositionInternal(PositionHelper.AbsoluteZeroPosition());
         
         private Primitive_Position GetPositionInternal() => _positionWorker.GetPosition();
 

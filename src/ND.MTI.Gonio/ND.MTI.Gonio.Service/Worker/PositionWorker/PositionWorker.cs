@@ -1,6 +1,7 @@
 ﻿using System;
 using ND.MTI.Gonio.Model;
 using ND.MTI.Gonio.Common.Utils;
+using ND.MTI.Gonio.Service.Helper;
 using ND.MTI.Gonio.Common.Configuration;
 using ND.MTI.Gonio.Common.RuntimeContext;
 using ND.MTI.Gonio.Service.Worker.Pokeys;
@@ -54,10 +55,7 @@ namespace ND.MTI.Gonio.Service.Worker
         {
             var pos = GetRawPositionInternal();
 
-            pos -= RuntimeContext.VirtualZeroPosition;
-            pos += RuntimeContext.ZeroPosition;
-
-            return pos;
+            return PositionHelper.Normalise(pos);
         }
 
         private Primitive_Position GetRawPositionInternal()
@@ -75,8 +73,23 @@ namespace ND.MTI.Gonio.Service.Worker
 
         public void SetPosition(Primitive_Position position)
         {
+            var diffFromAbsZero = PositionHelper.CurrentPositionToAbsoluteZero(position);
+
+            if (IsOutOfRange(diffFromAbsZero.X, _gonioConfiguration.Endpoint_XMin, _gonioConfiguration.Endpoint_XMax))
+                throw new Exception($"The target position is out of range in X axis.\nValue: {position.X}\nNormalised value: {diffFromAbsZero.X}");
+
+            if (IsOutOfRange(diffFromAbsZero.Y, _gonioConfiguration.Endpoint_YMin, _gonioConfiguration.Endpoint_YMax))
+                throw new Exception($"The target position is out of range in Y axis.\nValue: {position.Y}\nNormalised value: {diffFromAbsZero.Y}");
+
             SetPositionXInternal(position.X);
             SetPositionYInternal(position.Y);
+
+            bool IsOutOfRange(double current, double min, double max)
+            {
+                return
+                    current < min ||
+                    current > max;
+            }
         }
 
         public void DecrementY() => DecrementYInternal();

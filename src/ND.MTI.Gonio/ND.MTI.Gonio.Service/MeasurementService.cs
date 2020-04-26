@@ -140,10 +140,10 @@ namespace ND.MTI.Gonio.Service
             }
 
             if (RuntimeContext.UserConfig.ResetToZero)
-                SetPositionInternal(new Primitive_Position(0, 0) - RuntimeContext.VirtualZeroPosition);
+                SetPositionInternal(PositionHelper.AbsoluteZeroPosition());
 
             if (RuntimeContext.UserConfig.ResetToVZero)
-                SetPositionInternal(GetPositionInternal() - RuntimeContext.VirtualZeroPosition);
+                SetPositionInternal(PositionHelper.VirtualZeroPositionToCurrent(GetPositionInternal()));
 
             State = MeasurementStatus.FINISHED;
 
