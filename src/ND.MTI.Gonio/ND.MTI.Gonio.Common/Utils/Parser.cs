@@ -39,6 +39,9 @@ namespace ND.MTI.Gonio.Common.Utils
 
         public static IList<string> StringToStringList(string listStr)
         {
+            if (string.IsNullOrEmpty(listStr))
+                return new List<string>();
+
             var separator = ';';
 
             if (!listStr.Contains(separator.ToString()))
