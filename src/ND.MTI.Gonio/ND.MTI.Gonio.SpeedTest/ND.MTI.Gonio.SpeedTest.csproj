@@ -7,7 +7,7 @@
     <ProjectGuid>{8C20999E-E3AB-4D51-BD4F-166D32716952}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <RootNamespace>ND.MTI.Gonio.SpeedTest</RootNamespace>
-    <AssemblyName>ND.MTI.Gonio.SpeedTest</AssemblyName>
+    <AssemblyName>Gonio.SpeedTest</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
