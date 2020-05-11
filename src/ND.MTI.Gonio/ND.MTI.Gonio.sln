@@ -19,7 +19,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		external\PoKeysDevice_DLL.dll = external\PoKeysDevice_DLL.dll
 		external\PoKeysDevice_DLL.tlb = external\PoKeysDevice_DLL.tlb
 		external\PoKeysDevice_DLL.XML = external\PoKeysDevice_DLL.XML
-		postBuild.ps1 = postBuild.ps1
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tools", "Tools", "{F5B6EE97-2290-42E8-A704-E518E6F4C3AE}"
@@ -37,6 +36,16 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ND.MTI.Gonio.SpeedTest", "ND.MTI.Gonio.SpeedTest\ND.MTI.Gonio.SpeedTest.csproj", "{8C20999E-E3AB-4D51-BD4F-166D32716952}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ND.MTI.Gonio.Notifier", "ND.MTI.Gonio.Notifier\ND.MTI.Gonio.Notifier.csproj", "{EE2C3675-C018-4FD5-B85D-7DA373F17920}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "assets", "assets", "{25D0A242-A41D-4A5E-AB1D-898DD3C04FE9}"
+	ProjectSection(SolutionItems) = preProject
+		external\assets\finishloader.gif = external\assets\finishloader.gif
+		external\assets\gonioapp.ico = external\assets\gonioapp.ico
+		external\assets\helpicon16.png = external\assets\helpicon16.png
+		external\assets\rawposition.ico = external\assets\rawposition.ico
+		external\assets\routegenerator.ico = external\assets\routegenerator.ico
+		external\assets\speedtest.ico = external\assets\speedtest.ico
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -85,6 +94,7 @@ Global
 		{7A2BB03C-EF4B-431C-8FF5-8EBAB6BD9BCF} = {F5B6EE97-2290-42E8-A704-E518E6F4C3AE}
 		{E83EF18F-1A2C-4F01-9A9A-73155108D483} = {1FE7D508-D008-48C4-A75E-1088D2A66E6F}
 		{8C20999E-E3AB-4D51-BD4F-166D32716952} = {F5B6EE97-2290-42E8-A704-E518E6F4C3AE}
+		{25D0A242-A41D-4A5E-AB1D-898DD3C04FE9} = {1FE7D508-D008-48C4-A75E-1088D2A66E6F}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {D7521CD1-B974-4102-BF23-A1A7539ADF02}
