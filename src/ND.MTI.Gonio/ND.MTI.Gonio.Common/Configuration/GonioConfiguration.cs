@@ -70,6 +70,7 @@ namespace ND.MTI.Gonio.Common.Configuration
 
         public double Position_AbsoluteZeroX => Parser.StringToDouble(GetConfigByKeyName(nameof(Position_AbsoluteZeroX), "0"));
         public double Position_AbsoluteZeroY => Parser.StringToDouble(GetConfigByKeyName(nameof(Position_AbsoluteZeroY), "0"));
+        public double Position_SpeedThreshold => Parser.StringToDouble(GetConfigByKeyName(nameof(Position_SpeedThreshold), "10"));
 
         public double Encoder_Precision => Parser.StringToDouble(GetConfigByKeyName(nameof(Encoder_Precision), "0.1"));
         public double Excel_Precision => Parser.StringToDouble(GetConfigByKeyName(nameof(Excel_Precision), "0.1"));

@@ -63,19 +63,35 @@ namespace ND.MTI.Gonio.Forms
             switch (e.KeyCode)
             {
                 case Keys.Q:
-                    DecrementXInternal();
+                    DecrementXInternalSlow();
                     break;
 
                 case Keys.W:
-                    IncrementXInternal();
+                    IncrementXInternalSlow();
+                    break;
+
+                case Keys.E:
+                    DecrementXInternalFast();
+                    break;
+
+                case Keys.R:
+                    IncrementXInternalFast();
                     break;
 
                 case Keys.A:
-                    DecrementYInternal();
+                    DecrementYInternalSlow();
                     break;
 
                 case Keys.S:
-                    IncrementYInternal();
+                    IncrementYInternalSlow();
+                    break;
+
+                case Keys.D:
+                    DecrementYInternalFast();
+                    break;
+
+                case Keys.F:
+                    IncrementYInternalFast();
                     break;
             }
 
@@ -98,11 +114,15 @@ namespace ND.MTI.Gonio.Forms
             {
                 case Keys.Q:
                 case Keys.W:
+                case Keys.E:
+                case Keys.R:
                     StopXInternal();
                     break;
 
                 case Keys.A:
                 case Keys.S:
+                case Keys.D:
+                case Keys.F:
                     StopYInternal();
                     break;
             }
@@ -111,25 +131,21 @@ namespace ND.MTI.Gonio.Forms
             e.SuppressKeyPress = true;
         }
 
-        private void ButtonIncrementX_Click(object sender, EventArgs e) => IncrementXInternal();
-
-        private void ButtonIncrementY_Click(object sender, EventArgs e) => IncrementYInternal();
-
-        private void ButtonDecrementX_Click(object sender, EventArgs e) => DecrementXInternal();
-
-        private void ButtonDecrementY_Click(object sender, EventArgs e) => DecrementYInternal();
-
         private void ButtonStopX_Click(object sender, EventArgs e) => StopXInternal();
 
         private void ButtonStopY_Click(object sender, EventArgs e) => StopYInternal();
 
-        private void IncrementXInternal() => _positionWorker.IncrementX();
+        private void IncrementXInternalSlow() => _positionWorker.IncrementXSlow();
+        private void IncrementXInternalFast() => _positionWorker.IncrementXFast();
 
-        private void IncrementYInternal() => _positionWorker.IncrementY();
+        private void IncrementYInternalSlow() => _positionWorker.IncrementYSlow();
+        private void IncrementYInternalFast() => _positionWorker.IncrementYFast();
 
-        private void DecrementXInternal() => _positionWorker.DecrementX();
+        private void DecrementXInternalSlow() => _positionWorker.DecrementXSlow();
+        private void DecrementXInternalFast() => _positionWorker.DecrementXFast();
 
-        private void DecrementYInternal() => _positionWorker.DecrementY();
+        private void DecrementYInternalSlow() => _positionWorker.DecrementYSlow();
+        private void DecrementYInternalFast() => _positionWorker.DecrementYFast();
 
         private void StopXInternal() => _positionWorker.StopX();
 
@@ -162,5 +178,21 @@ namespace ND.MTI.Gonio.Forms
             _positionWorker.SetPosition(_targetPosition);
             _thread.Abort();
         }
+
+        private void ButtonDecrementXSlow_Click(object sender, EventArgs e) => DecrementXInternalSlow();
+
+        private void ButtonIncrementXSlow_Click(object sender, EventArgs e) => IncrementXInternalSlow();
+
+        private void ButtonIncrementXFast_Click(object sender, EventArgs e) => IncrementXInternalFast();
+
+        private void ButtonDecrementXFast_Click(object sender, EventArgs e) => DecrementXInternalFast();
+
+        private void ButtonIncrementYSlow_Click(object sender, EventArgs e) => IncrementYInternalSlow();
+
+        private void ButtonDecrementYSlow_Click(object sender, EventArgs e) => DecrementYInternalSlow();
+
+        private void ButtonIncrementYFast_Click(object sender, EventArgs e) => IncrementYInternalFast();
+
+        private void ButtonDecrementYFast_Click(object sender, EventArgs e) => DecrementYInternalFast();
     }
 }

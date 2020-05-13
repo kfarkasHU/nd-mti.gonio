@@ -11,6 +11,7 @@ namespace ND.MTI.Gonio.Service.Worker
         private const int ENCODER_MAX = 8191;
 
         private const int LOWSPEED = 1;
+        private const int HIGHSPEED = 3;
         
         internal static int CurrentX { get; private set; }
         internal static int CurrentY { get; private set; }
@@ -30,9 +31,13 @@ namespace ND.MTI.Gonio.Service.Worker
 
         internal static void IncrementX_Slow() => ChangeX(LOWSPEED * -1);
         internal static void IncrementY_Slow() => ChangeY(LOWSPEED * 1);
+        internal static void IncrementX_Fast() => ChangeX(HIGHSPEED * -1);
+        internal static void IncrementY_Fast() => ChangeY(HIGHSPEED * 1);
 
         internal static void DecrementX_Slow() => ChangeX(LOWSPEED * 1);
         internal static void DecrementY_Slow() => ChangeY(LOWSPEED * -1);
+        internal static void DecrementX_Fast() => ChangeX(HIGHSPEED * 1);
+        internal static void DecrementY_Fast() => ChangeY(HIGHSPEED * -1);
 
         internal static void StopX() => ChangeX(0);
         internal static void StopY() => ChangeY(0);

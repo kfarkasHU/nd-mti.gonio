@@ -37,12 +37,16 @@ namespace ND.MTI.Gonio.Forms
             this.labelYCoord = new System.Windows.Forms.Label();
             this.labelXCoord = new System.Windows.Forms.Label();
             this.groupBoxControl = new System.Windows.Forms.GroupBox();
+            this.buttonIncrementYFast = new System.Windows.Forms.Button();
+            this.buttonDecrementXFast = new System.Windows.Forms.Button();
+            this.buttonIncrementXFast = new System.Windows.Forms.Button();
+            this.buttonDecrementYSlow = new System.Windows.Forms.Button();
             this.buttonStopX = new System.Windows.Forms.Button();
             this.buttonStopY = new System.Windows.Forms.Button();
-            this.buttonIncrementY = new System.Windows.Forms.Button();
-            this.buttonDecrementY = new System.Windows.Forms.Button();
-            this.buttonIncrementX = new System.Windows.Forms.Button();
-            this.buttonDecrementX = new System.Windows.Forms.Button();
+            this.buttonIncrementYSlow = new System.Windows.Forms.Button();
+            this.buttonDecrementYFast = new System.Windows.Forms.Button();
+            this.buttonIncrementXSlow = new System.Windows.Forms.Button();
+            this.buttonDecrementXSlow = new System.Windows.Forms.Button();
             this.buttonSave = new System.Windows.Forms.Button();
             this.buttonClose = new System.Windows.Forms.Button();
             this.groupBoxSetPosition = new System.Windows.Forms.GroupBox();
@@ -109,22 +113,66 @@ namespace ND.MTI.Gonio.Forms
             // 
             // groupBoxControl
             // 
+            this.groupBoxControl.Controls.Add(this.buttonIncrementYFast);
+            this.groupBoxControl.Controls.Add(this.buttonDecrementXFast);
+            this.groupBoxControl.Controls.Add(this.buttonIncrementXFast);
+            this.groupBoxControl.Controls.Add(this.buttonDecrementYSlow);
             this.groupBoxControl.Controls.Add(this.buttonStopX);
             this.groupBoxControl.Controls.Add(this.buttonStopY);
-            this.groupBoxControl.Controls.Add(this.buttonIncrementY);
-            this.groupBoxControl.Controls.Add(this.buttonDecrementY);
-            this.groupBoxControl.Controls.Add(this.buttonIncrementX);
-            this.groupBoxControl.Controls.Add(this.buttonDecrementX);
+            this.groupBoxControl.Controls.Add(this.buttonIncrementYSlow);
+            this.groupBoxControl.Controls.Add(this.buttonDecrementYFast);
+            this.groupBoxControl.Controls.Add(this.buttonIncrementXSlow);
+            this.groupBoxControl.Controls.Add(this.buttonDecrementXSlow);
             this.groupBoxControl.Location = new System.Drawing.Point(12, 240);
             this.groupBoxControl.Name = "groupBoxControl";
-            this.groupBoxControl.Size = new System.Drawing.Size(257, 87);
+            this.groupBoxControl.Size = new System.Drawing.Size(257, 137);
             this.groupBoxControl.TabIndex = 1;
             this.groupBoxControl.TabStop = false;
             this.groupBoxControl.Text = "Control";
             // 
+            // buttonIncrementYFast
+            // 
+            this.buttonIncrementYFast.Location = new System.Drawing.Point(87, 109);
+            this.buttonIncrementYFast.Name = "buttonIncrementYFast";
+            this.buttonIncrementYFast.Size = new System.Drawing.Size(75, 23);
+            this.buttonIncrementYFast.TabIndex = 9;
+            this.buttonIncrementYFast.Text = "+Y fast (F)";
+            this.buttonIncrementYFast.UseVisualStyleBackColor = true;
+            this.buttonIncrementYFast.Click += new System.EventHandler(this.ButtonIncrementYFast_Click);
+            // 
+            // buttonDecrementXFast
+            // 
+            this.buttonDecrementXFast.Location = new System.Drawing.Point(6, 48);
+            this.buttonDecrementXFast.Name = "buttonDecrementXFast";
+            this.buttonDecrementXFast.Size = new System.Drawing.Size(75, 23);
+            this.buttonDecrementXFast.TabIndex = 8;
+            this.buttonDecrementXFast.Text = "-X fast (E)";
+            this.buttonDecrementXFast.UseVisualStyleBackColor = true;
+            this.buttonDecrementXFast.Click += new System.EventHandler(this.ButtonDecrementXFast_Click);
+            // 
+            // buttonIncrementXFast
+            // 
+            this.buttonIncrementXFast.Location = new System.Drawing.Point(87, 48);
+            this.buttonIncrementXFast.Name = "buttonIncrementXFast";
+            this.buttonIncrementXFast.Size = new System.Drawing.Size(75, 23);
+            this.buttonIncrementXFast.TabIndex = 7;
+            this.buttonIncrementXFast.Text = "+X fast (R)";
+            this.buttonIncrementXFast.UseVisualStyleBackColor = true;
+            this.buttonIncrementXFast.Click += new System.EventHandler(this.ButtonIncrementXFast_Click);
+            // 
+            // buttonDecrementYSlow
+            // 
+            this.buttonDecrementYSlow.Location = new System.Drawing.Point(6, 80);
+            this.buttonDecrementYSlow.Name = "buttonDecrementYSlow";
+            this.buttonDecrementYSlow.Size = new System.Drawing.Size(75, 23);
+            this.buttonDecrementYSlow.TabIndex = 6;
+            this.buttonDecrementYSlow.Text = "-Y slow (A)";
+            this.buttonDecrementYSlow.UseVisualStyleBackColor = true;
+            this.buttonDecrementYSlow.Click += new System.EventHandler(this.ButtonDecrementYSlow_Click);
+            // 
             // buttonStopX
             // 
-            this.buttonStopX.Location = new System.Drawing.Point(172, 19);
+            this.buttonStopX.Location = new System.Drawing.Point(176, 19);
             this.buttonStopX.Name = "buttonStopX";
             this.buttonStopX.Size = new System.Drawing.Size(75, 23);
             this.buttonStopX.TabIndex = 5;
@@ -134,7 +182,7 @@ namespace ND.MTI.Gonio.Forms
             // 
             // buttonStopY
             // 
-            this.buttonStopY.Location = new System.Drawing.Point(172, 48);
+            this.buttonStopY.Location = new System.Drawing.Point(176, 80);
             this.buttonStopY.Name = "buttonStopY";
             this.buttonStopY.Size = new System.Drawing.Size(75, 23);
             this.buttonStopY.TabIndex = 4;
@@ -142,49 +190,49 @@ namespace ND.MTI.Gonio.Forms
             this.buttonStopY.UseVisualStyleBackColor = true;
             this.buttonStopY.Click += new System.EventHandler(this.ButtonStopY_Click);
             // 
-            // buttonIncrementY
+            // buttonIncrementYSlow
             // 
-            this.buttonIncrementY.Location = new System.Drawing.Point(91, 48);
-            this.buttonIncrementY.Name = "buttonIncrementY";
-            this.buttonIncrementY.Size = new System.Drawing.Size(75, 23);
-            this.buttonIncrementY.TabIndex = 3;
-            this.buttonIncrementY.Text = "+Y (S)";
-            this.buttonIncrementY.UseVisualStyleBackColor = true;
-            this.buttonIncrementY.Click += new System.EventHandler(this.ButtonIncrementY_Click);
+            this.buttonIncrementYSlow.Location = new System.Drawing.Point(87, 80);
+            this.buttonIncrementYSlow.Name = "buttonIncrementYSlow";
+            this.buttonIncrementYSlow.Size = new System.Drawing.Size(75, 23);
+            this.buttonIncrementYSlow.TabIndex = 3;
+            this.buttonIncrementYSlow.Text = "+Y slow (S)";
+            this.buttonIncrementYSlow.UseVisualStyleBackColor = true;
+            this.buttonIncrementYSlow.Click += new System.EventHandler(this.ButtonIncrementYSlow_Click);
             // 
-            // buttonDecrementY
+            // buttonDecrementYFast
             // 
-            this.buttonDecrementY.Location = new System.Drawing.Point(6, 48);
-            this.buttonDecrementY.Name = "buttonDecrementY";
-            this.buttonDecrementY.Size = new System.Drawing.Size(75, 23);
-            this.buttonDecrementY.TabIndex = 2;
-            this.buttonDecrementY.Text = "-Y (A)";
-            this.buttonDecrementY.UseVisualStyleBackColor = true;
-            this.buttonDecrementY.Click += new System.EventHandler(this.ButtonDecrementY_Click);
+            this.buttonDecrementYFast.Location = new System.Drawing.Point(6, 109);
+            this.buttonDecrementYFast.Name = "buttonDecrementYFast";
+            this.buttonDecrementYFast.Size = new System.Drawing.Size(75, 23);
+            this.buttonDecrementYFast.TabIndex = 2;
+            this.buttonDecrementYFast.Text = "-Y fast (A)";
+            this.buttonDecrementYFast.UseVisualStyleBackColor = true;
+            this.buttonDecrementYFast.Click += new System.EventHandler(this.ButtonDecrementYFast_Click);
             // 
-            // buttonIncrementX
+            // buttonIncrementXSlow
             // 
-            this.buttonIncrementX.Location = new System.Drawing.Point(91, 19);
-            this.buttonIncrementX.Name = "buttonIncrementX";
-            this.buttonIncrementX.Size = new System.Drawing.Size(75, 23);
-            this.buttonIncrementX.TabIndex = 1;
-            this.buttonIncrementX.Text = "+X (W)";
-            this.buttonIncrementX.UseVisualStyleBackColor = true;
-            this.buttonIncrementX.Click += new System.EventHandler(this.ButtonIncrementX_Click);
+            this.buttonIncrementXSlow.Location = new System.Drawing.Point(87, 19);
+            this.buttonIncrementXSlow.Name = "buttonIncrementXSlow";
+            this.buttonIncrementXSlow.Size = new System.Drawing.Size(75, 23);
+            this.buttonIncrementXSlow.TabIndex = 1;
+            this.buttonIncrementXSlow.Text = "+X slow (W)";
+            this.buttonIncrementXSlow.UseVisualStyleBackColor = true;
+            this.buttonIncrementXSlow.Click += new System.EventHandler(this.ButtonIncrementXSlow_Click);
             // 
-            // buttonDecrementX
+            // buttonDecrementXSlow
             // 
-            this.buttonDecrementX.Location = new System.Drawing.Point(6, 19);
-            this.buttonDecrementX.Name = "buttonDecrementX";
-            this.buttonDecrementX.Size = new System.Drawing.Size(75, 23);
-            this.buttonDecrementX.TabIndex = 0;
-            this.buttonDecrementX.Text = "-X (Q)";
-            this.buttonDecrementX.UseVisualStyleBackColor = true;
-            this.buttonDecrementX.Click += new System.EventHandler(this.ButtonDecrementX_Click);
+            this.buttonDecrementXSlow.Location = new System.Drawing.Point(6, 19);
+            this.buttonDecrementXSlow.Name = "buttonDecrementXSlow";
+            this.buttonDecrementXSlow.Size = new System.Drawing.Size(75, 23);
+            this.buttonDecrementXSlow.TabIndex = 0;
+            this.buttonDecrementXSlow.Text = "-X slow (Q)";
+            this.buttonDecrementXSlow.UseVisualStyleBackColor = true;
+            this.buttonDecrementXSlow.Click += new System.EventHandler(this.ButtonDecrementXSlow_Click);
             // 
             // buttonSave
             // 
-            this.buttonSave.Location = new System.Drawing.Point(194, 333);
+            this.buttonSave.Location = new System.Drawing.Point(194, 383);
             this.buttonSave.Name = "buttonSave";
             this.buttonSave.Size = new System.Drawing.Size(75, 23);
             this.buttonSave.TabIndex = 5;
@@ -194,7 +242,7 @@ namespace ND.MTI.Gonio.Forms
             // 
             // buttonClose
             // 
-            this.buttonClose.Location = new System.Drawing.Point(12, 333);
+            this.buttonClose.Location = new System.Drawing.Point(12, 383);
             this.buttonClose.Name = "buttonClose";
             this.buttonClose.Size = new System.Drawing.Size(75, 23);
             this.buttonClose.TabIndex = 6;
@@ -266,7 +314,7 @@ namespace ND.MTI.Gonio.Forms
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(286, 369);
+            this.ClientSize = new System.Drawing.Size(286, 418);
             this.ControlBox = false;
             this.Controls.Add(this.groupBoxSetPosition);
             this.Controls.Add(this.buttonClose);
@@ -299,10 +347,10 @@ namespace ND.MTI.Gonio.Forms
         private System.Windows.Forms.Label labelXCoord;
         private System.Windows.Forms.TextBox textBoxYCoord;
         private System.Windows.Forms.TextBox textBoxXCoord;
-        private System.Windows.Forms.Button buttonIncrementY;
-        private System.Windows.Forms.Button buttonDecrementY;
-        private System.Windows.Forms.Button buttonIncrementX;
-        private System.Windows.Forms.Button buttonDecrementX;
+        private System.Windows.Forms.Button buttonIncrementYSlow;
+        private System.Windows.Forms.Button buttonDecrementYFast;
+        private System.Windows.Forms.Button buttonIncrementXSlow;
+        private System.Windows.Forms.Button buttonDecrementXSlow;
         private System.Windows.Forms.Button buttonSave;
         private System.Windows.Forms.Button buttonClose;
         private System.Windows.Forms.Button buttonStopX;
@@ -313,5 +361,9 @@ namespace ND.MTI.Gonio.Forms
         private System.Windows.Forms.Label labelSetPositionY;
         private System.Windows.Forms.Label labelSetPositionX;
         private System.Windows.Forms.Button buttonGo;
+        private System.Windows.Forms.Button buttonIncrementYFast;
+        private System.Windows.Forms.Button buttonDecrementXFast;
+        private System.Windows.Forms.Button buttonIncrementXFast;
+        private System.Windows.Forms.Button buttonDecrementYSlow;
     }
 }

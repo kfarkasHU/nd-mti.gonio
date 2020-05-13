@@ -11,14 +11,20 @@ namespace ND.MTI.Gonio.Service.Worker
         Primitive_Position GetPosition();
         Primitive_Position GetRawPosition();
 
-        void DecrementY();
-        void DecrementX();
+        void DecrementYFast();
+        void DecrementYSlow();
+
+        void DecrementXFast();
+        void DecrementXSlow();
 
         void StopX();
         void StopY();
 
-        void IncrementY();
-        void IncrementX();
+        void IncrementYFast();
+        void IncrementYSlow();
+
+        void IncrementXFast();
+        void IncrementXSlow();
 
         void EncoderZero();
     }

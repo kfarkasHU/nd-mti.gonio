@@ -57,19 +57,35 @@ namespace ND.MTI.Gonio.RawPosition
             switch (e.KeyCode)
             {
                 case Keys.Q:
-                    _positionWorker.IncrementX();
+                    _positionWorker.IncrementXSlow();
                     break;
 
                 case Keys.W:
-                    _positionWorker.DecrementX();
+                    _positionWorker.DecrementXSlow();
+                    break;
+
+                case Keys.E:
+                    _positionWorker.IncrementXFast();
+                    break;
+
+                case Keys.R:
+                    _positionWorker.DecrementXFast();
                     break;
 
                 case Keys.A:
-                    _positionWorker.IncrementY();
+                    _positionWorker.IncrementYSlow();
                     break;
 
                 case Keys.S:
-                    _positionWorker.DecrementY();
+                    _positionWorker.DecrementYSlow();
+                    break;
+
+                case Keys.D:
+                    _positionWorker.IncrementYFast();
+                    break;
+
+                case Keys.F:
+                    _positionWorker.DecrementYFast();
                     break;
             }
 
@@ -87,11 +103,15 @@ namespace ND.MTI.Gonio.RawPosition
             {
                 case Keys.Q:
                 case Keys.W:
+                case Keys.E:
+                case Keys.R:
                     _positionWorker.StopX();
                     break;
 
                 case Keys.A:
                 case Keys.S:
+                case Keys.D:
+                case Keys.F:
                     _positionWorker.StopY();
                     break;
             }
@@ -100,15 +120,7 @@ namespace ND.MTI.Gonio.RawPosition
             e.SuppressKeyPress = true;
         }
 
-        private void ButtonIncX_Click(object sender, EventArgs e) => _positionWorker.IncrementX();
-
-        private void ButtonDecX_Click(object sender, EventArgs e) => _positionWorker.DecrementX();
-
         private void ButtonStopX_Click(object sender, EventArgs e) => _positionWorker.StopX();
-
-        private void ButtonIncY_Click(object sender, EventArgs e) => _positionWorker.IncrementY();
-
-        private void ButtonDecY_Click(object sender, EventArgs e) => _positionWorker.DecrementY();
 
         private void ButtonStopY_Click(object sender, EventArgs e) => _positionWorker.StopY();
 
@@ -121,5 +133,21 @@ namespace ND.MTI.Gonio.RawPosition
 
             Close();
         }
+
+        private void ButtonIncXSlow_Click(object sender, EventArgs e) => _positionWorker.IncrementXSlow();
+
+        private void ButtonDecXSlow_Click(object sender, EventArgs e) => _positionWorker.DecrementYSlow();
+
+        private void ButtonIncXFast_Click(object sender, EventArgs e) => _positionWorker.IncrementXFast();
+
+        private void ButtonDecXFast_Click(object sender, EventArgs e) => _positionWorker.DecrementXFast();
+
+        private void ButtonIncYSlow_Click(object sender, EventArgs e) => _positionWorker.IncrementYSlow();
+
+        private void ButtonDecYSlow_Click(object sender, EventArgs e) => _positionWorker.DecrementYSlow();
+
+        private void ButtonIncYFast_Click(object sender, EventArgs e) => _positionWorker.IncrementXFast();
+
+        private void ButtonDecYFast_Click(object sender, EventArgs e) => _positionWorker.DecrementYFast();
     }
 }
