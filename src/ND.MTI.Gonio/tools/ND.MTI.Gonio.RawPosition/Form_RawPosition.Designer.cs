@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(RawPositionForm));
-            this.ButtonIncX = new System.Windows.Forms.Button();
+            this.ButtonIncXSlow = new System.Windows.Forms.Button();
             this.ButtonStopX = new System.Windows.Forms.Button();
             this.GroupBoxX = new System.Windows.Forms.GroupBox();
             this.TextBoxX_Normal = new System.Windows.Forms.TextBox();
@@ -38,7 +38,7 @@
             this.LabelX_Normalised = new System.Windows.Forms.Label();
             this.LabelX_Angle = new System.Windows.Forms.Label();
             this.LabelX_Raw = new System.Windows.Forms.Label();
-            this.ButtonDecX = new System.Windows.Forms.Button();
+            this.ButtonDecXSlow = new System.Windows.Forms.Button();
             this.GroupBoxY = new System.Windows.Forms.GroupBox();
             this.TextBoxY_Normal = new System.Windows.Forms.TextBox();
             this.TextBoxY_Angle = new System.Windows.Forms.TextBox();
@@ -46,27 +46,31 @@
             this.LabelY_Normalised = new System.Windows.Forms.Label();
             this.LabelY_Angle = new System.Windows.Forms.Label();
             this.LabelY_Raw = new System.Windows.Forms.Label();
-            this.ButtonDecY = new System.Windows.Forms.Button();
-            this.ButtonIncY = new System.Windows.Forms.Button();
+            this.ButtonDecYSlow = new System.Windows.Forms.Button();
+            this.ButtonIncYSlow = new System.Windows.Forms.Button();
             this.ButtonStopY = new System.Windows.Forms.Button();
             this.ButtonExit = new System.Windows.Forms.Button();
+            this.ButtonIncYFast = new System.Windows.Forms.Button();
+            this.ButtonDecYFast = new System.Windows.Forms.Button();
+            this.ButtonDecXFast = new System.Windows.Forms.Button();
+            this.ButtonIncXFast = new System.Windows.Forms.Button();
             this.GroupBoxX.SuspendLayout();
             this.GroupBoxY.SuspendLayout();
             this.SuspendLayout();
             // 
-            // ButtonIncX
+            // ButtonIncXSlow
             // 
-            this.ButtonIncX.Location = new System.Drawing.Point(6, 136);
-            this.ButtonIncX.Name = "ButtonIncX";
-            this.ButtonIncX.Size = new System.Drawing.Size(91, 23);
-            this.ButtonIncX.TabIndex = 2;
-            this.ButtonIncX.Text = "INC X (Q)";
-            this.ButtonIncX.UseVisualStyleBackColor = true;
-            this.ButtonIncX.Click += new System.EventHandler(this.ButtonIncX_Click);
+            this.ButtonIncXSlow.Location = new System.Drawing.Point(6, 136);
+            this.ButtonIncXSlow.Name = "ButtonIncXSlow";
+            this.ButtonIncXSlow.Size = new System.Drawing.Size(91, 23);
+            this.ButtonIncXSlow.TabIndex = 2;
+            this.ButtonIncXSlow.Text = "+X SLOW (Q)";
+            this.ButtonIncXSlow.UseVisualStyleBackColor = true;
+            this.ButtonIncXSlow.Click += new System.EventHandler(this.ButtonIncXSlow_Click);
             // 
             // ButtonStopX
             // 
-            this.ButtonStopX.Location = new System.Drawing.Point(6, 165);
+            this.ButtonStopX.Location = new System.Drawing.Point(6, 194);
             this.ButtonStopX.Name = "ButtonStopX";
             this.ButtonStopX.Size = new System.Drawing.Size(188, 23);
             this.ButtonStopX.TabIndex = 4;
@@ -76,18 +80,20 @@
             // 
             // GroupBoxX
             // 
+            this.GroupBoxX.Controls.Add(this.ButtonIncXFast);
+            this.GroupBoxX.Controls.Add(this.ButtonDecXFast);
             this.GroupBoxX.Controls.Add(this.TextBoxX_Normal);
             this.GroupBoxX.Controls.Add(this.TextBoxX_Angle);
             this.GroupBoxX.Controls.Add(this.TextBoxX_Raw);
             this.GroupBoxX.Controls.Add(this.LabelX_Normalised);
             this.GroupBoxX.Controls.Add(this.LabelX_Angle);
             this.GroupBoxX.Controls.Add(this.LabelX_Raw);
-            this.GroupBoxX.Controls.Add(this.ButtonDecX);
-            this.GroupBoxX.Controls.Add(this.ButtonIncX);
+            this.GroupBoxX.Controls.Add(this.ButtonDecXSlow);
+            this.GroupBoxX.Controls.Add(this.ButtonIncXSlow);
             this.GroupBoxX.Controls.Add(this.ButtonStopX);
             this.GroupBoxX.Location = new System.Drawing.Point(12, 12);
             this.GroupBoxX.Name = "GroupBoxX";
-            this.GroupBoxX.Size = new System.Drawing.Size(200, 197);
+            this.GroupBoxX.Size = new System.Drawing.Size(200, 231);
             this.GroupBoxX.TabIndex = 6;
             this.GroupBoxX.TabStop = false;
             this.GroupBoxX.Text = "X angle";
@@ -152,30 +158,32 @@
             this.LabelX_Raw.TabIndex = 6;
             this.LabelX_Raw.Text = "X RAW";
             // 
-            // ButtonDecX
+            // ButtonDecXSlow
             // 
-            this.ButtonDecX.Location = new System.Drawing.Point(103, 136);
-            this.ButtonDecX.Name = "ButtonDecX";
-            this.ButtonDecX.Size = new System.Drawing.Size(91, 23);
-            this.ButtonDecX.TabIndex = 5;
-            this.ButtonDecX.Text = "DEC X (W)";
-            this.ButtonDecX.UseVisualStyleBackColor = true;
-            this.ButtonDecX.Click += new System.EventHandler(this.ButtonDecX_Click);
+            this.ButtonDecXSlow.Location = new System.Drawing.Point(103, 136);
+            this.ButtonDecXSlow.Name = "ButtonDecXSlow";
+            this.ButtonDecXSlow.Size = new System.Drawing.Size(91, 23);
+            this.ButtonDecXSlow.TabIndex = 5;
+            this.ButtonDecXSlow.Text = "-X SLOW (W)";
+            this.ButtonDecXSlow.UseVisualStyleBackColor = true;
+            this.ButtonDecXSlow.Click += new System.EventHandler(this.ButtonDecXSlow_Click);
             // 
             // GroupBoxY
             // 
+            this.GroupBoxY.Controls.Add(this.ButtonDecYFast);
+            this.GroupBoxY.Controls.Add(this.ButtonIncYFast);
             this.GroupBoxY.Controls.Add(this.TextBoxY_Normal);
             this.GroupBoxY.Controls.Add(this.TextBoxY_Angle);
             this.GroupBoxY.Controls.Add(this.TextBoxY_Raw);
             this.GroupBoxY.Controls.Add(this.LabelY_Normalised);
             this.GroupBoxY.Controls.Add(this.LabelY_Angle);
             this.GroupBoxY.Controls.Add(this.LabelY_Raw);
-            this.GroupBoxY.Controls.Add(this.ButtonDecY);
-            this.GroupBoxY.Controls.Add(this.ButtonIncY);
+            this.GroupBoxY.Controls.Add(this.ButtonDecYSlow);
+            this.GroupBoxY.Controls.Add(this.ButtonIncYSlow);
             this.GroupBoxY.Controls.Add(this.ButtonStopY);
             this.GroupBoxY.Location = new System.Drawing.Point(218, 12);
             this.GroupBoxY.Name = "GroupBoxY";
-            this.GroupBoxY.Size = new System.Drawing.Size(200, 197);
+            this.GroupBoxY.Size = new System.Drawing.Size(200, 231);
             this.GroupBoxY.TabIndex = 11;
             this.GroupBoxY.TabStop = false;
             this.GroupBoxY.Text = "Y angle";
@@ -237,29 +245,29 @@
             this.LabelY_Raw.TabIndex = 6;
             this.LabelY_Raw.Text = "Y RAW";
             // 
-            // ButtonDecY
+            // ButtonDecYSlow
             // 
-            this.ButtonDecY.Location = new System.Drawing.Point(103, 136);
-            this.ButtonDecY.Name = "ButtonDecY";
-            this.ButtonDecY.Size = new System.Drawing.Size(91, 23);
-            this.ButtonDecY.TabIndex = 5;
-            this.ButtonDecY.Text = "DEC Y (S)";
-            this.ButtonDecY.UseVisualStyleBackColor = true;
-            this.ButtonDecY.Click += new System.EventHandler(this.ButtonDecY_Click);
+            this.ButtonDecYSlow.Location = new System.Drawing.Point(103, 136);
+            this.ButtonDecYSlow.Name = "ButtonDecYSlow";
+            this.ButtonDecYSlow.Size = new System.Drawing.Size(91, 23);
+            this.ButtonDecYSlow.TabIndex = 5;
+            this.ButtonDecYSlow.Text = "-Y SLOW (S)";
+            this.ButtonDecYSlow.UseVisualStyleBackColor = true;
+            this.ButtonDecYSlow.Click += new System.EventHandler(this.ButtonDecYSlow_Click);
             // 
-            // ButtonIncY
+            // ButtonIncYSlow
             // 
-            this.ButtonIncY.Location = new System.Drawing.Point(6, 136);
-            this.ButtonIncY.Name = "ButtonIncY";
-            this.ButtonIncY.Size = new System.Drawing.Size(91, 23);
-            this.ButtonIncY.TabIndex = 2;
-            this.ButtonIncY.Text = "INC Y (A)";
-            this.ButtonIncY.UseVisualStyleBackColor = true;
-            this.ButtonIncY.Click += new System.EventHandler(this.ButtonIncY_Click);
+            this.ButtonIncYSlow.Location = new System.Drawing.Point(6, 136);
+            this.ButtonIncYSlow.Name = "ButtonIncYSlow";
+            this.ButtonIncYSlow.Size = new System.Drawing.Size(91, 23);
+            this.ButtonIncYSlow.TabIndex = 2;
+            this.ButtonIncYSlow.Text = "+Y SLOW (A)";
+            this.ButtonIncYSlow.UseVisualStyleBackColor = true;
+            this.ButtonIncYSlow.Click += new System.EventHandler(this.ButtonIncYSlow_Click);
             // 
             // ButtonStopY
             // 
-            this.ButtonStopY.Location = new System.Drawing.Point(6, 165);
+            this.ButtonStopY.Location = new System.Drawing.Point(6, 194);
             this.ButtonStopY.Name = "ButtonStopY";
             this.ButtonStopY.Size = new System.Drawing.Size(188, 23);
             this.ButtonStopY.TabIndex = 4;
@@ -269,7 +277,7 @@
             // 
             // ButtonExit
             // 
-            this.ButtonExit.Location = new System.Drawing.Point(343, 215);
+            this.ButtonExit.Location = new System.Drawing.Point(343, 249);
             this.ButtonExit.Name = "ButtonExit";
             this.ButtonExit.Size = new System.Drawing.Size(75, 23);
             this.ButtonExit.TabIndex = 12;
@@ -277,11 +285,51 @@
             this.ButtonExit.UseVisualStyleBackColor = true;
             this.ButtonExit.Click += new System.EventHandler(this.ButtonExit_Click);
             // 
+            // ButtonIncYFast
+            // 
+            this.ButtonIncYFast.Location = new System.Drawing.Point(6, 165);
+            this.ButtonIncYFast.Name = "ButtonIncYFast";
+            this.ButtonIncYFast.Size = new System.Drawing.Size(91, 23);
+            this.ButtonIncYFast.TabIndex = 11;
+            this.ButtonIncYFast.Text = "+Y SLOW (D)";
+            this.ButtonIncYFast.UseVisualStyleBackColor = true;
+            this.ButtonIncYFast.Click += new System.EventHandler(this.ButtonIncYFast_Click);
+            // 
+            // ButtonDecYFast
+            // 
+            this.ButtonDecYFast.Location = new System.Drawing.Point(103, 165);
+            this.ButtonDecYFast.Name = "ButtonDecYFast";
+            this.ButtonDecYFast.Size = new System.Drawing.Size(91, 23);
+            this.ButtonDecYFast.TabIndex = 12;
+            this.ButtonDecYFast.Text = "-Y FAST (F)";
+            this.ButtonDecYFast.UseVisualStyleBackColor = true;
+            this.ButtonDecYFast.Click += new System.EventHandler(this.ButtonDecYFast_Click);
+            // 
+            // ButtonDecXFast
+            // 
+            this.ButtonDecXFast.Location = new System.Drawing.Point(103, 165);
+            this.ButtonDecXFast.Name = "ButtonDecXFast";
+            this.ButtonDecXFast.Size = new System.Drawing.Size(91, 23);
+            this.ButtonDecXFast.TabIndex = 11;
+            this.ButtonDecXFast.Text = "-X FAST (R)";
+            this.ButtonDecXFast.UseVisualStyleBackColor = true;
+            this.ButtonDecXFast.Click += new System.EventHandler(this.ButtonDecXFast_Click);
+            // 
+            // ButtonIncXFast
+            // 
+            this.ButtonIncXFast.Location = new System.Drawing.Point(6, 165);
+            this.ButtonIncXFast.Name = "ButtonIncXFast";
+            this.ButtonIncXFast.Size = new System.Drawing.Size(91, 23);
+            this.ButtonIncXFast.TabIndex = 12;
+            this.ButtonIncXFast.Text = "+X FAST (E)";
+            this.ButtonIncXFast.UseVisualStyleBackColor = true;
+            this.ButtonIncXFast.Click += new System.EventHandler(this.ButtonIncXFast_Click);
+            // 
             // RawPositionForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(423, 247);
+            this.ClientSize = new System.Drawing.Size(423, 284);
             this.ControlBox = false;
             this.Controls.Add(this.ButtonExit);
             this.Controls.Add(this.GroupBoxY);
@@ -303,10 +351,10 @@
         }
 
         #endregion
-        private System.Windows.Forms.Button ButtonIncX;
+        private System.Windows.Forms.Button ButtonIncXSlow;
         private System.Windows.Forms.Button ButtonStopX;
         private System.Windows.Forms.GroupBox GroupBoxX;
-        private System.Windows.Forms.Button ButtonDecX;
+        private System.Windows.Forms.Button ButtonDecXSlow;
         private System.Windows.Forms.TextBox TextBoxX_Normal;
         private System.Windows.Forms.TextBox TextBoxX_Angle;
         private System.Windows.Forms.TextBox TextBoxX_Raw;
@@ -320,10 +368,14 @@
         private System.Windows.Forms.Label LabelY_Normalised;
         private System.Windows.Forms.Label LabelY_Angle;
         private System.Windows.Forms.Label LabelY_Raw;
-        private System.Windows.Forms.Button ButtonDecY;
-        private System.Windows.Forms.Button ButtonIncY;
+        private System.Windows.Forms.Button ButtonDecYSlow;
+        private System.Windows.Forms.Button ButtonIncYSlow;
         private System.Windows.Forms.Button ButtonStopY;
         private System.Windows.Forms.Button ButtonExit;
+        private System.Windows.Forms.Button ButtonIncXFast;
+        private System.Windows.Forms.Button ButtonDecXFast;
+        private System.Windows.Forms.Button ButtonDecYFast;
+        private System.Windows.Forms.Button ButtonIncYFast;
     }
 }
 

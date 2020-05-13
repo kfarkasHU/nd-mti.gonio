@@ -136,8 +136,8 @@ namespace ND.MTI.Gonio.Forms
                     if (max is 0)
                         max++;
 
-                    var percentage = (current / max) * 100;
-                    labelPercentage.Text = $"{current}/{max} ({percentage}%)";
+                    var percentage = (current / (double)max) * 100.0;
+                    labelPercentage.Text = $"{current}/{max} ({percentage:0.##}%)";
                     progressBarProgress.Maximum = max;
                     progressBarProgress.Value = current;
 

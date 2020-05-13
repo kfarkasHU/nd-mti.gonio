@@ -92,13 +92,17 @@ namespace ND.MTI.Gonio.Service.Worker
             }
         }
 
-        public void DecrementY() => DecrementYInternal();
+        public void DecrementYFast() => DecrementYInternalFast();
+        public void DecrementYSlow() => DecrementYInternalSlow();
 
-        public void DecrementX() => DecrementXInternal();
+        public void DecrementXFast() => DecrementXInternalFast();
+        public void DecrementXSlow() => DecrementXInternalSlow();
 
-        public void IncrementY() => IncrementYInternal();
+        public void IncrementYFast() => IncrementYInternalFast();
+        public void IncrementYSlow() => IncrementYInternalSlow();
 
-        public void IncrementX() => IncrementXInternal();
+        public void IncrementXFast() => IncrementXInternalFast();
+        public void IncrementXSlow() => IncrementXInternalSlow();
 
         public void StopX() => StopXInternal();
 
@@ -117,19 +121,33 @@ namespace ND.MTI.Gonio.Service.Worker
             if (CloseEnough(currentX, pos))
                 return;
 
-            if(currentX < pos)
+            if (currentX < pos)
             {
-                IncrementXInternal();
+                if (Math.Abs(currentX - pos) > _gonioConfiguration.Position_SpeedThreshold)
+                {
+                    IncrementXFast();
 
-                while (GetPositionInternal().X < pos) { };
-                
+                    while (!CloseEnough(GetPositionInternal().X, pos - _gonioConfiguration.Position_SpeedThreshold)) { };
+                }
+
+                IncrementXInternalSlow();
+
+                while (!CloseEnough(GetPositionInternal().X, pos)) { };
+
                 StopXInternal();
             }
-            else if(currentX > pos)
+            else if (currentX > pos)
             {
-                DecrementXInternal();
+                if (Math.Abs(currentX - pos) > _gonioConfiguration.Position_SpeedThreshold)
+                {
+                    DecrementXInternalFast();
 
-                while (GetPositionInternal().X > pos) { };
+                    while (!CloseEnough(GetPositionInternal().X, pos + _gonioConfiguration.Position_SpeedThreshold)) { };
+                }
+
+                DecrementXInternalSlow();
+
+                while (!CloseEnough(GetPositionInternal().X, pos)) { };
 
                 StopXInternal();
             }
@@ -146,18 +164,32 @@ namespace ND.MTI.Gonio.Service.Worker
 
             if (currentY < pos)
             {
-                IncrementYInternal();
+                if (Math.Abs(currentY - pos) > _gonioConfiguration.Position_SpeedThreshold)
+                {
+                    IncrementYFast();
 
-                while (GetPositionInternal().Y < pos) { };
-                
+                    while (!CloseEnough(GetPositionInternal().Y, pos + _gonioConfiguration.Position_SpeedThreshold)) { };
+                }
+
+                IncrementYInternalSlow();
+
+                while (!CloseEnough(GetPositionInternal().Y, pos)) { };
+
                 StopYInternal();
             }
             else if (currentY > pos)
             {
-                DecrementYInternal();
+                if (Math.Abs(currentY - pos) > _gonioConfiguration.Position_SpeedThreshold)
+                {
+                    DecrementYInternalFast();
 
-                while (GetPositionInternal().Y > pos) { };
-               
+                    while (!CloseEnough(GetPositionInternal().Y, pos - _gonioConfiguration.Position_SpeedThreshold)) { };
+                }
+
+                DecrementYInternalSlow();
+
+                while (!CloseEnough(GetPositionInternal().Y, pos)) { };
+
                 StopYInternal();
             }
 
@@ -171,17 +203,21 @@ namespace ND.MTI.Gonio.Service.Worker
             return current - precision < target && current + precision > target;
         }
 
-        private void IncrementXInternal() => _ = _pokeysWorker.WriteDataX(GonioPokeys_Commands.ENA1_SR1_DIR0_RES0);
+        private void IncrementXInternalFast() => _ = _pokeysWorker.WriteDataX(GonioPokeys_Commands.ENA1_SR1_DIR0_SPEED1);
+        private void IncrementXInternalSlow() => _ = _pokeysWorker.WriteDataX(GonioPokeys_Commands.ENA1_SR1_DIR0_SPEED0);
 
-        private void IncrementYInternal() => _ = _pokeysWorker.WriteDataY(GonioPokeys_Commands.ENA1_SR1_DIR0_RES0);
+        private void IncrementYInternalFast() => _ = _pokeysWorker.WriteDataY(GonioPokeys_Commands.ENA1_SR1_DIR0_SPEED1);
+        private void IncrementYInternalSlow() => _ = _pokeysWorker.WriteDataY(GonioPokeys_Commands.ENA1_SR1_DIR0_SPEED0);
 
-        private void DecrementXInternal() => _ = _pokeysWorker.WriteDataX(GonioPokeys_Commands.ENA1_SR1_DIR1_RES0);
+        private void DecrementXInternalFast() => _ = _pokeysWorker.WriteDataX(GonioPokeys_Commands.ENA1_SR1_DIR1_SPEED1);
+        private void DecrementXInternalSlow() => _ = _pokeysWorker.WriteDataX(GonioPokeys_Commands.ENA1_SR1_DIR1_SPEED0);
 
-        private void DecrementYInternal() => _ = _pokeysWorker.WriteDataY(GonioPokeys_Commands.ENA1_SR1_DIR1_RES0);
+        private void DecrementYInternalFast() => _ = _pokeysWorker.WriteDataY(GonioPokeys_Commands.ENA1_SR1_DIR1_SPEED1);
+        private void DecrementYInternalSlow() => _ = _pokeysWorker.WriteDataY(GonioPokeys_Commands.ENA1_SR1_DIR1_SPEED0);
 
-        private void StopXInternal() => _pokeysWorker.WriteDataX(GonioPokeys_Commands.ENA0_SR0_DIR0_RES0);
+        private void StopXInternal() => _pokeysWorker.WriteDataX(GonioPokeys_Commands.ENA0_SR0_DIR0_SPEED0);
 
-        private void StopYInternal() => _pokeysWorker.WriteDataY(GonioPokeys_Commands.ENA0_SR0_DIR0_RES0);
+        private void StopYInternal() => _pokeysWorker.WriteDataY(GonioPokeys_Commands.ENA0_SR0_DIR0_SPEED0);
 
         private double NormalizeInternal(float current) {
             var c = 360f / 8192f;
