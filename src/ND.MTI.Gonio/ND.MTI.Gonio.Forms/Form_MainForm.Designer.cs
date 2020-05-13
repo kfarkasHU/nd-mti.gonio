@@ -307,6 +307,7 @@
             this.textBoxXCurrentPosition.ReadOnly = true;
             this.textBoxXCurrentPosition.Size = new System.Drawing.Size(75, 20);
             this.textBoxXCurrentPosition.TabIndex = 41;
+            this.textBoxXCurrentPosition.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // textBoxYCurrentPosition
             // 
@@ -316,6 +317,7 @@
             this.textBoxYCurrentPosition.ReadOnly = true;
             this.textBoxYCurrentPosition.Size = new System.Drawing.Size(75, 20);
             this.textBoxYCurrentPosition.TabIndex = 42;
+            this.textBoxYCurrentPosition.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // buttonRegistration
             // 
