@@ -7,7 +7,6 @@ using ND.MTI.Gonio.Service;
 using ND.MTI.Gonio.Model.Enum;
 using ND.MTI.Gonio.Common.Utils;
 using ND.MTI.Gonio.Common.Validator;
-using ND.MTI.Gonio.Common.Userconfig;
 using ND.MTI.Gonio.Common.Configuration;
 using ND.MTI.Gonio.Common.RuntimeContext;
 
@@ -133,6 +132,9 @@ namespace ND.MTI.Gonio.Forms
 
                     var current = _measurementService.CurrentStepNumber;
                     var max = _measurementService.NumberOfSteps;
+
+                    if (max is 0)
+                        max++;
 
                     var percentage = (current / max) * 100;
                     labelPercentage.Text = $"{current}/{max} ({percentage}%)";
@@ -346,7 +348,12 @@ namespace ND.MTI.Gonio.Forms
         private void ButtonRegistration_Click(object sender, EventArgs e)
         {
             var form = new Form_Registration();
-            form.Show();
+
+            _measurementService.SetRunning();
+
+            _ = form.ShowDialog();
+
+            _measurementService.SetReady();
         }
         
         private void ButtonStop_Click(object sender, EventArgs e) => _measurementService.Stop();

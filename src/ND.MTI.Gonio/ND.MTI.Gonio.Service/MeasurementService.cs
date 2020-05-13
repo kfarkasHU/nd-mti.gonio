@@ -87,6 +87,8 @@ namespace ND.MTI.Gonio.Service
 
         public void SetReady() => State = MeasurementStatus.READY;
 
+        public void SetRunning() => State = MeasurementStatus.RUNNING;
+
         public Primitive_Position GetPosition() => GetPositionInternal();
         
         private void SetPositionInternal(Primitive_Position position) => _positionWorker.SetPosition(position);        
