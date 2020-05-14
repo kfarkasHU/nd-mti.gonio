@@ -47,6 +47,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "assets", "assets", "{25D0A2
 		external\assets\speedtest.ico = external\assets\speedtest.ico
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ND.MTI.GONIO.CLI", "ND.MTI.GONIO.CLI\ND.MTI.GONIO.CLI.csproj", "{3071F300-11EA-4AAF-A848-D6434089D63E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -85,6 +87,10 @@ Global
 		{EE2C3675-C018-4FD5-B85D-7DA373F17920}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EE2C3675-C018-4FD5-B85D-7DA373F17920}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EE2C3675-C018-4FD5-B85D-7DA373F17920}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3071F300-11EA-4AAF-A848-D6434089D63E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3071F300-11EA-4AAF-A848-D6434089D63E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3071F300-11EA-4AAF-A848-D6434089D63E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3071F300-11EA-4AAF-A848-D6434089D63E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -95,6 +101,7 @@ Global
 		{E83EF18F-1A2C-4F01-9A9A-73155108D483} = {1FE7D508-D008-48C4-A75E-1088D2A66E6F}
 		{8C20999E-E3AB-4D51-BD4F-166D32716952} = {F5B6EE97-2290-42E8-A704-E518E6F4C3AE}
 		{25D0A242-A41D-4A5E-AB1D-898DD3C04FE9} = {1FE7D508-D008-48C4-A75E-1088D2A66E6F}
+		{3071F300-11EA-4AAF-A848-D6434089D63E} = {F5B6EE97-2290-42E8-A704-E518E6F4C3AE}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {D7521CD1-B974-4102-BF23-A1A7539ADF02}
