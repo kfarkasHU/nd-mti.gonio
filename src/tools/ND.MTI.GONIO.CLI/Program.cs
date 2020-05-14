@@ -4,14 +4,14 @@ using ND.MTI.Gonio.Common.Utils;
 using ND.MTI.Gonio.Service.Worker;
 using ND.MTI.Gonio.Common.RuntimeContext;
 
-namespace ND.MTI.GONIO.CLI
+namespace ND.MTI.Gonio.CLI
 {
     class Program
     {
         private static IGonioWorker _gonioWorker;
         private static IPositionWorker _positionWorker;
 
-        static void Main(string[] args)
+        static void Main()
         {
             _gonioWorker = GonioWorker.GetInstance();
             _positionWorker = PositionWorker.GetInstance();
