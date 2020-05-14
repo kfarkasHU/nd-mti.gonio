@@ -221,11 +221,10 @@ namespace ND.MTI.Gonio.Forms
                     buttonAdvanced.Enabled = RuntimeContext.IsAdminContext;
                     buttonAdvanced.Cursor = RuntimeContext.IsAdminContext ? Cursors.Hand : Cursors.No;
 
-
-                    textBoxEndX.Enabled = true;
-                    textBoxEndX.Cursor = Cursors.Hand;
-                    textBoxEndY.Enabled = true;
-                    textBoxEndY.Cursor = Cursors.Hand;
+                    textBoxEndX.Enabled = _model.IsXAuto;
+                    textBoxEndX.Cursor = _model.IsXAuto ? Cursors.Hand : Cursors.No;
+                    textBoxEndY.Enabled = _model.IsYAuto;
+                    textBoxEndY.Cursor = _model.IsXAuto ? Cursors.Hand : Cursors.No;
                     textBoxStepX.Enabled = _model.IsXAuto;
                     textBoxStepX.Cursor = _model.IsXAuto ? Cursors.Hand : Cursors.No;
                     textBoxStepY.Enabled = _model.IsYAuto;
@@ -287,6 +286,10 @@ namespace ND.MTI.Gonio.Forms
         private void CheckBoxYAuto_CheckedChanged(object sender, EventArgs e)
         {
             _model.IsYAuto = checkBoxYAuto.Checked;
+
+            textBoxEndY.Enabled = checkBoxYAuto.Checked;
+            textBoxEndY.Cursor = checkBoxYAuto.Checked ? Cursors.Hand : Cursors.No;
+
             textBoxStepY.Enabled = checkBoxYAuto.Checked;
             textBoxStepY.Cursor = checkBoxYAuto.Checked ? Cursors.Hand : Cursors.No;
         }
@@ -294,6 +297,10 @@ namespace ND.MTI.Gonio.Forms
         private void CheckBoxXAuto_CheckedChanged(object sender, EventArgs e)
         {
             _model.IsXAuto = checkBoxXAuto.Checked;
+
+            textBoxEndX.Enabled = checkBoxXAuto.Checked;
+            textBoxEndX.Cursor = checkBoxXAuto.Checked ? Cursors.Hand : Cursors.No;
+
             textBoxStepX.Enabled = checkBoxXAuto.Checked;
             textBoxStepX.Cursor = checkBoxXAuto.Checked ? Cursors.Hand : Cursors.No;
         }

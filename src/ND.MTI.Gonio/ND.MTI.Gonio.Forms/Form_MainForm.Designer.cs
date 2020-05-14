@@ -220,6 +220,7 @@
             // 
             // textBoxEndY
             // 
+            this.textBoxEndY.Enabled = false;
             this.textBoxEndY.Location = new System.Drawing.Point(129, 52);
             this.textBoxEndY.Name = "textBoxEndY";
             this.textBoxEndY.Size = new System.Drawing.Size(75, 20);
@@ -228,6 +229,7 @@
             // 
             // textBoxEndX
             // 
+            this.textBoxEndX.Enabled = false;
             this.textBoxEndX.Location = new System.Drawing.Point(129, 29);
             this.textBoxEndX.Name = "textBoxEndX";
             this.textBoxEndX.Size = new System.Drawing.Size(75, 20);
