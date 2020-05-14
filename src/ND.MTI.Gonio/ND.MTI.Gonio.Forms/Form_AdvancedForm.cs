@@ -4,14 +4,13 @@ using ND.MTI.Gonio.Service;
 using System.Windows.Forms;
 using ND.MTI.Gonio.Common.Utils;
 using ND.MTI.Gonio.Service.Worker;
-using ND.MTI.Gonio.Common.Userconfig;
 using ND.MTI.Gonio.Common.RuntimeContext;
 
 namespace ND.MTI.Gonio.Forms
 {
     public partial class Form_AdvancedForm : Form
     {
-        private Primitive_Userconfig _model;
+        private readonly Primitive_Userconfig _model;
 
         private readonly IIOWorker _ioWorker;
         private readonly IMeasurementService _measurementService;

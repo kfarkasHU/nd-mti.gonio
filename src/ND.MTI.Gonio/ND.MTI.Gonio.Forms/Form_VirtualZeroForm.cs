@@ -155,8 +155,8 @@ namespace ND.MTI.Gonio.Forms
 
         private void SetModelInternal(Primitive_Position position)
         {
-            var posX = Math.Round(position.X, 3);
-            var posY = Math.Round(position.Y, 3);
+            var posX = position.X;
+            var posY = position.Y;
 
             textBoxXCoord.Text = posX.ToString();
             textBoxYCoord.Text = posY.ToString();
