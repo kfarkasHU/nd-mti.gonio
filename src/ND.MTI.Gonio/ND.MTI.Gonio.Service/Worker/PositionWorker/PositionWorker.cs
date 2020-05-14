@@ -132,6 +132,7 @@ namespace ND.MTI.Gonio.Service.Worker
                     while (!CloseEnough(GetPositionInternal().X, pos - _gonioConfiguration.Position_SpeedThreshold)) { };
                 }
 
+                StopXInternal();
                 IncrementXInternalSlow();
 
                 while (!CloseEnough(GetPositionInternal().X, pos)) { };
@@ -147,6 +148,7 @@ namespace ND.MTI.Gonio.Service.Worker
                     while (!CloseEnough(GetPositionInternal().X, pos + _gonioConfiguration.Position_SpeedThreshold)) { };
                 }
 
+                StopXInternal();
                 DecrementXInternalSlow();
 
                 while (!CloseEnough(GetPositionInternal().X, pos)) { };
@@ -173,6 +175,7 @@ namespace ND.MTI.Gonio.Service.Worker
                     while (!CloseEnough(GetPositionInternal().Y, pos + _gonioConfiguration.Position_SpeedThreshold)) { };
                 }
 
+                StopYInternal();
                 IncrementYInternalSlow();
 
                 while (!CloseEnough(GetPositionInternal().Y, pos)) { };
@@ -188,6 +191,7 @@ namespace ND.MTI.Gonio.Service.Worker
                     while (!CloseEnough(GetPositionInternal().Y, pos - _gonioConfiguration.Position_SpeedThreshold)) { };
                 }
 
+                StopYInternal();
                 DecrementYInternalSlow();
 
                 while (!CloseEnough(GetPositionInternal().Y, pos)) { };
