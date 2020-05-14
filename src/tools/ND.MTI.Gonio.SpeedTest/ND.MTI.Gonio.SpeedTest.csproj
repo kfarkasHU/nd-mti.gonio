@@ -4,10 +4,10 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{9559C4CE-7A5D-40A6-99FB-8B5C992D8BF3}</ProjectGuid>
+    <ProjectGuid>{8C20999E-E3AB-4D51-BD4F-166D32716952}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <RootNamespace>ND.MTI.Gonio.RawPosition</RootNamespace>
-    <AssemblyName>Gonio.RawPosition</AssemblyName>
+    <RootNamespace>ND.MTI.Gonio.SpeedTest</RootNamespace>
+    <AssemblyName>Gonio.SpeedTest</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
@@ -32,7 +32,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>icon.ico</ApplicationIcon>
+    <ApplicationIcon>speedtest.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -47,16 +47,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Form_RawPosition.cs">
+    <Compile Include="Form_MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form_RawPosition.Designer.cs">
-      <DependentUpon>Form_RawPosition.cs</DependentUpon>
+    <Compile Include="Form_MainForm.Designer.cs">
+      <DependentUpon>Form_MainForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="Form_RawPosition.resx">
-      <DependentUpon>Form_RawPosition.cs</DependentUpon>
+    <EmbeddedResource Include="Form_MainForm.resx">
+      <DependentUpon>Form_MainForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -66,11 +66,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
-      <DesignTime>True</DesignTime>
     </Compile>
-    <None Include="gonio.cfg">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -82,7 +78,7 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\exit.png" />
+    <Content Include="speedtest.ico" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\ND.MTI.Gonio.Common\ND.MTI.Gonio.Common.csproj">
@@ -98,11 +94,8 @@
       <Name>ND.MTI.Gonio.Service</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Content Include="icon.ico" />
-  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>xcopy "$(TargetDir)*" "$(SolutionDir)../../dist/$(Configuration)/_TOOLS/$(ProjectName)"  /s /i /Y</PostBuildEvent>
+    <PostBuildEvent>xcopy "$(TargetDir)*" "$(SolutionDir)../dist/$(Configuration)/_TOOLS/$(ProjectName)"  /s /i /Y</PostBuildEvent>
   </PropertyGroup>
 </Project>

@@ -11,9 +11,7 @@ using ND.MTI.Gonio.Common.Configuration;
 using ND.MTI.Gonio.Common.RuntimeContext;
 
 namespace ND.MTI.Gonio.Forms
-{
-    // https://www.iconfinder.com/iconsets/ios-web-user-interface-multi-circle-flat-vol-3
-    
+{   
     internal partial class Form_MainForm : Form
     {
         private readonly Thread _thread;
