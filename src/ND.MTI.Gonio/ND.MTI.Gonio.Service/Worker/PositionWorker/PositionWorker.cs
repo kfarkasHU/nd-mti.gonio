@@ -55,7 +55,9 @@ namespace ND.MTI.Gonio.Service.Worker
         {
             var pos = GetRawPositionInternal();
 
-            return PositionHelper.Normalise(pos);
+            return PositionHelper
+                .Normalise(pos)
+                .RoundTo3();
         }
 
         private Primitive_Position GetRawPositionInternal()
@@ -68,7 +70,7 @@ namespace ND.MTI.Gonio.Service.Worker
                 NormalizeInternal(Parser.StringToInteger(strY)) * -1 // mert az Y enkóder ellentétes irányú!
             );
 
-            return pos;
+            return pos.RoundTo3();
         }
 
         public void SetPosition(Primitive_Position position)
