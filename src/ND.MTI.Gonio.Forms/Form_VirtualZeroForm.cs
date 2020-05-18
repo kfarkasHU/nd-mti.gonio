@@ -35,16 +35,19 @@ namespace ND.MTI.Gonio.Forms
             _timer.Start();
         }
 
-        private void Form_VirtualZeroForm_Load(object sender, EventArgs e) => SetModelInternal(_positionWorker.GetPosition());
+        private void Form_VirtualZeroForm_Load(object sender, EventArgs e) => SetModelInternal();
 
         private void ButtonClose_Click(object sender, EventArgs e) => Close();
 
-        private void ButtonSave_Click(object sender, EventArgs e)
-        {
-            RuntimeContext.VirtualZeroPosition += _positionWorker.GetPosition();
+        private void ButtonSave_Click(object sender, EventArgs e) => SaveInternal();
 
+        private void ButtonSaveAndClose_Click(object sender, EventArgs e)
+        {
+            SaveInternal();
             Close();
         }
+
+        private void ButtonClearVirtualZero_Click(object sender, EventArgs e) => RuntimeContext.VirtualZeroPosition = new Primitive_Position(0, 0);
 
         private void OnKeyDown(object sender, KeyEventArgs e)
         {
@@ -52,7 +55,7 @@ namespace ND.MTI.Gonio.Forms
             if (47 < keyChar && keyChar < 58)
                 return;
 
-            if (keyChar == 27 || keyChar == 46) // esc + del
+            if (keyChar == 8 || keyChar == 46) // backspace + del
                 return;
 
             if (_keyPressed)
@@ -105,7 +108,7 @@ namespace ND.MTI.Gonio.Forms
             if (47 < keyChar && keyChar < 58)
                 return;
 
-            if (keyChar == 27 || keyChar == 46) // esc + del
+            if (keyChar == 8 || keyChar == 46) // backspace + del
                 return;
 
             _keyPressed = false;
@@ -151,15 +154,21 @@ namespace ND.MTI.Gonio.Forms
 
         private void StopYInternal() => _positionWorker.StopY();
 
-        private void OnTimerTick(object sender, EventArgs e) => SetModelInternal(_positionWorker.GetPosition());
+        private void OnTimerTick(object sender, EventArgs e) => SetModelInternal();
 
-        private void SetModelInternal(Primitive_Position position)
+        private void SetModelInternal()
         {
-            var posX = position.X;
-            var posY = position.Y;
+            var positionRelatedToV0 = _positionWorker.GetPosition();
+            var positionRelatedToA0 = positionRelatedToV0 + RuntimeContext.VirtualZeroPosition;
 
-            textBoxXCoord.Text = posX.ToString();
-            textBoxYCoord.Text = posY.ToString();
+            textBoxXCoordV0.Text = positionRelatedToV0.X.ToString();
+            textBoxYCoordV0.Text = positionRelatedToV0.Y.ToString();
+
+            textBoxXCoordA0.Text = positionRelatedToA0.X.ToString();
+            textBoxYCoordA0.Text = positionRelatedToA0.Y.ToString();
+
+            textBoxVirtualZeroX.Text = RuntimeContext.VirtualZeroPosition.X.ToString();
+            textBoxVirtualZeroY.Text = RuntimeContext.VirtualZeroPosition.Y.ToString();
         }
 
         private void ButtonGo_Click(object sender, EventArgs e)
@@ -171,6 +180,7 @@ namespace ND.MTI.Gonio.Forms
 
             _thread = new Thread(OnThreadWorking);
             _thread.IsBackground = true;
+            _thread.Start();
         }
 
         private void OnThreadWorking()
@@ -194,5 +204,7 @@ namespace ND.MTI.Gonio.Forms
         private void ButtonIncrementYFast_Click(object sender, EventArgs e) => IncrementYInternalFast();
 
         private void ButtonDecrementYFast_Click(object sender, EventArgs e) => DecrementYInternalFast();
+
+        private void SaveInternal() => RuntimeContext.VirtualZeroPosition += _positionWorker.GetPosition();
     }
 }

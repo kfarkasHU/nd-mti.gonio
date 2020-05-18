@@ -32,8 +32,8 @@ namespace ND.MTI.Gonio.Forms
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form_VirtualZeroForm));
             this.groupBoxCurrentPosition = new System.Windows.Forms.GroupBox();
-            this.textBoxYCoord = new System.Windows.Forms.TextBox();
-            this.textBoxXCoord = new System.Windows.Forms.TextBox();
+            this.textBoxYCoordV0 = new System.Windows.Forms.TextBox();
+            this.textBoxXCoordV0 = new System.Windows.Forms.TextBox();
             this.labelYCoord = new System.Windows.Forms.Label();
             this.labelXCoord = new System.Windows.Forms.Label();
             this.groupBoxControl = new System.Windows.Forms.GroupBox();
@@ -47,7 +47,7 @@ namespace ND.MTI.Gonio.Forms
             this.buttonDecrementYFast = new System.Windows.Forms.Button();
             this.buttonIncrementXSlow = new System.Windows.Forms.Button();
             this.buttonDecrementXSlow = new System.Windows.Forms.Button();
-            this.buttonSave = new System.Windows.Forms.Button();
+            this.buttonSaveAndClose = new System.Windows.Forms.Button();
             this.buttonClose = new System.Windows.Forms.Button();
             this.groupBoxSetPosition = new System.Windows.Forms.GroupBox();
             this.buttonGo = new System.Windows.Forms.Button();
@@ -55,15 +55,29 @@ namespace ND.MTI.Gonio.Forms
             this.textBoxSetPositionX = new System.Windows.Forms.TextBox();
             this.labelSetPositionY = new System.Windows.Forms.Label();
             this.labelSetPositionX = new System.Windows.Forms.Label();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.textBoxYCoordA0 = new System.Windows.Forms.TextBox();
+            this.textBoxXCoordA0 = new System.Windows.Forms.TextBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.textBoxVirtualZeroY = new System.Windows.Forms.TextBox();
+            this.textBoxVirtualZeroX = new System.Windows.Forms.TextBox();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.buttonSave = new System.Windows.Forms.Button();
+            this.buttonClearVirtualZero = new System.Windows.Forms.Button();
             this.groupBoxCurrentPosition.SuspendLayout();
             this.groupBoxControl.SuspendLayout();
             this.groupBoxSetPosition.SuspendLayout();
+            this.groupBox1.SuspendLayout();
+            this.groupBox2.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBoxCurrentPosition
             // 
-            this.groupBoxCurrentPosition.Controls.Add(this.textBoxYCoord);
-            this.groupBoxCurrentPosition.Controls.Add(this.textBoxXCoord);
+            this.groupBoxCurrentPosition.Controls.Add(this.textBoxYCoordV0);
+            this.groupBoxCurrentPosition.Controls.Add(this.textBoxXCoordV0);
             this.groupBoxCurrentPosition.Controls.Add(this.labelYCoord);
             this.groupBoxCurrentPosition.Controls.Add(this.labelXCoord);
             this.groupBoxCurrentPosition.Location = new System.Drawing.Point(12, 12);
@@ -71,27 +85,27 @@ namespace ND.MTI.Gonio.Forms
             this.groupBoxCurrentPosition.Size = new System.Drawing.Size(262, 100);
             this.groupBoxCurrentPosition.TabIndex = 0;
             this.groupBoxCurrentPosition.TabStop = false;
-            this.groupBoxCurrentPosition.Text = "Current position";
+            this.groupBoxCurrentPosition.Text = "Current position from virtual zero";
             // 
-            // textBoxYCoord
+            // textBoxYCoordV0
             // 
-            this.textBoxYCoord.Cursor = System.Windows.Forms.Cursors.No;
-            this.textBoxYCoord.Enabled = false;
-            this.textBoxYCoord.Location = new System.Drawing.Point(29, 54);
-            this.textBoxYCoord.Name = "textBoxYCoord";
-            this.textBoxYCoord.Size = new System.Drawing.Size(218, 20);
-            this.textBoxYCoord.TabIndex = 3;
-            this.textBoxYCoord.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.textBoxYCoordV0.Cursor = System.Windows.Forms.Cursors.No;
+            this.textBoxYCoordV0.Enabled = false;
+            this.textBoxYCoordV0.Location = new System.Drawing.Point(29, 54);
+            this.textBoxYCoordV0.Name = "textBoxYCoordV0";
+            this.textBoxYCoordV0.Size = new System.Drawing.Size(218, 20);
+            this.textBoxYCoordV0.TabIndex = 3;
+            this.textBoxYCoordV0.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
-            // textBoxXCoord
+            // textBoxXCoordV0
             // 
-            this.textBoxXCoord.Cursor = System.Windows.Forms.Cursors.No;
-            this.textBoxXCoord.Enabled = false;
-            this.textBoxXCoord.Location = new System.Drawing.Point(29, 27);
-            this.textBoxXCoord.Name = "textBoxXCoord";
-            this.textBoxXCoord.Size = new System.Drawing.Size(218, 20);
-            this.textBoxXCoord.TabIndex = 2;
-            this.textBoxXCoord.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.textBoxXCoordV0.Cursor = System.Windows.Forms.Cursors.No;
+            this.textBoxXCoordV0.Enabled = false;
+            this.textBoxXCoordV0.Location = new System.Drawing.Point(29, 27);
+            this.textBoxXCoordV0.Name = "textBoxXCoordV0";
+            this.textBoxXCoordV0.Size = new System.Drawing.Size(218, 20);
+            this.textBoxXCoordV0.TabIndex = 2;
+            this.textBoxXCoordV0.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // labelYCoord
             // 
@@ -125,14 +139,14 @@ namespace ND.MTI.Gonio.Forms
             this.groupBoxControl.Controls.Add(this.buttonDecrementXSlow);
             this.groupBoxControl.Location = new System.Drawing.Point(12, 240);
             this.groupBoxControl.Name = "groupBoxControl";
-            this.groupBoxControl.Size = new System.Drawing.Size(257, 137);
+            this.groupBoxControl.Size = new System.Drawing.Size(530, 79);
             this.groupBoxControl.TabIndex = 1;
             this.groupBoxControl.TabStop = false;
             this.groupBoxControl.Text = "Control";
             // 
             // buttonIncrementYFast
             // 
-            this.buttonIncrementYFast.Location = new System.Drawing.Point(87, 109);
+            this.buttonIncrementYFast.Location = new System.Drawing.Point(297, 48);
             this.buttonIncrementYFast.Name = "buttonIncrementYFast";
             this.buttonIncrementYFast.Size = new System.Drawing.Size(75, 23);
             this.buttonIncrementYFast.TabIndex = 9;
@@ -142,7 +156,7 @@ namespace ND.MTI.Gonio.Forms
             // 
             // buttonDecrementXFast
             // 
-            this.buttonDecrementXFast.Location = new System.Drawing.Point(6, 48);
+            this.buttonDecrementXFast.Location = new System.Drawing.Point(216, 19);
             this.buttonDecrementXFast.Name = "buttonDecrementXFast";
             this.buttonDecrementXFast.Size = new System.Drawing.Size(75, 23);
             this.buttonDecrementXFast.TabIndex = 8;
@@ -152,7 +166,7 @@ namespace ND.MTI.Gonio.Forms
             // 
             // buttonIncrementXFast
             // 
-            this.buttonIncrementXFast.Location = new System.Drawing.Point(87, 48);
+            this.buttonIncrementXFast.Location = new System.Drawing.Point(297, 19);
             this.buttonIncrementXFast.Name = "buttonIncrementXFast";
             this.buttonIncrementXFast.Size = new System.Drawing.Size(75, 23);
             this.buttonIncrementXFast.TabIndex = 7;
@@ -162,7 +176,7 @@ namespace ND.MTI.Gonio.Forms
             // 
             // buttonDecrementYSlow
             // 
-            this.buttonDecrementYSlow.Location = new System.Drawing.Point(6, 80);
+            this.buttonDecrementYSlow.Location = new System.Drawing.Point(6, 48);
             this.buttonDecrementYSlow.Name = "buttonDecrementYSlow";
             this.buttonDecrementYSlow.Size = new System.Drawing.Size(75, 23);
             this.buttonDecrementYSlow.TabIndex = 6;
@@ -172,7 +186,7 @@ namespace ND.MTI.Gonio.Forms
             // 
             // buttonStopX
             // 
-            this.buttonStopX.Location = new System.Drawing.Point(176, 19);
+            this.buttonStopX.Location = new System.Drawing.Point(440, 19);
             this.buttonStopX.Name = "buttonStopX";
             this.buttonStopX.Size = new System.Drawing.Size(75, 23);
             this.buttonStopX.TabIndex = 5;
@@ -182,7 +196,7 @@ namespace ND.MTI.Gonio.Forms
             // 
             // buttonStopY
             // 
-            this.buttonStopY.Location = new System.Drawing.Point(176, 80);
+            this.buttonStopY.Location = new System.Drawing.Point(440, 48);
             this.buttonStopY.Name = "buttonStopY";
             this.buttonStopY.Size = new System.Drawing.Size(75, 23);
             this.buttonStopY.TabIndex = 4;
@@ -192,7 +206,7 @@ namespace ND.MTI.Gonio.Forms
             // 
             // buttonIncrementYSlow
             // 
-            this.buttonIncrementYSlow.Location = new System.Drawing.Point(87, 80);
+            this.buttonIncrementYSlow.Location = new System.Drawing.Point(87, 48);
             this.buttonIncrementYSlow.Name = "buttonIncrementYSlow";
             this.buttonIncrementYSlow.Size = new System.Drawing.Size(75, 23);
             this.buttonIncrementYSlow.TabIndex = 3;
@@ -202,7 +216,7 @@ namespace ND.MTI.Gonio.Forms
             // 
             // buttonDecrementYFast
             // 
-            this.buttonDecrementYFast.Location = new System.Drawing.Point(6, 109);
+            this.buttonDecrementYFast.Location = new System.Drawing.Point(216, 48);
             this.buttonDecrementYFast.Name = "buttonDecrementYFast";
             this.buttonDecrementYFast.Size = new System.Drawing.Size(75, 23);
             this.buttonDecrementYFast.TabIndex = 2;
@@ -230,19 +244,19 @@ namespace ND.MTI.Gonio.Forms
             this.buttonDecrementXSlow.UseVisualStyleBackColor = true;
             this.buttonDecrementXSlow.Click += new System.EventHandler(this.ButtonDecrementXSlow_Click);
             // 
-            // buttonSave
+            // buttonSaveAndClose
             // 
-            this.buttonSave.Location = new System.Drawing.Point(194, 383);
-            this.buttonSave.Name = "buttonSave";
-            this.buttonSave.Size = new System.Drawing.Size(75, 23);
-            this.buttonSave.TabIndex = 5;
-            this.buttonSave.Text = "Save";
-            this.buttonSave.UseVisualStyleBackColor = true;
-            this.buttonSave.Click += new System.EventHandler(this.ButtonSave_Click);
+            this.buttonSaveAndClose.Location = new System.Drawing.Point(417, 325);
+            this.buttonSaveAndClose.Name = "buttonSaveAndClose";
+            this.buttonSaveAndClose.Size = new System.Drawing.Size(125, 23);
+            this.buttonSaveAndClose.TabIndex = 5;
+            this.buttonSaveAndClose.Text = "Save and close";
+            this.buttonSaveAndClose.UseVisualStyleBackColor = true;
+            this.buttonSaveAndClose.Click += new System.EventHandler(this.ButtonSaveAndClose_Click);
             // 
             // buttonClose
             // 
-            this.buttonClose.Location = new System.Drawing.Point(12, 383);
+            this.buttonClose.Location = new System.Drawing.Point(12, 325);
             this.buttonClose.Name = "buttonClose";
             this.buttonClose.Size = new System.Drawing.Size(75, 23);
             this.buttonClose.TabIndex = 6;
@@ -310,15 +324,141 @@ namespace ND.MTI.Gonio.Forms
             this.labelSetPositionX.TabIndex = 0;
             this.labelSetPositionX.Text = "X:";
             // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.textBoxYCoordA0);
+            this.groupBox1.Controls.Add(this.textBoxXCoordA0);
+            this.groupBox1.Controls.Add(this.label1);
+            this.groupBox1.Controls.Add(this.label2);
+            this.groupBox1.Location = new System.Drawing.Point(280, 12);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(262, 100);
+            this.groupBox1.TabIndex = 4;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Current position from absolute zero";
+            // 
+            // textBoxYCoordA0
+            // 
+            this.textBoxYCoordA0.Cursor = System.Windows.Forms.Cursors.No;
+            this.textBoxYCoordA0.Enabled = false;
+            this.textBoxYCoordA0.Location = new System.Drawing.Point(29, 54);
+            this.textBoxYCoordA0.Name = "textBoxYCoordA0";
+            this.textBoxYCoordA0.Size = new System.Drawing.Size(218, 20);
+            this.textBoxYCoordA0.TabIndex = 3;
+            this.textBoxYCoordA0.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // textBoxXCoordA0
+            // 
+            this.textBoxXCoordA0.Cursor = System.Windows.Forms.Cursors.No;
+            this.textBoxXCoordA0.Enabled = false;
+            this.textBoxXCoordA0.Location = new System.Drawing.Point(29, 27);
+            this.textBoxXCoordA0.Name = "textBoxXCoordA0";
+            this.textBoxXCoordA0.Size = new System.Drawing.Size(218, 20);
+            this.textBoxXCoordA0.TabIndex = 2;
+            this.textBoxXCoordA0.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(6, 57);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(17, 13);
+            this.label1.TabIndex = 1;
+            this.label1.Text = "Y:";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(6, 30);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(17, 13);
+            this.label2.TabIndex = 0;
+            this.label2.Text = "X:";
+            // 
+            // groupBox2
+            // 
+            this.groupBox2.Controls.Add(this.buttonClearVirtualZero);
+            this.groupBox2.Controls.Add(this.textBoxVirtualZeroY);
+            this.groupBox2.Controls.Add(this.textBoxVirtualZeroX);
+            this.groupBox2.Controls.Add(this.label3);
+            this.groupBox2.Controls.Add(this.label4);
+            this.groupBox2.Location = new System.Drawing.Point(280, 121);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(262, 113);
+            this.groupBox2.TabIndex = 4;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "Current virtual zero position";
+            // 
+            // textBoxVirtualZeroY
+            // 
+            this.textBoxVirtualZeroY.Cursor = System.Windows.Forms.Cursors.No;
+            this.textBoxVirtualZeroY.Enabled = false;
+            this.textBoxVirtualZeroY.Location = new System.Drawing.Point(29, 54);
+            this.textBoxVirtualZeroY.Name = "textBoxVirtualZeroY";
+            this.textBoxVirtualZeroY.Size = new System.Drawing.Size(218, 20);
+            this.textBoxVirtualZeroY.TabIndex = 3;
+            this.textBoxVirtualZeroY.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // textBoxVirtualZeroX
+            // 
+            this.textBoxVirtualZeroX.Cursor = System.Windows.Forms.Cursors.No;
+            this.textBoxVirtualZeroX.Enabled = false;
+            this.textBoxVirtualZeroX.Location = new System.Drawing.Point(29, 27);
+            this.textBoxVirtualZeroX.Name = "textBoxVirtualZeroX";
+            this.textBoxVirtualZeroX.Size = new System.Drawing.Size(218, 20);
+            this.textBoxVirtualZeroX.TabIndex = 2;
+            this.textBoxVirtualZeroX.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(6, 57);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(17, 13);
+            this.label3.TabIndex = 1;
+            this.label3.Text = "Y:";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(6, 30);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(17, 13);
+            this.label4.TabIndex = 0;
+            this.label4.Text = "X:";
+            // 
+            // buttonSave
+            // 
+            this.buttonSave.Location = new System.Drawing.Point(336, 325);
+            this.buttonSave.Name = "buttonSave";
+            this.buttonSave.Size = new System.Drawing.Size(75, 23);
+            this.buttonSave.TabIndex = 7;
+            this.buttonSave.Text = "Save";
+            this.buttonSave.UseVisualStyleBackColor = true;
+            this.buttonSave.Click += new System.EventHandler(this.ButtonSave_Click);
+            // 
+            // buttonClearVirtualZero
+            // 
+            this.buttonClearVirtualZero.Location = new System.Drawing.Point(9, 77);
+            this.buttonClearVirtualZero.Name = "buttonClearVirtualZero";
+            this.buttonClearVirtualZero.Size = new System.Drawing.Size(238, 23);
+            this.buttonClearVirtualZero.TabIndex = 8;
+            this.buttonClearVirtualZero.Text = "Clear virtual zero";
+            this.buttonClearVirtualZero.UseVisualStyleBackColor = true;
+            this.buttonClearVirtualZero.Click += new System.EventHandler(this.ButtonClearVirtualZero_Click);
+            // 
             // Form_VirtualZeroForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(286, 418);
+            this.ClientSize = new System.Drawing.Size(550, 356);
             this.ControlBox = false;
+            this.Controls.Add(this.buttonSave);
+            this.Controls.Add(this.groupBox2);
+            this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.groupBoxSetPosition);
             this.Controls.Add(this.buttonClose);
-            this.Controls.Add(this.buttonSave);
+            this.Controls.Add(this.buttonSaveAndClose);
             this.Controls.Add(this.groupBoxControl);
             this.Controls.Add(this.groupBoxCurrentPosition);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
@@ -335,6 +475,10 @@ namespace ND.MTI.Gonio.Forms
             this.groupBoxControl.ResumeLayout(false);
             this.groupBoxSetPosition.ResumeLayout(false);
             this.groupBoxSetPosition.PerformLayout();
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
+            this.groupBox2.ResumeLayout(false);
+            this.groupBox2.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -345,13 +489,13 @@ namespace ND.MTI.Gonio.Forms
         private System.Windows.Forms.GroupBox groupBoxControl;
         private System.Windows.Forms.Label labelYCoord;
         private System.Windows.Forms.Label labelXCoord;
-        private System.Windows.Forms.TextBox textBoxYCoord;
-        private System.Windows.Forms.TextBox textBoxXCoord;
+        private System.Windows.Forms.TextBox textBoxYCoordV0;
+        private System.Windows.Forms.TextBox textBoxXCoordV0;
         private System.Windows.Forms.Button buttonIncrementYSlow;
         private System.Windows.Forms.Button buttonDecrementYFast;
         private System.Windows.Forms.Button buttonIncrementXSlow;
         private System.Windows.Forms.Button buttonDecrementXSlow;
-        private System.Windows.Forms.Button buttonSave;
+        private System.Windows.Forms.Button buttonSaveAndClose;
         private System.Windows.Forms.Button buttonClose;
         private System.Windows.Forms.Button buttonStopX;
         private System.Windows.Forms.Button buttonStopY;
@@ -365,5 +509,17 @@ namespace ND.MTI.Gonio.Forms
         private System.Windows.Forms.Button buttonDecrementXFast;
         private System.Windows.Forms.Button buttonIncrementXFast;
         private System.Windows.Forms.Button buttonDecrementYSlow;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.TextBox textBoxYCoordA0;
+        private System.Windows.Forms.TextBox textBoxXCoordA0;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.TextBox textBoxVirtualZeroY;
+        private System.Windows.Forms.TextBox textBoxVirtualZeroX;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Button buttonSave;
+        private System.Windows.Forms.Button buttonClearVirtualZero;
     }
 }
