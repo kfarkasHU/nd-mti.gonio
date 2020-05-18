@@ -67,12 +67,13 @@
             this.labelVirtualZero = new System.Windows.Forms.Label();
             this.progressBarProgress = new System.Windows.Forms.ProgressBar();
             this.labelPercentage = new System.Windows.Forms.Label();
+            this.labelLuminousUnit = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // checkBoxXAuto
             // 
             this.checkBoxXAuto.AutoSize = true;
-            this.checkBoxXAuto.Location = new System.Drawing.Point(210, 31);
+            this.checkBoxXAuto.Location = new System.Drawing.Point(257, 31);
             this.checkBoxXAuto.Name = "checkBoxXAuto";
             this.checkBoxXAuto.Size = new System.Drawing.Size(47, 17);
             this.checkBoxXAuto.TabIndex = 3;
@@ -92,39 +93,39 @@
             // 
             // buttonGoToZero
             // 
-            this.buttonGoToZero.Location = new System.Drawing.Point(10, 159);
+            this.buttonGoToZero.Location = new System.Drawing.Point(91, 130);
             this.buttonGoToZero.Name = "buttonGoToZero";
-            this.buttonGoToZero.Size = new System.Drawing.Size(75, 23);
+            this.buttonGoToZero.Size = new System.Drawing.Size(113, 23);
             this.buttonGoToZero.TabIndex = 17;
-            this.buttonGoToZero.Text = "Go to 0";
+            this.buttonGoToZero.Text = "Go to NULL";
             this.buttonGoToZero.UseVisualStyleBackColor = true;
             this.buttonGoToZero.Click += new System.EventHandler(this.ButtonGoToZero_Click);
             // 
             // buttonGoToVirtualZero
             // 
             this.buttonGoToVirtualZero.Enabled = false;
-            this.buttonGoToVirtualZero.Location = new System.Drawing.Point(91, 130);
+            this.buttonGoToVirtualZero.Location = new System.Drawing.Point(91, 159);
             this.buttonGoToVirtualZero.Name = "buttonGoToVirtualZero";
-            this.buttonGoToVirtualZero.Size = new System.Drawing.Size(75, 23);
+            this.buttonGoToVirtualZero.Size = new System.Drawing.Size(113, 23);
             this.buttonGoToVirtualZero.TabIndex = 19;
-            this.buttonGoToVirtualZero.Text = "Go to V0";
+            this.buttonGoToVirtualZero.Text = "Go to virtual NULL";
             this.buttonGoToVirtualZero.UseVisualStyleBackColor = true;
             this.buttonGoToVirtualZero.Click += new System.EventHandler(this.ButtonGoToVirtualZero_Click);
             // 
             // buttonSetVirtualZero
             // 
-            this.buttonSetVirtualZero.Location = new System.Drawing.Point(91, 159);
+            this.buttonSetVirtualZero.Location = new System.Drawing.Point(91, 188);
             this.buttonSetVirtualZero.Name = "buttonSetVirtualZero";
-            this.buttonSetVirtualZero.Size = new System.Drawing.Size(75, 23);
+            this.buttonSetVirtualZero.Size = new System.Drawing.Size(113, 23);
             this.buttonSetVirtualZero.TabIndex = 18;
-            this.buttonSetVirtualZero.Text = "Set V0";
+            this.buttonSetVirtualZero.Text = "Set virtual NULL";
             this.buttonSetVirtualZero.UseVisualStyleBackColor = true;
             this.buttonSetVirtualZero.Click += new System.EventHandler(this.ButtonSetVirtualZero_Click);
             // 
             // buttonStop
             // 
             this.buttonStop.Enabled = false;
-            this.buttonStop.Location = new System.Drawing.Point(253, 130);
+            this.buttonStop.Location = new System.Drawing.Point(210, 217);
             this.buttonStop.Name = "buttonStop";
             this.buttonStop.Size = new System.Drawing.Size(75, 23);
             this.buttonStop.TabIndex = 14;
@@ -135,7 +136,7 @@
             // buttonContinue
             // 
             this.buttonContinue.Enabled = false;
-            this.buttonContinue.Location = new System.Drawing.Point(253, 159);
+            this.buttonContinue.Location = new System.Drawing.Point(210, 159);
             this.buttonContinue.Name = "buttonContinue";
             this.buttonContinue.Size = new System.Drawing.Size(75, 23);
             this.buttonContinue.TabIndex = 13;
@@ -145,7 +146,7 @@
             // 
             // buttonStart
             // 
-            this.buttonStart.Location = new System.Drawing.Point(172, 130);
+            this.buttonStart.Location = new System.Drawing.Point(210, 130);
             this.buttonStart.Name = "buttonStart";
             this.buttonStart.Size = new System.Drawing.Size(75, 23);
             this.buttonStart.TabIndex = 10;
@@ -156,7 +157,7 @@
             // buttonPause
             // 
             this.buttonPause.Enabled = false;
-            this.buttonPause.Location = new System.Drawing.Point(172, 159);
+            this.buttonPause.Location = new System.Drawing.Point(210, 188);
             this.buttonPause.Name = "buttonPause";
             this.buttonPause.Size = new System.Drawing.Size(75, 23);
             this.buttonPause.TabIndex = 12;
@@ -166,7 +167,7 @@
             // 
             // buttonResults
             // 
-            this.buttonResults.Location = new System.Drawing.Point(335, 159);
+            this.buttonResults.Location = new System.Drawing.Point(10, 188);
             this.buttonResults.Name = "buttonResults";
             this.buttonResults.Size = new System.Drawing.Size(75, 23);
             this.buttonResults.TabIndex = 11;
@@ -176,7 +177,7 @@
             // 
             // buttonExit
             // 
-            this.buttonExit.Location = new System.Drawing.Point(335, 241);
+            this.buttonExit.Location = new System.Drawing.Point(391, 280);
             this.buttonExit.Name = "buttonExit";
             this.buttonExit.Size = new System.Drawing.Size(75, 23);
             this.buttonExit.TabIndex = 23;
@@ -206,7 +207,7 @@
             // 
             this.textBoxStartX.Location = new System.Drawing.Point(48, 29);
             this.textBoxStartX.Name = "textBoxStartX";
-            this.textBoxStartX.Size = new System.Drawing.Size(75, 20);
+            this.textBoxStartX.Size = new System.Drawing.Size(99, 20);
             this.textBoxStartX.TabIndex = 1;
             this.textBoxStartX.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
@@ -214,32 +215,32 @@
             // 
             this.textBoxStartY.Location = new System.Drawing.Point(48, 52);
             this.textBoxStartY.Name = "textBoxStartY";
-            this.textBoxStartY.Size = new System.Drawing.Size(75, 20);
+            this.textBoxStartY.Size = new System.Drawing.Size(99, 20);
             this.textBoxStartY.TabIndex = 5;
             this.textBoxStartY.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // textBoxEndY
             // 
             this.textBoxEndY.Enabled = false;
-            this.textBoxEndY.Location = new System.Drawing.Point(129, 52);
+            this.textBoxEndY.Location = new System.Drawing.Point(153, 52);
             this.textBoxEndY.Name = "textBoxEndY";
-            this.textBoxEndY.Size = new System.Drawing.Size(75, 20);
+            this.textBoxEndY.Size = new System.Drawing.Size(98, 20);
             this.textBoxEndY.TabIndex = 6;
             this.textBoxEndY.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // textBoxEndX
             // 
             this.textBoxEndX.Enabled = false;
-            this.textBoxEndX.Location = new System.Drawing.Point(129, 29);
+            this.textBoxEndX.Location = new System.Drawing.Point(153, 29);
             this.textBoxEndX.Name = "textBoxEndX";
-            this.textBoxEndX.Size = new System.Drawing.Size(75, 20);
+            this.textBoxEndX.Size = new System.Drawing.Size(98, 20);
             this.textBoxEndX.TabIndex = 2;
             this.textBoxEndX.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // textBoxStepY
             // 
             this.textBoxStepY.Enabled = false;
-            this.textBoxStepY.Location = new System.Drawing.Point(257, 51);
+            this.textBoxStepY.Location = new System.Drawing.Point(310, 51);
             this.textBoxStepY.Name = "textBoxStepY";
             this.textBoxStepY.Size = new System.Drawing.Size(75, 20);
             this.textBoxStepY.TabIndex = 8;
@@ -248,7 +249,7 @@
             // textBoxStepX
             // 
             this.textBoxStepX.Enabled = false;
-            this.textBoxStepX.Location = new System.Drawing.Point(257, 28);
+            this.textBoxStepX.Location = new System.Drawing.Point(310, 28);
             this.textBoxStepX.Name = "textBoxStepX";
             this.textBoxStepX.Size = new System.Drawing.Size(75, 20);
             this.textBoxStepX.TabIndex = 4;
@@ -257,7 +258,7 @@
             // checkBoxYAuto
             // 
             this.checkBoxYAuto.AutoSize = true;
-            this.checkBoxYAuto.Location = new System.Drawing.Point(210, 54);
+            this.checkBoxYAuto.Location = new System.Drawing.Point(257, 54);
             this.checkBoxYAuto.Name = "checkBoxYAuto";
             this.checkBoxYAuto.Size = new System.Drawing.Size(47, 17);
             this.checkBoxYAuto.TabIndex = 7;
@@ -277,7 +278,7 @@
             // labelEnd
             // 
             this.labelEnd.AutoSize = true;
-            this.labelEnd.Location = new System.Drawing.Point(154, 9);
+            this.labelEnd.Location = new System.Drawing.Point(190, 9);
             this.labelEnd.Name = "labelEnd";
             this.labelEnd.Size = new System.Drawing.Size(26, 13);
             this.labelEnd.TabIndex = 29;
@@ -286,7 +287,7 @@
             // labelStep
             // 
             this.labelStep.AutoSize = true;
-            this.labelStep.Location = new System.Drawing.Point(281, 8);
+            this.labelStep.Location = new System.Drawing.Point(334, 8);
             this.labelStep.Name = "labelStep";
             this.labelStep.Size = new System.Drawing.Size(29, 13);
             this.labelStep.TabIndex = 30;
@@ -295,7 +296,7 @@
             // labelCurrentPosition
             // 
             this.labelCurrentPosition.AutoSize = true;
-            this.labelCurrentPosition.Location = new System.Drawing.Point(343, 9);
+            this.labelCurrentPosition.Location = new System.Drawing.Point(399, 9);
             this.labelCurrentPosition.Name = "labelCurrentPosition";
             this.labelCurrentPosition.Size = new System.Drawing.Size(61, 13);
             this.labelCurrentPosition.TabIndex = 40;
@@ -304,7 +305,7 @@
             // textBoxXCurrentPosition
             // 
             this.textBoxXCurrentPosition.Enabled = false;
-            this.textBoxXCurrentPosition.Location = new System.Drawing.Point(335, 29);
+            this.textBoxXCurrentPosition.Location = new System.Drawing.Point(391, 29);
             this.textBoxXCurrentPosition.Name = "textBoxXCurrentPosition";
             this.textBoxXCurrentPosition.ReadOnly = true;
             this.textBoxXCurrentPosition.Size = new System.Drawing.Size(75, 20);
@@ -314,7 +315,7 @@
             // textBoxYCurrentPosition
             // 
             this.textBoxYCurrentPosition.Enabled = false;
-            this.textBoxYCurrentPosition.Location = new System.Drawing.Point(335, 51);
+            this.textBoxYCurrentPosition.Location = new System.Drawing.Point(391, 51);
             this.textBoxYCurrentPosition.Name = "textBoxYCurrentPosition";
             this.textBoxYCurrentPosition.ReadOnly = true;
             this.textBoxYCurrentPosition.Size = new System.Drawing.Size(75, 20);
@@ -324,7 +325,7 @@
             // buttonRegistration
             // 
             this.buttonRegistration.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.buttonRegistration.Location = new System.Drawing.Point(335, 130);
+            this.buttonRegistration.Location = new System.Drawing.Point(10, 159);
             this.buttonRegistration.Name = "buttonRegistration";
             this.buttonRegistration.Size = new System.Drawing.Size(75, 23);
             this.buttonRegistration.TabIndex = 20;
@@ -375,7 +376,7 @@
             // 
             this.buttonAdvanced.Cursor = System.Windows.Forms.Cursors.Hand;
             this.buttonAdvanced.Enabled = false;
-            this.buttonAdvanced.Location = new System.Drawing.Point(335, 76);
+            this.buttonAdvanced.Location = new System.Drawing.Point(391, 76);
             this.buttonAdvanced.Name = "buttonAdvanced";
             this.buttonAdvanced.Size = new System.Drawing.Size(75, 23);
             this.buttonAdvanced.TabIndex = 58;
@@ -389,7 +390,7 @@
             this.textBoxLuminousIntensivity.Location = new System.Drawing.Point(257, 78);
             this.textBoxLuminousIntensivity.Name = "textBoxLuminousIntensivity";
             this.textBoxLuminousIntensivity.ReadOnly = true;
-            this.textBoxLuminousIntensivity.Size = new System.Drawing.Size(75, 20);
+            this.textBoxLuminousIntensivity.Size = new System.Drawing.Size(103, 20);
             this.textBoxLuminousIntensivity.TabIndex = 59;
             this.textBoxLuminousIntensivity.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
@@ -409,7 +410,7 @@
             this.textBoxVirtualZero.Location = new System.Drawing.Point(257, 104);
             this.textBoxVirtualZero.Name = "textBoxVirtualZero";
             this.textBoxVirtualZero.ReadOnly = true;
-            this.textBoxVirtualZero.Size = new System.Drawing.Size(153, 20);
+            this.textBoxVirtualZero.Size = new System.Drawing.Size(209, 20);
             this.textBoxVirtualZero.TabIndex = 61;
             this.textBoxVirtualZero.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
@@ -425,27 +426,37 @@
             // 
             // progressBarProgress
             // 
-            this.progressBarProgress.Location = new System.Drawing.Point(10, 188);
+            this.progressBarProgress.Location = new System.Drawing.Point(10, 246);
             this.progressBarProgress.Name = "progressBarProgress";
-            this.progressBarProgress.Size = new System.Drawing.Size(400, 23);
+            this.progressBarProgress.Size = new System.Drawing.Size(456, 23);
             this.progressBarProgress.TabIndex = 63;
             // 
             // labelPercentage
             // 
             this.labelPercentage.AutoSize = true;
             this.labelPercentage.BackColor = System.Drawing.Color.Transparent;
-            this.labelPercentage.Location = new System.Drawing.Point(182, 217);
+            this.labelPercentage.Location = new System.Drawing.Point(223, 280);
             this.labelPercentage.Name = "labelPercentage";
             this.labelPercentage.Size = new System.Drawing.Size(47, 13);
             this.labelPercentage.TabIndex = 64;
             this.labelPercentage.Text = "0/0 (0%)";
             // 
+            // labelLuminousUnit
+            // 
+            this.labelLuminousUnit.AutoSize = true;
+            this.labelLuminousUnit.Location = new System.Drawing.Point(360, 81);
+            this.labelLuminousUnit.Name = "labelLuminousUnit";
+            this.labelLuminousUnit.Size = new System.Drawing.Size(19, 13);
+            this.labelLuminousUnit.TabIndex = 65;
+            this.labelLuminousUnit.Text = "cd";
+            // 
             // Form_MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(420, 276);
+            this.ClientSize = new System.Drawing.Size(478, 312);
             this.ControlBox = false;
+            this.Controls.Add(this.labelLuminousUnit);
             this.Controls.Add(this.labelPercentage);
             this.Controls.Add(this.progressBarProgress);
             this.Controls.Add(this.textBoxVirtualZero);
@@ -538,5 +549,6 @@
         private System.Windows.Forms.Label labelVirtualZero;
         private System.Windows.Forms.ProgressBar progressBarProgress;
         private System.Windows.Forms.Label labelPercentage;
+        private System.Windows.Forms.Label labelLuminousUnit;
     }
 }
