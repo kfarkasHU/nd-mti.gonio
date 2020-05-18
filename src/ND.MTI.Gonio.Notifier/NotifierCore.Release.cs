@@ -36,6 +36,7 @@ namespace ND.MTI.Gonio.Notifier
             }
         }
 
+        protected virtual void OnException(Exception ex) { }
         protected abstract void BeforeSendMessages();
         protected abstract void AfterSendMessages();
         protected abstract void ExecuteMessage(string target, string body, string title);
