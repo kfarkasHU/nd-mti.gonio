@@ -25,7 +25,7 @@ namespace ND.MTI.Gonio.Service.Worker
             CurrentX = (ENCODER_MIN + ENCODER_MAX) / 2; 
             CurrentY = (ENCODER_MIN + ENCODER_MAX) / 2;
 
-            _timer = new GonioTimer(OnTimerTick, 20);
+            _timer = new GonioTimer(OnTimerTick, 1);
             _timer.Start();
         }
 

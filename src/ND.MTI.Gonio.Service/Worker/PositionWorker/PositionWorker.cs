@@ -127,12 +127,14 @@ namespace ND.MTI.Gonio.Service.Worker
             {
                 if (Math.Abs(currentX - pos) > _gonioConfiguration.Position_SpeedThreshold)
                 {
-                    IncrementXFast();
+                    var fastEnd = pos - _gonioConfiguration.Position_SpeedThreshold;
 
-                    while (!CloseEnough(GetPositionInternal().X, pos - _gonioConfiguration.Position_SpeedThreshold)) { };
+                    IncrementXInternalFast();
+
+                    while (GetPositionInternal().X < fastEnd) { };
+                    StopXInternal();
                 }
 
-                StopXInternal();
                 IncrementXInternalSlow();
 
                 while (!CloseEnough(GetPositionInternal().X, pos)) { };
@@ -143,12 +145,14 @@ namespace ND.MTI.Gonio.Service.Worker
             {
                 if (Math.Abs(currentX - pos) > _gonioConfiguration.Position_SpeedThreshold)
                 {
+                    var fastEnd = pos + _gonioConfiguration.Position_SpeedThreshold;
+
                     DecrementXInternalFast();
 
-                    while (!CloseEnough(GetPositionInternal().X, pos + _gonioConfiguration.Position_SpeedThreshold)) { };
+                    while (GetPositionInternal().X > fastEnd) { };
+                    StopXInternal();
                 }
 
-                StopXInternal();
                 DecrementXInternalSlow();
 
                 while (!CloseEnough(GetPositionInternal().X, pos)) { };
@@ -170,12 +174,15 @@ namespace ND.MTI.Gonio.Service.Worker
             {
                 if (Math.Abs(currentY - pos) > _gonioConfiguration.Position_SpeedThreshold)
                 {
-                    IncrementYFast();
+                    var fastEnd = pos - _gonioConfiguration.Position_SpeedThreshold;
 
-                    while (!CloseEnough(GetPositionInternal().Y, pos + _gonioConfiguration.Position_SpeedThreshold)) { };
+                    IncrementYInternalFast();
+
+                    while (GetPositionInternal().Y < fastEnd) { };
+
+                    StopYInternal();
                 }
 
-                StopYInternal();
                 IncrementYInternalSlow();
 
                 while (!CloseEnough(GetPositionInternal().Y, pos)) { };
@@ -186,12 +193,15 @@ namespace ND.MTI.Gonio.Service.Worker
             {
                 if (Math.Abs(currentY - pos) > _gonioConfiguration.Position_SpeedThreshold)
                 {
+                    var fastEnd = pos + _gonioConfiguration.Position_SpeedThreshold;
+
                     DecrementYInternalFast();
 
-                    while (!CloseEnough(GetPositionInternal().Y, pos - _gonioConfiguration.Position_SpeedThreshold)) { };
+                    while (GetPositionInternal().Y > fastEnd) { };
+
+                    StopYInternal();
                 }
 
-                StopYInternal();
                 DecrementYInternalSlow();
 
                 while (!CloseEnough(GetPositionInternal().Y, pos)) { };
