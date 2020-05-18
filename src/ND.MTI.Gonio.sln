@@ -39,10 +39,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "readme", "readme", "{E83EF1
 		README_HU.txt = README_HU.txt
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ND.MTI.Gonio.SpeedTest", "ND.MTI.Gonio.SpeedTest\ND.MTI.Gonio.SpeedTest.csproj", "{8C20999E-E3AB-4D51-BD4F-166D32716952}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ND.MTI.Gonio.Notifier", "ND.MTI.Gonio.Notifier\ND.MTI.Gonio.Notifier.csproj", "{EE2C3675-C018-4FD5-B85D-7DA373F17920}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "assets", "assets", "{25D0A242-A41D-4A5E-AB1D-898DD3C04FE9}"
 	ProjectSection(SolutionItems) = preProject
 		external\assets\finishloader.gif = external\assets\finishloader.gif
@@ -52,8 +48,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "assets", "assets", "{25D0A2
 		external\assets\routegenerator.ico = external\assets\routegenerator.ico
 		external\assets\speedtest.ico = external\assets\speedtest.ico
 	EndProjectSection
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ND.MTI.GONIO.CLI", "ND.MTI.GONIO.CLI\ND.MTI.GONIO.CLI.csproj", "{3071F300-11EA-4AAF-A848-D6434089D63E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

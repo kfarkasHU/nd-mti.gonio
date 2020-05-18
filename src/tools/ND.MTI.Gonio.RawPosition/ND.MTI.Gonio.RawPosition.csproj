@@ -103,6 +103,6 @@
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>xcopy "$(TargetDir)*" "$(SolutionDir)../../dist/$(Configuration)/_TOOLS/$(ProjectName)"  /s /i /Y</PostBuildEvent>
+    <PostBuildEvent>xcopy "$(TargetDir)*" "$(SolutionDir)../dist/$(Configuration)/_TOOLS/$(ProjectName)"  /s /i /Y</PostBuildEvent>
   </PropertyGroup>
 </Project>
