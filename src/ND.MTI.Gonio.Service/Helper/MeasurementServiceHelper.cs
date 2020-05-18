@@ -20,7 +20,7 @@ namespace ND.MTI.Gonio.Service.Helper
         {
             _ioWorker = new IOWorker();
 
-            _helpFilePath = $"{Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location)}\\calculations.cfg";
+            _helpFilePath = $"{Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location)}\\calibrations.cfg";
             var helpLines = _ioWorker.ReadAllLines(_helpFilePath, '=');
 
             _cache = new List<Tuple<double, double>>();
