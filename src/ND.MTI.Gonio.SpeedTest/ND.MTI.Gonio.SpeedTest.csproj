@@ -4,10 +4,10 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{969DF68B-4448-4AD9-B4C7-5722863D6C5B}</ProjectGuid>
+    <ProjectGuid>{8C20999E-E3AB-4D51-BD4F-166D32716952}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <RootNamespace>ND.MTI.Gonio.Forms</RootNamespace>
-    <AssemblyName>GonioApplication</AssemblyName>
+    <RootNamespace>ND.MTI.Gonio.SpeedTest</RootNamespace>
+    <AssemblyName>Gonio.SpeedTest</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
@@ -32,7 +32,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>icon.ico</ApplicationIcon>
+    <ApplicationIcon>speedtest.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -47,81 +47,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Form_AdvancedForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Form_AdvancedForm.Designer.cs">
-      <DependentUpon>Form_AdvancedForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Form_Finished.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Form_Finished.Designer.cs">
-      <DependentUpon>Form_Finished.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Form_LoadForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Form_LoadForm.Designer.cs">
-      <DependentUpon>Form_LoadForm.cs</DependentUpon>
-    </Compile>
     <Compile Include="Form_MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Form_MainForm.Designer.cs">
       <DependentUpon>Form_MainForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Form_Registration.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Form_Registration.Designer.cs">
-      <DependentUpon>Form_Registration.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Form_ResultsForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Form_ResultsForm.Designer.cs">
-      <DependentUpon>Form_ResultsForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Form_Status.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Form_Status.Designer.cs">
-      <DependentUpon>Form_Status.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Form_VirtualZeroForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Form_VirtualZeroForm.Designer.cs">
-      <DependentUpon>Form_VirtualZeroForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="GonioErrorHandler.cs" />
-    <Compile Include="MainFormHelper.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="Form_AdvancedForm.resx">
-      <DependentUpon>Form_AdvancedForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Form_Finished.resx">
-      <DependentUpon>Form_Finished.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Form_LoadForm.resx">
-      <DependentUpon>Form_LoadForm.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Form_MainForm.resx">
       <DependentUpon>Form_MainForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Form_Registration.resx">
-      <DependentUpon>Form_Registration.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Form_ResultsForm.resx">
-      <DependentUpon>Form_ResultsForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Form_Status.resx">
-      <DependentUpon>Form_Status.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Form_VirtualZeroForm.resx">
-      <DependentUpon>Form_VirtualZeroForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -131,14 +66,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
-      <DesignTime>True</DesignTime>
     </Compile>
-    <None Include="calculations.cfg">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="gonio.cfg">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -148,16 +76,9 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <None Include="userconfig.cfg">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Content\connect.png" />
-    <Content Include="Content\disconnect.png" />
-    <Content Include="Content\light_bulb_on.jpg" />
-    <Content Include="icon.ico" />
-    <None Include="Resources\ezgif-5-017d2c77cf11.gif" />
+    <Content Include="speedtest.ico" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ND.MTI.Gonio.Common\ND.MTI.Gonio.Common.csproj">
@@ -165,12 +86,8 @@
       <Name>ND.MTI.Gonio.Common</Name>
     </ProjectReference>
     <ProjectReference Include="..\ND.MTI.Gonio.Model\ND.MTI.Gonio.Model.csproj">
-      <Project>{680927ac-e6e3-47f1-8da7-b8457ddab8d9}</Project>
+      <Project>{680927AC-E6E3-47F1-8DA7-B8457DDAB8D9}</Project>
       <Name>ND.MTI.Gonio.Model</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\ND.MTI.Gonio.Notifier\ND.MTI.Gonio.Notifier.csproj">
-      <Project>{ee2c3675-c018-4fd5-b85d-7da373f17920}</Project>
-      <Name>ND.MTI.Gonio.Notifier</Name>
     </ProjectReference>
     <ProjectReference Include="..\ND.MTI.Gonio.Service\ND.MTI.Gonio.Service.csproj">
       <Project>{612EEEC8-DD6F-4812-8965-96390D059BD5}</Project>
@@ -179,6 +96,6 @@
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>xcopy "$(TargetDir)*" "$(SolutionDir)../../dist/$(Configuration)/_GONIOAPP"  /s /i /Y</PostBuildEvent>
+    <PostBuildEvent>xcopy "$(TargetDir)*" "$(SolutionDir)../../dist/$(Configuration)/_TOOLS/$(ProjectName)"  /s /i /Y</PostBuildEvent>
   </PropertyGroup>
 </Project>

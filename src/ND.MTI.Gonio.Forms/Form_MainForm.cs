@@ -11,7 +11,7 @@ using ND.MTI.Gonio.Common.Configuration;
 using ND.MTI.Gonio.Common.RuntimeContext;
 
 namespace ND.MTI.Gonio.Forms
-{   
+{
     internal partial class Form_MainForm : Form
     {
         private readonly Thread _thread;
