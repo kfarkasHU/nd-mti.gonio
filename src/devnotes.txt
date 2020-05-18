@@ -1,15 +1,17 @@
-Gmail account:
-Last name: Application
-First name: Gonio
-Username: oekvk.gonio
-Password: xUpmWjT5wrEhtHmGYsEyFWLQLhjevMEtyxePxQk2FkkTLNVARcV7Gg76svXxk2zm
-Birthdate: 2000.04.26
-Gender: Not set
+Icon pack:      https://www.iconfinder.com/iconsets/ios-web-user-interface-multi-circle-flat-vol-3
 
-Enable this: https://myaccount.google.com/lesssecureapps
+Gmail account:
+Last name:      Application
+First name:     Gonio
+Username:       oekvk.gonio
+Password:       xUpmWjT5wrEhtHmGYsEyFWLQLhjevMEtyxePxQk2FkkTLNVARcV7Gg76svXxk2zm
+Birthdate:      2000.04.26
+Gender:         Not set
+
+Enable this:    https://myaccount.google.com/lesssecureapps
 
 SMTP datas:
-    username: same
-    password: same
-    port:
-    address: 
+    username:   same
+    password:   same
+    port:       587
+    address:    smtp.gmail.com
