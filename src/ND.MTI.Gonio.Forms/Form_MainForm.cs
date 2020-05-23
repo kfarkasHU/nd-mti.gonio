@@ -9,6 +9,7 @@ using ND.MTI.Gonio.Common.Utils;
 using ND.MTI.Gonio.Common.Validator;
 using ND.MTI.Gonio.Common.Configuration;
 using ND.MTI.Gonio.Common.RuntimeContext;
+using System.Diagnostics;
 
 namespace ND.MTI.Gonio.Forms
 {
@@ -44,10 +45,23 @@ namespace ND.MTI.Gonio.Forms
 
         private void ThreadWorker()
         {
+            var stopwatch = new Stopwatch();
+
             while (true)
             {
+                stopwatch.Start();
+
                 _ = _waitHandle.WaitOne();
                 UpdateLuminousText(_measurementService.MeasureLumenance().ToString());
+
+                stopwatch.Stop();
+
+                var remaining = (int)(_gonioConfiguration.MainForm_LuminousIntensityRefreshTimeInMs - stopwatch.ElapsedMilliseconds);
+
+                if (remaining > 0)
+                    Thread.Sleep(remaining);
+
+                stopwatch.Reset();
             }
         }
 
