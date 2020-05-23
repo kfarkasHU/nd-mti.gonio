@@ -29,6 +29,8 @@ namespace ND.MTI.Gonio.Notifier
                     foreach (var target in _targetAddresses)
                         ExecuteMessage(target, message.Body, message.Title);
 
+                _messages.Clear();
+
                 AfterSendMessages();
             }
             catch (Exception)
