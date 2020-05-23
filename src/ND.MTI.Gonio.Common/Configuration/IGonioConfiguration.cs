@@ -21,6 +21,8 @@ namespace ND.MTI.Gonio.Common.Configuration
         double Endpoint_YMin { get; }
         double Endpoint_YMax { get; }
 
+        int MainForm_LuminousIntensityRefreshTimeInMs { get; }
+
         int Notification_Email_SMTPPort { get; }
         bool Notification_Email_SMTPSSLEnabled { get; }
         string Notification_Email_SMTPAddress { get; }

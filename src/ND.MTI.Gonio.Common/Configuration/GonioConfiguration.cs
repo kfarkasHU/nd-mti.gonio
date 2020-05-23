@@ -80,6 +80,8 @@ namespace ND.MTI.Gonio.Common.Configuration
         public double Endpoint_YMin => Parser.StringToDouble(GetConfigByKeyName(nameof(Endpoint_YMin), "-176"));
         public double Endpoint_YMax => Parser.StringToDouble(GetConfigByKeyName(nameof(Endpoint_YMax), "176"));
 
+        public int MainForm_LuminousIntensityRefreshTimeInMs => Parser.StringToInteger(GetConfigByKeyName(nameof(MainForm_LuminousIntensityRefreshTimeInMs), "1000"));
+
         public int Notification_Email_SMTPPort => Parser.StringToInteger(GetConfigByKeyName(nameof(Notification_Email_SMTPPort), "587"));
         public bool Notification_Email_SMTPSSLEnabled => Parser.StringToBoolean(GetConfigByKeyName(nameof(Notification_Email_SMTPSSLEnabled), "1"));
         public string Notification_Email_SMTPAddress => GetConfigByKeyName(nameof(Notification_Email_SMTPAddress), "smtp.gmail.com");
