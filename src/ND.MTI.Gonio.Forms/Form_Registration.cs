@@ -31,10 +31,13 @@ namespace ND.MTI.Gonio.Forms
             var timeCol = new DataGridViewTextBoxColumn();
             timeCol.HeaderText = "Time";
 
-            var valueCol = new DataGridViewTextBoxColumn();
-            valueCol.HeaderText = "Data";
+            var deltaCol = new DataGridViewTextBoxColumn();
+            deltaCol.HeaderText = "∆T (ms)";
 
-            dataGridViewResults.Columns.AddRange(timeCol, valueCol);
+            var valueCol = new DataGridViewTextBoxColumn();
+            valueCol.HeaderText = "Data (lx)";
+
+            dataGridViewResults.Columns.AddRange(timeCol, deltaCol, valueCol);
             dataGridViewResults.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
         }
 
@@ -49,7 +52,7 @@ namespace ND.MTI.Gonio.Forms
                         needToAdd = false;
 
                 if(needToAdd)
-                    dataGridViewResults.Rows.Add(_results[i].Time, _results[i].Data);
+                    dataGridViewResults.Rows.Add(_results[i].Time, _results[i].Delta, _results[i].Data);
             }
             dataGridViewResults.Update();
         }
@@ -110,6 +113,7 @@ namespace ND.MTI.Gonio.Forms
         
         private void WorkingThreadImplementation()
         {
+            var delta = 0.0d;
             while (true)
             {
                 var stopwatch = new Stopwatch();
@@ -118,13 +122,15 @@ namespace ND.MTI.Gonio.Forms
                 var data = _gonioWorker.Measure();
                 var time = DateTime.Now.TimeOfDay;
 
-                _results.Add(new Complex_RegistrationItem(time, data));
-                stopwatch.Stop();
+                _results.Add(new Complex_RegistrationItem(time, data, delta));
 
                 var remainingTime = _interval - (int)stopwatch.ElapsedMilliseconds;
 
                 if (remainingTime > 0)
                     Thread.Sleep(remainingTime);
+
+                delta = (double)stopwatch.ElapsedMilliseconds;
+                stopwatch.Stop();
             }
         }
     }

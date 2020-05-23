@@ -1,6 +1,7 @@
 ﻿using System.Linq;
 using OfficeOpenXml;
 using ND.MTI.Gonio.Model;
+using System;
 
 namespace ND.MTI.Gonio.Service.Worker
 {
@@ -59,10 +60,17 @@ namespace ND.MTI.Gonio.Service.Worker
                 var worksheet = workbook.Worksheets
                     .Add("Results");
 
-                for(var i = 0; i < results.Count; i++)
+                worksheet.Cells[1, 1].Value = "Time";
+                worksheet.Cells[1, 2].Value = "∆T (ms)";
+                worksheet.Cells[1, 3].Value = "Data (lx)";
+
+                worksheet.Column(1).Style.Numberformat.Format = "hh:mm:ss";
+
+                for (var i = 0; i < results.Count; i++)
                 {
-                    worksheet.Cells[i + 1, 1].Value = results[i].Time;
-                    worksheet.Cells[i + 1, 2].Value = results[i].Data;
+                    worksheet.Cells[i + 2, 1].Value = results[i].Time;
+                    worksheet.Cells[i + 2, 2].Value = results[i].Delta;
+                    worksheet.Cells[i + 2, 3].Value = results[i].Data;
                 }
 
                 content = package.GetAsByteArray();
