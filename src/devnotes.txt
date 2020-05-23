@@ -1,12 +1,12 @@
 Icon pack:      https://www.iconfinder.com/iconsets/ios-web-user-interface-multi-circle-flat-vol-3
 
 Gmail account:
-Last name:      Application
-First name:     Gonio
-Username:       oekvk.gonio
-Password:       xUpmWjT5wrEhtHmGYsEyFWLQLhjevMEtyxePxQk2FkkTLNVARcV7Gg76svXxk2zm
-Birthdate:      2000.04.26
-Gender:         Not set
+    last name:      Application
+    first name:     Gonio
+    username:       oekvk.gonio
+    password:       xUpmWjT5wrEhtHmGYsEyFWLQLhjevMEtyxePxQk2FkkTLNVARcV7Gg76svXxk2zm
+    birthdate:      2000.04.26
+    gender:         Not set
 
 Enable this:    https://myaccount.google.com/lesssecureapps
 
