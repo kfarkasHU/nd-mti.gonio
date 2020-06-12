@@ -2,6 +2,7 @@
 using ND.MTI.Gonio.Model;
 using ND.MTI.Gonio.Service;
 using System.Windows.Forms;
+using ND.MTI.Gonio.Model.Enum;
 using ND.MTI.Gonio.Common.Utils;
 using ND.MTI.Gonio.Service.Worker;
 using ND.MTI.Gonio.Common.RuntimeContext;
@@ -32,7 +33,7 @@ namespace ND.MTI.Gonio.Forms
             textBoxMeasuresInSamePosition.Text = _model.MeasuresInSamePosition.ToString();
             checkBoxSendNotificationFinished.Checked = _model.SendNotificationOnComplete;
             checkBoxSendNotificationError.Checked = _model.SendNotificationOnError;
-            comboBoxSamePosOperation.SelectedIndex = _model.MeasuresInSamePositionOperation;
+            comboBoxSamePosOperation.SelectedIndex = (int)_model.MeasuresInSamePositionOperation;
         }
 
         private void ButtonCancel_Click(object sender, EventArgs e) => Close();
@@ -67,7 +68,7 @@ namespace ND.MTI.Gonio.Forms
             _model.Amplification = Parser.DecimalToDouble(numericUpDownAmplifier.Value);
             _model.SendNotificationOnError = checkBoxSendNotificationError.Checked;
             _model.SendNotificationOnComplete = checkBoxSendNotificationFinished.Checked;
-            _model.MeasuresInSamePositionOperation = comboBoxSamePosOperation.SelectedIndex;
+            _model.MeasuresInSamePositionOperation = (MathOperation)comboBoxSamePosOperation.SelectedIndex;
 
             RuntimeContext.UserConfig = _model;
 

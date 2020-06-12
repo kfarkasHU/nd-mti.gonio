@@ -1,4 +1,6 @@
-﻿namespace ND.MTI.Gonio.Model
+﻿using ND.MTI.Gonio.Model.Enum;
+
+namespace ND.MTI.Gonio.Model
 {
     public class Primitive_Userconfig
     {
@@ -12,6 +14,6 @@
         public int MeasuresInSamePosition { get; set; }
         public bool SendNotificationOnError { get; set; }
         public bool SendNotificationOnComplete { get; set; }
-        public int MeasuresInSamePositionOperation { get; set; }
+        public MathOperation MeasuresInSamePositionOperation { get; set; }
     }
 }

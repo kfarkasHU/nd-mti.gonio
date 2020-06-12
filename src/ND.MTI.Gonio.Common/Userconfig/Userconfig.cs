@@ -1,6 +1,7 @@
 ﻿using System.IO;
 using System.Reflection;
 using ND.MTI.Gonio.Model;
+using ND.MTI.Gonio.Model.Enum;
 using ND.MTI.Gonio.Common.Utils;
 using System.Collections.Generic;
 
@@ -75,7 +76,7 @@ namespace ND.MTI.Gonio.Common.Userconfig
                 userconfig.MeasuresInSamePosition = Parser.StringToInteger(GetConfigByKeyName("MeasuresIsSamePosition", "1"));
                 userconfig.SendNotificationOnError = Parser.StringToBoolean(GetConfigByKeyName("SendNotificationOnError", "1"));
                 userconfig.SendNotificationOnComplete = Parser.StringToBoolean(GetConfigByKeyName("SendNotificationOnComplete", "1"));
-                userconfig.MeasuresInSamePositionOperation = Parser.StringToInteger(GetConfigByKeyName("MeasuresIsSamePositionOperation", "0"));
+                userconfig.MeasuresInSamePositionOperation = Parser.StringIntToEnum<MathOperation>(GetConfigByKeyName("MeasuresIsSamePositionOperation", "0"));
 
                 return userconfig;
             }
@@ -94,7 +95,7 @@ namespace ND.MTI.Gonio.Common.Userconfig
             lines[6] = $"MeasuresIsSamePosition={config.MeasuresInSamePosition}";
             lines[7] = $"SendNotificationOnError={config.SendNotificationOnError}";
             lines[8] = $"SendNotificationOnComplete={config.SendNotificationOnComplete}";
-            lines[9] = $"MeasuresIsSamePositionOperation={config.MeasuresInSamePositionOperation}";
+            lines[9] = $"MeasuresIsSamePositionOperation={(int)config.MeasuresInSamePositionOperation}";
             
             File.WriteAllLines(_configFileAbsolutePath, lines);
         }

@@ -10,6 +10,8 @@ using ND.MTI.Gonio.Common.Validator;
 using ND.MTI.Gonio.Common.Configuration;
 using ND.MTI.Gonio.Common.RuntimeContext;
 using System.Diagnostics;
+using System.Drawing.Imaging;
+using ND.MTI.Gonio.Service.Worker;
 
 namespace ND.MTI.Gonio.Forms
 {
@@ -18,6 +20,7 @@ namespace ND.MTI.Gonio.Forms
         private readonly Thread _thread;
         private readonly GonioTimer _timer;
         private readonly Complex_MainModel _model;
+        private readonly IGonioWorker _gonioWorker;
         private readonly EventWaitHandle _waitHandle;
         private readonly MainFormHelper _mainFormHelper;
         private readonly IMeasurementService _measurementService;
@@ -30,6 +33,7 @@ namespace ND.MTI.Gonio.Forms
             _model = new Complex_MainModel();
             _thread = new Thread(ThreadWorker);
             _mainFormHelper = new MainFormHelper();
+            _gonioWorker = GonioWorker.GetInstance();
             _measurementService = new MeasurementService();
             _waitHandle = new ManualResetEvent(initialState: true);
             _gonioConfiguration = GonioConfiguration.GetInstance();
@@ -52,7 +56,7 @@ namespace ND.MTI.Gonio.Forms
                 stopwatch.Start();
 
                 _ = _waitHandle.WaitOne();
-                UpdateLuminousText(_measurementService.MeasureLumenance().ToString());
+                UpdateLuminousText(_gonioWorker.MeasureLumenanceOperated().ToString());
 
                 stopwatch.Stop();
 
