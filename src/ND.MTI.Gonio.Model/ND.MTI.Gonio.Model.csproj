@@ -48,6 +48,7 @@
     <Compile Include="Complex_ResultItem.cs" />
     <Compile Include="Complex_SerialConfig.cs" />
     <Compile Include="Complex_SSIConfig.cs" />
+    <Compile Include="Enum\MathOperation.cs" />
     <Compile Include="Enum\MeasurementStatus.cs" />
     <Compile Include="Primitive_Position.cs" />
     <Compile Include="Primitive_PositionCollection.cs" />

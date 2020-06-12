@@ -13,6 +13,8 @@ using System.Collections.Generic;
 using ND.MTI.Gonio.Common.Exceptions;
 using OfficeOpenXml.FormulaParsing.Excel.Functions.Text;
 using OfficeOpenXml.FormulaParsing.Excel.Functions.Math;
+using ND.MTI.Gonio.Common.Utils;
+using ND.MTI.Gonio.Common.Extensions;
 
 namespace ND.MTI.Gonio.Service
 {
@@ -164,80 +166,15 @@ namespace ND.MTI.Gonio.Service
                     results.Add(new Tuple<double, double>(measured, correction));
                 }
 
-                switch (RuntimeContext.UserConfig.MeasuresInSamePositionOperation)
-                {
-                    // Raw      0
-                    // Average  1
-                    // Sum      2
-                    // Median   3
-                    // Modus    4
-                    case 0:
-                        {
-                            operatedResults = results;
+                var mResults = results.Select(m => m.Item1).ToList();
+                var cResults = results.Select(m => m.Item2).ToList();
 
-                            break;
-                        }
-                    case 1:
-                        {
-                            var avgRes = results.Sum(m => m.Item1) / results.Count;
-                            var avgCor = results.Sum(m => m.Item2) / results.Count;
+                var mOperatedResults = MathUtils.Operate(mResults, RuntimeContext.UserConfig.MeasuresInSamePositionOperation);
+                var cOperatedResults = MathUtils.Operate(cResults, RuntimeContext.UserConfig.MeasuresInSamePositionOperation);
 
-                            operatedResults.Add(new Tuple<double, double>(avgRes, avgCor));
+                operatedResults.CreateFromMerge(mOperatedResults, cOperatedResults);
 
-                            break;
-                        }
-                    case 2:
-                        {
-                            var sumRes = results.Sum(m => m.Item1);
-                            var sumCor = results.Sum(m => m.Item2);
-
-                            operatedResults.Add(new Tuple<double, double>(sumRes, sumCor));
-
-                            break;
-                        }
-                    case 3:
-                        {
-                            var orderedResults = results.OrderBy(m => m.Item1).ToList();
-
-                            if(orderedResults.Count % 2 == 0)
-                            {
-                                var index = orderedResults.Count / 2.0;
-                                var lowerNeighbour = orderedResults[(int)Math.Floor(index)];
-                                var biggerNeighbour = orderedResults[(int)Math.Ceiling(index)];
-
-                                var medRes = (lowerNeighbour.Item1 + biggerNeighbour.Item1) / 2;
-                                var medCor = (lowerNeighbour.Item2 + biggerNeighbour.Item2) / 2;
-
-                                operatedResults.Add(new Tuple<double, double>(medRes, medCor));
-                            }
-                            else
-                            {
-                                var median = orderedResults[orderedResults.Count / 2];
-                                operatedResults.Add(new Tuple<double, double>(median.Item1, median.Item2));
-                            }
-
-                            break;
-                        }
-                    case 4:
-                        {
-                            var modus = results
-                                .GroupBy(m => m.Item1)
-                                .OrderByDescending(m => m.Count())
-                                .ThenBy(m => m.Key)
-                                .First()
-                                .First()
-                            ;
-
-                            operatedResults.Add(new Tuple<double, double>(modus.Item1, modus.Item2));
-
-                            break;
-                        }
-                    default:
-                        throw new Gonio_Exception("Measures in same position is invalid!");
-                }
-
-
-                for(var i = 0; i < operatedResults.Count; i++)
+                for (var i = 0; i < operatedResults.Count; i++)
                 {
                     RuntimeContext.Results
                         .Add(

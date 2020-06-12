@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace ND.MTI.Gonio.Model
+﻿namespace ND.MTI.Gonio.Model
 {
     public sealed class Complex_MainModel
     {

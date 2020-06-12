@@ -119,7 +119,7 @@ namespace ND.MTI.Gonio.Forms
                 var stopwatch = new Stopwatch();
                 stopwatch.Start();
 
-                var data = _gonioWorker.Measure();
+                var data = _gonioWorker.MeasureOperated();
                 var time = DateTime.Now.TimeOfDay;
 
                 _results.Add(new Complex_RegistrationItem(time, data, delta));

@@ -9,5 +9,7 @@ namespace ND.MTI.Gonio.Service.Worker
 
         void Reset();
         double Measure();
+        double MeasureOperated();
+        double MeasureLumenanceOperated();
     }
 }
