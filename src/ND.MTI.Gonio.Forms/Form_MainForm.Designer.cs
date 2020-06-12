@@ -136,7 +136,7 @@
             // buttonContinue
             // 
             this.buttonContinue.Enabled = false;
-            this.buttonContinue.Location = new System.Drawing.Point(210, 159);
+            this.buttonContinue.Location = new System.Drawing.Point(210, 188);
             this.buttonContinue.Name = "buttonContinue";
             this.buttonContinue.Size = new System.Drawing.Size(75, 23);
             this.buttonContinue.TabIndex = 13;
@@ -157,7 +157,7 @@
             // buttonPause
             // 
             this.buttonPause.Enabled = false;
-            this.buttonPause.Location = new System.Drawing.Point(210, 188);
+            this.buttonPause.Location = new System.Drawing.Point(210, 159);
             this.buttonPause.Name = "buttonPause";
             this.buttonPause.Size = new System.Drawing.Size(75, 23);
             this.buttonPause.TabIndex = 12;

@@ -219,17 +219,17 @@ namespace ND.MTI.Gonio.Service.Worker
             return current - precision < target && current + precision > target;
         }
 
-        private void IncrementXInternalFast() => _ = _pokeysWorker.WriteDataX(GonioPokeys_Commands.ENA1_SR1_DIR0_SPEED1);
-        private void IncrementXInternalSlow() => _ = _pokeysWorker.WriteDataX(GonioPokeys_Commands.ENA1_SR1_DIR0_SPEED0);
+        private void IncrementXInternalFast() => _ = _pokeysWorker.WriteDataX(GonioPokeys_Commands.ENA1_SR1_DIR1_SPEED1);
+        private void IncrementXInternalSlow() => _ = _pokeysWorker.WriteDataX(GonioPokeys_Commands.ENA1_SR1_DIR1_SPEED0);
 
-        private void IncrementYInternalFast() => _ = _pokeysWorker.WriteDataY(GonioPokeys_Commands.ENA1_SR1_DIR0_SPEED1);
-        private void IncrementYInternalSlow() => _ = _pokeysWorker.WriteDataY(GonioPokeys_Commands.ENA1_SR1_DIR0_SPEED0);
+        private void IncrementYInternalFast() => _ = _pokeysWorker.WriteDataY(GonioPokeys_Commands.ENA1_SR1_DIR1_SPEED1);
+        private void IncrementYInternalSlow() => _ = _pokeysWorker.WriteDataY(GonioPokeys_Commands.ENA1_SR1_DIR1_SPEED0);
 
-        private void DecrementXInternalFast() => _ = _pokeysWorker.WriteDataX(GonioPokeys_Commands.ENA1_SR1_DIR1_SPEED1);
-        private void DecrementXInternalSlow() => _ = _pokeysWorker.WriteDataX(GonioPokeys_Commands.ENA1_SR1_DIR1_SPEED0);
+        private void DecrementXInternalFast() => _ = _pokeysWorker.WriteDataX(GonioPokeys_Commands.ENA1_SR1_DIR0_SPEED1);
+        private void DecrementXInternalSlow() => _ = _pokeysWorker.WriteDataX(GonioPokeys_Commands.ENA1_SR1_DIR0_SPEED0);
 
-        private void DecrementYInternalFast() => _ = _pokeysWorker.WriteDataY(GonioPokeys_Commands.ENA1_SR1_DIR1_SPEED1);
-        private void DecrementYInternalSlow() => _ = _pokeysWorker.WriteDataY(GonioPokeys_Commands.ENA1_SR1_DIR1_SPEED0);
+        private void DecrementYInternalFast() => _ = _pokeysWorker.WriteDataY(GonioPokeys_Commands.ENA1_SR1_DIR0_SPEED1);
+        private void DecrementYInternalSlow() => _ = _pokeysWorker.WriteDataY(GonioPokeys_Commands.ENA1_SR1_DIR0_SPEED0);
 
         private void StopXInternal() => _pokeysWorker.WriteDataX(GonioPokeys_Commands.ENA0_SR0_DIR0_SPEED0);
 

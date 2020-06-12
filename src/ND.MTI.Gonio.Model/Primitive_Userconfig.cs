@@ -12,5 +12,6 @@
         public int MeasuresInSamePosition { get; set; }
         public bool SendNotificationOnError { get; set; }
         public bool SendNotificationOnComplete { get; set; }
+        public int MeasuresInSamePositionOperation { get; set; }
     }
 }
