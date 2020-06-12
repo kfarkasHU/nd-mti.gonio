@@ -8,6 +8,11 @@ using ND.MTI.Gonio.Service.Worker;
 using ND.MTI.Gonio.Service.Helper;
 using ND.MTI.Gonio.Common.Configuration;
 using ND.MTI.Gonio.Common.RuntimeContext;
+using System.Collections;
+using System.Collections.Generic;
+using ND.MTI.Gonio.Common.Exceptions;
+using OfficeOpenXml.FormulaParsing.Excel.Functions.Text;
+using OfficeOpenXml.FormulaParsing.Excel.Functions.Math;
 
 namespace ND.MTI.Gonio.Service
 {
@@ -82,7 +87,7 @@ namespace ND.MTI.Gonio.Service
 
             State = MeasurementStatus.READY;
         }
-        
+
         public void EncoderZero() => _positionWorker.EncoderZero();
 
         public void SetReady() => State = MeasurementStatus.READY;
@@ -90,8 +95,8 @@ namespace ND.MTI.Gonio.Service
         public void SetRunning() => State = MeasurementStatus.RUNNING;
 
         public Primitive_Position GetPosition() => GetPositionInternal();
-        
-        private void SetPositionInternal(Primitive_Position position) => _positionWorker.SetPosition(position);        
+
+        private void SetPositionInternal(Primitive_Position position) => _positionWorker.SetPosition(position);
 
         private Primitive_Position GetPositionInternal() => _positionWorker.GetPosition();
 
@@ -103,7 +108,7 @@ namespace ND.MTI.Gonio.Service
             RuntimeContext.Results.Clear();
 
             var position = GetPositionInternal();
-            for(var i = 0; i < _positionMatrix.Count; i++)
+            for (var i = 0; i < _positionMatrix.Count; i++)
             {
                 _ = _waitHandle.WaitOne();
 
@@ -113,32 +118,7 @@ namespace ND.MTI.Gonio.Service
                     position = GetPositionInternal();
                 }
 
-                foreach(var _ in Enumerable.Range(0, RuntimeContext.UserConfig.MeasuresInSamePosition))
-                {
-                    CurrentStepNumber++;
-
-                    Thread.Sleep(_config.HoldTime);
-
-                    var measured = MeasureInternal();
-                    var correction = RuntimeContext.UserConfig.UseCorrection
-                        ? _measurementServiceHelper.GetCorrectionValue(measured)
-                        : 1;
-
-                    if (RuntimeContext.UserConfig.Amplification > 0)
-                        measured *= RuntimeContext.UserConfig.Amplification;
-
-                    measured += RuntimeContext.UserConfig.Offset;
-
-                    RuntimeContext.Results
-                        .Add(
-                            new Complex_ResultItem(
-                                position.X,
-                                position.Y,
-                                measured,
-                                correction
-                        )
-                    );
-                }
+                DoMeasurement();
             }
 
             if (RuntimeContext.UserConfig.ResetToZero)
@@ -159,6 +139,117 @@ namespace ND.MTI.Gonio.Service
             }
 
             _thread.Abort();
+
+
+            void DoMeasurement()
+            {
+                var results = new List<Tuple<double, double>>();
+                var operatedResults = new List<Tuple<double, double>>();
+                foreach (var _ in Enumerable.Range(0, RuntimeContext.UserConfig.MeasuresInSamePosition))
+                {
+                    CurrentStepNumber++;
+
+                    Thread.Sleep(_config.HoldTime);
+
+                    var measured = MeasureInternal();
+                    var correction = RuntimeContext.UserConfig.UseCorrection
+                        ? _measurementServiceHelper.GetCorrectionValue(measured)
+                        : 1;
+
+                    if (RuntimeContext.UserConfig.Amplification > 0)
+                        measured *= RuntimeContext.UserConfig.Amplification;
+
+                    measured += RuntimeContext.UserConfig.Offset;
+
+                    results.Add(new Tuple<double, double>(measured, correction));
+                }
+
+                switch (RuntimeContext.UserConfig.MeasuresInSamePositionOperation)
+                {
+                    // Raw      0
+                    // Average  1
+                    // Sum      2
+                    // Median   3
+                    // Modus    4
+                    case 0:
+                        {
+                            operatedResults = results;
+
+                            break;
+                        }
+                    case 1:
+                        {
+                            var avgRes = results.Sum(m => m.Item1) / results.Count;
+                            var avgCor = results.Sum(m => m.Item2) / results.Count;
+
+                            operatedResults.Add(new Tuple<double, double>(avgRes, avgCor));
+
+                            break;
+                        }
+                    case 2:
+                        {
+                            var sumRes = results.Sum(m => m.Item1);
+                            var sumCor = results.Sum(m => m.Item2);
+
+                            operatedResults.Add(new Tuple<double, double>(sumRes, sumCor));
+
+                            break;
+                        }
+                    case 3:
+                        {
+                            var orderedResults = results.OrderBy(m => m.Item1).ToList();
+
+                            if(orderedResults.Count % 2 == 0)
+                            {
+                                var index = orderedResults.Count / 2.0;
+                                var lowerNeighbour = orderedResults[(int)Math.Floor(index)];
+                                var biggerNeighbour = orderedResults[(int)Math.Ceiling(index)];
+
+                                var medRes = (lowerNeighbour.Item1 + biggerNeighbour.Item1) / 2;
+                                var medCor = (lowerNeighbour.Item2 + biggerNeighbour.Item2) / 2;
+
+                                operatedResults.Add(new Tuple<double, double>(medRes, medCor));
+                            }
+                            else
+                            {
+                                var median = orderedResults[orderedResults.Count / 2];
+                                operatedResults.Add(new Tuple<double, double>(median.Item1, median.Item2));
+                            }
+
+                            break;
+                        }
+                    case 4:
+                        {
+                            var modus = results
+                                .GroupBy(m => m.Item1)
+                                .OrderByDescending(m => m.Count())
+                                .ThenBy(m => m.Key)
+                                .First()
+                                .First()
+                            ;
+
+                            operatedResults.Add(new Tuple<double, double>(modus.Item1, modus.Item2));
+
+                            break;
+                        }
+                    default:
+                        throw new Gonio_Exception("Measures in same position is invalid!");
+                }
+
+
+                for(var i = 0; i < operatedResults.Count; i++)
+                {
+                    RuntimeContext.Results
+                        .Add(
+                            new Complex_ResultItem(
+                                position.X,
+                                position.Y,
+                                operatedResults[i].Item1,
+                                operatedResults[i].Item2
+                        )
+                    );
+                }
+            }
         }
     }
 }

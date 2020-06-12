@@ -20,6 +20,10 @@ namespace ND.MTI.Gonio.Forms
 
             InitializeComponent();
 
+            var hashCodeCol = new DataGridViewTextBoxColumn();
+            hashCodeCol.HeaderText = "Hash code";
+            hashCodeCol.Visible = false;
+
             var positionCol = new DataGridViewTextBoxColumn();
             positionCol.HeaderText = "Position";
 
@@ -35,6 +39,7 @@ namespace ND.MTI.Gonio.Forms
             var luminousIntensityCol = new DataGridViewTextBoxColumn();
             luminousIntensityCol.HeaderText = "Lum. intensity (cd)";
 
+            dataGridViewResults.Columns.Add(hashCodeCol);
             dataGridViewResults.Columns.Add(positionCol);
             dataGridViewResults.Columns.Add(measuredIlluminationCol);
             dataGridViewResults.Columns.Add(correctionCol);
@@ -63,11 +68,13 @@ namespace ND.MTI.Gonio.Forms
                 var needToAdd = true;
 
                 foreach (DataGridViewRow row in dataGridViewResults.Rows)
-                    if (row.Cells[0].Value.ToString() == RuntimeContext.Results[i].Position.ToString())
+                    if (row.Cells[0].Value.ToString() == RuntimeContext.Results[i].GetHashCode().ToString())
                         needToAdd = false;
+
 
                 if (needToAdd)
                     dataGridViewResults.Rows.Add(
+                        RuntimeContext.Results[i].GetHashCode(),
                         RuntimeContext.Results[i].Position,
                         RuntimeContext.Results[i].MeasuredIllumination,
                         RuntimeContext.Results[i].Correction,

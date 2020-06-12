@@ -29,15 +29,15 @@ namespace ND.MTI.Gonio.Service.Worker
             _timer.Start();
         }
 
-        internal static void IncrementX_Slow() => ChangeX(LOWSPEED * -1);
-        internal static void IncrementY_Slow() => ChangeY(LOWSPEED * 1);
-        internal static void IncrementX_Fast() => ChangeX(HIGHSPEED * -1);
-        internal static void IncrementY_Fast() => ChangeY(HIGHSPEED * 1);
+        internal static void IncrementX_Slow() => ChangeX(LOWSPEED * 1);
+        internal static void IncrementY_Slow() => ChangeY(LOWSPEED * -1);
+        internal static void IncrementX_Fast() => ChangeX(HIGHSPEED * 1);
+        internal static void IncrementY_Fast() => ChangeY(HIGHSPEED * -1);
 
-        internal static void DecrementX_Slow() => ChangeX(LOWSPEED * 1);
-        internal static void DecrementY_Slow() => ChangeY(LOWSPEED * -1);
-        internal static void DecrementX_Fast() => ChangeX(HIGHSPEED * 1);
-        internal static void DecrementY_Fast() => ChangeY(HIGHSPEED * -1);
+        internal static void DecrementX_Slow() => ChangeX(LOWSPEED * -1);
+        internal static void DecrementY_Slow() => ChangeY(LOWSPEED * 1);
+        internal static void DecrementX_Fast() => ChangeX(HIGHSPEED * -1);
+        internal static void DecrementY_Fast() => ChangeY(HIGHSPEED * 1);
 
         internal static void StopX() => ChangeX(0);
         internal static void StopY() => ChangeY(0);
