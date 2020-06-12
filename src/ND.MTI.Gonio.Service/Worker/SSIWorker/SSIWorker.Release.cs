@@ -41,6 +41,10 @@ namespace ND.MTI.Gonio.Service.Worker.SSIWorker
                     var pa = p[0].Replace("A", "");
                     var pb = p[1].Replace("B", "");
 
+                    if (string.Equals(pa, ResponseY) && 
+                        string.Equals(pb, ResponseX))
+                        continue;
+
                     if (pa.Length == 4)
                         ResponseY = pa;
 
