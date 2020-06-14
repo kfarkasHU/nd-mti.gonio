@@ -1,15 +1,11 @@
 ﻿#if DEBUG
 
-using ND.MTI.Gonio.Service.Worker.PokeysCore;
+using ND.MTI.Gonio.ServiceInterface;
 
 namespace ND.MTI.Gonio.Service.Worker.Pokeys
 {
     public sealed class Pokeys57UWorker : IExternalDevice, IPokeys57UCore, IPokeys57UWorker
     {
-        public Pokeys57UWorker(int readInterval)
-        {
-        }
-
         public bool IsConnected => true;
 
         public bool Connect() => true;

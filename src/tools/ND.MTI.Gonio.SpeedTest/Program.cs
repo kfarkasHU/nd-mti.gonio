@@ -1,7 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Windows.Forms;
+using ND.MTI.Gonio.Common.RuntimeContext;
+using Ninject;
 
 namespace ND.MTI.Gonio.SpeedTest
 {
@@ -13,9 +13,14 @@ namespace ND.MTI.Gonio.SpeedTest
         [STAThread]
         static void Main()
         {
+            RuntimeContext.Init();
+
+            var kernel = new StandardKernel(new GonioNinjectModule());
+            GonioNinjectModuleHelper.SetKernel(kernel);
+
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Form_MainForm());
+            Application.Run(GonioNinjectModuleHelper.MainForm);
         }
     }
 }

@@ -1,6 +1,6 @@
 ﻿using ND.MTI.Gonio.Model;
 
-namespace ND.MTI.Gonio.Service.Worker
+namespace ND.MTI.Gonio.ServiceInterface
 {
     public interface IExcelFactory
     {

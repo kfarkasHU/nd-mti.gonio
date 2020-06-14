@@ -3,15 +3,13 @@ using System.Linq;
 using System.Threading;
 using ND.MTI.Gonio.Model;
 using System.Windows.Forms;
-using ND.MTI.Gonio.Service;
 using ND.MTI.Gonio.Model.Enum;
 using ND.MTI.Gonio.Common.Utils;
 using ND.MTI.Gonio.Common.Validator;
 using ND.MTI.Gonio.Common.Configuration;
 using ND.MTI.Gonio.Common.RuntimeContext;
 using System.Diagnostics;
-using System.Drawing.Imaging;
-using ND.MTI.Gonio.Service.Worker;
+using ND.MTI.Gonio.ServiceInterface;
 
 namespace ND.MTI.Gonio.Forms
 {
@@ -26,15 +24,18 @@ namespace ND.MTI.Gonio.Forms
         private readonly IMeasurementService _measurementService;
         private readonly IGonioConfiguration _gonioConfiguration;
 
-        internal Form_MainForm()
+        public Form_MainForm(
+            IGonioWorker gonioWorker,
+            IMeasurementService measurementService,
+            MainFormHelper mainFormHelper)
         {
             InitializeComponent();
 
             _model = new Complex_MainModel();
             _thread = new Thread(ThreadWorker);
-            _mainFormHelper = new MainFormHelper();
-            _gonioWorker = GonioWorker.GetInstance();
-            _measurementService = new MeasurementService();
+            _mainFormHelper = mainFormHelper;
+            _gonioWorker = gonioWorker;
+            _measurementService = measurementService;
             _waitHandle = new ManualResetEvent(initialState: true);
             _gonioConfiguration = GonioConfiguration.GetInstance();
             _timer = new GonioTimer(OnTimerTick, _gonioConfiguration.Pokeys_ReadInterval);
@@ -284,7 +285,7 @@ namespace ND.MTI.Gonio.Forms
 
                     #endregion [ UI ]
 
-                    var finishedForm = new Form_Finished(_measurementService);
+                    var finishedForm = GonioNinjectModuleHelper.FinishedForm;
                     finishedForm.Show();
 
                     break;
@@ -296,7 +297,7 @@ namespace ND.MTI.Gonio.Forms
             var exit = MessageBox.Show("Are your sure?", "Exit", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
             if(exit == DialogResult.Yes)
-                RuntimeContext.LoadFormInstance.Close();
+                GonioNinjectModuleHelper.LoadForm.Close();
         }
 
         private void CheckBoxYAuto_CheckedChanged(object sender, EventArgs e)
@@ -370,7 +371,7 @@ namespace ND.MTI.Gonio.Forms
 
         private void ButtonRegistration_Click(object sender, EventArgs e)
         {
-            var form = new Form_Registration();
+            var form = GonioNinjectModuleHelper.RegistarionForm;
 
             _measurementService.SetRunning();
 
@@ -383,27 +384,14 @@ namespace ND.MTI.Gonio.Forms
 
         private void ButtonPause_Click(object sender, EventArgs e) => _measurementService.Pause();
 
-        private void ButtonResults_Click(object sender, EventArgs e)
-        {
-            var resultsFrom = new Form_ResultsForm();
-            resultsFrom.Show();
-        }
+        private void ButtonResults_Click(object sender, EventArgs e) => GonioNinjectModuleHelper.ResultsForm.Show();
 
         private void ButtonGoToZero_Click(object sender, EventArgs e) => _mainFormHelper.SetPositionToZero();
 
         private void ButtonGoToVirtualZero_Click(object sender, EventArgs e) => _mainFormHelper.SetPositionVirtualZero();
 
-        private void ButtonSetVirtualZero_Click(object sender, EventArgs e)
-        {
-            var virtualZeroForm = new Form_VirtualZeroForm();
+        private void ButtonSetVirtualZero_Click(object sender, EventArgs e) => GonioNinjectModuleHelper.VirtualZeroForm.Show();
 
-            virtualZeroForm.Show();
-        }
-
-        private void ButtonAdvanced_Click(object sender, EventArgs e)
-        {
-            var advancedForm = new Form_AdvancedForm();
-            advancedForm.Show();
-        }
+        private void ButtonAdvanced_Click(object sender, EventArgs e) => GonioNinjectModuleHelper.AdvancedForm.Show();
     }
 }

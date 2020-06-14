@@ -35,6 +35,9 @@
     <ApplicationIcon>icon.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Ninject, Version=3.2.0.0, Culture=neutral, PublicKeyToken=c7192dc5380945e7, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Ninject.3.2.2.0\lib\net40\Ninject.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -53,6 +56,8 @@
     <Compile Include="Form_RawPosition.Designer.cs">
       <DependentUpon>Form_RawPosition.cs</DependentUpon>
     </Compile>
+    <Compile Include="GonioNinjectModule.cs" />
+    <Compile Include="GonioNinjectModuleHelper.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Form_RawPosition.resx">
@@ -68,6 +73,7 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -89,6 +95,10 @@
     <ProjectReference Include="..\..\ND.MTI.Gonio.Model\ND.MTI.Gonio.Model.csproj">
       <Project>{680927AC-E6E3-47F1-8DA7-B8457DDAB8D9}</Project>
       <Name>ND.MTI.Gonio.Model</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\ND.MTI.Gonio.ServiceInterface\ND.MTI.Gonio.ServiceInterface.csproj">
+      <Project>{D0E939A2-0662-4661-80E8-572980D80EDE}</Project>
+      <Name>ND.MTI.Gonio.ServiceInterface</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\ND.MTI.Gonio.Service\ND.MTI.Gonio.Service.csproj">
       <Project>{612EEEC8-DD6F-4812-8965-96390D059BD5}</Project>

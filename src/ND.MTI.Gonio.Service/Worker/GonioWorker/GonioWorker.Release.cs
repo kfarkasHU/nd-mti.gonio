@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using ND.MTI.Gonio.Common.Configuration;
 using ND.MTI.Gonio.Common.RuntimeContext;
 using ND.MTI.Gonio.Service.Worker.Serial;
+using ND.MTI.Gonio.ServiceInterface.Worker;
 
 namespace ND.MTI.Gonio.Service.Worker
 {
@@ -16,20 +17,10 @@ namespace ND.MTI.Gonio.Service.Worker
         private const string ResetCommand = "!";
         private const string MeasureCommand = "M";
 
-        private static IGonioWorker _instance;
-
         private GonioWorker()
         {
             var config = GonioConfiguration.GetInstance().FSM_GonioConfig;
             RuntimeContext.IsFSMGonioConnected = Connect(config);
-        }
-
-        public static IGonioWorker GetInstance()
-        {
-            if (_instance is null)
-                _instance = new GonioWorker();
-
-            return _instance;
         }
 
         public bool Connect(Complex_FSMGonioConfig fsmGonioConfig) => base.Connect(

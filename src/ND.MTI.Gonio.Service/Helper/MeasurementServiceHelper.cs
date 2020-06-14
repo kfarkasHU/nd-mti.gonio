@@ -4,7 +4,7 @@ using System.Linq;
 using System.Reflection;
 using ND.MTI.Gonio.Common.Utils;
 using System.Collections.Generic;
-using ND.MTI.Gonio.Service.Worker;
+using ND.MTI.Gonio.ServiceInterface;
 
 namespace ND.MTI.Gonio.Service.Helper
 {
@@ -14,11 +14,9 @@ namespace ND.MTI.Gonio.Service.Helper
         private readonly string _helpFilePath;
         private readonly IList<Tuple<double, double>> _cache;
 
-        private static MeasurementServiceHelper _instance;
-
-        private MeasurementServiceHelper()
+        public MeasurementServiceHelper(IIOWorker ioWorker)
         {
-            _ioWorker = new IOWorker();
+            _ioWorker = ioWorker;
 
             _helpFilePath = $"{Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location)}\\calibrations.cfg";
             var helpLines = _ioWorker.ReadAllLines(_helpFilePath, '=');
@@ -36,14 +34,6 @@ namespace ND.MTI.Gonio.Service.Helper
                 .OrderBy(m => m.Item1)
                 .ToList()
                 ;
-        }
-
-        public static MeasurementServiceHelper GetInstance()
-        {
-            if (_instance is null)
-                _instance = new MeasurementServiceHelper();
-
-            return _instance;
         }
 
         public double GetCorrectionValue(double measuredValue)

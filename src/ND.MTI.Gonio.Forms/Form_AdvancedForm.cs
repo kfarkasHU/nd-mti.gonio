@@ -1,11 +1,11 @@
 ﻿using System;
 using ND.MTI.Gonio.Model;
-using ND.MTI.Gonio.Service;
 using System.Windows.Forms;
 using ND.MTI.Gonio.Model.Enum;
 using ND.MTI.Gonio.Common.Utils;
 using ND.MTI.Gonio.Service.Worker;
 using ND.MTI.Gonio.Common.RuntimeContext;
+using ND.MTI.Gonio.ServiceInterface;
 
 namespace ND.MTI.Gonio.Forms
 {
@@ -16,12 +16,12 @@ namespace ND.MTI.Gonio.Forms
         private readonly IIOWorker _ioWorker;
         private readonly IMeasurementService _measurementService;
 
-        public Form_AdvancedForm()
+        public Form_AdvancedForm(IIOWorker ioWorker, IMeasurementService measurementService)
         {
             InitializeComponent();
 
-            _ioWorker = new IOWorker();
-            _measurementService = new MeasurementService();
+            _ioWorker = ioWorker;
+            _measurementService = measurementService;
 
             _model = RuntimeContext.UserConfig;
 

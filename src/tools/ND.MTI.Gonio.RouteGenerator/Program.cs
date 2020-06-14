@@ -1,7 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Windows.Forms;
+using Ninject;
 
 namespace ND.MTI.Gonio.RouteGenerator
 {
@@ -13,9 +12,12 @@ namespace ND.MTI.Gonio.RouteGenerator
         [STAThread]
         static void Main()
         {
+            var kernel = new StandardKernel(new GonioNinjectModule());
+            GonioNinjectModuleHelper.SetKernel(kernel);
+
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Form_RouteGenerator());
+            Application.Run(GonioNinjectModuleHelper.RouteGeneratorForm);
         }
     }
 }

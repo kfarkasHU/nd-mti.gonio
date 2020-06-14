@@ -6,6 +6,7 @@ using ND.MTI.Gonio.Common.Configuration;
 using ND.MTI.Gonio.Common.RuntimeContext;
 using ND.MTI.Gonio.Notifier.Implementations;
 using ND.MTI.Gonio.Notifier;
+using Ninject;
 
 namespace ND.MTI.Gonio.Forms
 {
@@ -20,12 +21,19 @@ namespace ND.MTI.Gonio.Forms
                 if (args[0] == "-o")
                     RuntimeContext.IsAdminContext = true;
 
+            RegisterNinjectModules();
             RegisterNotificators();
             RegisterExceptionHandlers();
 
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Form_LoadForm());
+            Application.Run(GonioNinjectModuleHelper.LoadForm);
+        }
+
+        private static void RegisterNinjectModules()
+        {
+            var kernel = new StandardKernel(new GonioNinjectModule());
+            GonioNinjectModuleHelper.SetKernel(kernel);
         }
 
         private static void RegisterNotificators()

@@ -1,16 +1,12 @@
 ﻿using System.Linq;
 using OfficeOpenXml;
 using ND.MTI.Gonio.Model;
-using System;
+using ND.MTI.Gonio.ServiceInterface;
 
 namespace ND.MTI.Gonio.Service.Worker
 {
     public class ExcelFactory : IExcelFactory
     {
-        public ExcelFactory()
-        {
-        }
-
         public byte[] CreateMeasurementResults(Complex_ResultCollection results)
         {
 

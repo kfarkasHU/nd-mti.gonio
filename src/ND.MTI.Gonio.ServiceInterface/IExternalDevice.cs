@@ -1,4 +1,4 @@
-﻿namespace ND.MTI.Gonio.Service
+﻿namespace ND.MTI.Gonio.ServiceInterface
 {
     public interface IExternalDevice
     {

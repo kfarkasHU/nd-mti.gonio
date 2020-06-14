@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Windows.Forms;
 using ND.MTI.Gonio.Common.Utils;
-using ND.MTI.Gonio.Common.RuntimeContext;
 
 namespace ND.MTI.Gonio.Forms
 {
@@ -9,22 +8,20 @@ namespace ND.MTI.Gonio.Forms
     {
         private readonly GonioTimer _timer;
 
-        internal Form_LoadForm()
+        public Form_LoadForm()
         {
             InitializeComponent();
 
             _timer = new GonioTimer(OnTimerTick, 1500);
 
             _timer.Start();
-
-            RuntimeContext.LoadFormInstance = this;
         }
 
         private void OnTimerTick(object sender, EventArgs e)
         {
             _timer.Stop();
 
-            var mainForm = new Form_MainForm();
+            var mainForm = GonioNinjectModuleHelper.MainForm;
             mainForm.Show();
 
             Hide();

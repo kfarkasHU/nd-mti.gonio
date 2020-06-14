@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows.Forms;
+using ND.MTI.Gonio.ServiceInterface;
 using ND.MTI.Gonio.Common.RuntimeContext;
-using ND.MTI.Gonio.Service;
 
 namespace ND.MTI.Gonio.Forms
 {
@@ -10,9 +10,9 @@ namespace ND.MTI.Gonio.Forms
         private readonly IExcelExportService _excelExportService;
         private readonly IMeasurementService _measurementService;
 
-        public Form_Finished(IMeasurementService measurementService)
+        public Form_Finished(IExcelExportService excelExportService, IMeasurementService measurementService)
         {
-            _excelExportService = new ExcelExportService();
+            _excelExportService = excelExportService;
             _measurementService = measurementService;
 
             InitializeComponent();

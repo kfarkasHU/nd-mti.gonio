@@ -1,6 +1,6 @@
 ﻿using System.IO.Ports;
 
-namespace ND.MTI.Gonio.Service.Worker.Serial
+namespace ND.MTI.Gonio.ServiceInterface
 {
     public interface ISerialCore : IExternalDevice
     {

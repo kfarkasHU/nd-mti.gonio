@@ -51,6 +51,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "assets", "assets", "{25D0A2
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ND.MTI.Gonio.EmailSender", "tools\ND.MTI.Gonio.EmailSender\ND.MTI.Gonio.EmailSender.csproj", "{1B23DFE0-9D7B-4351-946D-F496763E3D68}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ND.MTI.Gonio.ServiceInterface", "ND.MTI.Gonio.ServiceInterface\ND.MTI.Gonio.ServiceInterface.csproj", "{D0E939A2-0662-4661-80E8-572980D80EDE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -97,6 +99,10 @@ Global
 		{1B23DFE0-9D7B-4351-946D-F496763E3D68}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1B23DFE0-9D7B-4351-946D-F496763E3D68}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1B23DFE0-9D7B-4351-946D-F496763E3D68}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D0E939A2-0662-4661-80E8-572980D80EDE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D0E939A2-0662-4661-80E8-572980D80EDE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D0E939A2-0662-4661-80E8-572980D80EDE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D0E939A2-0662-4661-80E8-572980D80EDE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

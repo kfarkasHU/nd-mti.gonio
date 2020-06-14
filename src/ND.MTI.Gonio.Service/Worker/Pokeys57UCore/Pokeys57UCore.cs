@@ -3,6 +3,7 @@ using PoKeysDevice_DLL;
 using System.Collections.Generic;
 using ND.MTI.Gonio.Common.Exceptions;
 using ND.MTI.Gonio.Service.Worker.PokeysCore.Helper;
+using ND.MTI.Gonio.ServiceInterface;
 
 namespace ND.MTI.Gonio.Service.Worker.PokeysCore
 {

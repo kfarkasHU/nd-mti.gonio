@@ -1,6 +1,4 @@
 ﻿using ND.MTI.Gonio.Model;
-using System.Windows.Forms;
-using System.ComponentModel;
 using ND.MTI.Gonio.Common.Configuration;
 using ND.MTI.Gonio.Common.Userconfig;
 
@@ -22,7 +20,6 @@ namespace ND.MTI.Gonio.Common.RuntimeContext
             Results = new Complex_ResultCollection();
         }
 
-        public static Form LoadFormInstance { get; set; }
         public static Primitive_Position ZeroPosition { get; set; }
         public static Primitive_Position VirtualZeroPosition { get; set; }
 

@@ -1,7 +1,6 @@
 ﻿using ND.MTI.Gonio.Model;
-using ND.MTI.Gonio.Service.Worker.Serial;
 
-namespace ND.MTI.Gonio.Service.Worker.SSIWorker
+namespace ND.MTI.Gonio.ServiceInterface
 {
     public interface ISSIWorker : ISerialCore
     {

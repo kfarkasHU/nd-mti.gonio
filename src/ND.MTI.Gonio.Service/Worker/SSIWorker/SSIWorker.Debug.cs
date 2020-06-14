@@ -3,7 +3,7 @@
 using System;
 using System.IO.Ports;
 using ND.MTI.Gonio.Model;
-using ND.MTI.Gonio.Service.Worker.Serial;
+using ND.MTI.Gonio.ServiceInterface;
 
 namespace ND.MTI.Gonio.Service.Worker.SSIWorker
 {

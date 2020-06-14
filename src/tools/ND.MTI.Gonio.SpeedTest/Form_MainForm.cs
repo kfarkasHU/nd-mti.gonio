@@ -5,7 +5,7 @@ using System.Windows.Forms;
 using ND.MTI.Gonio.Common.RuntimeContext;
 using ND.MTI.Gonio.Common.Utils;
 using ND.MTI.Gonio.Model;
-using ND.MTI.Gonio.Service.Worker;
+using ND.MTI.Gonio.ServiceInterface;
 
 namespace ND.MTI.Gonio.SpeedTest
 {
@@ -21,14 +21,13 @@ namespace ND.MTI.Gonio.SpeedTest
 
         private readonly IPositionWorker _positionWorker;
 
-        public Form_MainForm()
+        public Form_MainForm(IPositionWorker positionWorker)
         {
             InitializeComponent();
-            RuntimeContext.Init();
 
             _xTimer = new GonioTimer(OnXTimerTick, 1000);
             _yTimer = new GonioTimer(OnYTimerTick, 1000);
-            _positionWorker = PositionWorker.GetInstance();
+            _positionWorker = positionWorker;
 
             _lastPosition = _positionWorker.GetPosition();
         }

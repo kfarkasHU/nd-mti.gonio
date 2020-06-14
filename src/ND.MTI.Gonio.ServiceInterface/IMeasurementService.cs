@@ -1,7 +1,7 @@
 ﻿using ND.MTI.Gonio.Model;
 using ND.MTI.Gonio.Model.Enum;
 
-namespace ND.MTI.Gonio.Service
+namespace ND.MTI.Gonio.ServiceInterface
 {
     public interface IMeasurementService
     {

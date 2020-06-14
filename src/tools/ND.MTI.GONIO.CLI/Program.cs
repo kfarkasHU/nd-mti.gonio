@@ -1,8 +1,9 @@
 ﻿using System;
 using ND.MTI.Gonio.Model;
 using ND.MTI.Gonio.Common.Utils;
-using ND.MTI.Gonio.Service.Worker;
 using ND.MTI.Gonio.Common.RuntimeContext;
+using ND.MTI.Gonio.ServiceInterface;
+using Ninject;
 
 namespace ND.MTI.Gonio.CLI
 {
@@ -13,8 +14,13 @@ namespace ND.MTI.Gonio.CLI
 
         static void Main()
         {
-            _gonioWorker = GonioWorker.GetInstance();
-            _positionWorker = PositionWorker.GetInstance();
+            var kernel = new StandardKernel(new GonioNinjectModule());
+            GonioNinjectModuleHelper.SetKernel(kernel);
+
+            _gonioWorker = GonioNinjectModuleHelper.GonioWorker;
+            _positionWorker = GonioNinjectModuleHelper.PositionWorker;
+
+            RuntimeContext.Init();
 
             ReadCommand();
             Console.ReadKey();
@@ -22,7 +28,7 @@ namespace ND.MTI.Gonio.CLI
 
         private static void ReadCommand()
         {
-            var command = string.Empty;
+            string command;
             do
             {
                 command = Console.ReadLine();
