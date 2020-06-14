@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace ND.MTI.Gonio.Service.Worker
+namespace ND.MTI.Gonio.ServiceInterface
 {
     public interface IIOWorker
     {

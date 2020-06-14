@@ -1,8 +1,8 @@
 ﻿using System;
-using ND.MTI.Gonio.Service;
 using System.Windows.Forms;
 using ND.MTI.Gonio.Common.Utils;
 using ND.MTI.Gonio.Common.RuntimeContext;
+using ND.MTI.Gonio.ServiceInterface;
 
 namespace ND.MTI.Gonio.Forms
 {
@@ -11,9 +11,9 @@ namespace ND.MTI.Gonio.Forms
         private readonly GonioTimer _timer;
         private readonly IExcelExportService _excelExportService;
 
-        internal Form_ResultsForm()
+        public Form_ResultsForm(IExcelExportService excelExportService)
         {
-            _excelExportService = new ExcelExportService();
+            _excelExportService = excelExportService;
 
             _timer = new GonioTimer(OnTimerTick, 1000);
             _timer.Start();

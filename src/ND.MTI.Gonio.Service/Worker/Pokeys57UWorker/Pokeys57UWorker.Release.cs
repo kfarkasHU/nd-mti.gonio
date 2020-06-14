@@ -8,6 +8,8 @@ using ND.MTI.Gonio.Common.Exceptions;
 using ND.MTI.Gonio.Service.Worker.PokeysCore;
 using ND.MTI.Gonio.Service.Worker.Pokeys.Helper;
 using ND.MTI.Gonio.Service.Worker.PokeysCore.Helper;
+using ND.MTI.Gonio.ServiceInterface;
+using ND.MTI.Gonio.Common.Configuration;
 
 namespace ND.MTI.Gonio.Service.Worker.Pokeys
 {
@@ -18,9 +20,10 @@ namespace ND.MTI.Gonio.Service.Worker.Pokeys
         private bool _endpoint_X;
         private bool _endpoint_Y;
 
-        public Pokeys57UWorker(int readInterval)
+        public Pokeys57UWorker()
         {
-            _timer = new GonioTimer(OnTimerTick, readInterval);
+
+            _timer = new GonioTimer(OnTimerTick, GonioConfiguration.GetInstance().Pokeys_ReadInterval);
         }
 
         public override bool Connect()

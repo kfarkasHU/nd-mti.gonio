@@ -4,30 +4,12 @@ namespace ND.MTI.Gonio.Service.Worker.Pokeys.Helper
 {
     internal static class GonioPokeys_Pinout
     {
-        internal static Pokeys57U_Pin X_SR
-        {
-            get
-            {
-                return Pokeys57U_Pin.PIN_17;
-            }
-        }
-
-        internal static Pokeys57U_Pin Y_SR
-        {
-            get
-            {
-                return Pokeys57U_Pin.PIN_18;
-            }
-        }
-
         internal static Pokeys57U_Pin[] X_Input
         {
             get
             {
                 return new Pokeys57U_Pin[]
                 {
-                    //Pokeys57U_Pin.PIN_1, // Do not use the reserved bit as Gray coded bit!
-
                     Pokeys57U_Pin.PIN_4,
                     Pokeys57U_Pin.PIN_5,
                     Pokeys57U_Pin.PIN_6,
@@ -51,8 +33,6 @@ namespace ND.MTI.Gonio.Service.Worker.Pokeys.Helper
             {
                 return new Pokeys57U_Pin[]
                 {
-                    //Pokeys57U_Pin.PIN_19, // Do not use the reserved bit as Gray coded bit!
-
                     Pokeys57U_Pin.PIN_22,
                     Pokeys57U_Pin.PIN_23,
                     Pokeys57U_Pin.PIN_24,

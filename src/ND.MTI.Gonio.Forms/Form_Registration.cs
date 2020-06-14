@@ -2,10 +2,9 @@
 using System.Threading;
 using ND.MTI.Gonio.Model;
 using System.Diagnostics;
-using ND.MTI.Gonio.Service;
 using System.Windows.Forms;
 using ND.MTI.Gonio.Common.Utils;
-using ND.MTI.Gonio.Service.Worker;
+using ND.MTI.Gonio.ServiceInterface;
 
 namespace ND.MTI.Gonio.Forms
 {
@@ -18,11 +17,11 @@ namespace ND.MTI.Gonio.Forms
         private readonly Complex_RegistrationCollection _results;
         private readonly IExcelExportService _excelExportService;
 
-        public Form_Registration()
+        public Form_Registration(IGonioWorker gonioWorker, IExcelExportService excelExportService)
         {
-            _gonioWorker = GonioWorker.GetInstance();
+            _gonioWorker = gonioWorker;
             _results = new Complex_RegistrationCollection();
-            _excelExportService = new ExcelExportService();
+            _excelExportService = excelExportService;
 
             _timer = new GonioTimer(OnTimerTick, 100);
 

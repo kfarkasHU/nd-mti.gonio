@@ -1,7 +1,7 @@
 ﻿using System.Threading;
 using ND.MTI.Gonio.Model;
-using ND.MTI.Gonio.Service.Worker;
 using ND.MTI.Gonio.Service.Helper;
+using ND.MTI.Gonio.ServiceInterface;
 
 namespace ND.MTI.Gonio.Forms
 {
@@ -11,9 +11,9 @@ namespace ND.MTI.Gonio.Forms
         private Primitive_Position _primitivePosition;
         private readonly IPositionWorker _positionWorker;
 
-        public MainFormHelper()
+        public MainFormHelper(IPositionWorker positionWorker)
         {
-            _positionWorker = PositionWorker.GetInstance();
+            _positionWorker = positionWorker;
         }
 
 

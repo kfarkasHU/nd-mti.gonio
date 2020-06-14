@@ -6,6 +6,7 @@ using ND.MTI.Gonio.Common.Utils;
 using System.Collections.Generic;
 using ND.MTI.Gonio.Service.Helper;
 using ND.MTI.Gonio.Service.Worker;
+using ND.MTI.Gonio.ServiceInterface;
 
 namespace ND.MTI.Gonio.RouteGenerator
 {
@@ -16,7 +17,7 @@ namespace ND.MTI.Gonio.RouteGenerator
 
         private static IIOWorker _ioWorker;
 
-        public Form_RouteGenerator()
+        public Form_RouteGenerator(IIOWorker ioWorker)
         {
             InitializeComponent();
 
@@ -29,7 +30,7 @@ namespace ND.MTI.Gonio.RouteGenerator
             dataGridViewXSegments.DataSource = xBindingList;
             dataGridViewYSegments.DataSource = yBindingList;
 
-            _ioWorker = new IOWorker();
+            _ioWorker = ioWorker;
         }
 
         private void buttonClose_Click(object sender, EventArgs e) => Close();

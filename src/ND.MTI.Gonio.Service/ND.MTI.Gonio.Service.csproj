@@ -55,33 +55,22 @@
     <Compile Include="Helper\MeasurementServiceHelper.cs" />
     <Compile Include="Helper\PositionHelper.cs" />
     <Compile Include="Helper\PositionMatrixHelper.cs" />
-    <Compile Include="IExcelExportService.cs" />
-    <Compile Include="IExternalDevice.cs" />
-    <Compile Include="IMeasurementService.cs" />
     <Compile Include="MeasurementService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Worker\ExcelFactory\ExcelFactory.cs" />
-    <Compile Include="Worker\ExcelFactory\IExcelFactory.cs" />
     <Compile Include="Worker\GonioWorker\GonioWorker.Debug.cs" />
     <Compile Include="Worker\GonioWorker\GonioWorker.Release.cs" />
-    <Compile Include="Worker\GonioWorker\IGonioWorker.cs" />
-    <Compile Include="Worker\IOWorker\IIOWorker.cs" />
     <Compile Include="Worker\IOWorker\IOWorker.cs" />
     <Compile Include="Worker\IOWorker\IOWorker_Filter.cs" />
     <Compile Include="Worker\Pokeys57UCore\Helper\Pokeys57U_Pin.cs" />
     <Compile Include="Worker\Pokeys57UCore\Helper\Pokeys57U_PinFunction.cs" />
-    <Compile Include="Worker\Pokeys57UCore\IPokeys57UCore.cs" />
     <Compile Include="Worker\Pokeys57UCore\Pokeys57UCore.cs" />
     <Compile Include="Worker\Pokeys57UWorker\Helper\GonioPokeys_Axis.cs" />
     <Compile Include="Worker\Pokeys57UWorker\Helper\GonioPokeys_Commands.cs" />
     <Compile Include="Worker\Pokeys57UWorker\Helper\GonioPokeys_Pinout.cs" />
-    <Compile Include="Worker\Pokeys57UWorker\IPokeys57UWorker.cs" />
     <Compile Include="Worker\Pokeys57UWorker\Pokeys57UWorker.Release.cs" />
-    <Compile Include="Worker\PositionWorker\IPositionWorker.cs" />
     <Compile Include="Worker\PositionWorker\PositionWorker.cs" />
-    <Compile Include="Worker\SerialCore\ISerialCore.cs" />
     <Compile Include="Worker\SerialCore\SerialCore.cs" />
-    <Compile Include="Worker\SSIWorker\ISSIWorker.cs" />
     <Compile Include="Worker\SSIWorker\SSIWorker.Debug.cs" />
     <Compile Include="Worker\SSIWorker\SSIWorker.Release.cs" />
     <Compile Include="Worker\WorkerHelper.Debug.cs" />
@@ -98,6 +87,10 @@
     <ProjectReference Include="..\ND.MTI.Gonio.Notifier\ND.MTI.Gonio.Notifier.csproj">
       <Project>{EE2C3675-C018-4FD5-B85D-7DA373F17920}</Project>
       <Name>ND.MTI.Gonio.Notifier</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ND.MTI.Gonio.ServiceInterface\ND.MTI.Gonio.ServiceInterface.csproj">
+      <Project>{d0e939a2-0662-4661-80e8-572980d80ede}</Project>
+      <Name>ND.MTI.Gonio.ServiceInterface</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

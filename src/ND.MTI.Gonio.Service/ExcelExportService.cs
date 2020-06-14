@@ -1,5 +1,6 @@
 ﻿using ND.MTI.Gonio.Model;
 using ND.MTI.Gonio.Service.Worker;
+using ND.MTI.Gonio.ServiceInterface;
 
 namespace ND.MTI.Gonio.Service
 {
@@ -8,10 +9,10 @@ namespace ND.MTI.Gonio.Service
         private readonly IIOWorker _ioWorker;
         private readonly IExcelFactory _excelFactory;
 
-        public ExcelExportService()
+        public ExcelExportService(IIOWorker ioWorker, IExcelFactory excelFactory)
         {
-            _ioWorker = new IOWorker();
-            _excelFactory = new ExcelFactory();
+            _ioWorker = ioWorker;
+            _excelFactory = excelFactory;
         }
 
         public void ExportToExcel(Complex_ResultCollection results)

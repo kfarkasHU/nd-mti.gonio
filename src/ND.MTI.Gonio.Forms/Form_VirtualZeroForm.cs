@@ -3,9 +3,9 @@ using System.Threading;
 using ND.MTI.Gonio.Model;
 using System.Windows.Forms;
 using ND.MTI.Gonio.Common.Utils;
-using ND.MTI.Gonio.Service.Worker;
 using ND.MTI.Gonio.Common.Configuration;
 using ND.MTI.Gonio.Common.RuntimeContext;
+using ND.MTI.Gonio.ServiceInterface;
 
 namespace ND.MTI.Gonio.Forms
 {
@@ -20,9 +20,9 @@ namespace ND.MTI.Gonio.Forms
 
         private bool _keyPressed;
 
-        internal Form_VirtualZeroForm()
+        public Form_VirtualZeroForm(IPositionWorker positionWorker)
         {
-            _positionWorker = PositionWorker.GetInstance();
+            _positionWorker = positionWorker;
             _gonioConfiguration = GonioConfiguration.GetInstance();
 
             InitializeComponent();

@@ -3,8 +3,6 @@ using System.Text;
 using System.Net.Mail;
 using System.Collections.Generic;
 using ND.MTI.Gonio.Notifier.Contexts;
-using System.ComponentModel;
-using System;
 
 namespace ND.MTI.Gonio.Notifier.Implementations
 {

@@ -7,7 +7,7 @@ using ND.MTI.Gonio.Common.Utils;
 
 namespace ND.MTI.Gonio.Service.Helper
 {
-    public class PositionMatrixHelper
+    public static class PositionMatrixHelper
     {
         public static Primitive_PositionCollection CalculatePositionMatrix(Complex_MainModel config)
         {

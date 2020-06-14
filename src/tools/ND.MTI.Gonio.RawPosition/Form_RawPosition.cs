@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows.Forms;
 using ND.MTI.Gonio.Common.Utils;
-using ND.MTI.Gonio.Service.Worker;
+using ND.MTI.Gonio.ServiceInterface;
 
 namespace ND.MTI.Gonio.RawPosition
 {
@@ -12,12 +12,12 @@ namespace ND.MTI.Gonio.RawPosition
 
         private bool _keyPressed;
 
-        public RawPositionForm()
+        public RawPositionForm(IPositionWorker positionWorker)
         {
             InitializeComponent();
 
             _timer = new GonioTimer(OnTimerTick, 10);
-            _positionWorker = PositionWorker.GetInstance();
+            _positionWorker = positionWorker;
 
             _positionWorker.StopX();
             _positionWorker.StopY();

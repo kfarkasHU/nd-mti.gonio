@@ -4,21 +4,18 @@ using ND.MTI.Gonio.Common.Utils;
 using ND.MTI.Gonio.Service.Helper;
 using ND.MTI.Gonio.Common.Configuration;
 using ND.MTI.Gonio.Common.RuntimeContext;
-using ND.MTI.Gonio.Service.Worker.Pokeys;
-using ND.MTI.Gonio.Service.Worker.SSIWorker;
 using ND.MTI.Gonio.Service.Worker.Pokeys.Helper;
+using ND.MTI.Gonio.ServiceInterface;
 
 namespace ND.MTI.Gonio.Service.Worker
 {
     public sealed class PositionWorker : IPositionWorker
     {
-        private static IPositionWorker _instance { get; set; }
-
         private readonly ISSIWorker _ssiWorker;
         private readonly IPokeys57UWorker _pokeysWorker;
         private readonly IGonioConfiguration _gonioConfiguration;
 
-        private PositionWorker()
+        public PositionWorker(ISSIWorker ssiWorker, IPokeys57UWorker pokeys57UWorker)
         {
             _gonioConfiguration = GonioConfiguration.GetInstance();
 
@@ -26,19 +23,11 @@ namespace ND.MTI.Gonio.Service.Worker
             WorkerHelper.Init();
 #endif
 
-            _ssiWorker = new SSIWorker.SSIWorker();
+            _ssiWorker = ssiWorker;
             RuntimeContext.IsSSIPanelConnected = _ssiWorker.Connect(_gonioConfiguration.SSI_Config);
 
-            _pokeysWorker = new Pokeys57UWorker(_gonioConfiguration.Pokeys_ReadInterval);
+            _pokeysWorker = pokeys57UWorker;
             RuntimeContext.IsPokeys57Connected = _pokeysWorker.Connect();
-        }
-
-        public static IPositionWorker GetInstance()
-        {
-            if (_instance is null)
-                _instance = new PositionWorker();
-
-            return _instance;
         }
 
         public Tuple<int, int> GetIncomeData() =>

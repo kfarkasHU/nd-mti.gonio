@@ -4,17 +4,13 @@ using System.Threading;
 using ND.MTI.Gonio.Model;
 using ND.MTI.Gonio.Notifier;
 using ND.MTI.Gonio.Model.Enum;
-using ND.MTI.Gonio.Service.Worker;
 using ND.MTI.Gonio.Service.Helper;
 using ND.MTI.Gonio.Common.Configuration;
 using ND.MTI.Gonio.Common.RuntimeContext;
-using System.Collections;
 using System.Collections.Generic;
-using ND.MTI.Gonio.Common.Exceptions;
-using OfficeOpenXml.FormulaParsing.Excel.Functions.Text;
-using OfficeOpenXml.FormulaParsing.Excel.Functions.Math;
 using ND.MTI.Gonio.Common.Utils;
 using ND.MTI.Gonio.Common.Extensions;
+using ND.MTI.Gonio.ServiceInterface;
 
 namespace ND.MTI.Gonio.Service
 {
@@ -34,13 +30,17 @@ namespace ND.MTI.Gonio.Service
         public int CurrentStepNumber { get; private set; } = 0;
         public MeasurementStatus State { get; private set; } = MeasurementStatus.READY;
 
-        public MeasurementService()
+        public MeasurementService(
+            IGonioWorker gonioWorker,
+            IPositionWorker positionWorker,
+            MeasurementServiceHelper measurementServiceHelper
+        )
         {
-            _gonioWorker = GonioWorker.GetInstance();
-            _positionWorker = PositionWorker.GetInstance();
+            _gonioWorker = gonioWorker;
+            _positionWorker = positionWorker;
             _waitHandle = new ManualResetEvent(initialState: true);
             _gonioConfiguration = GonioConfiguration.GetInstance();
-            _measurementServiceHelper = MeasurementServiceHelper.GetInstance();
+            _measurementServiceHelper = measurementServiceHelper;
         }
 
         public void Configure(Complex_MainModel mainModel) => _config = mainModel;

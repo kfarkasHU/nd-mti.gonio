@@ -8,24 +8,15 @@ using ND.MTI.Gonio.Service.Worker.Serial;
 using System.Linq;
 using System.Collections.Generic;
 using ND.MTI.Gonio.Common.Utils;
+using ND.MTI.Gonio.ServiceInterface;
 
 namespace ND.MTI.Gonio.Service.Worker
 {
     public class GonioWorker : SerialCore, IGonioWorker
     {
-        private static IGonioWorker _instance;
-
-        private GonioWorker()
+        public GonioWorker()
         {
             RuntimeContext.IsFSMGonioConnected = Connect(null);
-        }
-        
-        public static IGonioWorker GetInstance()
-        {
-            if (_instance is null)
-                _instance = new GonioWorker();
-
-            return _instance;
         }
 
         public bool Connect(Complex_FSMGonioConfig fsmGonioConfig) => true;
